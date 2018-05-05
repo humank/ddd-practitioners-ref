@@ -4,6 +4,8 @@ A very first event storming workshop delivered by Kim And Arthur. Contains such 
 
 ## Agenda
 
+### 0) Problem Domain - 叫車吧咖啡店點餐
+
 ### 1) Ice breaking and role play assignment
 ### 2) workshop intro
 ### 3) Event discovering
