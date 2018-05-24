@@ -1,3 +1,10 @@
+![image](/documents/images/coffee.jpg)
+
+```
+picture license free from : Pexels
+https://www.pexels.com/photo/background-beverage-breakfast-brown-414645/
+```
+
 # Running DDD on AWS
 
 This demo is running on AWS. By using Lambda and cloudwatch event to present how can we keep model classes at the core, and leverage the outside adapter to interact with other domain.
