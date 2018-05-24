@@ -5,6 +5,6 @@ Resources:
     Type: 'AWS::Serverless::Function'
     Properties:
       Runtime: java8
-      Handler: solid.humank.Makeup::handleRequest
+      Handler: solid.humank.callcarbar.coffee.makeup.adapter.Makeup::handleRequest
       Timeout: 60
       CodeUri: ./target/lambda.jar
