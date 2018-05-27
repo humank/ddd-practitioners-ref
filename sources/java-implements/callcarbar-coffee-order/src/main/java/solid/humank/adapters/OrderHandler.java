@@ -14,8 +14,8 @@ public class OrderHandler implements RequestHandler<Order, OrderReadModel> {
         LambdaLogger logger = context.getLogger();
         logger.log(String.format("Log output: order line is '%s'\n", order.toString()));
 
-        order.establish();
-        OrderReadModel orderReadModel = new OrderReadModel();
+        String orderString = order.establish();
+        OrderReadModel orderReadModel = new OrderReadModel(orderString);
 
         return orderReadModel;
     }

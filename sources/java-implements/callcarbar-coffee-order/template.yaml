@@ -6,12 +6,16 @@ Resources:
     Properties:
       Runtime: java8
       Handler: solid.humank.adapters.OrderHandler::handleRequest
-      Timeout: 60
+      Timeout: 15
       CodeUri: ./target/lambda.jar
-      Policies: AmazonDynamoDBFullAccess
       Events:
         PurchaseOrder:
           Type: Api
           Properties:
-            Path: /
-            Method: any
+            Path: /order
+            Method: post
+Outputs:
+  TestVersionUrl:
+    Description: "Test Order URL"
+    Value:
+      'Fn::Sub': "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/order"
