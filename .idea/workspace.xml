@@ -1,44 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1da32bf4-32a6-4a74-9010-5e94493ace54" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/sources/java-implements/callcarbar-coffee-order/.idea/libraries/Maven__com_amazonaws_aws_java_sdk_core_1_11_308.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sources/java-implements/callcarbar-coffee-order/.idea/libraries/Maven__com_amazonaws_aws_java_sdk_dynamodb_1_11_308.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sources/java-implements/callcarbar-coffee-order/.idea/libraries/Maven__com_amazonaws_aws_java_sdk_events_1_11_308.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sources/java-implements/callcarbar-coffee-order/.idea/libraries/Maven__com_amazonaws_aws_java_sdk_kms_1_11_308.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sources/java-implements/callcarbar-coffee-order/.idea/libraries/Maven__com_amazonaws_aws_java_sdk_s3_1_11_308.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sources/java-implements/callcarbar-coffee-order/.idea/libraries/Maven__com_amazonaws_jmespath_java_1_11_308.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sources/java-implements/callcarbar-coffee-order/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_annotations_2_6_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sources/java-implements/callcarbar-coffee-order/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_6_7.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sources/java-implements/callcarbar-coffee-order/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_databind_2_6_7_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sources/java-implements/callcarbar-coffee-order/.idea/libraries/Maven__com_fasterxml_jackson_dataformat_jackson_dataformat_cbor_2_6_7.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sources/java-implements/callcarbar-coffee-order/.idea/libraries/Maven__commons_codec_commons_codec_1_10.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sources/java-implements/callcarbar-coffee-order/.idea/libraries/Maven__commons_logging_commons_logging_1_1_3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sources/java-implements/callcarbar-coffee-order/.idea/libraries/Maven__info_cukes_cucumber_core_1_2_4.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sources/java-implements/callcarbar-coffee-order/.idea/libraries/Maven__info_cukes_cucumber_html_0_2_3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sources/java-implements/callcarbar-coffee-order/.idea/libraries/Maven__info_cukes_cucumber_java_1_2_4.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sources/java-implements/callcarbar-coffee-order/.idea/libraries/Maven__info_cukes_cucumber_jvm_deps_1_0_5.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sources/java-implements/callcarbar-coffee-order/.idea/libraries/Maven__info_cukes_gherkin_2_12_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sources/java-implements/callcarbar-coffee-order/.idea/libraries/Maven__joda_time_joda_time_2_8_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sources/java-implements/callcarbar-coffee-order/.idea/libraries/Maven__org_apache_httpcomponents_httpclient_4_5_5.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sources/java-implements/callcarbar-coffee-order/.idea/libraries/Maven__org_apache_httpcomponents_httpcore_4_4_9.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sources/java-implements/callcarbar-coffee-order/.idea/libraries/Maven__org_apiguardian_apiguardian_api_1_0_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sources/java-implements/callcarbar-coffee-order/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_api_5_2_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sources/java-implements/callcarbar-coffee-order/.idea/libraries/Maven__org_junit_platform_junit_platform_commons_1_2_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sources/java-implements/callcarbar-coffee-order/.idea/libraries/Maven__org_opentest4j_opentest4j_1_1_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sources/java-implements/callcarbar-coffee-order/.idea/libraries/Maven__org_projectlombok_lombok_1_16_20.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sources/java-implements/callcarbar-coffee-order/.idea/libraries/Maven__software_amazon_ion_ion_java_1_0_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sources/java-implements/callcarbar-coffee-order/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sources/java-implements/callcarbar-coffee-order/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sources/java-implements/callcarbar-coffee-order/src/main/java/solid/humank/adapters/CloudwatchEventAdapter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sources/java-implements/callcarbar-coffee-order/src/main/java/solid/humank/adapters/OrderHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sources/java-implements/callcarbar-coffee-order/src/main/java/solid/humank/domains/ProductItem.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sources/java-implements/callcarbar-coffee-order/src/test/java/solid/humank/steps/OrderAmericanoTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sources/java-implements/callcarbar-coffee-order/src/test/resources/features/Order_Americano.feature" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/java-implements/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/sources/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/java-implements/callcarbar-coffee-order/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/sources/java-implements/callcarbar-coffee-order/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/java-implements/callcarbar-coffee-order/src/main/java/solid/humank/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/sources/java-implements/callcarbar-coffee-order/src/main/java/solid/humank/domains/Order.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/java-implements/callcarbar-coffee-order/template.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/sources/java-implements/callcarbar-coffee-order/template.yaml" afterDir="false" />
+    <list default="true" id="1da32bf4-32a6-4a74-9010-5e94493ace54" name="Default" comment="fine tune mvn run with cucumber and junit 4.">
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__info_cukes_cucumber_core_1_2_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__info_cukes_cucumber_java_1_2_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apiguardian_apiguardian_api_1_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_api_5_2_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_platform_junit_platform_commons_1_2_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_opentest4j_opentest4j_1_1_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sources/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/sources/java-implements/callcarbar-coffee-order/target/" />
     <ignored path="$PROJECT_DIR$/sources/java-implements/callcarbar-coffee-makeup/target/" />
@@ -51,16 +23,62 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/sources/.gitignore">
+      <file leaf-file-name="OrderAmericanoTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sources/java-implements/callcarbar-coffee-order/src/test/java/solid/humank/steps/OrderAmericanoTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" column="25" selection-start-line="5" selection-start-column="25" selection-end-line="5" selection-end-column="25" />
+            <state relative-caret-position="414">
+              <caret line="50" column="14" lean-forward="true" selection-start-line="50" selection-start-column="14" selection-end-line="50" selection-end-column="14" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="9" column="10" selection-start-line="9" selection-start-column="10" selection-end-line="9" selection-end-column="10" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RunCucumberTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sources/java-implements/callcarbar-coffee-order/src/test/java/solid/humank/cucumberjunit/RunCucumberTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="225">
+              <caret line="15" selection-start-line="15" selection-end-line="15" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sources/java-implements/callcarbar-coffee-order/pom.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="247">
+              <caret line="157" column="36" selection-start-line="157" selection-start-column="36" selection-end-line="157" selection-end-column="36" />
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>junit</find>
+      <find>cucumber</find>
+    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -75,8 +93,11 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/sources/.gitignore" />
+        <option value="$PROJECT_DIR$/sources/java-implements/callcarbar-coffee-order/src/test/java/solid/humank/cucumberjunit/RunCucumberTest.java" />
+        <option value="$PROJECT_DIR$/sources/java-implements/callcarbar-coffee-order/pom.xml" />
+        <option value="$PROJECT_DIR$/sources/java-implements/callcarbar-coffee-order/src/test/java/solid/humank/steps/OrderAmericanoTest.java" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -124,12 +145,6 @@
               <item name="EventStormingWorkShop" type="462c0819:PsiDirectoryNode" />
               <item name="sources" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="EventStormingWorkShop" type="b2602c69:ProjectViewProjectNode" />
-              <item name="EventStormingWorkShop" type="462c0819:PsiDirectoryNode" />
-              <item name="sources" type="462c0819:PsiDirectoryNode" />
-              <item name="java-implements" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -146,8 +161,8 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/sources" />
       <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/sources" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -218,12 +233,20 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1527408023856</updated>
-      <workItem from="1527408025529" duration="261000" />
+      <workItem from="1527408025529" duration="1606000" />
     </task>
+    <task id="LOCAL-00001" summary="fine tune mvn run with cucumber and junit 4.">
+      <created>1527409409245</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1527409409245</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="261000" />
+    <option name="totallyTimeSpent" value="1606000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="665" y="-1057" width="1920" height="1057" extended-state="0" />
@@ -240,7 +263,7 @@
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Version Control" />
       <window_info anchor="right" id="Mongo Explorer" />
-      <window_info active="true" anchor="bottom" id="Terminal" visible="true" weight="0.48879403" />
+      <window_info active="true" anchor="bottom" id="Terminal" visible="true" weight="0.26467448" />
       <window_info id="Capture Tool" />
       <window_info id="Designer" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24973376" />
@@ -265,11 +288,63 @@
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="fine tune mvn run with cucumber and junit 4." />
+    <option name="LAST_COMMIT_MESSAGE" value="fine tune mvn run with cucumber and junit 4." />
+  </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/sources/.gitignore">
+    <entry file="file://$PROJECT_DIR$/sources/java-implements/callcarbar-coffee-makeup/src/main/java/solid/humank/callcarbar/coffee/makeup/adapter/DdbPersist.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="25" selection-start-line="5" selection-start-column="25" selection-end-line="5" selection-end-column="25" />
+        <state relative-caret-position="30">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sources/java-implements/callcarbar-coffee-order/src/main/java/solid/humank/domains/ProductItem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sources/java-implements/callcarbar-coffee-order/src/test/java/solid/humank/cucumberjunit/RunCucumberTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" selection-start-line="15" selection-end-line="15" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sources/java-implements/callcarbar-coffee-order/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="157" column="36" selection-start-line="157" selection-start-column="36" selection-end-line="157" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" lean-forward="true" selection-end-line="57" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sources/java-implements/callcarbar-coffee-order/src/test/java/solid/humank/steps/OrderAmericanoTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="50" column="14" lean-forward="true" selection-start-line="50" selection-start-column="14" selection-end-line="50" selection-end-column="14" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="10" selection-start-line="9" selection-start-column="10" selection-end-line="9" selection-end-column="10" />
         </state>
       </provider>
     </entry>
