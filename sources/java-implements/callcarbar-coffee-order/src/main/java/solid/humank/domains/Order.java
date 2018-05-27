@@ -17,9 +17,12 @@ import lombok.Data;
 import org.joda.time.LocalDateTime;
 import solid.humank.adapters.CloudwatchEventAdapter;
 import solid.humank.adapters.OrderRepository;
+import solid.humank.events.OrderEstablishedEvent;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Data
@@ -27,7 +30,7 @@ public class Order{
 
     private String seatNo;
     private boolean hereOrToGo;
-    private List<CoffeeItem> acceptedOrderCoffeeItems;
+    private Set<CoffeeItem> acceptedOrderCoffeeItems;
     private String establishedTime;
 
     public boolean isHereOrToGo() {
@@ -38,7 +41,7 @@ public class Order{
         return seatNo;
     }
 
-    public List<CoffeeItem> getAcceptedOrderCoffeeItems() {
+    public Set<CoffeeItem> getAcceptedOrderCoffeeItems() {
         return acceptedOrderCoffeeItems;
     }
 
@@ -47,7 +50,7 @@ public class Order{
     }
 
     public Order(){
-        acceptedOrderCoffeeItems = new ArrayList<CoffeeItem>();
+        acceptedOrderCoffeeItems = new HashSet<CoffeeItem>();
     }
 
 
@@ -77,8 +80,7 @@ public class Order{
         repository.saveOrder(this);
 
         //send event to makeup
-        String json = "{\"eventname\":\"coffeepurchased\"}";
-        new CloudwatchEventAdapter().putEvent(json,"Cofee",this.getClass().getPackage().getName());
+        new CloudwatchEventAdapter().publishEvent(new OrderEstablishedEvent(this));
 
         return 0;
     }

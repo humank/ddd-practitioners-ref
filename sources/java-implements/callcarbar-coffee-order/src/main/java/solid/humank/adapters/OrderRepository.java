@@ -19,6 +19,7 @@ public class OrderRepository {
 
         Item item = new Item()
                 .withPrimaryKey("establishtime", purchasedOrder.getEstablishedTime())
+                .withBoolean("isHereOrToGo",purchasedOrder.isHereOrToGo())
                 .withString("productItemName", "Americano")
                 .withNumber("price", 80)
                 .withNumber("quantity", 2)
