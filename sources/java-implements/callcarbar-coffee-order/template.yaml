@@ -5,6 +5,6 @@ Resources:
     Type: 'AWS::Serverless::Function'
     Properties:
       Runtime: java8
-      Handler: solid.humank.Order::handleRequest
+      Handler: solid.humank.domains.Order::handleRequest
       Timeout: 60
       CodeUri: ./target/lambda.jar

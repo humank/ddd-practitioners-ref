@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/EventStormingWorkShop.iml" filepath="$PROJECT_DIR$/.idea/EventStormingWorkShop.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sources/java-implements/callcarbar-coffee-makeup/callcarbar-coffee-makeup.iml" filepath="$PROJECT_DIR$/sources/java-implements/callcarbar-coffee-makeup/callcarbar-coffee-makeup.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sources/java-implements/callcarbar-coffee-order/callcarbar-coffee-order.iml" filepath="$PROJECT_DIR$/sources/java-implements/callcarbar-coffee-order/callcarbar-coffee-order.iml" />
+    </modules>
+  </component>
+</project>
