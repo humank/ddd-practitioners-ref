@@ -1,11 +1,11 @@
 package solid.humank.domains;
 
-public class ProductItem {
+public class CoffeeItem {
 
     private String name;
     private int price;
 
-    public ProductItem(String name) {
+    public CoffeeItem(String name) {
         this.name = name;
     }
 

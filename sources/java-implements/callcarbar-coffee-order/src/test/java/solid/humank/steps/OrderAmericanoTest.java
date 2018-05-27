@@ -4,7 +4,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import solid.humank.domains.Order;
-import solid.humank.domains.ProductItem;
+import solid.humank.domains.CoffeeItem;
 
 import static org.junit.Assert.assertEquals;
 
@@ -14,7 +14,7 @@ public class OrderAmericanoTest {
     int orderCups;
     int temperature;
     int totalPrice;
-    ProductItem americano;
+    CoffeeItem americano;
 
     Order order = new Order();
 
@@ -22,7 +22,7 @@ public class OrderAmericanoTest {
     public void the_price_of_a_Americano_is(int price) throws Throwable {
         this.price = price;
 
-        americano = new ProductItem("Americano");
+        americano = new CoffeeItem("Americano");
         americano.setPrice(price);
 
     }
