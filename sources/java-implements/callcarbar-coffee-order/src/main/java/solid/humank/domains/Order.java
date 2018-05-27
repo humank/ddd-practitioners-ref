@@ -19,75 +19,104 @@ import solid.humank.adapters.CloudwatchEventAdapter;
 import solid.humank.adapters.OrderRepository;
 import solid.humank.events.OrderEstablishedEvent;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.concurrent.atomic.AtomicInteger;
-
 @Data
-public class Order{
+public class Order {
 
+    private int quantity;
     private String seatNo;
-    private boolean hereOrToGo;
-    private Set<CoffeeItem> acceptedOrderCoffeeItems;
+    private boolean drinkhere;
+    private int price;
+    private String coffeeItemName;
     private String establishedTime;
+    private int drinkDegree;
 
-    public boolean isHereOrToGo() {
-        return hereOrToGo;
+    public Order(String seatNo, boolean ishere, String coffeeItemName, int quantity, int price) {
+        this.seatNo = seatNo;
+        this.drinkhere = ishere;
+        this.coffeeItemName = coffeeItemName;
+        this.quantity = quantity;
+        this.price = price;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public String getCoffeeItemName() {
+        return coffeeItemName;
+    }
+
+    public void setCoffeeItemName(String coffeeItemName) {
+        this.coffeeItemName = coffeeItemName;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public boolean drinkHere() {
+        return drinkhere;
+    }
+
+    public void setDrinkhere(boolean drinkhere) {
+        this.drinkhere = drinkhere;
     }
 
     public String getSeatNo() {
         return seatNo;
     }
 
-    public Set<CoffeeItem> getAcceptedOrderCoffeeItems() {
-        return acceptedOrderCoffeeItems;
+    public void setSeatNo(String seatNo) {
+        this.seatNo = seatNo;
     }
 
     public String getEstablishedTime() {
         return establishedTime;
     }
 
-    public Order(){
-        acceptedOrderCoffeeItems = new HashSet<CoffeeItem>();
-    }
-
-
-    public void accept(CoffeeItem americano) {
-        acceptedOrderCoffeeItems.add(americano);
-    }
-
-    public void setHereOrToGo(boolean hereOrToGo) {
-        this.hereOrToGo = hereOrToGo;
+    public void setEstablishedTime(String establishedTime) {
+        this.establishedTime = establishedTime;
     }
 
     public int payAmount() {
-        AtomicInteger payAmount = new AtomicInteger();
-        acceptedOrderCoffeeItems.forEach(coffeeItem -> {
-            payAmount.addAndGet(coffeeItem.getPrice());
-        });
+        return this.getQuantity() * this.getPrice();
 
-        return payAmount.get();
     }
 
-    public int establish() {
+    public String establish() {
 
+        String orderString=null;
         this.establishedTime = new LocalDateTime().toString("yyyy-MM-dd:HH:mm:ss");
+
+        if(this.drinkHere()){
+            this.drinkDegree = 70;
+        }else{
+            this.drinkDegree = 100;
+        }
 
         //save to repo
         OrderRepository repository = new OrderRepository();
-        repository.saveOrder(this);
+        orderString = repository.saveOrder(this);
 
         //send event to makeup
         new CloudwatchEventAdapter().publishEvent(new OrderEstablishedEvent(this));
 
-        return 0;
+        return orderString;
     }
 
-    public void setSeatNo(String seatNo) {
-        this.seatNo = seatNo;
+    public String getCoffeItemName() {
+        return this.coffeeItemName;
     }
 
-
+    public int getSeatDrinkDegree() {
+        return this.drinkDegree;
+    }
 }

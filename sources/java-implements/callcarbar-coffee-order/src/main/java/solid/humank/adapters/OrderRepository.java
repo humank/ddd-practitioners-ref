@@ -19,11 +19,11 @@ public class OrderRepository {
 
         Item item = new Item()
                 .withPrimaryKey("establishtime", purchasedOrder.getEstablishedTime())
-                .withBoolean("isHereOrToGo",purchasedOrder.isHereOrToGo())
-                .withString("productItemName", "Americano")
-                .withNumber("price", 80)
+                .withBoolean("drinkHere",purchasedOrder.drinkHere())
+                .withString("productItemName", purchasedOrder.getCoffeItemName())
+                .withNumber("price", purchasedOrder.getPrice())
                 .withNumber("quantity", 2)
-                .withBoolean("here", purchasedOrder.isHereOrToGo())
+                .withBoolean("here", purchasedOrder.drinkHere())
                 .withString("seatno", purchasedOrder.getSeatNo())
                 .withNumber("temperature", 70);
 
