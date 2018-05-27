@@ -6,7 +6,7 @@ import cucumber.api.java.en.When;
 import solid.humank.domains.Order;
 import solid.humank.domains.ProductItem;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 public class OrderAmericanoTest {
 
