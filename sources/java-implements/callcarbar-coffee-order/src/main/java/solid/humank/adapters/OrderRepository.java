@@ -21,7 +21,7 @@ public class OrderRepository {
                 .withPrimaryKey("establishtime", purchasedOrder.getEstablishedTime())
                 .withString("productItemName", "Americano")
                 .withNumber("price", 80)
-                .withNumber("cups", 2)
+                .withNumber("quantity", 2)
                 .withBoolean("here", purchasedOrder.isHereOrToGo())
                 .withString("seatno", purchasedOrder.getSeatNo())
                 .withNumber("temperature", 70);

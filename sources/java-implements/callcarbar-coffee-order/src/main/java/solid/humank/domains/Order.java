@@ -25,7 +25,10 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Data
 public class Order{
 
+    private String seatNo;
+    private boolean hereOrToGo;
     private List<CoffeeItem> acceptedOrderCoffeeItems;
+    private String establishedTime;
 
     public boolean isHereOrToGo() {
         return hereOrToGo;
@@ -35,8 +38,6 @@ public class Order{
         return seatNo;
     }
 
-    private boolean hereOrToGo;
-
     public List<CoffeeItem> getAcceptedOrderCoffeeItems() {
         return acceptedOrderCoffeeItems;
     }
@@ -44,9 +45,6 @@ public class Order{
     public String getEstablishedTime() {
         return establishedTime;
     }
-
-    private String establishedTime;
-    private String seatNo;
 
     public Order(){
         acceptedOrderCoffeeItems = new ArrayList<CoffeeItem>();

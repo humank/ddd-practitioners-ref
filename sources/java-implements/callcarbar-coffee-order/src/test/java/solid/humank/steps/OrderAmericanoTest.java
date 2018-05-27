@@ -11,7 +11,7 @@ import static org.junit.Assert.assertEquals;
 public class OrderAmericanoTest {
 
     int price;
-    int orderCups;
+    int orderquantity;
     int temperature;
     int totalPrice;
     CoffeeItem americano;
@@ -27,12 +27,13 @@ public class OrderAmericanoTest {
 
     }
 
-    @When("^I order (\\d+) cups of Americano$")
-    public void i_order_cups_of_Americano(int cups) throws Throwable {
+    @When("^I order (\\d+) quantity of Americano$")
+    public void i_order_quantity_of_Americano(int quantity) throws Throwable {
 
-        order.accept(americano);
-        order.accept(americano);
-        this.orderCups = cups;
+        for(int i=0;i<quantity;i++){
+            order.accept(americano);
+        }
+        this.orderquantity = quantity;
 
     }
 
@@ -45,8 +46,8 @@ public class OrderAmericanoTest {
     }
 
     @Then("^the total price should be (\\d+) \\* (\\d+)$")
-    public void the_total_price_should_be(int cups, int price) throws Throwable {
-        totalPrice = cups * price;
+    public void the_total_price_should_be(int quantity, int price) throws Throwable {
+        totalPrice = quantity * price;
         assertEquals(totalPrice,order.payAmount());
         int orderNo = order.establish();
 

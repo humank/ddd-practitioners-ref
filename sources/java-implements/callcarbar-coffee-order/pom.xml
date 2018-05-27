@@ -6,9 +6,9 @@
     <version>1.0.0</version>
 
     <properties>
-        <awsRegion></awsRegion>
-        <s3Bucket></s3Bucket>
-        <stackName></stackName>
+        <awsRegion>ap-northeast-1</awsRegion>
+        <s3Bucket>lambda-jar-upload</s3Bucket>
+        <stackName>coffeeshop-order</stackName>
         <s3Prefix>aws-serverless-java/${project.groupId}:${project.artifactId}:${project.version}</s3Prefix>
         <skipLocalInvoke>true</skipLocalInvoke>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
