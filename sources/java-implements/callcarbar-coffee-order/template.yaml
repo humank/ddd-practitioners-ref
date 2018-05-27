@@ -10,7 +10,7 @@ Resources:
       CodeUri: ./target/lambda.jar
       Policies: AmazonDynamoDBFullAccess
       Events:
-        Api:
+        PurchaseOrder:
           Type: Api
           Properties:
             Path: /

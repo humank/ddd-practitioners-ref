@@ -30,6 +30,10 @@ public class Order {
     private String establishedTime;
     private int drinkDegree;
 
+    public Order(){
+
+    }
+
     public Order(String seatNo, boolean ishere, String coffeeItemName, int quantity, int price) {
         this.seatNo = seatNo;
         this.drinkhere = ishere;
