@@ -3,10 +3,12 @@
 
 #java mvn target
 
-java-implements/**/target
+sources/**/target
 
 *.iml
 # User-specific stuff
+.idea/misc.xml
+.idea/workspace.xml
 .idea/**/workspace.xml
 .idea/**/tasks.xml
 .idea/**/dictionaries
