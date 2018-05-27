@@ -1,21 +1,25 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Outputs:
-  TestVersionUrl:
+  TestOrderUrl:
     Description: Test Order URL
     Value:
       Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/order
 Resources:
   OrderFunction:
     Properties:
-      CodeUri: s3://lambda-jar-upload/6c1ce6d2c6b6e56529809b42bb535455
+      CodeUri: s3://lambda-jar-upload/839934a73403d6ab60f124444035a43b
       Events:
         PurchaseOrder:
           Properties:
-            Method: post
-            Path: /order
+            Method: ANY
+            Path: /{proxy+}
           Type: Api
       Handler: solid.humank.adapters.OrderHandler::handleRequest
+      Policies:
+      - AmazonDynamoDBFullAccess
+      - AWSLambdaFullAccess
+      - CloudWatchEventsFullAccess
       Runtime: java8
-      Timeout: 15
+      Timeout: 60
     Type: AWS::Serverless::Function
 Transform: AWS::Serverless-2016-10-31

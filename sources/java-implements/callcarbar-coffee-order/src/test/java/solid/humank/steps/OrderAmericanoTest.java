@@ -1,5 +1,10 @@
 package solid.humank.steps;
 
+import com.amazonaws.services.cloudwatchevents.AmazonCloudWatchEvents;
+import com.amazonaws.services.cloudwatchevents.AmazonCloudWatchEventsClientBuilder;
+import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
+import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
+import com.amazonaws.services.dynamodbv2.document.DynamoDB;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -16,6 +21,12 @@ public class OrderAmericanoTest {
 
     Order order;
     String orderString;
+
+    final AmazonCloudWatchEvents cwe =
+            AmazonCloudWatchEventsClientBuilder.defaultClient();
+
+    final AmazonDynamoDB client = AmazonDynamoDBClientBuilder.defaultClient();
+    final DynamoDB ddb = new DynamoDB(client);
 
     @Given("^the price of a cup of Americano is (\\d+)$")
     public void the_price_of_a_cup_of_Americano_is(int price) throws Throwable {
@@ -37,7 +48,7 @@ public class OrderAmericanoTest {
     public void the_order_is_established() throws Throwable {
 
         order = new Order("2c",true,"Americano",2,80);
-        orderString = order.establish();
+        orderString = order.establish(cwe,ddb);
 
     }
 
@@ -48,7 +59,7 @@ public class OrderAmericanoTest {
 
     @Then("^the coffee temperatuere should be (\\d+) degree c$")
     public void the_coffee_temperatuere_should_be_degree_c(int degree) throws Throwable {
-        assertEquals(degree, order.getSeatDrinkDegree());
+        assertEquals(degree, order.getDrinktemperature());
     }
 
 }

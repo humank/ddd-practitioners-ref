@@ -13,6 +13,8 @@
 
 package solid.humank.domains;
 
+import com.amazonaws.services.cloudwatchevents.AmazonCloudWatchEvents;
+import com.amazonaws.services.dynamodbv2.document.DynamoDB;
 import lombok.Data;
 import org.joda.time.LocalDateTime;
 import solid.humank.adapters.CloudwatchEventAdapter;
@@ -24,70 +26,22 @@ public class Order {
 
     private int quantity;
     private String seatNo;
-    private boolean drinkhere;
+    private boolean drinkHere;
     private int price;
-    private String coffeeItemName;
-    private String establishedTime;
-    private int drinkDegree;
+    private String itemName;
+    private String establishTime;
+    private int drinktemperature;
 
-    public Order(){
+    public Order() {
 
     }
 
-    public Order(String seatNo, boolean ishere, String coffeeItemName, int quantity, int price) {
+    public Order(String seatNo, boolean ishere, String itemName, int quantity, int price) {
         this.seatNo = seatNo;
-        this.drinkhere = ishere;
-        this.coffeeItemName = coffeeItemName;
+        this.drinkHere = ishere;
+        this.itemName = itemName;
         this.quantity = quantity;
         this.price = price;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public String getCoffeeItemName() {
-        return coffeeItemName;
-    }
-
-    public void setCoffeeItemName(String coffeeItemName) {
-        this.coffeeItemName = coffeeItemName;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
-    public boolean drinkHere() {
-        return drinkhere;
-    }
-
-    public void setDrinkhere(boolean drinkhere) {
-        this.drinkhere = drinkhere;
-    }
-
-    public String getSeatNo() {
-        return seatNo;
-    }
-
-    public void setSeatNo(String seatNo) {
-        this.seatNo = seatNo;
-    }
-
-    public String getEstablishedTime() {
-        return establishedTime;
-    }
-
-    public void setEstablishedTime(String establishedTime) {
-        this.establishedTime = establishedTime;
     }
 
     public int payAmount() {
@@ -95,32 +49,26 @@ public class Order {
 
     }
 
-    public String establish() {
+    public String establish(AmazonCloudWatchEvents cwe, DynamoDB ddb) {
+        String orderString = null;
+        this.establishTime = new LocalDateTime().toString("yyyy-MM-dd:HH:mm:ss");
 
-        String orderString=null;
-        this.establishedTime = new LocalDateTime().toString("yyyy-MM-dd:HH:mm:ss");
-
-        if(this.drinkHere()){
-            this.drinkDegree = 70;
-        }else{
-            this.drinkDegree = 100;
+        if (drinkHere) {
+            this.drinktemperature = 70;
+        } else {
+            this.drinktemperature = 100;
         }
 
         //save to repo
-        OrderRepository repository = new OrderRepository();
+        OrderRepository repository = new OrderRepository(ddb);
         orderString = repository.saveOrder(this);
 
         //send event to makeup
-        new CloudwatchEventAdapter().publishEvent(new OrderEstablishedEvent(this));
 
+        CloudwatchEventAdapter cweAdapter =new CloudwatchEventAdapter(cwe);
+        String publishResult = cweAdapter.publishEvent(new OrderEstablishedEvent(this));
+
+        System.out.println("publish result : " + publishResult);
         return orderString;
-    }
-
-    public String getCoffeItemName() {
-        return this.coffeeItemName;
-    }
-
-    public int getSeatDrinkDegree() {
-        return this.drinkDegree;
     }
 }
