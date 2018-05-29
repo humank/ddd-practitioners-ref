@@ -7,14 +7,15 @@ Outputs:
 Resources:
   OrderFunction:
     Properties:
-      CodeUri: s3://lambda-jar-upload/839934a73403d6ab60f124444035a43b
+      CodeUri: s3://lambda-jar-upload/4f9873343f7215761d4d31ab51fd73b6
       Events:
         PurchaseOrder:
           Properties:
-            Method: ANY
-            Path: /{proxy+}
+            Method: post
+            Path: /order
           Type: Api
-      Handler: solid.humank.adapters.OrderHandler::handleRequest
+      Handler: solid.humank.adapters.OrderPrxoyHandler::handleRequest
+      MemorySize: 256
       Policies:
       - AmazonDynamoDBFullAccess
       - AWSLambdaFullAccess

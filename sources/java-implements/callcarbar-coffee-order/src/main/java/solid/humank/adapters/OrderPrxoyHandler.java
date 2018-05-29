@@ -37,7 +37,7 @@ public class OrderPrxoyHandler implements RequestStreamHandler {
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
         JSONObject responseJson = new JSONObject();
-        String responseCode = "200";
+        int responseCode = 200;
 
         Order order = new Order();
         try {
@@ -75,9 +75,9 @@ public class OrderPrxoyHandler implements RequestStreamHandler {
 
             JSONObject headerJson = new JSONObject();
             headerJson.put("Content-Type", "application/json");
-            //responseJson.put("isBase64Encoded", false);
-            //responseJson.put("statusCode", responseCode);
-            //cresponseJson.put("headers", headerJson);
+            responseJson.put("isBase64Encoded", false);
+            responseJson.put("statusCode", responseCode);
+            responseJson.put("headers", headerJson);
             responseJson.put("body", responseBody.toString());
 
         } catch (ParseException pex) {

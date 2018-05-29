@@ -156,6 +156,7 @@
             <groupId>info.cukes</groupId>
             <artifactId>cucumber-java</artifactId>
             <version>1.2.5</version>
+            <scope>test</scope>
         </dependency>
         <!-- https://mvnrepository.com/artifact/info.cukes/cucumber-junit -->
         <dependency>
@@ -193,12 +194,6 @@
             <groupId>com.googlecode.json-simple</groupId>
             <artifactId>json-simple</artifactId>
             <version>1.1.1</version>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
