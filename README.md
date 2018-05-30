@@ -1,38 +1,23 @@
-# EventStormingWorkShop
-A very first event storming workshop delivered by Kim And Arthur. Contains such topics: DDD, Event storming, design sprint, and tdd.
+![image](/documents/images/coffee.jpg)
+
+```
+picture license free from : Pexels
+https://www.pexels.com/photo/background-beverage-breakfast-brown-414645/
+```
+
+# Running DDD on AWS
+
+This demo is running on AWS. By using Lambda and cloudwatch event to present how can we keep model classes at the core, and leverage the outside adapter to interact with other domain.
 
 
-## Agenda
+## Using Lambda function as the entry point
 
-### 0) Problem Domain - 叫車吧咖啡店點餐
+You can easily export a lambda function to accept the incomg command, and do some stuff.
 
-### 1) Ice breaking and role play assignment
-### 2) workshop intro
-### 3) Event discovering
-### 4) Grouping problem and dive deep most valuable one event -- business concern
-### 5) Solution Brainstorming
-### 6) Impact Mapping
-### 7) User story and story board landing -- clarify boundary
-### 8) Aggregate, Entity, Value Object, Factory, Repository, 
+## Using CloudWatch Event as the integration Event
 
-#### Factory
-#### Repository
-#### Aggregator root
-#### Entity
-#### Value Object
-#### Domain Service
-#### Application Service -- just like a facade, gateway or responsibility is not clear to be defined one
+If cross boundary event did occured in current domain, never call other domain service directly, just publish a cross-domain-event. On AWS, the most appropriate one is using CloudWatch Event, it's a concrete Pub/Sub model, high performance and scalable.
 
-### 9)Implement your very first Model
+## Using DynamoDB as the Write Model/ Read Model persistent Repository
 
-### 10)Specification by Example -- Verify your model
-
-### 11)Build up Application
-
-#### leverage a web mock tool or from scratch
-
-
-### 12)Demo
-
-### 13)Retro
-
+Once capture Model with Domain Experts, you can design Write Model first, and create Query usage Read Model.
