@@ -32,7 +32,7 @@ public class OrderPrxoyHandler implements RequestStreamHandler {
     public void handleRequest(InputStream inputStream, OutputStream outputStream, Context context) throws IOException {
 
         LambdaLogger logger = context.getLogger();
-        logger.log("Loading Java Lambda handler of ProxyWithStream");
+        logger.log("Loading Java Lambda handler of ProxyWithStream \r\n");
 
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
