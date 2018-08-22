@@ -15,7 +15,7 @@ import solid.humank.domains.Order;
 
 import java.io.IOException;
 
-public class WrapperLambda implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
+public class OrderAPIGProxyWrapper implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
 
     final AmazonCloudWatchEvents cwe =
             AmazonCloudWatchEventsClientBuilder.defaultClient();
