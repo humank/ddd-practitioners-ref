@@ -24,6 +24,7 @@ Once capture Model with Domain Experts, you can design Write Model first, and cr
 
 
 ## TODO
+* Add installation instructions for the application
 * Using AWS SDK for Java v2 to have better performance
 * Put on X-ray inspection diagram
 * Try to use Dagger2 as the DI framework to have better cold start time
