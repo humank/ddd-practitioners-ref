@@ -21,3 +21,9 @@ If cross boundary event did occured in current domain, never call other domain s
 ## Using DynamoDB as the Write Model/ Read Model persistent Repository
 
 Once capture Model with Domain Experts, you can design Write Model first, and create Query usage Read Model.
+
+
+## TODO
+* Using AWS SDK for Java v2 to have better performance
+* Put on X-ray inspection diagram
+* Try to use Dagger2 as the DI framework to have better cold start time
