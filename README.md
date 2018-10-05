@@ -11,6 +11,8 @@ https://www.pexels.com/photo/background-beverage-breakfast-brown-414645/
 
 ## Why Event Storming
 
+![image](/documents/images/problemsolving.png)
+
 As the Complexity Problem domain growing, it's hard to have a fluent way to help Product Owner and Developer team to collaborate to produce a requriments all fulfilled Service/system.
 
 This problem is not a new story, from 2003, Eric Evans has already introduced the "Domain Driven Design" implementing approach to help developers, but it's really hard to implement from the Strategy and Tactic abstraction level.
