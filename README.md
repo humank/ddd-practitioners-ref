@@ -13,7 +13,7 @@ https://www.pexels.com/photo/background-beverage-breakfast-brown-414645/
 
 As the Complexity Problem domain growing, it's hard to have a fluent way to help Product Owner and Developer team to collaborate to produce a requriments all fulfilled Service/system.
 
-This problem is not a news, from 2003, Eric Evans has already introduced the "Domain Driven Design" implementing approach to help developers, but it's really hard to implement from the Strategy and Tactic abstraction level.
+This problem is not a new story, from 2003, Eric Evans has already introduced the "Domain Driven Design" implementing approach to help developers, but it's really hard to implement from the Strategy and Tactic abstraction level.
 
 After several years, Alberto Brandolini introduced the Event Storming approach to go through the DDD concept and make it easy to implement. 
 
@@ -31,7 +31,7 @@ You can easily export a lambda function to accept the incomg command, and do som
 
 ## Using CloudWatch Event as the integration Event
 
-If cross boundary event did occured in current domain, never call other domain service directly, just publish a cross-domain-event. On AWS, the most appropriate one is using CloudWatch Event, it's a concrete Pub/Sub model, high performance and scalable.
+If cross boundary event did occured in current domain, never call other domain service directly, just publish a cross-domain-event. On AWS, the most appropriate one is using CloudWatch Event, it's a near-real-time event, high performance and scalable.
 
 ## Using DynamoDB as the Write Model/ Read Model persistent Repository
 
