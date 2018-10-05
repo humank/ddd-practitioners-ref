@@ -71,8 +71,8 @@ This workshop example explained a Coffee shop use case, go through a customer or
 
 ### Prerequisite
 
-1. Create a Lambda function Execution Role
-2. Add API Gateway Logging policy to Cloudwatch
+1. [Create a Lambda function Execution Role](https://docs.aws.amazon.com/lambda/latest/dg/intro-permission-model.html#lambda-intro-execution-role)
+2. [Enable Amazon CloudWatch Logs for API Gateway](https://aws.amazon.com/premiumsupport/knowledge-center/api-gateway-cloudwatch-logs/)
 3. [Install AWS CLI](https://aws.amazon.com/cli/)
 4. [Install SAM CLI](https://github.com/awslabs/aws-sam-cli)
 5. Get used to do Unit Test - mvn test
@@ -83,13 +83,18 @@ This workshop example explained a Coffee shop use case, go through a customer or
 
 #### 01 - Deploy Order Domain lambda function with proxy integration on API Gateway
 
+[Deploy Order Domain](/documents/01-deploy-order-domain/README.MD)
+
 #### 02 - Deploy MakeUp Domain lambda function with proxy integration on API Gateway
+
+[Deploy MakeUp Domain](/documents/02-deploy-makeup-domain/README.MD)
 
 #### 03 - Define CloudWatchEvent for the Order-created Event
 
+[Define CloudWatch Event for Coffee Order Created Event](/documents/03-define-cloudwatchevent/README.MD)
+
 ## TODO
 
-* Add installation instructions for the application
 * Using AWS SDK for Java v2 to have better performance
 * Put on X-ray inspection diagram
 * Try to use Dagger2 as the DI framework to have better cold start time
