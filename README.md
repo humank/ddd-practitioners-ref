@@ -25,7 +25,25 @@ You can apply it to practically any technical or business domain, especially tho
 
 ## What is the benefit
 
+When you want to divide a monolithic system into microservices, or you want to build up a new system from scratch, the most pain point is there is no idea to clarify the system boundary. Even though you interview with domain experts, and get a whole bunch of requirement documents, it still not easy to start the design. Maybe you are familiar with the classic modeling methodologies such as :
+
+>UP/RUP, OOAD, RAD, Use Case Modeling, ICONIX Processing ...etc
+
+No matter any one of these methodologies, all deeply depends on experts skill, but if you apply Event Storming workshop, you could leverage team's collaboration to acquire requirements with key events. However, these events are most concerned business value by stakeholders. With different color, pin, and diagrams to group the actions, events, and the aggregate context. Naturally forms up the domain boundary.
+
 ## How to implement DDD via Event Storming approach
+
+There are plenty materials to introduce how to run the EventStorming process, most useful materials are listed:
+
+* [Join EventStorming workshop](https://www.eventstorming.com/)
+
+* [Book from Alberto Brandolini](https://www.eventstorming.com/book/)
+
+* [More deatil from awesome-eventstorming](https://github.com/mariuszgil/awesome-eventstorming)
+
+## Design each Microservices in Port-adapter concept
+
+![image](/documents/images/implementation.png)
 
 ## Using Lambda function as the entry point
 
