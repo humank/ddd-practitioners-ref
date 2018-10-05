@@ -81,17 +81,19 @@ This workshop example explained a Coffee shop use case, go through a customer or
 
 ### Deployment instructions
 
-#### 01 - Deploy Order Domain lambda function with proxy integration on API Gateway
+#### 01 - Define CloudWatchEvent for the Order-created Event
 
-[Deploy Order Domain](/documents/01-deploy-order-domain/README.MD)
+[Define CloudWatch Event for Coffee Order Created Event](/documents/01-define-cloudwatchevent/README.MD)
 
-#### 02 - Deploy MakeUp Domain lambda function with proxy integration on API Gateway
+#### 02 - Deploy Order Domain lambda function with proxy integration on API Gateway
 
-[Deploy MakeUp Domain](/documents/02-deploy-makeup-domain/README.MD)
+[Deploy Order Domain](/documents/02-deploy-order-domain/README.MD)
 
-#### 03 - Define CloudWatchEvent for the Order-created Event
+#### 03 - Deploy MakeUp Domain lambda function with proxy integration on API Gateway
 
-[Define CloudWatch Event for Coffee Order Created Event](/documents/03-define-cloudwatchevent/README.MD)
+[Deploy MakeUp Domain](/documents/03-deploy-makeup-domain/README.MD)
+
+
 
 ## TODO
 
