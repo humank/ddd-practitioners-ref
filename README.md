@@ -45,6 +45,12 @@ There are plenty materials to introduce how to run the EventStorming process, mo
 
 ![image](/documents/images/implementation.png)
 
+>The famous Port-Adapter pattern is best suite for developing microservices. Focus on core domain problem, and switch any infrastructure or communication tools as you need.
+
+![image](/documents/images/orderdomain.png)
+
+>For this workshop demo, design a order domain object, and leverage AWS services to do persistent, http request accept and handler, and event propagation.
+
 ## Using Lambda function as the entry point
 
 You can easily export a lambda function to accept the incomg command, and do some stuff.
@@ -56,6 +62,21 @@ If cross boundary event did occured in current domain, never call other domain s
 ## Using DynamoDB as the Write Model/ Read Model persistent Repository
 
 Once capture Model with Domain Experts, you can design Write Model first, and create Query usage Read Model.
+
+## Launch this workshop example on AWS
+
+![image](/documents/images/eventhandling.png)
+
+This workshop example explained a Coffee shop use case, go through a customer order coffee and barista accept the order then make coffee.
+
+### Prerequisite
+
+1. Create a Lambda function Execution Role
+2. Add API Gateway Logging policy to Cloudwatch
+3. Install SAM CLI
+4. Get used to do Unit Test
+5. Java/Maven Environment
+6. Configure AWS CLI Enviroment
 
 ## TODO
 
