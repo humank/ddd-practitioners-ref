@@ -26,22 +26,4 @@ public class Order {
     private String establishTime;
     private int drinktemperature;
 
-    public Order() {
-
-    }
-
-    public Order(String seatNo, boolean ishere, String itemName, int quantity, int price) {
-        this.seatNo = seatNo;
-        this.drinkHere = ishere;
-        this.itemName = itemName;
-        this.quantity = quantity;
-        this.price = price;
-    }
-
-    public int payAmount() {
-        return this.getQuantity() * this.getPrice();
-
-    }
-
-
 }

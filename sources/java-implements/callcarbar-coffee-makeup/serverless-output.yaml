@@ -2,7 +2,7 @@ AWSTemplateFormatVersion: '2010-09-09'
 Resources:
   MakeupFunction:
     Properties:
-      CodeUri: s3://kim-lambda-store/e77f0d155fe4a84312581c80e4795d74
+      CodeUri: s3://kim-lambda-store/47a51c0d5340665d64165a5b9d1c3da4
       Handler: solid.humank.adapters.OrderReceiverAdapter::handleRequest
       MemorySize: 256
       Policies:

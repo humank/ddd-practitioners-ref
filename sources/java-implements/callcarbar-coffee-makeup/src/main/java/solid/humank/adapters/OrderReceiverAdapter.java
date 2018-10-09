@@ -16,12 +16,17 @@ package solid.humank.adapters;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.LambdaLogger;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import solid.humank.domains.Order;
 import solid.humank.domains.OrderMakeup;
 
-public class OrderReceiverAdapter implements RequestHandler<String, OrderMakeup> {
+import java.io.IOException;
+
+public class OrderReceiverAdapter implements RequestHandler<OrderCreatedEvent, OrderMakeup> {
 
     @Override
-    public OrderMakeup handleRequest(String receivedOrderString, Context context) {
+    public OrderMakeup handleRequest(OrderCreatedEvent orderCreatedEvent, Context context) {
 
         //call barista makeup coffee.
 
@@ -29,7 +34,19 @@ public class OrderReceiverAdapter implements RequestHandler<String, OrderMakeup>
 
         OrderMakeup madeup = new OrderMakeup();
         logger.log("yoyo");
-        logger.log(receivedOrderString);
-                return madeup;
+        logger.log(orderCreatedEvent.toString());
+
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            String orderString= mapper.writeValueAsString(orderCreatedEvent.getDetail());
+            logger.log(orderString);
+            mapper.readValue(orderString, Order.class);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 }
