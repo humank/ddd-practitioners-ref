@@ -25,3 +25,30 @@ output would be:
     "RuleArn": "arn:aws:events:ap-northeast-1:<<AWS Account ID>>:rule/OrderCreatedEvent"
 }
 ```
+
+Once the Domain event defined, then you could register the " Targets " on the event. The target means once the domain event occured, the registered Targets functions will be invoked to relfect the event or handle the event.
+
+Yes, you could still associate/register the Targets on Event or just run the following command:
+
+```bash
+aws events put-targets --rule OrderCreatedEvent --targets "Id"="MakeUpDomain", "Arn"="<<Your AWS Lambda Function which is responsbile for the Barista makeup coffee for the incoming coffee order>>"
+```
+
+example:
+
+```bash
+aws events put-targets --rule OrderCreatedEvent --targets "Id"="MakeUpDomain","Arn"="arn:aws:lambda:ap-northeast-1:123456789012:function:BaristaHello"
+
+```
+
+Output would be:
+
+```json
+{
+    "FailedEntries": [],
+    "FailedEntryCount": 0
+}
+```
+
+The well setup CloudWatch Event looks like this:
+![image](/documents/images/OrderCreatedEvent-setup.png)
