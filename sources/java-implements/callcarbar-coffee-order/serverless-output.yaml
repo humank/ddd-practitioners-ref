@@ -1,0 +1,26 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Outputs:
+  TestOrderUrl:
+    Description: Test Order URL
+    Value:
+      Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/order
+Resources:
+  OrderFunction:
+    Properties:
+      CodeUri: s3://kim-lambda-store/64f89b4bdacf2baf8a828e87e4a4cd01
+      Events:
+        PurchaseOrder:
+          Properties:
+            Method: post
+            Path: /order
+          Type: Api
+      Handler: solid.humank.adapters.OrderAPIGProxyWrapper::handleRequest
+      MemorySize: 256
+      Policies:
+      - AmazonDynamoDBFullAccess
+      - AWSLambdaFullAccess
+      - CloudWatchEventsFullAccess
+      Runtime: java8
+      Timeout: 60
+    Type: AWS::Serverless::Function
+Transform: AWS::Serverless-2016-10-31

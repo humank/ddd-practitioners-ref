@@ -37,7 +37,7 @@ aws events put-targets --rule OrderCreatedEvent --targets "Id"="MakeUpDomain", "
 example:
 
 ```bash
-aws events put-targets --rule OrderCreatedEvent --targets "Id"="MakeUpDomain","Arn"="arn:aws:lambda:ap-northeast-1:123456789012:function:BaristaHello"
+aws events put-targets --rule "OrderCreatedEvent" --targets "Id"="MakeUpDomain","Arn"="arn:aws:lambda:ap-northeast-1:123456789012:function:BaristaHello"
 
 ```
 

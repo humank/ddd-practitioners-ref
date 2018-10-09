@@ -34,3 +34,105 @@ The way to start the api gateway at local, just start with the command:
 ![image](/documents/images/order-domain-sam-local-startapi.png)
 
 ## SAM CLI Package & Deploy
+
+### Packing application
+
+At first, make sure that you have a s3 bucket which is used to store the application, if need, just run the command to create a new bucket.
+
+
+```bash
+aws s3 mb s3://bucket-name-to-store-lambda-function --region <<AsYouNeed>>
+```
+
+Next, then try to pack this lambda function and upload it to s3 bucket which you refer to store.
+
+```bash
+sam package \
+    --template-file path/template.yaml \
+    --output-template-file serverless-output.yaml \
+    --s3-bucket s3-bucket-name
+```
+example:
+
+```bash
+sam package \
+    --template-file template.yaml \
+    --output-template-file serverless-output.yaml \
+    --s3-bucket kim-lambda-store
+```
+Output:
+
+```text
+Uploading to 64f89b4bdacf2baf8a828e87e4a4cd01  8339909 / 8339909.0  (100.00%)
+Successfully packaged artifacts and wrote output template to file serverless-output.yaml.
+Execute the following command to deploy the packaged template
+aws cloudformation deploy --template-file /Users/yikai/git/EventStormingWorkShop/sources/java-implements/callcarbar-coffee-order/serverless-output.yaml --stack-name <YOUR STACK NAME>
+```
+
+The package command returns an AWS SAM template named serverless-output.yaml that contains the CodeUri that points to the deployment zip in the Amazon S3 bucket that you specified. This template represents your serverless application. You are now ready to deploy it.
+
+Take a look on the Serverless-output.yml
+
+```yml
+AWSTemplateFormatVersion: '2010-09-09'
+Outputs:
+  TestOrderUrl:
+    Description: Test Order URL
+    Value:
+      Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/order
+Resources:
+  OrderFunction:
+    Properties:
+      CodeUri: s3://kim-lambda-store/64f89b4bdacf2baf8a828e87e4a4cd01
+      Events:
+        PurchaseOrder:
+          Properties:
+            Method: post
+            Path: /order
+          Type: Api
+      Handler: solid.humank.adapters.OrderAPIGProxyWrapper::handleRequest
+      MemorySize: 256
+      Policies:
+      - AmazonDynamoDBFullAccess
+      - AWSLambdaFullAccess
+      - CloudWatchEventsFullAccess
+      Runtime: java8
+      Timeout: 60
+    Type: AWS::Serverless::Function
+Transform: AWS::Serverless-2016-10-31
+```
+
+### Deploying application
+
+```bash
+sam deploy \
+    --template-file serverless-output.yaml \
+    --stack-name OrderDomain \
+    --capabilities CAPABILITY_IAM
+```
+
+Output:
+
+```log
+Waiting for changeset to be created..
+Waiting for stack create/update to complete
+Successfully created/updated stack - OrderDomain
+```
+
+Remember, the Serverless Application Model is a streamline version from CloudFormation. All the sam deployment will trigger the cloudformation to create stack from the specified serverless-output.yaml. So the whole cloudformation stack creation process will be invoked( Check for change, if exist then create change-set, and then confirm to create/update the change to complete).
+
+Final check for the cloudformation to see these changes.
+
+* Cloudformation Stack created
+
+![image](/documents/images/order-domain-stack-created.png)
+
+* Created resources
+
+![image](/documents/images/order-domain-resources.png)
+
+If you are interested in knowing the whole process, and want to know what stuff CFN did, just look at the event records.
+
+* Creation detail
+
+![image](/documents/images/order-domain-creation-process.png)
