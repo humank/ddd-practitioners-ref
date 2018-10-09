@@ -6,9 +6,9 @@
     <version>1.0.0</version>
 
     <properties>
-        <awsRegion></awsRegion>
-        <s3Bucket></s3Bucket>
-        <stackName></stackName>
+        <awsRegion>ap-northeast-1</awsRegion>
+        <s3Bucket>lambda-jar-upload</s3Bucket>
+        <stackName>coffeeshop-makeup</stackName>
         <s3Prefix>aws-serverless-java/${project.groupId}:${project.artifactId}:${project.version}</s3Prefix>
         <skipLocalInvoke>true</skipLocalInvoke>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -49,7 +49,7 @@
                 <artifactId>maven-shade-plugin</artifactId>
                 <version>3.1.0</version>
                 <configuration>
-                    <finalName>lambda</finalName>
+                    <finalName>makeup-lambda</finalName>
                     <createDependencyReducedPom>false</createDependencyReducedPom>
                 </configuration>
                 <executions>
@@ -123,6 +123,14 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>8</source>
+                    <target>8</target>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
@@ -131,6 +139,17 @@
             <groupId>com.amazonaws</groupId>
             <artifactId>aws-lambda-java-core</artifactId>
             <version>1.2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.16.6</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.9.3</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 

@@ -1,0 +1,15 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Resources:
+  MakeupFunction:
+    Properties:
+      CodeUri: s3://kim-lambda-store/e77f0d155fe4a84312581c80e4795d74
+      Handler: solid.humank.adapters.OrderReceiverAdapter::handleRequest
+      MemorySize: 256
+      Policies:
+      - AmazonDynamoDBFullAccess
+      - AWSLambdaFullAccess
+      - CloudWatchEventsFullAccess
+      Runtime: java8
+      Timeout: 60
+    Type: AWS::Serverless::Function
+Transform: AWS::Serverless-2016-10-31

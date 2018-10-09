@@ -8,9 +8,9 @@ import solid.humank.events.DomainEvent;
 
 public class CloudwatchEventAdapter {
 
-    final String EVENT_TYPE = "customeevent";
+    final String EVENT_TYPE = "customevent";
     final String EVENT_SOURCE = "solid.humank.eventstormingddd";
-    final String RESOURCE_ARN = "arn:aws:events:ap-northeast-1:584518143473:rule/hellocwe";
+    final String RESOURCE_ARN = "arn:aws:events:ap-northeast-1:584518143473:rule/OrderCreatedEvent";
     private AmazonCloudWatchEvents cwe;
 
     public CloudwatchEventAdapter(AmazonCloudWatchEvents cwe) {

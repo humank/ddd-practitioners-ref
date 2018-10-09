@@ -5,6 +5,12 @@ Resources:
     Type: 'AWS::Serverless::Function'
     Properties:
       Runtime: java8
-      Handler: solid.humank.callcarbar.coffee.makeup.adapter.Makeup::handleRequest
+      Handler: solid.humank.adapters.OrderReceiverAdapter::handleRequest
       Timeout: 60
-      CodeUri: ./target/lambda.jar
+      MemorySize: 256
+      CodeUri: ./target/makeup-lambda.jar
+      Policies:
+        - AmazonDynamoDBFullAccess
+        - AWSLambdaFullAccess
+        - CloudWatchEventsFullAccess
+
