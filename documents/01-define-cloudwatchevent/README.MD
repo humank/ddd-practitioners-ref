@@ -52,3 +52,24 @@ Output would be:
 
 The well setup CloudWatch Event looks like this:
 ![image](/documents/images/OrderCreatedEvent-setup.png)
+
+## Configure the Coffee Order Domain Events Properties File
+
+The OrderCreatedEvent has been registered on AWS CloudWatch Event. 
+
+And now, we need to configure the Order Domain to make it has the ability to publish the coffee order.
+
+Open the Properties file, path is : 
+
+```bash
+
+<<Your work env>>/git/EventStormingWorkShop/sources/java-implements/callcarbar-coffee-order/src/main/resources/cloudwatchevents.properties
+```
+
+Modify the parameter: RESOURCE_ARN, change the arn to your OrderCreatedEvent Arn.
+
+```bash
+RESOURCE_ARN=arn:aws:events:ap-northeast-1:123456789012:rule/OrderCreatedEvent
+
+RESOURCE_ARN=arn:aws:events:ap-northeast-1:<<Your AWS Account ID>>:rule/OrderCreatedEvent
+```
