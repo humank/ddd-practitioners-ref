@@ -50,7 +50,7 @@ public class Order {
     }
 
     public String establish(AmazonCloudWatchEvents cwe, DynamoDB ddb) {
-        String orderString = null;
+
         this.establishTime = new LocalDateTime().toString("yyyy-MM-dd:HH:mm:ss");
 
         if (drinkHere) {
@@ -61,11 +61,11 @@ public class Order {
 
         //save to repo
         OrderRepository repository = new OrderRepository(ddb);
-        orderString = repository.saveOrder(this);
+        String orderString = repository.saveOrder(this);
 
         //send event to makeup
 
-        CloudwatchEventAdapter cweAdapter =new CloudwatchEventAdapter(cwe);
+        CloudwatchEventAdapter cweAdapter = new CloudwatchEventAdapter(cwe);
         String publishResult = cweAdapter.publishEvent(new OrderEstablishedEvent(this));
 
         System.out.println("publish result : " + publishResult);
