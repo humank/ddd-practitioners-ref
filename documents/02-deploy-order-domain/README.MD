@@ -48,18 +48,11 @@ Next, then try to pack this lambda function and upload it to s3 bucket which you
 
 ```bash
 sam package \
-    --template-file path/template.yaml \
-    --output-template-file serverless-output.yaml \
-    --s3-bucket s3-bucket-name
-```
-example:
-
-```bash
-sam package \
     --template-file template.yaml \
     --output-template-file serverless-output.yaml \
     --s3-bucket kim-lambda-store
 ```
+
 Output:
 
 ```text

@@ -44,7 +44,7 @@ public class OrderAPIGProxyWrapper implements RequestHandler<APIGatewayProxyRequ
 
         String orderString = order.establish(cwe, ddb);
 
-        responseEvent.setBody("{\"orderString:\"" + "\"" + orderString + "\"}");
+        responseEvent.setBody("{\"orderString\":" + "\"" + orderString + "\"}");
         responseEvent.setStatusCode(200);
 
         return responseEvent;

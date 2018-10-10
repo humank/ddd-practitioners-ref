@@ -7,7 +7,7 @@ Outputs:
 Resources:
   OrderFunction:
     Properties:
-      CodeUri: s3://kim-lambda-store/1852ff8d2d4e65a22fd83f5a444b2c65
+      CodeUri: s3://kim-lambda-store/abfba3923b771e116ea6e32279fd4e88
       Events:
         PurchaseOrder:
           Properties:

@@ -93,7 +93,9 @@ This workshop example explained a Coffee shop use case, go through a customer or
 
 [Deploy MakeUp Domain](/documents/03-deploy-makeup-domain/README.MD)
 
+#### 04 - Experience and Test the Demo
 
+[Experience Coffee order demo](/documents/04-experience/README.MD)
 
 ## TODO
 
