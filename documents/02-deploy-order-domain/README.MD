@@ -21,7 +21,7 @@ cd callcarbar-coffee-order
 mvn clean test package
 ```
 
-![image](/documents/images/mvn-process.png)
+![image](/documents/images/order-mvn-process.png)
 
 ## SAM CLI Local Test
 
@@ -50,7 +50,7 @@ Next, then try to pack this lambda function and upload it to s3 bucket which you
 sam package \
     --template-file template.yaml \
     --output-template-file serverless-output.yaml \
-    --s3-bucket kim-lambda-store
+    --s3-bucket <<your-lambda-bucket-store>>
 ```
 
 Output:
