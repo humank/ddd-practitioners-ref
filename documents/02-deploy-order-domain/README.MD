@@ -33,6 +33,66 @@ The way to start the api gateway at local, just start with the command:
 
 ![image](/documents/images/order-domain-sam-local-startapi.png)
 
+## Create DynamoDB Table to persist Domain Entity - Order
+
+Order table Partition Key definition:
+
+```json
+{
+    "TableName": "Order",
+    "KeySchema": [
+      { "AttributeName": "establishtime", "KeyType": "HASH" }
+    ],
+    "AttributeDefinitions": [
+      { "AttributeName": "establishtime", "AttributeType": "S" }
+    ],
+    "ProvisionedThroughput": {
+      "ReadCapacityUnits": 5,
+      "WriteCapacityUnits": 5
+    }
+}
+```
+
+```bash
+cd ~/<<YourWorkPath>>/EventStormingWorkShop/sources
+
+aws dynamodb create-table --cli-input-json file://create-dynamodb-table-order.json --region ap-northeast-1
+
+```
+
+Output:
+
+```json
+{
+    "TableDescription": {
+        "TableArn": "arn:aws:dynamodb:ap-northeast-1:584518143473:table/Order",
+        "AttributeDefinitions": [
+            {
+                "AttributeName": "establishtime",
+                "AttributeType": "S"
+            }
+        ],
+        "ProvisionedThroughput": {
+            "NumberOfDecreasesToday": 0,
+            "WriteCapacityUnits": 5,
+            "ReadCapacityUnits": 5
+        },
+        "TableSizeBytes": 0,
+        "TableName": "Order",
+        "TableStatus": "CREATING",
+        "TableId": "111bc38b-bc03-4a60-b285-9a2d063851bf",
+        "KeySchema": [
+            {
+                "KeyType": "HASH",
+                "AttributeName": "establishtime"
+            }
+        ],
+        "ItemCount": 0,
+        "CreationDateTime": 1539189162.492
+    }
+}
+```
+
 ## SAM CLI Package & Deploy
 
 ### Packing application
