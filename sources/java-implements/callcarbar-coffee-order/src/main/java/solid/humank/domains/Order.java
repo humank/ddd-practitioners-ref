@@ -17,7 +17,7 @@ import com.amazonaws.services.cloudwatchevents.AmazonCloudWatchEvents;
 import com.amazonaws.services.dynamodbv2.document.DynamoDB;
 import lombok.Data;
 import org.joda.time.LocalDateTime;
-import solid.humank.adapters.CloudwatchEventAdapter;
+import solid.humank.adapters.CloudWatchEventAdapter;
 import solid.humank.adapters.OrderRepository;
 import solid.humank.events.OrderEstablishedEvent;
 
@@ -65,7 +65,7 @@ public class Order {
 
         //send event to makeup
 
-        CloudwatchEventAdapter cweAdapter = new CloudwatchEventAdapter(cwe);
+        CloudWatchEventAdapter cweAdapter = new CloudWatchEventAdapter(cwe);
         String publishResult = cweAdapter.publishEvent(new OrderEstablishedEvent(this));
 
         System.out.println("publish result : " + publishResult);

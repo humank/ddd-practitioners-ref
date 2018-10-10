@@ -10,15 +10,14 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Properties;
 
-public class CloudwatchEventAdapter {
+public class CloudWatchEventAdapter {
 
     final String propFileName = "cloudwatchevents.properties";
     private AmazonCloudWatchEvents cwe;
 
-    public CloudwatchEventAdapter(AmazonCloudWatchEvents cwe) {
+    public CloudWatchEventAdapter(AmazonCloudWatchEvents cwe) {
         this.cwe = cwe;
     }
 
