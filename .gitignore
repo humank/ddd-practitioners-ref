@@ -64,3 +64,4 @@ fabric.properties
 .project
 .classpath
 .settings/
+.factorypath
