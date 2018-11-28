@@ -28,7 +28,7 @@ https://1yvd5pyuoe.execute-api.ap-northeast-1.amazonaws.com/Prod/order
 curl --header "Content-Type: application/json" \
 --request POST \
 --data '{"seatNo": "2a","drinkHere": "true","itemName": "Americano","quantity": "2","price": "80"}' \
-https://1yvd5pyuoe.execute-api.ap-northeast-1.amazonaws.com/Prod/order
+https://1yvd5pyuoe.execute-api.ap-northeast-1.amazonaws.com/Prod/order -w "\n"
 ```
 
 Once the order has been accepted, you will get the ticket for order response - orderString. I use the order created timestamp as the order identifier.
