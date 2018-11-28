@@ -27,33 +27,30 @@ public class CloudWatchEventAdapter {
 
     private String putEvent(String eventContent) {
 
-        HashMap<String, String> cweMap = null;
-
         try {
-            cweMap = getCWEParameters();
+            Properties cweProp = getCWEParameters();
+            PutEventsRequestEntry request_entry = new PutEventsRequestEntry()
+                    .withDetail(eventContent)
+                    .withDetailType(cweProp.getProperty("EVENT_TYPE"))
+                    .withResources(cweProp.getProperty("RESOURCE_ARN"))
+                    .withSource(cweProp.getProperty("EVENT_SOURCE"));
+
+            PutEventsRequest request = new PutEventsRequest()
+                    .withEntries(request_entry);
+
+            PutEventsResult response = cwe.putEvents(request);
+            return response.getSdkResponseMetadata().toString();
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-            return "AWS Cloud Watch Events configuration is not correct. The event is not published:" + eventContent;
+
         }
-
-
-        PutEventsRequestEntry request_entry = new PutEventsRequestEntry()
-                .withDetail(eventContent)
-                .withDetailType(cweMap.get("EVENT_TYPE"))
-                .withResources(cweMap.get("RESOURCE_ARN"))
-                .withSource(cweMap.get("EVENT_SOURCE"));
-
-        PutEventsRequest request = new PutEventsRequest()
-                .withEntries(request_entry);
-
-        PutEventsResult response = cwe.putEvents(request);
-
-        return response.getSdkResponseMetadata().toString();
+        return "AWS Cloud Watch Events configuration is not correct. The event is not published:" + eventContent;
     }
 
     //TODO : Move the parameters to AWS ParameterStore
 
-    private HashMap<String, String> getCWEParameters() throws FileNotFoundException {
+    private Properties getCWEParameters() throws FileNotFoundException {
 
         InputStream inputStream;
         Properties prop = new Properties();
@@ -71,6 +68,6 @@ public class CloudWatchEventAdapter {
             throw new FileNotFoundException("property file '" + propFileName + "' not found in the classpath");
         }
 
-        return map;
+        return prop;
     }
 }

@@ -67,4 +67,4 @@ fabric.properties
 .factorypath
 
 #SAM CLI output
-serverless-output.yaml
+**/serverless-output.yaml
