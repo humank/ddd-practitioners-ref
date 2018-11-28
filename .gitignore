@@ -60,3 +60,7 @@ fabric.properties
 .idea/httpRequests
 
 **/.DS_Store
+
+.project
+.classpath
+.settings/
