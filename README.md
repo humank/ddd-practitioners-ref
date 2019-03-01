@@ -10,30 +10,6 @@ Besides, making all of these artifact automatically deploy to AWS is a must to b
 
 Core services used on AWS as the following :
 
-[Amazon API Gateway](https://aws.amazon.com/api-gateway/)
-
-[AWS Lambda](https://aws.amazon.com/lambda/)
-
-[Amazon DynamoDB](https://aws.amazon.com/dynamodb/)
-
-[Amazon RDS for Aurora](https://aws.amazon.com/rds/aurora/)
-
-[AWS X-Ray](https://aws.amazon.com/xray/)
-
-[AWS Messaging](https://aws.amazon.com/messaging/)
-
-[AWS CodePipeline](https://aws.amazon.com/codepipeline/)
-
-[AWS CodeBuild](https://aws.amazon.com/codebuild/)
-
-[AWS CodeDeploy](https://aws.amazon.com/codedeploy/)
-
-[Amazon Elastic Container Service](https://aws.amazon.com/ecs/)
-
-[Amazon Elastic Container Service for Kubernetes](https://aws.amazon.com/eks/)
-
-[AWS CloudFormation](https://aws.amazon.com/cloudformation/)
-
 ## 01 Getting Started with Event Storming
 
 [Why Event Storming](/documents/01-getting-started-with-EventStorming/README.md)
@@ -52,11 +28,18 @@ Core services used on AWS as the following :
 
 ## 05 Implementing stack
 
-[](/documents/05-implementing-in-java/README.md)
+[Java](/documents/05-implementing-in-java/README.md)
 
-## 06 Deployment Pipeline
+## 06 CI/CD Pipeline
+
+To leave your latop clean and keep the instruction could be run everywhere, recommend to use [AWS Cloud9](https://aws.amazon.com/cloud9/) to run deployment commands.
+
+If you're willing to do this on laptop, there are some prerequisite tools should be installed, check as the following.
 
 ### Prerequisite
+
+* AWS CLI
+* AWS SAM CLI
 
 ### 6.1 Build and package
 

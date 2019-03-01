@@ -1,3 +1,13 @@
+# CI/CD Pipeline
+
+> This page is under reorganzing ... will update ASAP.
+
+We are going to steup a pipeline to do source code fetch, build, and deploy on to AWS. There are 2 solutions offered here : 
+
+1. Serverless Lambda Function
+2. Container - ECS with Fargate
+3. Container - EKS
+
 ## Launch this workshop example on AWS
 
 ![image](/documents/images/eventhandling.png)
