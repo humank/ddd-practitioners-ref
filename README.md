@@ -6,7 +6,7 @@
 
 This repo is designed to run an EventStorming workshop to crunch a Coffeeshop bussiness domain, and implement it on Amazon Web Services. By going through this workshop, you will learn the classic DDD Strategical modeling and Tactical Design pattern, implement solution domains as microservice(s).
 
-Besides, making all of these artifact automatically deploy to AWS is a must to be, you will also learn how to use AWS infrastructure provisioning service - Cloudformation and DevOps tools - CodePipeline, CodeBuild, CodeDeploy ...etc.
+Besides, making all of these artifact automatically deploy to AWS is a must to have, you will also learn how to use AWS infrastructure provisioning service - Cloudformation and DevOps tools - CodePipeline, CodeBuild, CodeDeploy ...etc.
 
 Core services used on AWS as the following :
 
