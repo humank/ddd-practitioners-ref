@@ -27,7 +27,7 @@ public class OrderAPIGProxyWrapper implements RequestHandler<APIGatewayProxyRequ
     public APIGatewayProxyResponseEvent handleRequest(APIGatewayProxyRequestEvent apiGatewayProxyRequestEvent, Context context) {
 
         LambdaLogger logger = context.getLogger();
-        logger.log("Loading Java Lambda handler of ProxyIntegration mode \r\n");
+        logger.log("Yes oh my !!! Loading Java Lambda handler of ProxyIntegration mode \r\n");
 
 
         APIGatewayProxyResponseEvent responseEvent = new APIGatewayProxyResponseEvent();
