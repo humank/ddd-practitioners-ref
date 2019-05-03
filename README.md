@@ -1,89 +1,103 @@
-# Implementing DDD on AWS
+* # Running DDD on AWS
 
-![image](./documents/images/coffee.jpg)
+  ![image](documents/images/coffee.jpg)
 
-> Way to deal with complexity problem(s).
+  ```bash
+  picture license free from : Pexels
+  https://www.pexels.com/photo/background-beverage-breakfast-brown-414645/
+  ```
 
-This repo is designed to run an EventStorming workshop to crunch a CoffeeShop domain, and implement it on Amazon Web Services. By going through this workshop, you will learn the classic DDD Strategical modeling and Tactical Design pattern, implement solution domains as microservice(s).
+  > This demo is running on AWS. By using Lambda and cloudwatch event to present how can we keep model classes at the core, and leverage the outside adapter to interact with other domain.
 
-Besides, making all of these artifact automatically deploy to AWS is a must to have, you will also learn how to use AWS infrastructure provisioning service - Cloudformation and DevOps tools - CodePipeline, CodeBuild, CodeDeploy ...etc.
+  ## Why Event Storming
 
+  ![image](documents/images/problemsolving.png)
 
+  As the Complexity Problem domain growing, it's hard to have a fluent way to help Product Owner and Developer team to collaborate to produce a requriments all fulfilled Service/system.
 
-## Modeling for the Problem Domain
+  This problem is not a new story, from 2003, Eric Evans has already introduced the "Domain Driven Design" implementing approach to help developers, but it's really hard to implement from the Strategy and Tactic abstraction level.
 
+  After several years, Alberto Brandolini introduced the Event Storming approach to go through the DDD concept and make it easy to implement. 
 
+  Event storming is a rapid, lightweight, and underappreciated group modeling technique that is intense, fun, and useful for accelerating development teams. It's a synthesis of facilitated group learning practices from Gamestorming and the principles of domain-driven design (DDD). The technique isn't limited to software development. Frankly speaking it is recommend to invite all the stakeholders to join the storming workshop, collect each opinions from each viewpoints.
 
-## Developing Solution in Java
+  You can apply it to practically any technical or business domain, especially those that are large, complex, or both.
 
-## Building on AWS
+  ## What is the benefit
 
-### 01 Getting Started with Event Storming
+  When you want to divide a monolithic system into microservices, or you want to build up a new system from scratch, the most pain point is there is no idea to clarify the system boundary. Even though you interview with domain experts, and get a whole bunch of requirement documents, it still not easy to start the design. Maybe you are familiar with the classic modeling methodologies such as :
 
-[Why Event Storming](/documents/01-getting-started-with-EventStorming/README.md)
+  > UP/RUP, OOAD, RAD, Use Case Modeling, ICONIX Processing ...etc
 
-### 02 Case Study
+  No matter any one of these methodologies, all deeply depends on experts skill, but if you apply Event Storming workshop, you could leverage team's collaboration to acquire requirements with key events. However, these events are most concerned business value by stakeholders. With different color, pin, and diagrams to group the actions, events, and the aggregate context. Naturally forms up the domain boundary.
 
-[CallCarBar coffee shop](/documents/02-case-study/README.md)
+  ## How to implement DDD via Event Storming approach
 
-### 03 Strategic Modeling
+  There are plenty materials to introduce how to run the EventStorming process, most useful materials are listed:
 
-[CallCarBar Strategic Modeling](/documents/03-strategic-modeling/README.md)
+  - [Join EventStorming workshop](https://www.eventstorming.com/)
+  - [Book from Alberto Brandolini](https://www.eventstorming.com/book/)
+  - [More deatil from awesome-eventstorming](https://github.com/mariuszgil/awesome-eventstorming)
 
-### 04 Tactical Modeling
+  ## Design each Microservices in Port-adapter concept
 
-[CallCarBar Tactical Modeling](/documents/04-tactical-modeling/README.md)
+  ![image](documents/images/implementation.png)
 
-## Building on AWS
+  > The famous Port-Adapter pattern is best suite for developing microservices. Focus on core domain problem, and switch any infrastructure or communication tools as you need.
 
-## 01 Implementing stack
+  ![image](documents/images/orderdomain.png)
 
-[Java](/documents/05-implementing-in-java/README.md)
+  > For this workshop demo, design a order domain object, and leverage AWS services to do persistent, http request accept and handler, and event propagation.
 
-## 02 CI/CD Pipeline
+  ## Using Lambda function as the entry point
 
-To leave your latop clean and keep the instruction could be run everywhere, recommend to use [AWS Cloud9](https://aws.amazon.com/cloud9/) to run deployment commands.
+  You can easily export a lambda function to accept the incomg command, and do some stuff.
 
-If you're willing to do this on laptop, there are some prerequisite tools should be installed, check as the following.
+  ## Using CloudWatch Event as the integration Event
 
-### Prerequisite
+  If cross boundary event did occured in current domain, never call other domain service directly, just publish a cross-domain-event. On AWS, the most appropriate one is using CloudWatch Event, it's a near-real-time event, high performance and scalable.
 
-* AWS CLI
-* AWS SAM CLI
+  ## Using DynamoDB as the Write Model/ Read Model persistent Repository
 
-#### 2.1 Provision evenronment by Cloudformation
+  Once capture Model with Domain Experts, you can design Write Model first, and create Query usage Read Model.
 
-#### 2.2 Integrate with Amazon ECR
+  ## Launch this workshop example on AWS
 
-#### 2.3 Integrate Jib within Maven Lifecycle
+  ![image](documents/images/eventhandling.png)
 
-### 6.2 Deploy Lambda function
+  This workshop example explained a Coffee shop use case, go through a customer order coffee and barista accept the order then make coffee.
 
-#### 6.2.1 Packaging in Lambda Layer(s)
+  ### Prerequisite
 
-#### 6.2.2 SAM and SAM CLI
+  1. [Create a Lambda function Execution Role](https://docs.aws.amazon.com/lambda/latest/dg/intro-permission-model.html#lambda-intro-execution-role)
+  2. [Enable Amazon CloudWatch Logs for API Gateway](https://aws.amazon.com/premiumsupport/knowledge-center/api-gateway-cloudwatch-logs/)
+  3. [Install AWS CLI](https://aws.amazon.com/cli/)
+  4. [Install SAM CLI](https://github.com/awslabs/aws-sam-cli)
+  5. Get used to do Unit Test - mvn test
+  6. Prepare Java/Maven env by IDE or commandline
+  7. [Configuring the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html)
 
-#### 6.2.3 Build up CI/CD pipeline
+  ### Deployment instructions
 
-### 6.3 Deploy with ECS/Fargate
+  #### 01 - Define CloudWatchEvent for the Order-created Event
 
-### 6.4 Deploy with EKS
+  [Define CloudWatch Event for Coffee Order Created Event](/documents/01-define-cloudwatchevent/README.MD)
 
-## 07 Service Control and Monitoring
+  #### 02 - Deploy Order Domain lambda function with proxy integration on API Gateway
 
-### 7.1 Integrate with App Mesh
+  [Deploy Order Domain](/documents/02-deploy-order-domain/README.MD)
 
-## 08 Service Discovery
+  #### 03 - Deploy MakeUp Domain lambda function with proxy integration on API Gateway
 
-### 8.1 Integrate with Cloud Map
+  [Deploy MakeUp Domain](/documents/03-deploy-makeup-domain/README.MD)
 
-## 09 Microservices Design Pattern
+  #### 04 - Experience and Test the Demo
 
-### 9.1 Transaction Compensate
+  [Experience Coffee order demo](/documents/04-experience/README.MD)
 
-<<<<<<< HEAD
-#### 9.1.1 Saga: Way to deal with distributed transactions
-=======
-* Using AWS SDK for Java v2 to have better performance
-* Put on X-ray inspection diagram
-* Try to use Dagger2 as the DI framework to have better cold start time
+  ## TODO
+
+  - Using AWS SDK for Java v2 to have better performance
+  - Put on X-ray inspection diagram
+  - Try to use Dagger2 as the DI framework to have better cold start time
+  - Time to enrich iDDD modules
