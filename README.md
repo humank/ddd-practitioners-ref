@@ -19,7 +19,7 @@ This problem is not a new story, from 2003, Eric Evans has already introduced th
 
 After several years, Alberto Brandolini introduced the Event Storming approach to go through the DDD concept and make it easy to implement. 
 
-Event storming is a rapid, lightweight, and underappreciated group modeling technique that is intense, fun, and useful for accelerating development teams. It's a synthesis of facilitated group learning practices from Gamestorming and the principles of domain-driven design (DDD). The technique isn't limited to software development. Frankly speaking it is recommend to invite all the stakeholders to join the storming workshop, collect each opinions from each viewpoints.
+**Event storming is a rapid, lightweight, and underappreciated group modeling technique that is intense, fun, and useful for accelerating development teams**. It's a synthesis of facilitated group learning practices from Gamestorming and the principles of domain-driven design (DDD). The technique isn't limited to software development. Frankly speaking it is recommend to invite all the stakeholders to join the storming workshop, collect each opinions from each viewpoints.
 
 You can apply it to practically any technical or business domain, especially those that are large, complex, or both.
 
@@ -33,14 +33,14 @@ You can apply it to practically any technical or business domain, especially tho
 
 Take a look on this diagram, there are a few colorful stickers with different intention:
 
-* Domain Events ( Orange color ) 
-  * Event, Stands for the fact happened in specific business context
-* Actions (Blue color)   
-  * Command, It is a request or intention, raised by a role or time or external system
-* Information ( Green color)  
-  * View Model, it's a supporting information to help role to make a decision to raise a command
-* Consistent Business Rules ( Yellow color) 
-  *  So called Aggregate
+* **Domain Events** ( Orange sticker ) 
+  * **Event**, Stands for the fact happened in specific business context
+* **Actions** (Blue sticker)   
+  * **Command**, It is a request or intention, raised by a role or time or external system
+* **Information** ( Green sticker)  
+  * **View Model**, it's a supporting information to help role to make a decision to raise a command
+* **Consistent Business Rules** ( Yellow sticker) 
+  * **Aggregate**
     * Has the responsibility to accept or fulfill the intention of command
     * Represent a specific business capability to support command
     * Shouldn't naming it with role concept, or you will get only the "actor" in the whole business.
@@ -48,8 +48,9 @@ Take a look on this diagram, there are a few colorful stickers with different in
     * Protects business invariants
     * Exposes by ID
     * And communicated by eventual consistency
-* Eventual Consistent Business rules (Lilac color) - Policy
-  * It's all about rules, sometimes the rules comes from external regulation restriction, or maybe account login success/fail process logic.
+* **Eventual Consistent Business rules** (Lilac sticker)
+  * Policy
+    * It's all about rules, sometimes the rules comes from external regulation restriction, or maybe account login success/fail process logic.
     * example : when login attemptation fail times up to 3, then lock this account
 
 ### The benefits from Event Storming
