@@ -69,6 +69,10 @@ If you are new to Event Storming, don't know how to start the domain event explo
 
 ![Timeline](documents/images/timelineformorning.png)
 
+Anyone of you could easily to figure out a couple of stickers there to present what you did in the morning. All of the **past-tense** wording is explaining what happened, immutable fact, and meaningful for your **"working day morning"**.
+
+**[Challenge for you]** Imagine a specific scenario, it's time to attend a meeting but you are probably be late to join, can you pick the most essential stickers to complete the journey on timeline?
+
 ## Coffee shop business scenario
 
 ## Modeling and Development
