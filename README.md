@@ -1,6 +1,6 @@
 # Implementing DDD on AWS
 
-![image](/Users/yikaikao/git/EventStormingWorkShop/documents/images/coffee.jpg)
+![image](documents/images/coffee.jpg)
 
 ```bash
 picture license free from : Pexels
