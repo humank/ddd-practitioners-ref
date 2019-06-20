@@ -67,5 +67,5 @@ fabric.properties
 .factorypath
 
 #SAM CLI output
-sources/java-implements/callcarbar-coffee-order/serverless-output.yaml
-sources/java-implements/callcarbar-coffee-makeup/serverless-output.yaml
+sources/coffee-order/serverless-output.yaml
+sources/coffee-makeup/serverless-output.yaml
