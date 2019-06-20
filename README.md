@@ -67,7 +67,7 @@ If you are new to Event Storming, don't know how to start the domain event explo
 
 > how many immutable fact events occurred, from you wake up at this morning, until now you read this post.
 
-
+![Timeline](documents/images/timelineformorning.png)
 
 ## Coffee shop business scenario
 
@@ -99,7 +99,7 @@ If cross boundary event did occured in current domain, never call other domain s
 
 Once capture Model with Domain Experts, you can design Write Model first, and create Query usage Read Model.
 
-## Launch this workshop example on AWS
+## Launch this workshop in Serverless Architecture
 
 ![image](documents/images/eventhandling.png)
 
@@ -154,5 +154,4 @@ This workshop example explained a Coffee shop use case, go through a customer or
 ## TODO
 
 - Using AWS SDK for Java v2 to have better performance
-- Put on X-ray inspection diagram
 - Try to use Dagger2 as the DI framework to have better cold start time
