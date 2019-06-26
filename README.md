@@ -91,13 +91,13 @@ In order to have a simple scenario to walk through Event Storming workshop, ther
 
 ![](documents/images/coffee-shop-2.png)
 
-~ **You walk in the coffee shop, oncoming scene is the cute menu on the wall. There are multiple choice of drinks to have, you ordered 2 cup of Americano for here. Counter kindly remind you could have a seat with great view, and food runner will serve later.**
+~ **You walk in the coffee shop, oncoming scene is the cute menu on the wall. There are multiple choice of drinks to have. Counter kindly remind you could have a seat with great view, and food runner will serve later.**
 
 
 
 ![](documents/images/coffee-shop-3.png)
 
-~ **The seats near by window are mostly occupied, you look for a table with 4 seats which make you comfortable and relax.**
+~ **The seats near by window are mostly occupied, you look for a table with 4 seats which make you comfortable and relax, you ordered 2 cup of Americano for here.**
 
 
 
@@ -123,7 +123,57 @@ In order to have a simple scenario to walk through Event Storming workshop, ther
 
 ~ **Enjoyed the teatime, and get a few bright idea from the brainstorming discussion, you leave there, and the Server cleaned the table for next customer(s).**
 
+That's the scenario for the teatime, let's crunch the truth which happened in the story.
+
 ## Modeling and Development
+
+### Key Business events in the coffeeshop
+
+### Tips
+
+When you are trying to capture events in business scenario, never to talk about technology with other stakeholders, **do respect domain experts, using ubiquitous language to have a clear dunerstanding during communication.**
+
+- Don't tell technology during the business events discoverying process
+- Don't sell technology concepts
+- Aim for core value
+- Figure out trigger and result
+
+![](documents/images/coffee-shop-events.png)
+
+**All of the immutable events occured:**
+
+* Menu offered
+* Seat occupied
+* Ordered 2 cup of Americano
+* Paid
+* Order receieved
+* Coffee made (up)
+* Customers left
+* Table cleaned
+
+### Roles, Commands and Events mapping
+
+### Most valuable or risky events
+
+### Re-think solutions to serve risky events
+
+### Aggregate(Blackbox) without a name
+
+### Aggregate Naming
+
+### Bounded Context forming up
+
+
+
+
+
+## Development
+
+### Develop Domain Model
+
+### Specification by Example
+
+
 
 ## Running on AWS
 
