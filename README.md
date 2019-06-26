@@ -73,7 +73,55 @@ Anyone of you could easily to figure out a couple of stickers there to present w
 
 **[Challenge for you]** Imagine a specific scenario, it's time to attend a meeting but you are probably be late to join, can you pick the most essential stickers to complete the journey on timeline?
 
+> The most key events you picked up, that's the critical path to "Attend meeting". On the other hand, if there is a product under developing, and the Product Owner opens whole bunch of wish list there, what approach will you take to survive under the pressure? 
+
+**The most valuable approach is to leverage "User story mapping" and "Impact mapping". Pick up the most essential ones to developer as first sprint, then continously exploring the story and refine it.**
+
 ## Coffee shop business scenario
+
+In order to have a simple scenario to walk through Event Storming workshop, there is a well-known casual scenario - **Drink a cup of coffee in coffee shop.**
+
+> The following images are provided by pixabay with free license.
+
+![](documents/images/coffee-shop-1.png)
+
+~ **It's a sunny warm afternoon, you are looking for a coffee shop to have a teatime and think about how to design a new service to fulfill marketing event requirement. Finally, at the corner of street, you found it and would like to make a phone call to colleague come to you.**
+
+
+
+![](documents/images/coffee-shop-2.png)
+
+~ **You walk in the coffee shop, oncoming scene is the cute menu on the wall. There are multiple choice of drinks to have, you ordered 2 cup of Americano for here. Counter kindly remind you could have a seat with great view, and food runner will serve later. **
+
+
+
+![](documents/images/coffee-shop-3.png)
+
+~ **The seats near by window are mostly occupied, you look for a table with 4 seats which make you comfortable and relax. **
+
+
+
+![](documents/images/coffee-shop-4.png)
+
+~ **In house Barista received the coffee order which you ordered from counter(staff), brew up beans and make up coffee. **
+
+
+
+![](documents/images/coffee-shop-5.png)
+
+~ **Food runner delivered the coffee and receipts. **
+
+
+
+![](documents/images/coffee-shop-6.png)
+
+~ **after a half of hour, your colleague come to here, you guys start to discusss how to design the new service. **
+
+
+
+![](documents/images/coffee-shop-7.png)
+
+~ **Enjoyed the teatime, and get a few bright idea from the brainstorming discussion, you leave there, and the Server cleaned the table for next customer(s). **
 
 ## Modeling and Development
 
