@@ -125,6 +125,18 @@ In order to have a simple scenario to walk through Event Storming workshop, ther
 
 That's the scenario for the teatime, let's crunch the truth which happened in the story.
 
+## Value proposition
+
+> This is the new material of this workshop, to be updated incrementally. Focus on Impact mapping to facilitate discussion. (2019-06-28 added)
+
+
+
+![img](https://www.impactmapping.org/assets/im_template.png)
+
+The coffee shop offer drinks and service for passengers, however all of these valuable offering cost a lot of investments. If you operate this coffee shop, how can you reach the goal —> **"Make this coffee shop long live, and offer greate customer experience".**
+
+
+
 ## Modeling and Development
 
 ### Key Business events in the coffeeshop
@@ -151,13 +163,48 @@ When you are trying to capture events in business scenario, never to talk about 
 * Customers left
 * Table cleaned
 
+> You can always arrange these events in a timeline, sequectially occurred. 
+
 ### Roles, Commands and Events mapping
 
+As you explored these immutable events, it's time to think about **"Who make it happened ? "**,  and **What support/offer the capability to serve it, a.k.a  made these events happened? **
+
+![](documents/images/coffee-shop-event-trigger.png)
+
+
+
+In this coffee-shop scenario, we could easily find out several actors(roles) : 
+
+* Client
+* Server
+* Counter
+* Barista
+
+**Let's coorchestrate it up ! **
+
+![](documents/images/coffee-shop-role-trigger.png)
+
+A (role) man/women/service raised a command, the command presented the intention, wish to have somebody( ? ) to fulfill the command, serve the command.
+
+The (?), which is the key element to serve request, and process it in internal, once the process finished, the 
+
+**"Command has been processed"**, we use an Event to present the result.
+
+Sometimes, the central element ( named with ? ) could serve the command itself, need to communicate with other business capability provider, then we can publish the event(s) to do next step.
+
+From technical viewpoint, we can adopt pub-sub mechanism to deal wthi this scenario.
+
 ### Most valuable or risky events
+
+When doing the events exploring journey, there will be whole bounch of stickers paste on the wall, it is impossible to figure out **Role send Command —> Aggregate accept or reject command —> command processed (Event produced)** for all of these stickers.
+
+Let's take an most cost-effective way to do this, take most valuable one or most risky one to go through the exploring. sometimes you can findout more scenario at the meanwhile, and extend the story to enrich the domain knowledge.
 
 ### Re-think solutions to serve risky events
 
 ### Aggregate(Blackbox) without a name
+
+Until now, you may realized that the central element ( named with ?) provides business capability, and owns the responsibility to accept or reject commands from client. Yes, it is the **"Aggregate"**.
 
 ### Aggregate Naming
 
