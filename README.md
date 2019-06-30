@@ -7,7 +7,7 @@ picture license free from : Pexels
 https://www.pexels.com/photo/background-beverage-breakfast-brown-414645/
 ```
 
-why you build software ? It's all about solve the business problem. However, there will be a gap from requirements to implementaion, it's a painpoint for all stakeholders. As a builder, you may eager to know how to mitigate this gap in a fluent way to deal with it, the Event Storming approach is "The One".
+why you build software ? It's all about solve the business problem. However, there will be a gap from requirements to implementaion, it's a pain point for all stakeholders. As a builder, you may eager to know how to mitigate this gap in a fluent way to deal with it, the Event Storming approach is "The One".
 
 ## Why EventStorming
 
