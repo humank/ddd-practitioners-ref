@@ -143,9 +143,9 @@ The coffee shop offer drinks and service for passengers, however all of these va
 
 ### Tips
 
-When you are trying to capture events in business scenario, never to talk about technology with other stakeholders, **do respect domain experts, using ubiquitous language to have a clear dunerstanding during communication.**
+When you are trying to capture events in business scenario, never to talk about technology with other stakeholders, **do respect domain experts, using ubiquitous language to have a clear understanding during communication.**
 
-- Don't tell technology during the business events discoverying process
+- Don't tell technology during the business events discovering process
 - Don't sell technology concepts
 - Aim for core value
 - Figure out trigger and result
@@ -180,7 +180,7 @@ In this coffee-shop scenario, we could easily find out several actors(roles) :
 * Counter
 * Barista
 
-**Let's coorchestrate it up ! **
+**Let's co-orchestrate it up ! **
 
 ![](documents/images/coffee-shop-role-trigger.png)
 
@@ -192,32 +192,32 @@ The (?), which is the key element to serve request, and process it in internal, 
 
 Sometimes, the central element ( named with ? ) could serve the command itself, need to communicate with other business capability provider, then we can publish the event(s) to do next step.
 
-From technical viewpoint, we can adopt pub-sub mechanism to deal wthi this scenario.
+From technical viewpoint, we can adopt pub-sub mechanism to deal with this scenario.
 
 ### Most valuable or risky events
 
-When doing the events exploring journey, there will be whole bounch of stickers pasted on the wall, it is impossible to figure out **Role send Command —> Aggregate accept or reject command —> command processed (Event produced)** for all of these stickers.
+When doing the events exploring journey, there will be whole bunch of stickers pasted on the wall, it is impossible to figure out **Role send Command —> Aggregate accept or reject command —> command processed (Event produced)** for all of these stickers.
 
-Let's take an most cost-effective way to do this, take most valuable one or most risky one to go through the exploring. sometimes you can findout more scenario at the meanwhile, and extend the story to enrich the domain knowledge.
+Let's take an most cost-effective way to do this, take most valuable one or most risky one to go through the exploring. sometimes you can find out more scenario at the meanwhile, and extend the story to enrich the domain knowledge.
 
 ### Re-think solutions to serve risky events
 
 ![](documents/images/coffee-shop-risk.png)
 
-Imagniate that what if any failure happened will suffer the business in the coffee shop scenario?
+Imagine that what if any failure happened will suffer the business in the coffee shop scenario?
 
-* What if the customers ordered coffee wihout note table number?  
+* What if the customers ordered coffee without note table number?  
 * What if the counter or barista make up coffee which is not ordered? 
 
 No matter which failure or mistakes happened there, the customer experience will be impacted. So we can re-think about these issues to find out further actions to prevent or solve these issues. 
 
-Although this step is not the essential one, but it could helpyou to **handle business scenario which you are not get familiared with before.**
+Although this step is not the essential one, but it could help you to **handle business scenario which you wre not familiar with before.**
 
 ### Aggregate(Blackbox) without a name
 
 Until now, you may realized that the central element ( named with ?) provides business capability, and owns the responsibility to accept or reject commands from client. Yes, it is the **"Aggregate"**.
 
-But at the early stage, encourage team members to focus on gathering events and commands, try to think about the co-relationshop between these events. If those events are relevant to a specific noun, concept, or a role even an organization, just try to pinned them on a yellow sticker and leave the name empty at the moment, amybe just mark it as a **question mark**. Try to defer naming until team has fully knowledge of the domain.
+But at the early stage, encourage team members to focus on gathering events and commands, try to think about the co-relationshop between these events. If those events are relevant to a specific noun, concept, or a role even an organization, just try to pinned them on a yellow sticker and leave the name empty at the moment, maybe just mark it as a **question mark**. Try to defer naming until team has fully knowledge of the domain.
 
 ### Aggregate Naming
 
