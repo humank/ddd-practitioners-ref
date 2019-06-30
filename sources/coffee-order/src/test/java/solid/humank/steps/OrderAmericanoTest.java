@@ -57,8 +57,8 @@ public class OrderAmericanoTest {
         assertEquals(sum,order.payAmount());
     }
 
-    @Then("^the coffee temperatuere should be (\\d+) degree c$")
-    public void the_coffee_temperatuere_should_be_degree_c(int degree) throws Throwable {
+    @Then("^the coffee temperature should be (\\d+) degree c$")
+    public void the_coffee_temperature_should_be_degree_c(int degree) throws Throwable {
         assertEquals(degree, order.getDrinktemperature());
     }
 
