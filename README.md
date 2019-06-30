@@ -273,9 +273,9 @@ It worth to do a "Bounded Context Mapping", chance to know what's the dependenci
 
 ## Development
 
-Now, you have the whole story, bounded context,m and **just-enough** aggregates, commands, and events. It's time to develope domain model to proof crunched model is correct or not.
+Now, you have the whole story, bounded context and **just-enough** aggregates, commands, and events. It's time to develop domain model to proof crunched model is correct or not.
 
-> Design & Develop model iteratively and incrementally is recommended, never to run this workshop in a waterfall style, that's spent lots of time but encounter uncontrollable surprise at lst-minute.
+> Design & Develop model iteratively and incrementally is recommended, never to run this workshop in a waterfall style, that's spent lots of time but encounter uncontrollable surprise at last-minute.
 
 ### Specification by Example
 
@@ -288,7 +288,7 @@ Feature: Order Americano in seat
     And decided to have it Here
     And the order is established
     Then the total price should be 160
-    And the coffee temperatuere should be 70 degree c
+    And the coffee temperature should be 70 degree c
 
 
 #    Examples:
@@ -303,7 +303,7 @@ A living doucment help team to collaborate in the same understanding by example.
 
 Try to read the feature and scenario as above, all of the stakeholders could read and understand it, there is no technical term explained there, which is a good way to talk with stakeholder.
 
-Team should cowork on these documents, once the examples confirmed, developers could leverage it to generate a unit test code skeleton, and implement it accordingly.
+Team should co-work on these documents, once the examples confirmed, developers could leverage it to generate a unit test code skeleton, and implement it accordingly.
 
 
 
@@ -470,7 +470,7 @@ public class OrderAmericanoTest {
 
 ![image](documents/images/implementation.png)
 
-> The famous Port-Adapter pattern is best suite for developing microservices. Focus on core domain problem, and switch any infrastructure or communication tools as you need.
+> The famous Port-Adapter pattern is the best suite for developing microservices. Focus on core domain problem, and switch any infrastructure or communication tools as you need.
 
 ![image](documents/images/orderdomain.png)
 
