@@ -196,17 +196,32 @@ From technical viewpoint, we can adopt pub-sub mechanism to deal wthi this scena
 
 ### Most valuable or risky events
 
-When doing the events exploring journey, there will be whole bounch of stickers paste on the wall, it is impossible to figure out **Role send Command —> Aggregate accept or reject command —> command processed (Event produced)** for all of these stickers.
+When doing the events exploring journey, there will be whole bounch of stickers pasted on the wall, it is impossible to figure out **Role send Command —> Aggregate accept or reject command —> command processed (Event produced)** for all of these stickers.
 
 Let's take an most cost-effective way to do this, take most valuable one or most risky one to go through the exploring. sometimes you can findout more scenario at the meanwhile, and extend the story to enrich the domain knowledge.
 
 ### Re-think solutions to serve risky events
 
+![](documents/images/coffee-shop-risk.png)
+
+Imagniate that what if any failure happened will suffer the business in the coffee shop scenario?
+
+* What if the customers ordered coffee wihout note table number?  
+* What if the counter or barista make up coffee which is not ordered? 
+
+No matter which failure or mistakes happened there, the customer experience will be impacted. So we can re-think about these issues to find out further actions to prevent or solve these issues. 
+
+Although this step is not the essential one, but it could helpyou to **handle business scenario which you are not get familiared with before.**
+
 ### Aggregate(Blackbox) without a name
 
 Until now, you may realized that the central element ( named with ?) provides business capability, and owns the responsibility to accept or reject commands from client. Yes, it is the **"Aggregate"**.
 
+But at the early stage, encourage team members to focus on gathering events and commands, try to think about the co-relationshop between these events. If those events are relevant to a specific noun, concept, or a role even an organization, just try to pinned them on a yellow sticker and leave the name empty at the moment, amybe just mark it as a **question mark**. Try to defer naming until team has fully knowledge of the domain.
+
 ### Aggregate Naming
+
+Once you have the more **question marked yellow stickers**, and feel comfortable to name it, the best time to name it should be event storming exlporing process finished, then naming it with concrete and meaningful  name.
 
 ### Bounded Context forming up
 
@@ -219,6 +234,24 @@ Until now, you may realized that the central element ( named with ?) provides bu
 ### Develop Domain Model
 
 ### Specification by Example
+
+```
+Feature: Order Americano in seat
+
+  Scenario: Drink Americano here
+    Given the price of a cup of Americano is 80
+    When I order 2 cups of Americano
+    And decided to have it Here
+    And the order is established
+    Then the total price should be 160
+    And the coffee temperatuere should be 70 degree c
+
+
+#    Examples:
+#      | coffee    | quantity | price | HereToGo |
+#      | Americano | 2        | 80    | true     |
+
+```
 
 
 
@@ -299,6 +332,14 @@ This workshop example explained a Coffee shop use case, go through a customer or
 - How to monitor Domain Events for Product management, https://xebia.com/blog/eventstorming-and-how-to-monitor-domain-events-for-product-management/
 
 
+
+## Special Thanks For
+
+**Jenson Lee** , plays the role as coffee shop owner
+
+**Arthur Chang** , collaborate design & run the workshop
+
+**Kenny Baas-Schwegler** , discuss the aggregate definition and ES workshop running experience sharing
 
 ## TODO
 
