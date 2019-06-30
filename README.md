@@ -221,17 +221,61 @@ But at the early stage, encourage team members to focus on gathering events and 
 
 ### Aggregate Naming
 
+> Another example for IT guy outsourcing, project management
+
+![](documents/images/itguy-outsourcing.png)
+
+
+
 Once you have the more **question marked yellow stickers**, and feel comfortable to name it, the best time to name it should be event storming exlporing process finished, then naming it with concrete and meaningful  name.
+
+What is the naming convention of Aggregate? There are some examples: 
+
+* By Noune
+* By Gerunds ( V - ing)
+
+No matter which type you favored, remember to present the **"ability"** of the aggregate, that's means traverse each command the aggregate receieve, and make sure each event occurred in reasonable.
 
 ### Bounded Context forming up
 
+With more and more Aggregates being captured, you may found that several aggregates are cohesive, others are not. There is a simple pattern to help you form up the boundary to have a clear bounded context.
 
+- Command A  is fired and it causes Event A 
+- Event A  effects View A
+- View A is also needed while doing a condition that uses Command B  
+- Command A and Command B  might be good to be in one module together.
+
+**Circle these cohesive aggregates together, the boundary is naturally established.**
+
+
+
+![](documents/images/bcmapping.png)
+
+
+
+While you figure out several bounded contexts, there are some co-relationships between each other, some bounded context play the upstream role, some of these play the downstream role. From **Eric Evans'** perspective, there are 9 types of corelationships.
+
+
+
+![](documents/images/legacy-bc.png)
+
+> Context Maps could reflect the collaborative or even organizational teams relationships between different Bounded Contexts in your systems.
+
+
+
+It worth to do a "Bounded Context Mapping", chance to know what's the dependencies, what's the impact scope while upstreaming API(contract) changed, and how to prevent the suffer while the changes happend.
+
+> Regarding Bounded Context mapping, recommend to have a quick guide to this document.
+
+[Bounded Context Mapping - by Domain Driven Design Taiwan Community - Eason Kuo](https://www.slideshare.net/YiChengKuo1/implementing-domaindriven-design-study-group-chapter-3-context-maps)
 
 
 
 ## Development
 
-### Develop Domain Model
+Now, you have the whole story, bounded context,m and **just-enough** aggregates, commands, and events. It's time to develope domain model to proof crunched model is correct or not.
+
+> Design & Develop model iteratively and incrementally is recommended, never to run this workshop in a waterfall style, that's spent lots of time but encounter uncontrollable surprise at lst-minute.
 
 ### Specification by Example
 
@@ -250,6 +294,169 @@ Feature: Order Americano in seat
 #    Examples:
 #      | coffee    | quantity | price | HereToGo |
 #      | Americano | 2        | 80    | true     |
+
+```
+
+Want to have concrete requirements scenario? **The only way is to talk about an example.**
+
+A living doucment help team to collaborate in the same understanding by example.
+
+Try to read the feature and scenario as above, all of the stakeholders could read and understand it, there is no technical term explained there, which is a good way to talk with stakeholder.
+
+Team should cowork on these documents, once the examples confirmed, developers could leverage it to generate a unit test code skeleton, and implement it accordingly.
+
+
+
+### TDD within Unit Test environment
+
+In this workshop, cucumber-java is in used to run the example.
+
+```
+package solid.humank.cucumberjunit;
+
+
+import cucumber.api.CucumberOptions;
+
+import cucumber.api.junit.Cucumber;
+import org.junit.runner.RunWith;
+
+@RunWith(Cucumber.class)
+@CucumberOptions(
+        features = "src/test/resources/features",
+        glue = "solid.humank.steps"
+)
+public class RunCucumberTest {
+}
+
+```
+
+
+
+### Generate unit test code skeleton
+
+![](documents/images/run-cucumber-steps.png)
+
+
+
+By running the cucumber-java steps, Java compiler complained that there are no implementation methods regarding **Feature: Order_Americao**. 
+
+```
+
+
+
+You can implement missing steps with the snippets below:
+
+@Given("^the price of a cup of Americano is (\\d+)$")
+public void the_price_of_a_cup_of_Americano_is(int arg1) throws Throwable {
+    // Write code here that turns the phrase above into concrete actions
+    throw new PendingException();
+}
+
+@When("^I order (\\d+) cups of Americano$")
+public void i_order_cups_of_Americano(int arg1) throws Throwable {
+    // Write code here that turns the phrase above into concrete actions
+    throw new PendingException();
+}
+
+@When("^decided to have it Here$")
+public void decided_to_have_it_Here() throws Throwable {
+    // Write code here that turns the phrase above into concrete actions
+    throw new PendingException();
+}
+
+@When("^the order is established$")
+public void the_order_is_established() throws Throwable {
+    // Write code here that turns the phrase above into concrete actions
+    throw new PendingException();
+}
+
+@Then("^the total price should be (\\d+)$")
+public void the_total_price_should_be(int arg1) throws Throwable {
+    // Write code here that turns the phrase above into concrete actions
+    throw new PendingException();
+}
+
+@Then("^the coffee temperatuere should be (\\d+) degree c$")
+public void the_coffee_temperatuere_should_be_degree_c(int arg1) throws Throwable {
+    // Write code here that turns the phrase above into concrete actions
+    throw new PendingException();
+}
+
+
+Process finished with exit code 0
+
+```
+
+### Implement Domain Model from code Skeleton
+
+It's a TDD style approach, way to fulfill Feature: Order_Americano steps.
+
+```
+package solid.humank.steps;
+
+import com.amazonaws.services.cloudwatchevents.AmazonCloudWatchEvents;
+import com.amazonaws.services.cloudwatchevents.AmazonCloudWatchEventsClientBuilder;
+import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
+import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
+import com.amazonaws.services.dynamodbv2.document.DynamoDB;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+import solid.humank.domains.Order;
+
+import static org.junit.Assert.assertEquals;
+
+public class OrderAmericanoTest {
+
+    int priceOfAmericano;
+    int orderCups;
+    boolean isHere;
+    int totalPrice;
+
+    Order order;
+    String orderString;
+
+    final AmazonCloudWatchEvents cwe =
+            AmazonCloudWatchEventsClientBuilder.defaultClient();
+
+    final AmazonDynamoDB client = AmazonDynamoDBClientBuilder.defaultClient();
+    final DynamoDB ddb = new DynamoDB(client);
+
+    @Given("^the price of a cup of Americano is (\\d+)$")
+    public void the_price_of_a_cup_of_Americano_is(int price) throws Throwable {
+
+        priceOfAmericano = price;
+    }
+
+    @When("^I order (\\d+) cups of Americano$")
+    public void i_order_cups_of_Americano(int cups) throws Throwable {
+        orderCups = cups;
+    }
+
+    @When("^decided to have it Here$")
+    public void decided_to_have_it_Here() throws Throwable {
+        isHere = true;
+    }
+
+    @When("^the order is established$")
+    public void the_order_is_established() throws Throwable {
+
+        order = new Order("2c",true,"Americano",2,80);
+        orderString = order.establish(cwe,ddb);
+
+    }
+
+    @Then("^the total price should be (\\d+)$")
+    public void the_total_price_should_be(int sum) throws Throwable {
+        assertEquals(sum,order.payAmount());
+    }
+
+    @Then("^the coffee temperatuere should be (\\d+) degree c$")
+    public void the_coffee_temperatuere_should_be_degree_c(int degree) throws Throwable {
+        assertEquals(degree, order.getDrinktemperature());
+    }
+
+}
 
 ```
 
@@ -337,11 +544,14 @@ This workshop example explained a Coffee shop use case, go through a customer or
 
 **Jenson Lee** , plays the role as coffee shop owner
 
-**Arthur Chang** , collaborate design & run the workshop
+**Eason Kuo**, Core team member from Domain Driven Design Taiwan Community
+
+**Arthur Chang** , collaborate design & run the workshop, Co-founder from Domain Driven Design Taiwan Community
 
 **Kenny Baas-Schwegler** , discuss the aggregate definition and ES workshop running experience sharing
 
 ## TODO
 
+- Split theis workshop into 3 module - Strategy Design, Tactical Design, Deployment on AWS
 - Using AWS SDK for Java v2 to have better performance
 - Try to use Dagger2 as the DI framework to have better cold start time
