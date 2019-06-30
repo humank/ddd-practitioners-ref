@@ -6,7 +6,7 @@ Feature: Order Americano in seat
     And decided to have it Here
     And the order is established
     Then the total price should be 160
-    And the coffee temperatuere should be 70 degree c
+    And the coffee temperature should be 70 degree c
 
 
 #    Examples:
