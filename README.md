@@ -211,7 +211,7 @@ Imagine that what if any failure happened will suffer the business in the coffee
 
 No matter which failure or mistakes happened there, the customer experience will be impacted. So we can re-think about these issues to find out further actions to prevent or solve these issues. 
 
-Although this step is not the essential one, but it could help you to **handle business scenario which you wre not familiar with before.**
+Although this step is not the essential one, but it could help you to **handle business scenario which you were not familiar with before.**
 
 ### Aggregate(Blackbox) without a name
 
@@ -231,10 +231,10 @@ Once you have the more **question marked yellow stickers**, and feel comfortable
 
 What is the naming convention of Aggregate? There are some examples: 
 
-* By Noune
+* By Nouns
 * By Gerunds ( V - ing)
 
-No matter which type you favored, remember to present the **"ability"** of the aggregate, that's means traverse each command the aggregate receieve, and make sure each event occurred in reasonable.
+No matter which type you favored, remember to present the **"ability"** of the aggregate, that means traverse each command the aggregate is received, and make sure each event occurred in reasonable.
 
 ### Bounded Context forming up
 
