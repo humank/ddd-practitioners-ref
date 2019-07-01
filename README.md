@@ -231,10 +231,10 @@ Once you have the more **question marked yellow stickers**, and feel comfortable
 
 What is the naming convention of Aggregate? There are some examples: 
 
-* By Noun
+* By Nouns
 * By Gerunds ( V - ing)
 
-No matter which type you favored, remember to present the **"ability"** of the aggregate, that's means traverse each command the aggregate receieve, and make sure each event occurred in reasonable.
+No matter which type you favored, remember to present the **"ability"** of the aggregate, that means traverse each command the aggregate is received, and make sure each event occurred in reasonable.
 
 ### Bounded Context forming up
 
