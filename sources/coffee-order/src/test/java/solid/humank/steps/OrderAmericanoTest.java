@@ -8,9 +8,9 @@ import com.amazonaws.services.dynamodbv2.document.DynamoDB;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import solid.humank.adapter.OrderDTO;
-import solid.humank.domain.DomainRegistry;
-import solid.humank.domain.Order;
+import solid.humank.port.adapter.OrderDTO;
+import solid.humank.domain.model.DomainRegistry;
+import solid.humank.domain.model.Order;
 
 import static org.junit.Assert.assertEquals;
 

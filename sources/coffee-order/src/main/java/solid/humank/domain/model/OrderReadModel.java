@@ -1,4 +1,4 @@
-package solid.humank.domain;
+package solid.humank.domain.model;
 
 public class OrderReadModel {
 

@@ -1,10 +1,11 @@
-package solid.humank.adapter;
+package solid.humank.port.adapter.messaging;
 
 import com.amazonaws.services.cloudwatchevents.AmazonCloudWatchEvents;
 import com.amazonaws.services.cloudwatchevents.model.PutEventsRequest;
 import com.amazonaws.services.cloudwatchevents.model.PutEventsRequestEntry;
 import com.amazonaws.services.cloudwatchevents.model.PutEventsResult;
-import solid.humank.events.DomainEvent;
+import solid.humank.port.adapter.event.DomainEvent;
+
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

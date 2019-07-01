@@ -1,7 +1,7 @@
-package solid.humank.adapter;
+package solid.humank.port.adapter;
 
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
-import solid.humank.domain.OrderTicket;
+import solid.humank.domain.model.OrderTicket;
 
 public class ProxyResponseWrapper {
     public static APIGatewayProxyResponseEvent wrap(OrderTicket orderTicket) {

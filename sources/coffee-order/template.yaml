@@ -5,7 +5,7 @@ Resources:
     Type: 'AWS::Serverless::Function'
     Properties:
       Runtime: java8
-      Handler: solid.humank.adapters.OrderAPIGProxyWrapper::handleRequest
+      Handler: solid.humank.port.adapter.OrderAPIGProxyWrapper::handleRequest
       Timeout: 60
       MemorySize: 256
       CodeUri: ./target/lambda.jar

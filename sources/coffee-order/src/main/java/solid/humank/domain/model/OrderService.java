@@ -1,9 +1,9 @@
-package solid.humank.domain;
+package solid.humank.domain.model;
 
 import org.joda.time.LocalDateTime;
-import solid.humank.adapter.OrderDTO;
-import solid.humank.adapter.OrderRepository;
-import solid.humank.events.OrderEstablishedEvent;
+import solid.humank.port.adapter.OrderDTO;
+import solid.humank.port.adapter.persistence.repository.OrderRepository;
+import solid.humank.port.adapter.event.OrderEstablishedEvent;
 
 public class OrderService {
 

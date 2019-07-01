@@ -1,6 +1,6 @@
-package solid.humank.domain;
+package solid.humank.domain.model;
 
-import solid.humank.adapter.OrderRepository;
+import solid.humank.port.adapter.persistence.repository.OrderRepository;
 
 public class DomainRegistry {
 

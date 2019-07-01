@@ -1,10 +1,10 @@
-package solid.humank.domain;
+package solid.humank.domain.model;
 
 import com.amazonaws.services.cloudwatchevents.AmazonCloudWatchEvents;
 import com.amazonaws.services.cloudwatchevents.AmazonCloudWatchEventsClientBuilder;
-import solid.humank.adapter.CloudWatchEventAdapter;
-import solid.humank.adapter.PublishResult;
-import solid.humank.events.OrderEstablishedEvent;
+import solid.humank.port.adapter.messaging.CloudWatchEventAdapter;
+import solid.humank.port.adapter.messaging.PublishResult;
+import solid.humank.port.adapter.event.OrderEstablishedEvent;
 
 public class DomainEventPublisher {
     final static AmazonCloudWatchEvents cwe =

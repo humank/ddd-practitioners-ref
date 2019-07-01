@@ -1,11 +1,11 @@
-package solid.humank.adapter;
+package solid.humank.port.adapter.persistence.repository;
 
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import com.amazonaws.services.dynamodbv2.document.DynamoDB;
 import com.amazonaws.services.dynamodbv2.document.Item;
 import com.amazonaws.services.dynamodbv2.document.Table;
-import solid.humank.domain.Order;
+import solid.humank.domain.model.Order;
 
 public class OrderRepository {
 
