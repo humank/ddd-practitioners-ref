@@ -11,15 +11,9 @@
  * specific language governing permissions and limitations under the License.
  */
 
-package solid.humank.domains;
+package solid.humank.domain;
 
-import com.amazonaws.services.cloudwatchevents.AmazonCloudWatchEvents;
-import com.amazonaws.services.dynamodbv2.document.DynamoDB;
 import lombok.Data;
-import org.joda.time.LocalDateTime;
-import solid.humank.adapters.CloudWatchEventAdapter;
-import solid.humank.adapters.OrderRepository;
-import solid.humank.events.OrderEstablishedEvent;
 
 @Data
 public class Order {
@@ -30,10 +24,17 @@ public class Order {
     private int price;
     private String itemName;
     private String establishTime;
-    private int drinktemperature;
+    private int drinkTemperature;
+    private OrderTicket orderTicket;
 
     public Order() {
 
+    }
+
+    public void serveConfirm(){
+        if(drinkHere){
+            drinkTemperature = 70;
+        }
     }
 
     public Order(String seatNo, boolean ishere, String itemName, int quantity, int price) {
@@ -49,26 +50,7 @@ public class Order {
 
     }
 
-    public String establish(AmazonCloudWatchEvents cwe, DynamoDB ddb) {
-
-        this.establishTime = new LocalDateTime().toString("yyyy-MM-dd:HH:mm:ss");
-
-        if (drinkHere) {
-            this.drinktemperature = 70;
-        } else {
-            this.drinktemperature = 100;
-        }
-
-        //save to repo
-        OrderRepository repository = new OrderRepository(ddb);
-        String orderString = repository.saveOrder(this);
-
-        //send event to makeup
-
-        CloudWatchEventAdapter cweAdapter = new CloudWatchEventAdapter(cwe);
-        String publishResult = cweAdapter.publishEvent(new OrderEstablishedEvent(this));
-
-        System.out.println("publish result : " + publishResult);
-        return orderString;
+    public OrderTicket orderTicket() {
+        return this.orderTicket;
     }
 }

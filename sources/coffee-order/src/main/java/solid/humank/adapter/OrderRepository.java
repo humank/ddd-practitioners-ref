@@ -1,21 +1,20 @@
-package solid.humank.adapters;
+package solid.humank.adapter;
 
+import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
+import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import com.amazonaws.services.dynamodbv2.document.DynamoDB;
 import com.amazonaws.services.dynamodbv2.document.Item;
 import com.amazonaws.services.dynamodbv2.document.Table;
-import solid.humank.domains.Order;
+import solid.humank.domain.Order;
 
 public class OrderRepository {
 
     final private String tableName = "Order";
+    final AmazonDynamoDB client = AmazonDynamoDBClientBuilder.defaultClient();
+    final DynamoDB ddb = new DynamoDB(client);
 
-    private DynamoDB ddb;
 
-    public OrderRepository(DynamoDB ddb) {
-        this.ddb = ddb;
-    }
-
-    public String saveOrder(Order purchasedOrder) {
+    public Order saveOrder(Order purchasedOrder) {
 
         System.out.println("item name is : " + purchasedOrder.getItemName());
 
@@ -23,15 +22,15 @@ public class OrderRepository {
 
         Item item = new Item()
                 .withPrimaryKey("establishtime", purchasedOrder.getEstablishTime())
-                .withBoolean("drinkHere",purchasedOrder.isDrinkHere())
+                .withBoolean("drinkHere", purchasedOrder.isDrinkHere())
                 .withString("itemName", purchasedOrder.getItemName())
                 .withNumber("price", purchasedOrder.getPrice())
                 .withNumber("quantity", 2)
                 .withString("seatno", purchasedOrder.getSeatNo())
-                .withNumber("drinktemperature", purchasedOrder.getDrinktemperature());
+                .withNumber("drinkTemperature", purchasedOrder.getDrinkTemperature());
 
         table.putItem(item);
 
-        return purchasedOrder.getEstablishTime();
+        return purchasedOrder;
     }
 }

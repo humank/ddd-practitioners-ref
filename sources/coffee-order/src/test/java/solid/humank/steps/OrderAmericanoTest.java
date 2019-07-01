@@ -8,7 +8,9 @@ import com.amazonaws.services.dynamodbv2.document.DynamoDB;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import solid.humank.domains.Order;
+import solid.humank.adapter.OrderDTO;
+import solid.humank.domain.DomainRegistry;
+import solid.humank.domain.Order;
 
 import static org.junit.Assert.assertEquals;
 
@@ -17,10 +19,7 @@ public class OrderAmericanoTest {
     int priceOfAmericano;
     int orderCups;
     boolean isHere;
-    int totalPrice;
-
     Order order;
-    String orderString;
 
     final AmazonCloudWatchEvents cwe =
             AmazonCloudWatchEventsClientBuilder.defaultClient();
@@ -47,19 +46,19 @@ public class OrderAmericanoTest {
     @When("^the order is established$")
     public void the_order_is_established() throws Throwable {
 
-        order = new Order("2c",true,"Americano",2,80);
-        orderString = order.establish(cwe,ddb);
+        OrderDTO orderDTO = new OrderDTO("2c", true, "Americano", 2, 80);
+        order = DomainRegistry.orderService().establishOrder(orderDTO);
 
     }
 
     @Then("^the total price should be (\\d+)$")
     public void the_total_price_should_be(int sum) throws Throwable {
-        assertEquals(sum,order.payAmount());
+        assertEquals(sum, order.payAmount());
     }
 
     @Then("^the coffee temperature should be (\\d+) degree c$")
     public void the_coffee_temperature_should_be_degree_c(int degree) throws Throwable {
-        assertEquals(degree, order.getDrinktemperature());
+        assertEquals(degree, order.getDrinkTemperature());
     }
 
 }

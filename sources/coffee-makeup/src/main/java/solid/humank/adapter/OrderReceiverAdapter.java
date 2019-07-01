@@ -11,15 +11,15 @@
  * specific language governing permissions and limitations under the License.
  */
 
-package solid.humank.adapters;
+package solid.humank.adapter;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.LambdaLogger;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import solid.humank.domains.Order;
-import solid.humank.domains.OrderMakeup;
+import solid.humank.domain.Order;
+import solid.humank.domain.OrderMakeup;
 
 import java.io.IOException;
 

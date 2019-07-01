@@ -1,4 +1,4 @@
-package solid.humank.adapters;
+package solid.humank.adapter;
 
 import lombok.Data;
 

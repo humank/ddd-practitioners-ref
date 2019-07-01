@@ -3,7 +3,7 @@ package solid.humank.events;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Data;
-import solid.humank.domains.Order;
+import solid.humank.domain.Order;
 
 @Data
 public class OrderEstablishedEvent implements DomainEvent {

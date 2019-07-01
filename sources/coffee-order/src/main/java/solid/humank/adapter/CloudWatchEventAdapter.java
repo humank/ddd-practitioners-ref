@@ -1,4 +1,4 @@
-package solid.humank.adapters;
+package solid.humank.adapter;
 
 import com.amazonaws.services.cloudwatchevents.AmazonCloudWatchEvents;
 import com.amazonaws.services.cloudwatchevents.model.PutEventsRequest;
@@ -21,11 +21,11 @@ public class CloudWatchEventAdapter {
         this.cwe = cwe;
     }
 
-    public String publishEvent(DomainEvent occuredEvent) {
+    public PublishResult publishEvent(DomainEvent occuredEvent) {
         return putEvent(occuredEvent.getEventContent());
     }
 
-    private String putEvent(String eventContent) {
+    private PublishResult putEvent(String eventContent) {
 
         try {
             Properties cweProp = getCWEParameters();
@@ -39,13 +39,14 @@ public class CloudWatchEventAdapter {
                     .withEntries(request_entry);
 
             PutEventsResult response = cwe.putEvents(request);
-            return response.getSdkResponseMetadata().toString();
+
+            return new PublishResult(response.getSdkResponseMetadata().toString());
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
 
         }
-        return "AWS Cloud Watch Events configuration is not correct. The event is not published:" + eventContent;
+        return new PublishResult("AWS Cloud Watch Events configuration is not correct. The event is not published:" + eventContent);
     }
 
     //TODO : Move the parameters to AWS ParameterStore
