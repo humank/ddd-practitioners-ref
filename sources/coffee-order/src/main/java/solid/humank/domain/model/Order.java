@@ -14,6 +14,8 @@
 package solid.humank.domain.model;
 
 import lombok.Data;
+import org.joda.time.LocalDateTime;
+import solid.humank.port.adapter.OrderDTO;
 
 @Data
 public class Order {
@@ -52,5 +54,19 @@ public class Order {
 
     public OrderTicket orderTicket() {
         return this.orderTicket;
+    }
+
+    public static Order create(OrderDTO orderDTO) {
+        //把 orderDTO 轉為 Order
+        Order purchaseOrder = new Order();
+        purchaseOrder.setDrinkHere(orderDTO.isDrinkHere());
+        purchaseOrder.setItemName(orderDTO.getItemName());
+        purchaseOrder.setPrice(orderDTO.getPrice());
+        purchaseOrder.setQuantity(orderDTO.getQuantity());
+        purchaseOrder.setSeatNo(orderDTO.getSeatNo());
+
+        purchaseOrder.setEstablishTime(new LocalDateTime().toString("yyyy-MM-dd:HH:mm:ss"));
+        purchaseOrder.serveConfirm();
+        return purchaseOrder;
     }
 }

@@ -7,6 +7,9 @@ import com.amazonaws.services.dynamodbv2.document.Item;
 import com.amazonaws.services.dynamodbv2.document.Table;
 import solid.humank.domain.model.Order;
 
+//per repository is only responsible for one aggregate root, not for single entity, or value object
+
+
 public class OrderRepository {
 
     final private String tableName = "Order";
