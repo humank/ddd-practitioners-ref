@@ -6,9 +6,10 @@
 2. The waiter will go to the seat to help the guest order coffee and mark the table number for ordering.
 3. After ordering, the customer will pay for the transaction, cash only.
 4. The guest waits for the barista to prepare coffee and meals in the seat.
-5. For orders dining in, the coffee should be served at 70 degree for the convenience of drinking. As for take-away orders, the serving temperatue of the coffee needs to be raised to 90 degrees. (_serving temperature & brewing temperatue?_)
+5. For orders dining in, the coffee should be served at 70 degree for the convenience of drinking. As for take-away orders, the serving temperatue of the coffee needs to be raised to 90 degrees. Regarding the brewing temperature, the best temperature is around 88°C ~ 98°C.
+
 6. The main prodcuts of the store are Expresso, Double Espresso, Caffe Americano, Caffe Latte, Cappuccino.
-7. We brew coffee in the way of making Espresso coffee. The size unit for every Espresso is a shot.
+7. We brew coffee in the way of making Espresso coffee. The size unit for every Espresso is a shot. The size of a shot can be a single, double, or triple, using a proportional amount of ground coffee, roughly 7 (25ml), 14 (50ml), and 21 (75ml) grams.
 8. We offer 4 options for cup size: Short (short/8 oz/240ml), Tall (Tall/12 oz/360ml), Grande (Grande/16 oz/480ml), Venti (Venti/20 oz/600ml)
 9. The unit prices of the above options are 80, 100, 120, and 140, repectively. 20 dollars increased for every upgrade.
 10. After receiving the order from the customer, the counter will confirm the order and process the payment, and summit it to the barista to make coffee.
