@@ -28,7 +28,7 @@ You can apply it to practically any technical or business domain, especially tho
 
 ## Why EventStorming?
 
-![image](documents/images/problemsolving.png)
+![image](docs/img/problemsolving.png)
 
 As the Complexity Problem domain growing, it's hard to have a fluent way to help Product Owner and Developer team to collaborate to develop a system which fulfill all of the requirements with correct understanding.
 
@@ -72,3 +72,5 @@ When you want to divide a monolithic system into microservices, or you want to b
 > UP/RUP, OOAD, RAD, Use Case Modeling, ICONIX Processing ...etc
 
 No matter any one of these methodologies, all deeply depends on experts skill, but if you apply Event Storming workshop, you could leverage team's collaboration to acquire requirements with key events. However, these events are most concerned business value by stakeholders. With different color, pin, and diagrams to group the actions, events, and the aggregate context. Naturally forms up the domain boundary.
+
+[Next: 01 Hands-on Events Exploring >](01-hands-on-events-exploring)

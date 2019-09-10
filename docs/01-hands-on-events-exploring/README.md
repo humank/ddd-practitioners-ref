@@ -1,4 +1,4 @@
-_[< back to EventStorming](../)_
+_[< back to EventStorming](../../)_
 
 ## Hands-on Events Exploring - a simple EventStorming Example
 
