@@ -1,0 +1,40 @@
+plugins {
+    id 'java'
+    id 'io.quarkus' version '0.22.0'
+}
+
+group 'solid.humank.coffeeshop'
+version '1.0'
+
+sourceCompatibility = 1.8
+
+allprojects {
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+}
+
+subprojects {
+    version = '1.0'
+}
+
+dependencies {
+
+    implementation enforcedPlatform('io.quarkus:quarkus-bom:0.22.0')
+    implementation 'io.quarkus:quarkus-resteasy'
+
+    // https://mvnrepository.com/artifact/io.quarkus/quarkus-gradle-plugin
+    compile group: 'io.quarkus', name: 'quarkus-gradle-plugin', version: '0.22.0', ext: 'pom'
+
+    implementation platform('software.amazon.awssdk:bom:2.5.29')
+    // implementation 'software.amazon.awssdk:kinesis'
+    // implementation 'software.amazon.awssdk:dynamodb'
+    // implementation 'software.amazon.awssdk:cloudwatch'
+    // implementation 'software.amazon.awssdk:apigateway'
+    testCompile group: 'io.quarkus', name: 'quarkus-junit5', version: '0.22.0'
+    testCompile group: 'io.rest-assured', name: 'rest-assured', version: '3.3.0'
+}
+test {
+    useJUnitPlatform()
+}

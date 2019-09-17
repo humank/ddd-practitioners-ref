@@ -1,0 +1,6 @@
+rootProject.name = 'coffeeshop'
+
+include 'coffee'
+include 'order'
+include 'inventory'
+include 'ddd-commons'

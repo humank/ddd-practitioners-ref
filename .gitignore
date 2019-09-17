@@ -65,7 +65,7 @@ fabric.properties
 .classpath
 .settings/
 .factorypath
-
+.vscode/
 #SAM CLI output
 sources/coffee-order/serverless-output.yaml
 sources/coffee-makeup/serverless-output.yaml
