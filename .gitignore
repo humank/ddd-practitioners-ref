@@ -27,8 +27,9 @@ sources/**/target
 # Gradle
 .idea/**/gradle.xml
 .idea/**/libraries
-**/sources/coffeeshop/.gradle/*
-**/sources/coffeeshop/**/build/*
+**/.gradle/*
+**/build/*
+
 # CMake
 cmake-build-debug/
 cmake-build-release/
@@ -67,9 +68,13 @@ fabric.properties
 .settings/
 .factorypath
 .vscode/
-.gradle/
-
 
 #SAM CLI output
 sources/coffee-order/serverless-output.yaml
 sources/coffee-makeup/serverless-output.yaml
+sources/gradle/
+sources/gradlew
+sources/gradlew.bat
+sources/coffeeshop/.gradle
+sources/coffeeshop/build/
+
