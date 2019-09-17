@@ -7,12 +7,11 @@ group 'solid.humank.coffeeshop'
 version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.8
-
+mainClassName='solid.humank.inventory.App'
 repositories {
     mavenCentral()
 }
 
 dependencies {
     compile project(':ddd-commons')
-    testCompile group: 'junit', name: 'junit', version: '4.12'
 }

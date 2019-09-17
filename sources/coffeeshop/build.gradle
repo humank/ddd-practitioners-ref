@@ -1,12 +1,16 @@
+buildscript {
+    repositories { jcenter() }
+    dependencies {
+        classpath 'com.netflix.nebula:gradle-lint-plugin:latest.release'
+    }
+}
+
 plugins {
-    id 'java'
     id 'idea'
 }
 
 group 'solid.humank.coffeeshop'
 version '1.0'
-
-sourceCompatibility = 1.8
 
 allprojects {
     repositories {
@@ -14,15 +18,16 @@ allprojects {
         jcenter()
     }
 
+    apply plugin: 'nebula.lint'
+    gradleLint.rules = ['all-dependency'] // add as many rules here as you'd like
 }
 
 subprojects {
-
     apply plugin: 'java'
+    buildscript { repositories { jcenter() } }
     dependencies {
 
         compile group: 'io.quarkus', name: 'quarkus-gradle-plugin', version: '0.22.0', ext: 'pom'
-
         compileOnly 'org.projectlombok:lombok:1.18.10'
         annotationProcessor 'org.projectlombok:lombok:1.18.10'
         testCompileOnly 'org.projectlombok:lombok:1.18.10'
@@ -51,7 +56,6 @@ subprojects {
         testImplementation 'io.cucumber:cucumber-java8:4.7.1'
         testImplementation 'io.cucumber:cucumber-junit:4.7.1'
     }
-
     configurations {
         cucumberRuntime {
             extendsFrom testImplementation
@@ -65,7 +69,7 @@ subprojects {
         dependsOn assemble, compileTestJava
         doLast {
             javaexec {
-                main = "cucumber.api.cli.Main"
+                main = "io.cucumber.core.cli.Main"
                 classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
                 args = ['--plugin', 'pretty', '--glue', 'gradle.cucumber', 'src/test/resources']
             }

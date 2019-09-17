@@ -1,6 +1,3 @@
 rootProject.name = 'coffeeshop'
 
-include 'coffee'
-include 'order'
-include 'inventory'
-include 'ddd-commons'
+include 'coffee', 'order','inventory','ddd-commons'

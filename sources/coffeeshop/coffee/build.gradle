@@ -8,6 +8,7 @@ version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.8
 
+mainClassName='solid.humank.port.adapter.App'
 repositories {
     mavenCentral()
 }
