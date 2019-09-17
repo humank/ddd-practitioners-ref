@@ -1,4 +1,4 @@
-package solid.humank.port.adapter;
+package solid.humank.coffeeshop.order.domainservices;
 
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 import com.fasterxml.jackson.databind.ObjectMapper;

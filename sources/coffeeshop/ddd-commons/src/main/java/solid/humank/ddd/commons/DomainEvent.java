@@ -1,4 +1,4 @@
-package solid.humank.port.adapter.event;
+package solid.humank.ddd.commons;
 
 public interface DomainEvent {
 

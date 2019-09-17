@@ -11,11 +11,11 @@
  * specific language governing permissions and limitations under the License.
  */
 
-package solid.humank.domain.model;
+package solid.humank.coffeeshop.order.domains;
 
 import lombok.Data;
 import org.joda.time.LocalDateTime;
-import solid.humank.port.adapter.OrderDTO;
+import solid.humank.coffeeshop.order.domainservices.OrderDTO;
 
 @Data
 public class Order {

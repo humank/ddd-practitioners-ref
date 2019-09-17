@@ -1,4 +1,4 @@
-package solid.humank.domain.model;
+package solid.humank.coffeeshop.order.domains;
 
 public class CoffeeItem {
 

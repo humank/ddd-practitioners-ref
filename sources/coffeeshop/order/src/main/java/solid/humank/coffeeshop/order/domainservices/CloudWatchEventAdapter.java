@@ -1,10 +1,10 @@
-package solid.humank.port.adapter.messaging;
+package solid.humank.coffeeshop.order.domainservices;
 
 import com.amazonaws.services.cloudwatchevents.AmazonCloudWatchEvents;
 import com.amazonaws.services.cloudwatchevents.model.PutEventsRequest;
 import com.amazonaws.services.cloudwatchevents.model.PutEventsRequestEntry;
 import com.amazonaws.services.cloudwatchevents.model.PutEventsResult;
-import solid.humank.port.adapter.event.DomainEvent;
+import solid.humank.ddd.commons.DomainEvent;
 
 
 import java.io.FileNotFoundException;

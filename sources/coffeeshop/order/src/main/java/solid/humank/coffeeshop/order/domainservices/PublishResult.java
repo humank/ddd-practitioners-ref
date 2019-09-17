@@ -1,4 +1,4 @@
-package solid.humank.port.adapter.messaging;
+package solid.humank.coffeeshop.order.domainservices;
 
 public class PublishResult {
     private String result;

@@ -1,11 +1,11 @@
-package solid.humank.port.adapter.persistence.repository;
+package solid.humank.coffeeshop.order.repositories;
 
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import com.amazonaws.services.dynamodbv2.document.DynamoDB;
 import com.amazonaws.services.dynamodbv2.document.Item;
 import com.amazonaws.services.dynamodbv2.document.Table;
-import solid.humank.domain.model.Order;
+import solid.humank.coffeeshop.order.domains.Order;
 
 //per repository is only responsible for one aggregate root, not for single entity, or value object
 

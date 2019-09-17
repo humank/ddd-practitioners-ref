@@ -6,9 +6,9 @@ import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import com.amazonaws.services.dynamodbv2.document.DynamoDB;
 import io.cucumber.java8.En;
-import solid.humank.domain.model.DomainRegistry;
-import solid.humank.domain.model.Order;
-import solid.humank.port.adapter.OrderDTO;
+import solid.humank.coffeeshop.order.domains.DomainRegistry;
+import solid.humank.coffeeshop.order.domains.Order;
+import solid.humank.coffeeshop.order.domainservices.OrderDTO;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

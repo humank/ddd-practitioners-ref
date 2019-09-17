@@ -1,12 +1,12 @@
-package solid.humank.port.adapter;
+package solid.humank.coffeeshop.order.domainservices;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.LambdaLogger;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
-import solid.humank.domain.model.DomainRegistry;
-import solid.humank.domain.model.OrderTicket;
+import solid.humank.coffeeshop.order.domains.DomainRegistry;
+import solid.humank.coffeeshop.order.domains.OrderTicket;
 
 public class OrderAPIGProxyWrapper implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
 

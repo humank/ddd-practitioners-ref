@@ -1,4 +1,4 @@
-package solid.humank.port.adapter;
+package solid.humank.coffeeshop.order.domainservices;
 
 public class OrderDTO {
     private int quantity;
