@@ -16,4 +16,4 @@ Anyone of you could easily to figure out a couple of stickers there to present w
 
 **The most valuable approach is to leverage "User story mapping" and "Impact mapping". Pick up the most essential ones to developer as first sprint, then continously exploring the story and refine it.**
 
-[Next: 02 Coffee shop scenario >](02-coffee-shop-scenario)
+[Next: 02 Coffee shop scenario >](../02-coffee-shop-scenario)
