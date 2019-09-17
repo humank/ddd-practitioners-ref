@@ -4,6 +4,12 @@ plugins {
 group 'solid.humank.coffeeshop'
 version '1.0'
 
+allprojects {
+    apply plugin: 'java'
+    dependencies {
+    }
+}
+
 subprojects {
     apply plugin: 'java'
     buildscript {
@@ -13,29 +19,24 @@ subprojects {
         }
     }
     dependencies {
-        compile group: 'io.quarkus', name: 'quarkus-gradle-plugin', version: '0.22.0', ext: 'pom'
+        testCompile group: 'io.quarkus', name: 'quarkus-junit5', version: '0.22.0'
+        testCompile group: 'io.rest-assured', name: 'rest-assured', version: '3.3.0'
+        testImplementation 'io.cucumber:cucumber-java8:4.7.1'
+        testImplementation 'io.cucumber:cucumber-junit:4.7.1'
         compileOnly 'org.projectlombok:lombok:1.18.10'
         annotationProcessor 'org.projectlombok:lombok:1.18.10'
         testCompileOnly 'org.projectlombok:lombok:1.18.10'
         testAnnotationProcessor 'org.projectlombok:lombok:1.18.10'
-
+        compile group: 'io.quarkus', name: 'quarkus-gradle-plugin', version: '0.22.0', ext: 'pom'
         implementation enforcedPlatform('io.quarkus:quarkus-bom:0.22.0')
         implementation 'io.quarkus:quarkus-resteasy'
-
         implementation platform('com.amazonaws:aws-java-sdk-bom:1.11.631')
         implementation 'com.amazonaws:aws-java-sdk-lambda'
         implementation 'com.amazonaws:aws-java-sdk-dynamodb'
         implementation 'com.amazonaws:aws-lambda-java-core'
         implementation 'com.amazonaws:aws-lambda-java-events'
         implementation 'com.amazonaws:aws-java-sdk-events'
-
         implementation platform('software.amazon.awssdk:bom:2.5.29')
-
-        testCompile group: 'io.quarkus', name: 'quarkus-junit5', version: '0.22.0'
-        testCompile group: 'io.rest-assured', name: 'rest-assured', version: '3.3.0'
-
-        testImplementation 'io.cucumber:cucumber-java8:4.7.1'
-        testImplementation 'io.cucumber:cucumber-junit:4.7.1'
     }
     configurations {
         cucumberRuntime {
@@ -45,7 +46,6 @@ subprojects {
     test {
         useJUnitPlatform()
     }
-
     task cucumber() {
         dependsOn assemble, compileTestJava
         doLast {
@@ -56,5 +56,6 @@ subprojects {
             }
         }
     }
+
 }
 

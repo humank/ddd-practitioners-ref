@@ -1,7 +1,8 @@
 rootProject.name = 'coffeeshop'
 
-include 'coffee', 'order','inventory','ddd-commons'
-include 'order-webapi'
-include 'inventory-webapi'
-include 'coffee-webapi'
+include 'ddd-commons'
+include 'inventory'
+include 'coffee'
+include 'orders'
+
 
