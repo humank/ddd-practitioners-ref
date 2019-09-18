@@ -1,6 +1,8 @@
 package solid.humank.ddd.commons.baseclasses;
 
-public interface DomainEvent {
+import solid.humank.ddd.commons.interfaces.IDomainEvent;
+import solid.humank.ddd.commons.interfaces.IEntityId;
 
-    String getEventContent();
+public abstract class DomainEvent<T extends IEntityId> extends ValueObject<DomainEvent> implements IDomainEvent {
+
 }
