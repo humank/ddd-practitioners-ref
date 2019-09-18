@@ -1,0 +1,13 @@
+plugins {
+    id 'java'
+}
+
+group 'solid.humank.coffeeshop'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+

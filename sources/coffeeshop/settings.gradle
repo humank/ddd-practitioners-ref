@@ -1,8 +1,13 @@
 rootProject.name = 'coffeeshop'
 
 include 'ddd-commons'
-include 'inventory'
-include 'coffee'
-include 'orders'
 
+include 'inventory-domain'
+
+include 'coffee-application'
+include 'coffee-domain'
+include 'coffee-web'
+include 'orders-application'
+include 'orders-domain'
+include 'orders-web'
 
