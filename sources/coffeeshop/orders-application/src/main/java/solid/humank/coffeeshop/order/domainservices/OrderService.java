@@ -2,6 +2,7 @@ package solid.humank.coffeeshop.order.domainservices;
 
 import solid.humank.coffeeshop.order.domainevents.OrderEstablishedEvent;
 import solid.humank.coffeeshop.order.models.Order;
+import solid.humank.coffeeshop.order.commands.CreateOrder;
 import solid.humank.coffeeshop.order.repositories.OrderRepository;
 
 public class OrderService {
@@ -15,9 +16,9 @@ public class OrderService {
         this.repository = repository;
     }
 
-    public Order establishOrder(OrderDTO orderDTO) {
+    public Order establishOrder(CreateOrder createOrder) {
 
-        Order purchaseOrder = Order.create(orderDTO);
+        Order purchaseOrder = Order.create(createOrder);
         Order order = repository.saveOrder(purchaseOrder);
 
         DomainEventPublisher.publish(new OrderEstablishedEvent(order));

@@ -6,6 +6,7 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
 import solid.humank.coffeeshop.order.domains.OrderTicket;
+import solid.humank.coffeeshop.order.commands.CreateOrder;
 
 public class OrderAPIGProxyWrapper implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
 
@@ -16,9 +17,9 @@ public class OrderAPIGProxyWrapper implements RequestHandler<APIGatewayProxyRequ
         logger.log("Yes oh my !!! Loading Java Lambda handler of ProxyIntegration mode \r\n");
         logger.log(apiGatewayProxyRequestEvent.getBody());
 
-        OrderDTO orderDTO = ProxyRequestEventTranslator.translate(apiGatewayProxyRequestEvent);
+        CreateOrder createOrder = ProxyRequestEventTranslator.translate(apiGatewayProxyRequestEvent);
 
-        OrderTicket orderTicket = DomainRegistry.orderService().establishOrder(orderDTO).orderTicket();
+        OrderTicket orderTicket = DomainRegistry.orderService().establishOrder(createOrder).orderTicket();
 
         APIGatewayProxyResponseEvent responseEvent = ProxyResponseWrapper.wrap(orderTicket);
         

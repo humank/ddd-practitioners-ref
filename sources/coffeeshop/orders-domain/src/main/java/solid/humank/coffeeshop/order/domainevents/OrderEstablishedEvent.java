@@ -5,9 +5,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Data;
 import solid.humank.coffeeshop.order.models.Order;
 import solid.humank.ddd.commons.baseclasses.DomainEvent;
+import solid.humank.ddd.commons.baseclasses.EntityId;
+
+import java.util.Optional;
 
 @Data
-public class OrderEstablishedEvent implements DomainEvent {
+public class OrderEstablishedEvent extends DomainEvent {
 
     private Order establishedOrder;
 
@@ -15,7 +18,6 @@ public class OrderEstablishedEvent implements DomainEvent {
         this.establishedOrder = order;
     }
 
-    @Override
     public String getEventContent() {
         ObjectMapper objectMapper = new ObjectMapper();
         try {
@@ -24,5 +26,15 @@ public class OrderEstablishedEvent implements DomainEvent {
             e.printStackTrace();
         }
         return "{\"error\":\"Data error\"}";
+    }
+
+    @Override
+    protected DomainEvent raise(EntityId entityId, Optional occurredDate) {
+        return null;
+    }
+
+    @Override
+    protected Iterable<Object> getEqualityComponents() {
+        return null;
     }
 }

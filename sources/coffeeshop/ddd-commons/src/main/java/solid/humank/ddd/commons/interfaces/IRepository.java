@@ -1,10 +1,12 @@
 package solid.humank.ddd.commons.interfaces;
 
+import solid.humank.ddd.commons.baseclasses.EntityId;
 import solid.humank.ddd.commons.baseclasses.Specification;
 
 import java.io.Serializable;
+import java.util.function.Predicate;
 
-public interface IRepository<T extends IAggregateRoot, U extends IEntityId> {
+public interface IRepository<T extends IAggregateRoot, U extends EntityId> {
 
     T get(U entityId);
 

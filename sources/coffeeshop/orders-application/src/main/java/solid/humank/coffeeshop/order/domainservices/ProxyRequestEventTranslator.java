@@ -2,19 +2,20 @@ package solid.humank.coffeeshop.order.domainservices;
 
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import solid.humank.coffeeshop.order.commands.CreateOrder;
 
 import java.io.IOException;
 
 public class ProxyRequestEventTranslator {
-    public static OrderDTO translate(APIGatewayProxyRequestEvent apiGatewayProxyRequestEvent) {
+    public static CreateOrder translate(APIGatewayProxyRequestEvent apiGatewayProxyRequestEvent) {
 
         ObjectMapper objectMapper = new ObjectMapper();
-        OrderDTO orderDTO = null;
+        CreateOrder createOrder = null;
         try {
-            orderDTO = objectMapper.readValue(apiGatewayProxyRequestEvent.getBody(), OrderDTO.class);
+            createOrder = objectMapper.readValue(apiGatewayProxyRequestEvent.getBody(), CreateOrder.class);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return orderDTO;
+        return createOrder;
     }
 }

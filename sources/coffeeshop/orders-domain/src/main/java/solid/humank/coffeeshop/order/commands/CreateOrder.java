@@ -1,6 +1,6 @@
-package solid.humank.coffeeshop.order.domainservices;
+package solid.humank.coffeeshop.order.commands;
 
-public class OrderDTO {
+public class CreateOrder {
     private int quantity;
     private String seatNo;
     private boolean drinkHere;
@@ -8,9 +8,9 @@ public class OrderDTO {
     private String itemName;
     private int drinktemperature;
 
-    public OrderDTO(String seatNo, boolean ishere, String itemName, int quantity, int price) {
+    public CreateOrder(String seatNo, boolean isHere, String itemName, int quantity, int price) {
         this.seatNo = seatNo;
-        this.drinkHere = ishere;
+        this.drinkHere = isHere;
         this.itemName = itemName;
         this.quantity = quantity;
         this.price = price;

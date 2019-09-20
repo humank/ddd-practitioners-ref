@@ -15,11 +15,10 @@ package solid.humank.coffeeshop.order.models;
 
 import lombok.Data;
 import org.joda.time.LocalDateTime;
-import solid.humank.coffeeshop.order.domains.OrderTicket;
-import solid.humank.coffeeshop.order.domainservices.OrderDTO;
+import solid.humank.coffeeshop.order.commands.CreateOrder;
 
 @Data
-public class Order {
+public class Order{
 
     private int quantity;
     private String seatNo;
@@ -34,15 +33,15 @@ public class Order {
 
     }
 
-    public void serveConfirm(){
-        if(drinkHere){
+    public void serveConfirm() {
+        if (drinkHere) {
             drinkTemperature = 70;
         }
     }
 
-    public Order(String seatNo, boolean ishere, String itemName, int quantity, int price) {
+    public Order(String seatNo, boolean isHere, String itemName, int quantity, int price) {
         this.seatNo = seatNo;
-        this.drinkHere = ishere;
+        this.drinkHere = isHere;
         this.itemName = itemName;
         this.quantity = quantity;
         this.price = price;
@@ -57,15 +56,14 @@ public class Order {
         return this.orderTicket;
     }
 
-    public static Order create(OrderDTO orderDTO) {
+    public static Order create(CreateOrder cmd) {
         //把 orderDTO 轉為 Order
         Order purchaseOrder = new Order();
-        purchaseOrder.setDrinkHere(orderDTO.isDrinkHere());
-        purchaseOrder.setItemName(orderDTO.getItemName());
-        purchaseOrder.setPrice(orderDTO.getPrice());
-        purchaseOrder.setQuantity(orderDTO.getQuantity());
-        purchaseOrder.setSeatNo(orderDTO.getSeatNo());
-
+        purchaseOrder.setDrinkHere(cmd.isDrinkHere());
+        purchaseOrder.setItemName(cmd.getItemName());
+        purchaseOrder.setPrice(cmd.getPrice());
+        purchaseOrder.setQuantity(cmd.getQuantity());
+        purchaseOrder.setSeatNo(cmd.getSeatNo());
         purchaseOrder.setEstablishTime(new LocalDateTime().toString("yyyy-MM-dd:HH:mm:ss"));
         purchaseOrder.serveConfirm();
         return purchaseOrder;
