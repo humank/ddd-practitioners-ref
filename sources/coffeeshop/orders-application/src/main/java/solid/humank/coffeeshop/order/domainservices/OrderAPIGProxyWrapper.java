@@ -5,7 +5,7 @@ import com.amazonaws.services.lambda.runtime.LambdaLogger;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
-import solid.humank.coffeeshop.order.domains.OrderTicket;
+import solid.humank.coffeeshop.order.datacontracts.results.OrderTicket;
 import solid.humank.coffeeshop.order.commands.CreateOrder;
 
 public class OrderAPIGProxyWrapper implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
@@ -19,7 +19,7 @@ public class OrderAPIGProxyWrapper implements RequestHandler<APIGatewayProxyRequ
 
         CreateOrder createOrder = ProxyRequestEventTranslator.translate(apiGatewayProxyRequestEvent);
 
-        OrderTicket orderTicket = DomainRegistry.orderService().establishOrder(createOrder).orderTicket();
+        OrderTicket orderTicket = DomainRegistry.orderService().establishOrder(createOrder);
 
         APIGatewayProxyResponseEvent responseEvent = ProxyResponseWrapper.wrap(orderTicket);
         

@@ -1,7 +1,9 @@
 package solid.humank.ddd.commons.baseclasses;
 
-import solid.humank.ddd.commons.interfaces.IAggregateRoot;
+import java.util.Collection;
 
-public abstract class AggregateRoot<T extends EntityId> extends Entity<EntityId> implements IAggregateRoot {
+public abstract class AggregateRoot<T extends EntityId> extends Entity<EntityId> {
+
+    Collection<DomainEvent> domainEvents;
 
 }

@@ -17,9 +17,12 @@ import lombok.Data;
 import org.joda.time.LocalDateTime;
 import solid.humank.coffeeshop.order.commands.CreateOrder;
 
-@Data
-public class Order{
+import java.util.UUID;
 
+@Data
+public class Order {
+
+    private UUID uuid;
     private int quantity;
     private String seatNo;
     private boolean drinkHere;
@@ -27,7 +30,6 @@ public class Order{
     private String itemName;
     private String establishTime;
     private int drinkTemperature;
-    private OrderTicket orderTicket;
 
     public Order() {
 
@@ -50,10 +52,6 @@ public class Order{
     public int payAmount() {
         return this.getQuantity() * this.getPrice();
 
-    }
-
-    public OrderTicket orderTicket() {
-        return this.orderTicket;
     }
 
     public static Order create(CreateOrder cmd) {

@@ -23,7 +23,8 @@ public class CloudWatchEventAdapter {
     }
 
     public PublishResult publishEvent(DomainEvent occuredEvent) {
-        return putEvent(occuredEvent.getEventContent());
+        //return putEvent(occuredEvent.getEventContent());
+        return putEvent(occuredEvent.toString());
     }
 
     private PublishResult putEvent(String eventContent) {

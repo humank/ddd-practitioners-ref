@@ -1,4 +1,4 @@
-package solid.humank.coffeeshop.order.datacontracts;
+package solid.humank.coffeeshop.order.datacontracts.messages;
 
 public class OrderReadModel {
 

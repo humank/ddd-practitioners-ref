@@ -3,23 +3,21 @@ package solid.humank.ddd.commons.baseclasses;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
-import solid.humank.ddd.commons.interfaces.IDomainEvent;
-import solid.humank.ddd.commons.interfaces.IEntity;
 
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
-public abstract class Entity<T extends EntityId> implements IEntity, Comparator<Entity> {
+public abstract class Entity<T extends EntityId> extends PropertyComparer<Entity> {
 
     @Getter(AccessLevel.PUBLIC)
-    @Setter(AccessLevel.PRIVATE)
+    @Setter(AccessLevel.PROTECTED)
     public EntityId id;
 
     private boolean suppressEvent = false;
-    protected List<IDomainEvent> domainEvents;
+    protected List<DomainEvent<? extends EntityId>> domainEvents = new ArrayList<>();
 
-    protected void applyEvent(IDomainEvent event) {
-        domainEvents.add(event);
+    protected void applyEvent(DomainEvent<? extends EntityId> event) {
+        if (suppressEvent) return;
+        this.domainEvents.add(event);
     }
 
     protected void suppressEvent() {
@@ -28,5 +26,18 @@ public abstract class Entity<T extends EntityId> implements IEntity, Comparator<
 
     protected void unSuppressedEvent() {
         suppressEvent = false;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Entity<?> entity = (Entity<?>) o;
+        return id.equals(entity.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.getClass(), id);
     }
 }

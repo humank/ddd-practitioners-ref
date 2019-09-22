@@ -1,7 +1,13 @@
 package solid.humank.ddd.commons.baseclasses;
 
-public abstract class PropertyComparer<T extends ValueObject> {
+public abstract class PropertyComparer<T> {
 
+    /**
+     * Ensure return a Collection which contains all of the properties in the sub-class.
+     * Will leverage the returned collection to do property comparison.
+     *
+     * @return
+     */
     protected abstract Iterable<Object> getEqualityComponents();
 
     @Override
