@@ -7,10 +7,9 @@ import lombok.Setter;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
-public abstract class DomainEvent<T extends EntityId> extends ValueObject<DomainEvent> {
+public abstract class DomainEvent<T extends EntityId> extends PropertyComparer<DomainEvent> {
 
     @Getter(AccessLevel.PUBLIC)
     @Setter(AccessLevel.PRIVATE)
@@ -22,11 +21,11 @@ public abstract class DomainEvent<T extends EntityId> extends ValueObject<Domain
 
     @Getter(AccessLevel.PRIVATE)
     @Setter(AccessLevel.PUBLIC)
-    private EntityId entityId;
+    protected T entityId;
 
-    protected DomainEvent(EntityId entityId, Optional<OffsetDateTime> occurredDate) {
+    protected DomainEvent() {
         this.eventId = UUID.randomUUID();
-        this.occurredDate = (occurredDate == null) ? OffsetDateTime.now() : occurredDate.get();
+        this.occurredDate = OffsetDateTime.now();
     }
 
     protected abstract Iterable<Object> getDerivedEventEqualityComponents();

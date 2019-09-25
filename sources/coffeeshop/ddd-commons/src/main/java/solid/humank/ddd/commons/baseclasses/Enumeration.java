@@ -10,11 +10,11 @@ public class Enumeration implements Comparable {
 
     @Setter(AccessLevel.PRIVATE)
     @Getter(AccessLevel.PUBLIC)
-    private final String name;
+    private String name;
 
     @Setter(AccessLevel.PRIVATE)
     @Getter(AccessLevel.PUBLIC)
-    private final int id;
+    private int id;
 
     @Override
     public String toString() {
@@ -26,7 +26,8 @@ public class Enumeration implements Comparable {
         this.name = name;
     }
 
-    //TODO: public static IEnumerable<T> GetAll<T>() where T : Enumeration
+    //TODO: provide a method to get all public enumeration types.
+    //public static IEnumerable<T> GetAll<T>() where T : Enumeration
 
     @Override
     public boolean equals(Object o) {

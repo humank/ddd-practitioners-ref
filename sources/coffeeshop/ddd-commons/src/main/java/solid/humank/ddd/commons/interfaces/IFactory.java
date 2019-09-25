@@ -5,5 +5,5 @@ import solid.humank.ddd.commons.baseclasses.EntityId;
 
 public interface IFactory<T extends AggregateRoot,U extends EntityId>{
 
-    T create(U entityId);
+    T create(Object param);
 }

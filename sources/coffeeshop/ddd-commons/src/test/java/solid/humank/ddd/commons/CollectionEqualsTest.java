@@ -5,6 +5,9 @@ import lombok.Data;
 import org.junit.jupiter.api.Test;
 import solid.humank.ddd.commons.baseclasses.DomainException;
 
+import javax.enterprise.inject.New;
+import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -16,6 +19,13 @@ public class CollectionEqualsTest {
 
     enum status{
         OPEN,CLOSE;
+    }
+
+    @Test
+    public void timeTest(){
+        OffsetDateTime time = OffsetDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmSS");
+        System.out.printf(time.format(formatter).toString());
     }
 
     @Test

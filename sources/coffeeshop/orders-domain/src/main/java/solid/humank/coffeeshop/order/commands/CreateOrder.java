@@ -1,66 +1,36 @@
 package solid.humank.coffeeshop.order.commands;
 
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
+import solid.humank.coffeeshop.order.models.OrderId;
+import solid.humank.coffeeshop.order.models.OrderItem;
+import solid.humank.coffeeshop.order.models.OrderStatus;
+
+import java.util.List;
+
 public class CreateOrder {
-    private int quantity;
-    private String seatNo;
-    private boolean drinkHere;
-    private int price;
-    private String itemName;
-    private int drinktemperature;
 
-    public CreateOrder(String seatNo, boolean isHere, String itemName, int quantity, int price) {
-        this.seatNo = seatNo;
-        this.drinkHere = isHere;
-        this.itemName = itemName;
-        this.quantity = quantity;
-        this.price = price;
-    }
+    @Getter
+    @Setter(AccessLevel.PRIVATE)
+    private OrderId id;
 
-    public int getQuantity() {
-        return quantity;
-    }
+    @Getter
+    @Setter(AccessLevel.PRIVATE)
+    private String tableNo;
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
+    @Getter
+    @Setter(AccessLevel.PRIVATE)
+    private OrderStatus status;
 
-    public String getSeatNo() {
-        return seatNo;
-    }
+    @Getter
+    @Setter(AccessLevel.PRIVATE)
+    private List<OrderItem> items;
 
-    public void setSeatNo(String seatNo) {
-        this.seatNo = seatNo;
-    }
-
-    public boolean isDrinkHere() {
-        return drinkHere;
-    }
-
-    public void setDrinkHere(boolean drinkHere) {
-        this.drinkHere = drinkHere;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
-    public String getItemName() {
-        return itemName;
-    }
-
-    public void setItemName(String itemName) {
-        this.itemName = itemName;
-    }
-
-    public int getDrinktemperature() {
-        return drinktemperature;
-    }
-
-    public void setDrinktemperature(int drinktemperature) {
-        this.drinktemperature = drinktemperature;
+    public CreateOrder(OrderId id, String tableNo, OrderStatus status, List<OrderItem> items) {
+        this.id = id;
+        this.tableNo = tableNo;
+        this.status = status;
+        this.items = items;
     }
 }

@@ -10,3 +10,7 @@ sourceCompatibility = 1.8
 repositories {
     mavenCentral()
 }
+
+dependencies {
+    compile project(':orders-application')
+}

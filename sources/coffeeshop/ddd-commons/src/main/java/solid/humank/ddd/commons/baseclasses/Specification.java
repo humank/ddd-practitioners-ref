@@ -1,21 +1,26 @@
 package solid.humank.ddd.commons.baseclasses;
 
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.function.Predicate;
 
-public class Specification<Entity> {
+public class Specification<T> {
 
-    private Entity entity;
-    private Predicate<Entity> predicate;
+
+    protected T entity;
+    protected Predicate<T> predicate;
 
     protected Specification() {
     }
 
-    public Specification(Predicate<Entity> predicate) {
+    public Specification(Predicate<T> predicate) {
 
         this.predicate = predicate;
     }
 
-    public Specification(Entity entity, Predicate predicate) {
+    public Specification(T entity, Predicate predicate) {
         this.entity = entity;
         this.predicate = predicate;
     }
@@ -24,5 +29,4 @@ public class Specification<Entity> {
         return this.predicate.test(entity);
     }
 
-    //TODO: void the operator override code snippets. Java doesn't support the feature.
 }

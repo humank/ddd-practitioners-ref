@@ -13,57 +13,188 @@
 
 package solid.humank.coffeeshop.order.models;
 
-import lombok.Data;
-import org.joda.time.LocalDateTime;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
+import solid.humank.coffeeshop.order.commands.ChangeItem;
 import solid.humank.coffeeshop.order.commands.CreateOrder;
+import solid.humank.coffeeshop.order.domainevents.OrderCreated;
+import solid.humank.coffeeshop.order.domainevents.OrderItemsChanged;
+import solid.humank.coffeeshop.order.domainevents.OrderStatusChanged;
+import solid.humank.coffeeshop.order.exceptions.StatusTransitionException;
+import solid.humank.coffeeshop.order.policies.OrderPolicy;
+import solid.humank.coffeeshop.order.specifications.StatusTransitionSpec;
+import solid.humank.ddd.commons.baseclasses.AggregateRoot;
+import solid.humank.ddd.commons.baseclasses.DomainEvent;
+import solid.humank.ddd.commons.baseclasses.Specification;
 
-import java.util.UUID;
+import java.math.BigDecimal;
+import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-@Data
-public class Order {
+public class Order extends AggregateRoot<OrderId> {
 
-    private UUID uuid;
-    private int quantity;
-    private String seatNo;
-    private boolean drinkHere;
-    private int price;
-    private String itemName;
-    private String establishTime;
-    private int drinkTemperature;
+    final static String ORDER_DATE_FORMAT ="yyyyMMddHHmmss";
+
+    @Getter @Setter(AccessLevel.PRIVATE)
+    private String tableNo;
+
+    @Getter @Setter(AccessLevel.PRIVATE)
+    private OrderStatus status;
+
+    @Getter @Setter(AccessLevel.PRIVATE)
+    private List<OrderItem> orderItems;
+
+    @Getter @Setter(AccessLevel.PRIVATE)
+    private BigDecimal totalFee;
+
+    @Getter @Setter(AccessLevel.PRIVATE)
+    private OffsetDateTime createdDate;
+
+    @Getter @Setter(AccessLevel.PRIVATE)
+    private OffsetDateTime modifiedDate;
 
     public Order() {
+        this.setId(new OrderId());
+        this.tableNo = "";
+        this.status = OrderStatus.INITIAL;
+        this.orderItems = new ArrayList<>();
+        this.createdDate = OffsetDateTime.now();
 
     }
 
-    public void serveConfirm() {
-        if (drinkHere) {
-            drinkTemperature = 70;
-        }
+    public Order(OrderId orderId, String tableNo, OrderStatus status, List<OrderItem> orderItems, OffsetDateTime createdDate, OffsetDateTime modifiedDate) {
+        this.setId(orderId);
+        this.tableNo = tableNo;
+        this.status = status;
+        this.orderItems = orderItems;
+        this.createdDate = createdDate;
+        this.modifiedDate = modifiedDate;
     }
 
-    public Order(String seatNo, boolean isHere, String itemName, int quantity, int price) {
-        this.seatNo = seatNo;
-        this.drinkHere = isHere;
-        this.itemName = itemName;
-        this.quantity = quantity;
-        this.price = price;
+    public Order(OrderId orderId, String tableNo, OrderStatus status, List<OrderItem> items, OffsetDateTime createdDate) {
+        this.setId(orderId);
+        this.tableNo = tableNo;
+        this.status = status;
+        this.orderItems = items;
+        this.createdDate = createdDate;
     }
 
-    public int payAmount() {
-        return this.getQuantity() * this.getPrice();
+    /**
+     * This is a static factory method to obtain Entity based on historical domain events. Good to Event-Soucring architecture usage.
+     * By traversing each historical domain event, and replay each event handler.
+     *
+     * @param events
+     * @return
+     */
+    public static Order reBuild(List<DomainEvent<OrderId>> events) {
 
+        //TODO : implement in java8 syntax.
+        return null;
     }
 
     public static Order create(CreateOrder cmd) {
-        //把 orderDTO 轉為 Order
-        Order purchaseOrder = new Order();
-        purchaseOrder.setDrinkHere(cmd.isDrinkHere());
-        purchaseOrder.setItemName(cmd.getItemName());
-        purchaseOrder.setPrice(cmd.getPrice());
-        purchaseOrder.setQuantity(cmd.getQuantity());
-        purchaseOrder.setSeatNo(cmd.getSeatNo());
-        purchaseOrder.setEstablishTime(new LocalDateTime().toString("yyyy-MM-dd:HH:mm:ss"));
-        purchaseOrder.serveConfirm();
-        return purchaseOrder;
+
+        Order order = new Order(cmd.getId(), cmd.getTableNo(), cmd.getStatus(), cmd.getItems(), OffsetDateTime.now());
+        OrderPolicy.Verify(order);
+
+        order.applyEvent(new OrderCreated(order.getId(), order.tableNo, order.orderItems, order.createdDate));
+        return order;
+    }
+
+    public void changeItem(ChangeItem cmd) {
+        if (cmd.getItems() == null || cmd.getItems().isEmpty()) return;
+        Stream<OrderItem> combinedStream = Stream.concat(this.orderItems.stream(), cmd.getItems().stream());
+
+        List<OrderItem> newItemList = combinedStream.collect(Collectors.toList());
+        this.orderItems.clear();
+        this.orderItems.addAll(newItemList);
+        this.modifiedDate = OffsetDateTime.now();
+
+        this.applyEvent(new OrderItemsChanged(this.getId(), cmd.getItems(), this.modifiedDate));
+    }
+
+    public void process() throws StatusTransitionException {
+        OrderStatus status = OrderStatus.PROCESSING;
+        this.verifyStatus(OrderStatus.INITIAL, status);
+        this.changeStatus(status);
+    }
+
+    private void changeStatus(OrderStatus status) {
+        OrderStatus originalStatus = this.status;
+        this.status = status;
+        this.modifiedDate = OffsetDateTime.now();
+
+        this.applyEvent(new OrderStatusChanged(this.getId(), originalStatus, status, this.modifiedDate));
+
+    }
+
+    private void verifyStatus(OrderStatus previousStatus, OrderStatus targetStatus) throws StatusTransitionException {
+        if (this.status == targetStatus) return;
+
+        Specification specification = new StatusTransitionSpec(this.status, previousStatus, targetStatus);
+        if (specification.isSatisfy() == false) {
+            String errorMessage = String.format("Cant not transit order status from %s to %s", status, targetStatus);
+            throw new StatusTransitionException(errorMessage);
+        }
+    }
+
+    public void deliver() throws StatusTransitionException {
+        OrderStatus status = OrderStatus.DELIVER;
+        this.verifyStatus(OrderStatus.PROCESSING, status);
+        this.changeStatus(status);
+
+    }
+
+    public void closed() throws StatusTransitionException {
+        OrderStatus status = OrderStatus.CLOSED;
+        this.verifyStatus(OrderStatus.DELIVER, status);
+        this.changeStatus(status);
+    }
+
+    public void cancel() throws StatusTransitionException {
+        this.changeStatus(OrderStatus.CANCEL);
+    }
+
+    public void when(OrderCreated event) {
+
+        this.setId(event.getOrderId());
+        this.tableNo = event.getTableNo();
+        this.status = OrderStatus.INITIAL;
+        this.orderItems = event.getOrderItems();
+        this.createdDate = event.getCreatedDate();
+    }
+
+    public void when(OrderStatusChanged event) throws StatusTransitionException {
+        this.suppressEvent();
+        switch (event.getCurStatus()) {
+            case PROCESSING:
+                this.process();
+                break;
+
+            case DELIVER:
+                this.deliver();
+                break;
+
+            case CLOSED:
+                this.closed();
+                break;
+
+            case CANCEL:
+                this.cancel();
+                break;
+        }
+        this.unSuppressedEvent();
+    }
+
+    public String createdDateString(){
+        return createdDate.format(DateTimeFormatter.ofPattern(ORDER_DATE_FORMAT));
+    }
+    public String modifiedDateString(){
+        return modifiedDate.format(DateTimeFormatter.ofPattern(ORDER_DATE_FORMAT));
     }
 }

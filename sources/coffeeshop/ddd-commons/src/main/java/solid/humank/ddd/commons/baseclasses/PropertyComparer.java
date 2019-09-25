@@ -1,6 +1,12 @@
 package solid.humank.ddd.commons.baseclasses;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Queue;
+
 public abstract class PropertyComparer<T> {
+
+    protected List<Object> container = new ArrayList<>();
 
     /**
      * Ensure return a Collection which contains all of the properties in the sub-class.
@@ -12,6 +18,7 @@ public abstract class PropertyComparer<T> {
 
     @Override
     public boolean equals(Object obj) {
+
 
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
