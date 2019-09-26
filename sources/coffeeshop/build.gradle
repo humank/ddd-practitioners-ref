@@ -7,9 +7,15 @@ version '1.0'
 
 allprojects {
     apply plugin: 'java'
-    dependencies {
-    }
 }
+/*
+目標訴求:
+1. rootProject 是 coffeeshop, 這一層不需要 src folder.
+2. 子專案的部分， *-web 是唯一會需要提供web server的部分，這會直接使用 quarkus framework來提供 rest api，而且會依賴於 *-application (ex: orders-web 依賴於 orders-application)
+3. 子專案的部分， *-application都是提供服務的模組，並不是提供 web 應用，而這都會依賴於他相應的 *-domain (ex: orders-application依賴於 orders-domain)
+4. 子專案的部分， *-domain是所有的業務核心， 都會需要依賴於 ddd-commons
+5. 關於測試，會跑 quarkus test，具體可以試跑一下 orders-web 的單元測試
+ */
 
 subprojects {
     apply plugin: 'java'
