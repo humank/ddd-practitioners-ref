@@ -6,7 +6,7 @@ pluginManagement {
     resolutionStrategy {
         eachPlugin {
             if (requested.id.id == 'io.quarkus') {
-                useModule("io.quarkus:quarkus-gradle-plugin:${requested.version}")
+                useModule("io.quarkus:quarkus-gradle-plugin:0.23.1")
             }
         }
     }

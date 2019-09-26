@@ -1,5 +1,6 @@
 plugins {
     id 'idea'
+    id 'io.quarkus' version '0.23.1'
 }
 group 'solid.humank.coffeeshop'
 version '1.0'
@@ -17,6 +18,10 @@ subprojects {
             mavenCentral()
             jcenter()
         }
+
+        test {
+            useJUnitPlatform()
+        }
     }
     dependencies {
         testCompile group: 'io.quarkus', name: 'quarkus-junit5', version: '0.22.0'
@@ -27,8 +32,8 @@ subprojects {
         annotationProcessor 'org.projectlombok:lombok:1.18.10'
         testCompileOnly 'org.projectlombok:lombok:1.18.10'
         testAnnotationProcessor 'org.projectlombok:lombok:1.18.10'
-        compile group: 'io.quarkus', name: 'quarkus-gradle-plugin', version: '0.22.0', ext: 'pom'
-        implementation enforcedPlatform('io.quarkus:quarkus-bom:0.22.0')
+        compile group: 'io.quarkus', name: 'quarkus-gradle-plugin', version: '0.23.1', ext: 'pom'
+        implementation enforcedPlatform('io.quarkus:quarkus-bom:0.23.1')
         implementation 'io.quarkus:quarkus-resteasy'
         implementation platform('com.amazonaws:aws-java-sdk-bom:1.11.631')
         implementation 'com.amazonaws:aws-java-sdk-lambda'
@@ -58,4 +63,18 @@ subprojects {
     }
 
 }
-
+project(":orders-domain") {
+    dependencies {
+        compile project(':ddd-commons')
+    }
+}
+project(":orders-application") {
+    dependencies {
+        compile project(':orders-domain')
+    }
+}
+project(":orders-web") {
+    dependencies {
+        compile project(':orders-application')
+    }
+}
