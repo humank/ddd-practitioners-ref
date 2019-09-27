@@ -2,8 +2,11 @@ plugins {
     id 'idea'
     id 'io.quarkus' version '0.23.1'
 }
+
 group 'solid.humank.coffeeshop'
 version '1.0'
+
+
 
 allprojects {
     apply plugin: 'java'
@@ -19,6 +22,12 @@ allprojects {
 
 subprojects {
     apply plugin: 'java'
+
+    compileJava   {
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
+    }
+
     buildscript {
         repositories {
             mavenCentral()
@@ -42,11 +51,11 @@ subprojects {
         implementation enforcedPlatform('io.quarkus:quarkus-bom:0.23.1')
         implementation 'io.quarkus:quarkus-resteasy'
         implementation platform('com.amazonaws:aws-java-sdk-bom:1.11.631')
-        implementation 'com.amazonaws:aws-java-sdk-lambda'
-        implementation 'com.amazonaws:aws-java-sdk-dynamodb'
+        implementation 'com.amazonaws:aws-java-sdk-lambda:1.11.631'
+        implementation 'com.amazonaws:aws-java-sdk-dynamodb:1.11.631'
         implementation 'com.amazonaws:aws-lambda-java-core'
         implementation 'com.amazonaws:aws-lambda-java-events'
-        implementation 'com.amazonaws:aws-java-sdk-events'
+        implementation 'com.amazonaws:aws-java-sdk-events:1.11.631'
         implementation platform('software.amazon.awssdk:bom:2.5.29')
     }
     configurations {
@@ -71,16 +80,16 @@ subprojects {
 }
 project(":orders-domain") {
     dependencies {
-        compile project(':ddd-commons')
+        implementation project(':ddd-commons')
     }
 }
 project(":orders-application") {
     dependencies {
-        compile project(':orders-domain')
+        implementation project(':orders-domain')
     }
 }
 project(":orders-web") {
     dependencies {
-        compile project(':orders-application')
+        implementation project(':orders-application')
     }
 }
