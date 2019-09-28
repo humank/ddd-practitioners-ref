@@ -1,16 +1,3 @@
-plugins {
-    id 'idea'
-    id 'io.quarkus' version '0.23.1'
-}
-
-group 'solid.humank.coffeeshop'
-version '1.0'
-
-
-
-allprojects {
-    apply plugin: 'java'
-}
 /*
 目標訴求:
 1. rootProject 是 coffeeshop, 這一層不需要 src folder.
@@ -19,77 +6,72 @@ allprojects {
 4. 子專案的部分， *-domain是所有的業務核心， 都會需要依賴於 ddd-commons
 5. 關於測試，會跑 quarkus test，具體可以試跑一下 orders-web 的單元測試
  */
-
-subprojects {
-    apply plugin: 'java'
-
-    compileJava   {
-        sourceCompatibility = '1.8'
-        targetCompatibility = '1.8'
-    }
-
-    buildscript {
-        repositories {
-            mavenCentral()
-            jcenter()
-        }
-
-        test {
-            useJUnitPlatform()
-        }
-    }
-    dependencies {
-        testCompile group: 'io.quarkus', name: 'quarkus-junit5', version: '0.22.0'
-        testCompile group: 'io.rest-assured', name: 'rest-assured', version: '3.3.0'
-        testImplementation 'io.cucumber:cucumber-java8:4.7.1'
-        testImplementation 'io.cucumber:cucumber-junit:4.7.1'
-        compileOnly 'org.projectlombok:lombok:1.18.10'
-        annotationProcessor 'org.projectlombok:lombok:1.18.10'
-        testCompileOnly 'org.projectlombok:lombok:1.18.10'
-        testAnnotationProcessor 'org.projectlombok:lombok:1.18.10'
-        compile group: 'io.quarkus', name: 'quarkus-gradle-plugin', version: '0.23.1', ext: 'pom'
-        implementation enforcedPlatform('io.quarkus:quarkus-bom:0.23.1')
-        implementation 'io.quarkus:quarkus-resteasy'
-        implementation platform('com.amazonaws:aws-java-sdk-bom:1.11.631')
-        implementation 'com.amazonaws:aws-java-sdk-lambda:1.11.631'
-        implementation 'com.amazonaws:aws-java-sdk-dynamodb:1.11.631'
-        implementation 'com.amazonaws:aws-lambda-java-core'
-        implementation 'com.amazonaws:aws-lambda-java-events'
-        implementation 'com.amazonaws:aws-java-sdk-events:1.11.631'
-        implementation platform('software.amazon.awssdk:bom:2.5.29')
-    }
-    configurations {
-        cucumberRuntime {
-            extendsFrom testImplementation
-        }
-    }
-    test {
-        useJUnitPlatform()
-    }
-    task cucumber() {
-        dependsOn assemble, compileTestJava
-        doLast {
-            javaexec {
-                main = "io.cucumber.core.cli.Main"
-                classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
-                args = ['--plugin', 'pretty', '--glue', 'gradle.cucumber', 'src/test/resources']
-            }
-        }
+buildscript {
+    ext {
+        quarkusJunitVersion = '0.22.0'
+        restAssuredVersion = '3.3.0'
+        cucumberVersion = '4.7.1'
+        lombokVersion = '1.18.10'
+        quarkusVersion = '0.23.1'
+        awsJavaVersion = '1.11.631'
+        awsVersion = '2.5.29'
     }
 
 }
-project(":orders-domain") {
-    dependencies {
-        implementation project(':ddd-commons')
+
+apply from: file("${rootDir}/gradle/project.gradle")
+
+List testCompilePackage = ["io.quarkus:quarkus-junit5:${quarkusJunitVersion}", "io.rest-assured:rest-assured:${restAssuredVersion}"]
+List testImplementPackage = ["io.cucumber:cucumber-java8:${cucumberVersion}", "io.cucumber:cucumber-junit:${cucumberVersion}"]
+List implementationPackage = ["io.quarkus:quarkus-resteasy",
+                              "com.amazonaws:aws-java-sdk-lambda",
+                              "com.amazonaws:aws-java-sdk-dynamodb",
+                              "com.amazonaws:aws-lambda-java-core",
+                              "com.amazonaws:aws-lambda-java-events",
+                              "com.amazonaws:aws-java-sdk-events"]
+
+
+subprojects { dir ->
+    repositories {
+        mavenCentral()
     }
-}
-project(":orders-application") {
+
     dependencies {
-        implementation project(':orders-domain')
+        // Lombok Support
+        compileOnly "org.projectlombok:lombok:${lombokVersion}"
+        annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+        testCompileOnly "org.projectlombok:lombok:${lombokVersion}"
+        testAnnotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+        // quarkus test
+        testCompile testCompilePackage
+        // cucumber test
+        testImplementation testImplementPackage
+        // quarkus
+        compile group: 'io.quarkus', name: 'quarkus-gradle-plugin', version: "${quarkusVersion}", ext: 'pom'
+        implementation enforcedPlatform("io.quarkus:quarkus-bom:${quarkusVersion}")
+        implementation platform("com.amazonaws:aws-java-sdk-bom:${awsJavaVersion}")
+        implementation platform("software.amazon.awssdk:bom:${awsVersion}")
+        implementation implementationPackage
     }
-}
-project(":orders-web") {
-    dependencies {
-        implementation project(':orders-application')
+
+
+    if (dir.name.endsWith("-domain")) {
+        dependencies {
+            implementation project(":ddd-commons")
+        }
+    }
+
+    if (dir.name.endsWith("-application")) {
+        String modName = dir.name.substring(0, dir.name.lastIndexOf("-application"))
+        dependencies {
+            implementation project(":ddd-commons"), project(":${modName}-domain")
+        }
+    }
+
+    if (dir.name.endsWith("-web")) {
+        String modName = dir.name.substring(0, dir.name.lastIndexOf("-web"))
+        dependencies {
+            implementation project(":ddd-commons"), project(":${modName}-domain"), project(":${modName}-application")
+        }
     }
 }
