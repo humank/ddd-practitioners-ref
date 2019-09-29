@@ -28,13 +28,5 @@ public class OrderCreated<OrderId extends EntityId> extends DomainEvent<OrderId>
 
     }
 
-    @Override
-    protected Iterable<Object> getDerivedEventEqualityComponents() {
-        Collection<Object> collection = new ArrayList<>();
-        collection.add(this.orderId);
-        for (OrderItem item : orderItems) {
-            collection.add(item);
-        }
-        return collection;
-    }
+
 }

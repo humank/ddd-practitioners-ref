@@ -42,17 +42,4 @@ public abstract class EntityId extends ValueObject<EntityId> {
         String date = this.occurredDate.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
         return String.format("%s-%s-%s", this.abbr, date, this.seqNo);
     }
-
-    @Override
-    protected Iterable<Object> getEqualityComponents() {
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmSS");
-
-        List<Object> collection = new ArrayList<Object>();
-        collection.add(this.seqNo);
-        collection.add(this.occurredDate.format(formatter).toString());
-        collection.add(this.abbr);
-        return collection;
-    }
-
 }

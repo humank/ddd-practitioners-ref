@@ -26,13 +26,4 @@ public class OrderItemsChanged extends DomainEvent {
     @Setter
     private OffsetDateTime modifiedDate;
 
-    @Override
-    protected Iterable<Object> getDerivedEventEqualityComponents() {
-        List<Object> collection = new ArrayList<>();
-        collection.add(super.entityId);
-        for (OrderItem item : this.changedItems) {
-            collection.add(item);
-        }
-        return collection;
-    }
 }
