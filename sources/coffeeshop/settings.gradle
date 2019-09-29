@@ -6,10 +6,11 @@ pluginManagement {
     resolutionStrategy {
         eachPlugin {
             if (requested.id.id == 'io.quarkus') {
-                useModule("io.quarkus:quarkus-gradle-plugin:0.23.1")
+                useModule("io.quarkus:quarkus-gradle-plugin:${requested.version}")
             }
         }
     }
+
 }
 rootProject.name = 'coffeeshop'
 include 'ddd-commons'

@@ -15,7 +15,8 @@ import solid.humank.ddd.commons.interfaces.ITranslator;
 
 import java.util.List;
 
-public class CreateOrderSvc {
+public class
+CreateOrderSvc {
 
     // Domain Service有個責任，把跨 layer傳入的DTO 在這裡翻譯成領域物件
 

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public abstract class DomainEvent<T extends EntityId> extends PropertyComparer<DomainEvent> {
+public abstract class DomainEvent<T extends EntityId>{
 
     @Getter(AccessLevel.PUBLIC)
     @Setter(AccessLevel.PRIVATE)
@@ -26,21 +26,6 @@ public abstract class DomainEvent<T extends EntityId> extends PropertyComparer<D
     protected DomainEvent() {
         this.eventId = UUID.randomUUID();
         this.occurredDate = OffsetDateTime.now();
-    }
-
-    protected abstract Iterable<Object> getDerivedEventEqualityComponents();
-
-    @Override
-    protected Iterable<Object> getEqualityComponents() {
-        List<Object> collection = new ArrayList<Object>();
-        collection.add(this.eventId);
-        collection.add(this.occurredDate);
-        collection.add(this.entityId);
-
-        for (Object property : this.getDerivedEventEqualityComponents()) {
-            collection.add(property);
-        }
-        return collection;
     }
 
 }

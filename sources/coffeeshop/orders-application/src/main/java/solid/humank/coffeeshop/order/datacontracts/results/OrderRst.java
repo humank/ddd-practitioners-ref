@@ -4,7 +4,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import solid.humank.coffeeshop.order.models.Order;
 import solid.humank.coffeeshop.order.models.OrderStatus;
-import solid.humank.ddd.commons.baseclasses.PropertyComparer;
 
 import java.time.OffsetDateTime;
 import java.util.List;

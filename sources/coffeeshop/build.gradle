@@ -21,41 +21,46 @@ subprojects {
     apply plugin: 'java'
     buildscript {
         repositories {
-            mavenCentral()
             jcenter()
+            mavenCentral()
         }
-
         test {
             useJUnitPlatform()
         }
+        dependencies {
+            classpath 'io.quarkus:quarkus-gradle-plugin:0.23.1'
+        }
     }
     dependencies {
-        testCompile group: 'io.quarkus', name: 'quarkus-junit5', version: '0.22.0'
-        testCompile group: 'io.rest-assured', name: 'rest-assured', version: '3.3.0'
+
         testImplementation 'io.cucumber:cucumber-java8:4.7.1'
         testImplementation 'io.cucumber:cucumber-junit:4.7.1'
+
         compileOnly 'org.projectlombok:lombok:1.18.10'
         annotationProcessor 'org.projectlombok:lombok:1.18.10'
         testCompileOnly 'org.projectlombok:lombok:1.18.10'
         testAnnotationProcessor 'org.projectlombok:lombok:1.18.10'
+
         compile group: 'io.quarkus', name: 'quarkus-gradle-plugin', version: '0.23.1', ext: 'pom'
+        testCompile group: 'io.quarkus', name: 'quarkus-junit5', version: '0.22.0'
+        testCompile group: 'io.rest-assured', name: 'rest-assured', version: '3.3.0'
+
         implementation enforcedPlatform('io.quarkus:quarkus-bom:0.23.1')
         implementation 'io.quarkus:quarkus-resteasy'
+
         implementation platform('com.amazonaws:aws-java-sdk-bom:1.11.631')
         implementation 'com.amazonaws:aws-java-sdk-lambda'
         implementation 'com.amazonaws:aws-java-sdk-dynamodb'
         implementation 'com.amazonaws:aws-lambda-java-core'
         implementation 'com.amazonaws:aws-lambda-java-events'
         implementation 'com.amazonaws:aws-java-sdk-events'
+
         implementation platform('software.amazon.awssdk:bom:2.5.29')
     }
     configurations {
         cucumberRuntime {
             extendsFrom testImplementation
         }
-    }
-    test {
-        useJUnitPlatform()
     }
     task cucumber() {
         dependsOn assemble, compileTestJava

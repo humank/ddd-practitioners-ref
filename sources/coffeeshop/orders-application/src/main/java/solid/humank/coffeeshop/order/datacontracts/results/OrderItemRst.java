@@ -4,7 +4,6 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import solid.humank.coffeeshop.order.models.OrderItem;
-import solid.humank.ddd.commons.baseclasses.PropertyComparer;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
