@@ -14,7 +14,7 @@ public class SampleTest {
                 .when().get("/order")
                 .then()
                 .statusCode(200)
-                .body(is("hello 123456789"));
+                .body(is("hello 12000"));
 
     }
 }
