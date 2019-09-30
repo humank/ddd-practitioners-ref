@@ -47,6 +47,11 @@
       <artifactId>quarkus-smallrye-openapi</artifactId>
       <version>${quarkus.version}</version>
     </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-resteasy-jsonb</artifactId>
+      <version>${quarkus.version}</version>
+    </dependency>
   </dependencies>
   <build>
     <plugins>
