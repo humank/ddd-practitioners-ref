@@ -1,15 +1,7 @@
 package gradle.cucumber;
 
-import com.amazonaws.services.cloudwatchevents.AmazonCloudWatchEvents;
-import com.amazonaws.services.cloudwatchevents.AmazonCloudWatchEventsClientBuilder;
-import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
-import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
-import com.amazonaws.services.dynamodbv2.document.DynamoDB;
 import io.cucumber.java8.En;
-import solid.humank.coffeeshop.order.commands.CreateOrder;
 import solid.humank.coffeeshop.order.models.Order;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 public class OrderAmericanoSteps implements En {
@@ -19,11 +11,11 @@ public class OrderAmericanoSteps implements En {
     boolean isHere;
     Order order;
 
-    final AmazonCloudWatchEvents cwe =
-            AmazonCloudWatchEventsClientBuilder.defaultClient();
-
-    final AmazonDynamoDB client = AmazonDynamoDBClientBuilder.defaultClient();
-    final DynamoDB ddb = new DynamoDB(client);
+//    final AmazonCloudWatchEvents cwe =
+//            AmazonCloudWatchEventsClientBuilder.defaultClient();
+//
+//    final AmazonDynamoDB client = AmazonDynamoDBClientBuilder.defaultClient();
+//    final DynamoDB ddb = new DynamoDB(client);
 
     public OrderAmericanoSteps() {
 //        Given("the price of a cup of Americano is {int}", (Integer price) -> {

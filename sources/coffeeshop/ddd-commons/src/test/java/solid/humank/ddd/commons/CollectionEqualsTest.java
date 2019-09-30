@@ -3,13 +3,10 @@ package solid.humank.ddd.commons;
 
 import lombok.Data;
 import org.junit.jupiter.api.Test;
-import solid.humank.ddd.commons.baseclasses.DomainException;
 
-import javax.enterprise.inject.New;
 import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -17,22 +14,22 @@ import static org.junit.jupiter.api.Assertions.*;
 public class CollectionEqualsTest {
 
 
-    enum status{
-        OPEN,CLOSE;
+    enum status {
+        OPEN, CLOSE;
     }
 
     @Test
-    public void timeTest(){
+    public void timeTest() {
         OffsetDateTime time = OffsetDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmSS");
         System.out.printf(time.format(formatter).toString());
     }
 
     @Test
-    public void checkToString(){
-     String test =  String.format("Code:%s - %s, Message: %s","123","456","789");
-     String expected = "Code:123 - 456, Message: 789";
-     assertEquals(test,expected);
+    public void checkToString() {
+        String test = String.format("Code:%s - %s, Message: %s", "123", "456", "789");
+        String expected = "Code:123 - 456, Message: 789";
+        assertEquals(test, expected);
     }
 
     @Test
@@ -50,7 +47,6 @@ public class CollectionEqualsTest {
         assertFalse(result);
     }
 }
-
 
 
 @Data

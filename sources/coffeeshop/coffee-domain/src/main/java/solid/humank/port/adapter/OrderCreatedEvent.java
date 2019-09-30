@@ -1,6 +1,6 @@
 package solid.humank.port.adapter;
 
-import lombok.Data;
+import lombok.*;
 
 import java.util.Date;
 import java.util.List;

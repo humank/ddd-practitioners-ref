@@ -13,10 +13,12 @@ import solid.humank.coffeeshop.order.models.OrderStatus;
 import solid.humank.coffeeshop.order.repositories.OrderRepository;
 import solid.humank.ddd.commons.interfaces.ITranslator;
 
+import javax.enterprise.context.Dependent;
 import java.util.List;
+@Dependent
+public class CreateOrderSvc {
 
-public class
-CreateOrderSvc {
+    public CreateOrderSvc(){}
 
     // Domain Service有個責任，把跨 layer傳入的DTO 在這裡翻譯成領域物件
 
@@ -41,7 +43,7 @@ CreateOrderSvc {
         Order createdOrder = Order.create(cmd);
         this.repository.save(createdOrder);
 
-        DomainEventPublisher.publish(new OrderCreated(id, request.getTableNo(), items, createdOrder.getCreatedDate()));
+        DomainEventPublisher.publish(new OrderCreated<>(id, request.getTableNo(), items, createdOrder.getCreatedDate()));
 
         return new OrderRst(createdOrder);
 

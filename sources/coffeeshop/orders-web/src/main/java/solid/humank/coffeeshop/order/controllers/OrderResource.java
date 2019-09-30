@@ -25,7 +25,7 @@ public class OrderResource {
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     public String sayHello() {
-        return "hello\n";
+        return "hello 12000";
     }
 
     @POST

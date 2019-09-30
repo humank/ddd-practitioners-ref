@@ -28,15 +28,4 @@ public class OrderStatusChanged extends DomainEvent<EntityId> {
         this.curStatus = curStatus;
         this.modifiedDate = modifiedDate;
     }
-
-    @Override
-    protected Iterable<Object> getDerivedEventEqualityComponents() {
-        List<Object> collection = new ArrayList<>();
-        collection.add(super.entityId);
-        collection.add(this.lastStatus);
-        collection.add(this.curStatus);
-        collection.add(this.modifiedDate);
-
-        return collection;
-    }
 }

@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OrderItemRst extends PropertyComparer<OrderItemRst> {
+public class OrderItemRst{
 
     @Getter @Setter(AccessLevel.PRIVATE)
     private  String productId;
@@ -35,16 +35,5 @@ public class OrderItemRst extends PropertyComparer<OrderItemRst> {
         this.qty = orderItem.getQty();
         this.price = orderItem.getPrice();
         this.fee = orderItem.getFee();
-    }
-
-    @Override
-    protected Iterable<Object> getEqualityComponents() {
-        List<Object> collection = new ArrayList<>();
-        collection.add(this.price);
-        collection.add(qty);
-        collection.add(productId);
-        collection.add(fee);
-
-        return collection;
     }
 }

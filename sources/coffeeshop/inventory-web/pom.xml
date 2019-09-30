@@ -1,0 +1,21 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <parent>
+        <groupId>solid.humank</groupId>
+        <artifactId>coffeeshop</artifactId>
+        <version>1.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>inventory-web</artifactId>
+    <packaging>jar</packaging>
+
+    <!-- specify dependencies from peer modules in this project -->
+    <dependencies>
+        <dependency>
+            <groupId>solid.humank</groupId>
+            <artifactId>orders-application</artifactId>
+            <version>1.0</version>
+        </dependency>
+    </dependencies>
+
+</project>

@@ -9,8 +9,8 @@ import java.time.OffsetDateTime;
 import java.util.List;
 
 @Data
-@EqualsAndHashCode(callSuper=true)
-public class OrderRst extends PropertyComparer<OrderRst> {
+
+public class OrderRst{
 
     private List<OrderItemRst> items;
     private int status;
@@ -40,17 +40,5 @@ public class OrderRst extends PropertyComparer<OrderRst> {
         });
         this.createdDate = order.getCreatedDate();
         this.modifiedDate = order.getModifiedDate();
-    }
-
-    @Override
-    protected Iterable<Object> getEqualityComponents() {
-        super.container.add(this.id);
-        super.container.add(this.status);
-        super.container.add(this.createdDate);
-        super.container.add(modifiedDate);
-        items.stream().forEach(orderItemRst -> {
-            container.add(orderItemRst);
-        });
-        return container;
     }
 }

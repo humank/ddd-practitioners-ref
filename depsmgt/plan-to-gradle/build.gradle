@@ -29,7 +29,6 @@ List implementationPackage = ["io.quarkus:quarkus-resteasy",
                               "com.amazonaws:aws-lambda-java-events",
                               "com.amazonaws:aws-java-sdk-events"]
 
-
 subprojects { dir ->
     repositories {
         mavenCentral()
@@ -55,7 +54,6 @@ subprojects { dir ->
 
     }
 
-
     if (dir.name.endsWith("-domain")) {
         dependencies {
             implementation project(":ddd-commons")
@@ -76,3 +74,4 @@ subprojects { dir ->
         }
     }
 }
+

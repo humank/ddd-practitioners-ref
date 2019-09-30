@@ -43,8 +43,6 @@ public class OrderReceiverAdapter implements RequestHandler<OrderCreatedEvent, O
             mapper.readValue(orderString, Order.class);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
 
         return null;

@@ -36,12 +36,4 @@ public class OrderItem extends ValueObject<OrderItem> {
         this.price = prices;
     }
 
-    @Override
-    protected Iterable<Object> getEqualityComponents() {
-        List<Object> collection = new ArrayList<>();
-        collection.add(this.productId);
-        collection.add(this.qty);
-        collection.add(this.price);
-        return collection;
-    }
 }

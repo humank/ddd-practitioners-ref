@@ -1,17 +1,20 @@
+
 import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.Test;
+
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.core.Is.is;
+
 
 @QuarkusTest
-public class SampleTest{
+public class SampleTest {
     @Test
-    public void helloTest(){
+    public void helloTest() {
         given()
-                .when().get("/hello")
+                .when().get("/order")
                 .then()
                 .statusCode(200)
-                .body(is("hello"));
+                .body(is("hello 123456789"));
 
     }
 }

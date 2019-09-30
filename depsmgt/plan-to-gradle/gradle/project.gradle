@@ -25,7 +25,7 @@ subprojects {
     tasks.withType(JavaCompile).configureEach {
         options.encoding = 'UTF-8'
         options.deprecation = true
-        options.compilerArgs += ['-Xlint:none', '-proc:none', '-nowarn']
+        //options.compilerArgs += ['-Xlint:none', '-proc:none', '-nowarn']
     }
 
     repositories {
