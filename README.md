@@ -3,13 +3,17 @@
 ![image](docs/img/coffee.jpg)
 _Picture license-free from [Pexels](https://www.pexels.com/photo/background-beverage-breakfast-brown-414645/)_
 
-why you build software ? It's all about solve the business problem. However, there will be a gap from requirements to implementaion, it's a pain point for all stakeholders. As a builder, you may eager to know how to mitigate this gap in a fluent way to deal with it, the Event Storming approach is "The One".
+Building software is hard. Understanding the business needs of the software is even harder. In almost every software development project, there will always be some form of gap between the requirements of the business users and the actual implementation.
+
+As a developer, knowing how to narrow this gap can help you go a long way to building applications that are relevant for the users. Using a Domain Driven Design approach, delivered via Event Storming, it can help to reduce the time it takes for everyone in the project team to understand a business domain model.
 
 ## Table of Contents
-- [00 - EventStorming](#eventstorming)
-  - [Why EventStorming?](#why-eventstorming)
-  - [EventStorming Terms](#eventstorming-terms)
-  - [EventStorming Benefits](#eventstorming-benefits)
+- [00 - Event Storming](#eventstorming)
+  - [What is Event Storming?](#what-is-event-storming)
+  - [Whom is it for?](#whom-is-it-for)
+  - [Event Storming Terms](#event-storming-terms)
+  - [Event Storming Benefits](#event-storming-benefits)
+  - [Event Storming Outcomes](#event-storming-outcomes)
 - [01 - Hands-on: Events exploring](01-hands-on-events-exploring)
 - [02 - Coffee shop business scenario](02-coffee-shop-scenario)
 - [03 - Modeling and Development](03-modeling-and-development)
@@ -21,37 +25,32 @@ why you build software ? It's all about solve the business problem. However, the
 - [09 - Deploy Containerized application](09-deploy-containerized-app)
 - [10 - Build up CI/CD pipeline](10-build-up-cicd-pipeline)
 
-# EventStorming
-**Event storming is a rapid, lightweight, and underappreciated group modeling technique that is intense, fun, and useful for accelerating development teams**. It's a synthesis of facilitated group learning practices from Gamestorming and the principles of domain-driven design (DDD). The technique isn't limited to software development. Frankly speaking it is recommend to invite all the stakeholders to join the storming workshop, collect each opinions from each viewpoints.
-
-You can apply it to practically any technical or business domain, especially those that are large, complex, or both.
-
-## Why EventStorming?
-
+# Event Storming
 ![image](docs/img/problemsolving.png)
 
-As the Complexity Problem domain growing, it's hard to have a fluent way to help Product Owner and Developer team to collaborate to develop a system which fulfill all of the requirements with correct understanding.
+## What is Event Storming?
+Event Storming is a **rapid**, **lightweight**, and often under-appreciated group modeling technique that is **intense**, **fun**, and **useful** to **accelerate** project teams. It is typically offered as an interactive **workshop** and it is a synthesis of facilitated group learning practices from Gamestorming, leveraging on the principles of Domain Driven Design (DDD).
 
-This problem is not a new story, from 2003, Eric Evans has already introduced the "Domain Driven Design" implementing approach to help developers, but it's really hard to implement from the Strategy and Tactic abstraction level.
+You can apply it practically on any technical or business domain, especially those that are large, complex, or both.
 
-After several years, Alberto Brandolini introduced the Event Storming approach to go through the DDD concept and make it easy to implement.
+## Whom is it for?
+Event Storming isn't limited to just for the software development team. In fact, it is recommend to invite all the stakeholders, such as developers, domain experts, business decision makers etc to join the Event Storming workshop to collect viewpoints from each participants.
 
-
-## EventStorming Terms
+## Event Storming Terms
 
 ![Event Storming](https://storage.googleapis.com/xebia-blog/1/2018/10/From-EventStorming-to-CoDDDing-New-frame-3.jpg)
 
 > Reference from Kenny Bass - https://storage.googleapis.com/xebia-blog/1/2018/10/From-EventStorming-to-CoDDDing-New-frame-3.jpg
 
-Take a look on this diagram, there are a few colorful stickers with different intention:
+Take a look on this diagram, there are a few colored sticky notes with different intention:
 
-* **Domain Events** ( Orange sticker )
+* **Domain Events** (Orange sticky note)
   * **Event**, Stands for the fact happened in specific business context
-* **Actions** (Blue sticker)   
+* **Actions** (Blue sticky note)   
   * **Command**, It is a request or intention, raised by a role or time or external system
-* **Information** ( Green sticker)  
+* **Information** (Green sticky note)  
   * **View Model**, it's a supporting information to help role to make a decision to raise a command
-* **Consistent Business Rules** ( Yellow sticker)
+* **Consistent Business Rules** (Yellow sticky note)
   * **Aggregate**
     * Has the responsibility to accept or fulfill the intention of command
     * Represent a specific business capability to support command
@@ -60,12 +59,26 @@ Take a look on this diagram, there are a few colorful stickers with different in
     * Protects business invariants
     * Exposes by ID
     * And communicated by eventual consistency
-* **Eventual Consistent Business rules** (Lilac sticker)
+* **Eventual Consistent Business rules** (Lilac sticky note)
   * Policy
     * It's all about rules, sometimes the rules comes from external regulation restriction, or maybe account login success/fail process logic.
     * example : when login attemptation fail times up to 3, then lock this account
 
-## EventStorming Benefits
+## Event Storming Benefits
+
+Business requirements can be very complex. It is often hard to find a fluent way to help the Product Owner and Development teams to collaborate effectively. Event storming is designed to be **efficient** and **fun**. By bringing key stakeholder into the same room, the process becomes:
+
+- **Efficient:** Everyone coming together in the same room can make decisions and sort out differences quickly. To create a comprehensive business domain model, what used to take many weeks of email, phone call or meeting exchanges can be reduced to a single workshop.
+
+- **Simple:** Event Storming encourages the use of "Ubiquitous language" that both the technical and non-technical stakeholders can understand.
+
+- **Fun:** Domain modeling is fun! Stakeholders get hands-on experience to domain modeling which everyone can participate and interact with each other. It also provides more opportunities to exchange ideas and improve mindsharing, from various perspective across multiple roles.
+
+- **Effective:** Stakeholders are encouraged not to think about the data model, but about the business domain. This puts customers first and working backwards from there, achieves an outcome that is more relevant.
+
+- **Insightful:** Event Storming generate conversations. This helps stakeholders to understand the entire business process better and help to have a more holistic view from various perspective.
+
+## Event Storming Applications
 
 When you want to divide a monolithic system into microservices, or you want to build up a new system from scratch, the most pain point is there is no idea to clarify the system boundary. Even though you interview with domain experts, and get a whole bunch of requirement documents, it still not easy to start the design. Maybe you are familiar with the classic modeling methodologies such as :
 
