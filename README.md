@@ -14,16 +14,18 @@ As a developer, knowing how to narrow this gap can help you go a long way to bui
   - [Event Storming Terms](#event-storming-terms)
   - [Event Storming Benefits](#event-storming-benefits)
   - [Event Storming Outcomes](#event-storming-outcomes)
-- [01 - Hands-on: Events exploring](01-hands-on-events-exploring)
-- [02 - Coffee shop business scenario](02-coffee-shop-scenario)
-- [03 - Modeling and Development](03-modeling-and-development)
+- [01 - Hands-on: Events exploring](01-hands-on-events-exploring/README.md)
+- [02 - Coffee shop business scenario](02-coffee-shop-scenario/README.md)
+- [03 - Modeling and Development](03-modeling-and-development/README.md)
 - [04 - Roles, Commands, and Events Mapping](04-roles-commands-events-mapping)
+<!---
 - [05 - Domain Driven Design Tactical design pattern guidance](05-ddd-tactical-design-pattern)
 - [06 - Actual Implementation](06-actual-implementation)
 - [07 - Infrastructure as Code by CDK](07-iaac-cdk)
 - [08 - Deploy Serverless application](08-deploy-serverless-app)
 - [09 - Deploy Containerized application](09-deploy-containerized-app)
 - [10 - Build up CI/CD pipeline](10-build-up-cicd-pipeline)
+--->
 
 # Event Storming
 ![image](docs/img/problemsolving.png)
@@ -44,25 +46,16 @@ Event Storming isn't limited to just for the software development team. In fact,
 
 Take a look on this diagram, there are a few colored sticky notes with different intention:
 
-* **Domain Events** (Orange sticky note)
-  * **Event**, Stands for the fact happened in specific business context
-* **Actions** (Blue sticky note)   
-  * **Command**, It is a request or intention, raised by a role or time or external system
-* **Information** (Green sticky note)  
-  * **View Model**, it's a supporting information to help role to make a decision to raise a command
-* **Consistent Business Rules** (Yellow sticky note)
-  * **Aggregate**
+* **Domain Events** (Orange sticky note) - Describes *what happened*. Represent facts that happened in a specific business context, written in past tense
+* **Actions** aka Command (Blue sticky note) - Describes an *action* that caused the domain event. It is a request or intention, raised by a role or time or external system
+* **Information** (Green sticky note) - Describes the *supporting information* required to help make a decision to raise a command
+* **Consistent Business Rules** aka Aggregate (Yellow sticky note)
+    * Groups of Events or Actions that represent a specific business capability
     * Has the responsibility to accept or fulfill the intention of command
-    * Represent a specific business capability to support command
-    * Shouldn't naming it with role concept, or you will get only the "actor" in the whole business.
     * Should be in small scope
-    * Protects business invariants
-    * Exposes by ID
     * And communicated by eventual consistency
-* **Eventual Consistent Business rules** (Lilac sticky note)
-  * Policy
-    * It's all about rules, sometimes the rules comes from external regulation restriction, or maybe account login success/fail process logic.
-    * example : when login attemptation fail times up to 3, then lock this account
+* **Eventual Consistent Business rules** aka Policy (Lilac sticky note)
+    * Represents a process or business rules. Can come from external regulation and restrictions e.g. account login success/fail process logic.
 
 ## Event Storming Benefits
 
@@ -80,10 +73,12 @@ Business requirements can be very complex. It is often hard to find a fluent way
 
 ## Event Storming Applications
 
-When you want to divide a monolithic system into microservices, or you want to build up a new system from scratch, the most pain point is there is no idea to clarify the system boundary. Even though you interview with domain experts, and get a whole bunch of requirement documents, it still not easy to start the design. Maybe you are familiar with the classic modeling methodologies such as :
+There are many useful applications of Event Storming. The most obvious time to use event storming is at a project's inception, so the team can start with a common understanding of the domain model. Some other reasons include:
+* Discovering complexity early on, finding missing concepts, understanding the business process;
+* Modelling or solving a specific problem in detail;
+* Learning how to model and think about modelling.
 
-> UP/RUP, OOAD, RAD, Use Case Modeling, ICONIX Processing ...etc
+Event Storming can also help to identify key views for your user interface, which can jump start Site Mapping or Wireframing.
 
-No matter any one of these methodologies, all deeply depends on experts skill, but if you apply Event Storming workshop, you could leverage team's collaboration to acquire requirements with key events. However, these events are most concerned business value by stakeholders. With different color, pin, and diagrams to group the actions, events, and the aggregate context. Naturally forms up the domain boundary.
-
-[Next: 01 Hands-on Events Exploring >](docs/01-hands-on-events-exploring)
+Let's get started with a quick example to demonstrate how to run a simple Event Storming.
+[Next: 01 Hands-on Events Exploring >](docs/01-hands-on-events-exploring/README.md)

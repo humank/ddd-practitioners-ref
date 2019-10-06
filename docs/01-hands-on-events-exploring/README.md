@@ -1,19 +1,23 @@
-_[< back to EventStorming](../../)_
+_[< back to EventStorming](../../README.md)_
 
-## Hands-on Events Exploring - a simple EventStorming Example
+## Hands-on Events Exploring - a simple Event Storming Example
 
-If you are new to Event Storming, don't know how to start the domain event exploring journey, recommend to think about a timeline:
+If you are new to Event Storming, and don't know how to start the domain event exploring journey, you can try thinking about this:
 
-> how many immutable fact events occurred, from you wake up at this morning, until now you read this post.
+> Think about all the Events that had occurred from the time you woke up at this morning, until now when you are reading this post.
+
+List them down and put each one of these Events into the orange sticky notes.
 
 ![Timeline](../img/timelineformorning.png)
 
-Anyone of you could easily to figure out a couple of stickers there to present what you did in the morning. All of the **past-tense** wording is explaining what happened, immutable fact, and meaningful for your **"working day morning"**.
+Note that you will tend to use **past-tense** wording to explain what had happened - which are all just facts.
 
-**[Challenge for you]** Imagine a specific scenario, it's time to attend a meeting but you are probably be late to join, can you pick the most essential stickers to complete the journey on timeline?
+**[Challenge for you]** Now, let's add a little twist to what you have. Imagine that you have to attend a meeting today and you are already running late. Can you pick the most essential stickers to complete the "morning journey" on the timeline?
 
-> The most key events you picked up, that's the critical path to "Attend meeting". On the other hand, if there is a product under developing, and the Product Owner opens whole bunch of wish list there, what approach will you take to survive under the pressure?
+Note the key events that remain on the board. These are the critical path towards "attending a meeting". Translating to software development, consider when a Product Owner pushes a long list of *wish list* into your Product Backlog, how would you go about prioritising them?
 
-**The most valuable approach is to leverage "User story mapping" and "Impact mapping". Pick up the most essential ones to developer as first sprint, then continously exploring the story and refine it.**
+This is where this *User Story Mapping* or *Impact Mapping* approach would be valuable. Pick up the most essential ones to work on as first sprint, then continue to explore the story and refine it.
 
-[Next: 02 Coffee shop scenario >](../02-coffee-shop-scenario)
+Next, let's take a look at a slightly more complex scenario.
+
+[Next: 02 Coffee shop scenario >](../02-coffee-shop-scenario/README.md)
