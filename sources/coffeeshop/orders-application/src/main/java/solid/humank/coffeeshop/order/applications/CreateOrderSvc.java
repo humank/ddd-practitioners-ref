@@ -14,6 +14,7 @@ import solid.humank.coffeeshop.order.repositories.OrderRepository;
 import solid.humank.ddd.commons.interfaces.ITranslator;
 
 import javax.enterprise.context.Dependent;
+import javax.inject.Inject;
 import java.util.List;
 @Dependent
 public class CreateOrderSvc {
@@ -22,6 +23,7 @@ public class CreateOrderSvc {
 
     // Domain Service有個責任，把跨 layer傳入的DTO 在這裡翻譯成領域物件
 
+    @Inject
     private OrderRepository repository;
 
     private ITranslator<List<OrderItemRst>, List<OrderItem>> itemsTranslator;

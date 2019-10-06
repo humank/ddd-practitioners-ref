@@ -10,6 +10,7 @@ import solid.humank.coffeeshop.order.models.requestsmodels.OrderItemRM;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,11 +29,11 @@ public class OrderResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public OrderRst createOrder(AddOrderReq request) {
+    public Response createOrder(AddOrderReq request) {
 
         CreateOrderMsg cmd = new CreateOrderMsg("0", this.transformToOrderItemVM(request.getItems()));
         OrderRst orderRst = service.establishOrder(cmd);
-        return orderRst;
+        return Response.ok(orderRst).build();
 
     }
 

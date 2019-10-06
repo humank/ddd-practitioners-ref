@@ -24,6 +24,7 @@
         <cucumber.java.version>4.7.2</cucumber.java.version>
         <!-- settings for aws -->
         <aws-java-sdk-bom>1.11.641</aws-java-sdk-bom>
+        <software.amazon.awssdk>2.9.13</software.amazon.awssdk>
 
     </properties>
 
@@ -39,6 +40,7 @@
         <module>orders-application</module>
         <module>orders-domain</module>
         <module>orders-web</module>
+        <module>infrastructure</module>
     </modules>
 
     <dependencyManagement>
@@ -47,6 +49,13 @@
                 <groupId>io.quarkus</groupId>
                 <artifactId>quarkus-bom</artifactId>
                 <version>${quarkus.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>software.amazon.awssdk</groupId>
+                <artifactId>bom</artifactId>
+                <version>${software.amazon.awssdk}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

@@ -13,7 +13,7 @@ public interface IRepository<T extends AggregateRoot, U extends EntityId> {
 
     T get(U entityId);
 
-    T remove(T aggregateRoot);
+    void remove(T aggregateRoot);
 
     T first(ISelector selector, Specification<U> by);
 

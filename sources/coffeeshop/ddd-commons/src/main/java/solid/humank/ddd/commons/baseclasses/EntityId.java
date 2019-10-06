@@ -1,5 +1,6 @@
 package solid.humank.ddd.commons.baseclasses;
 
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;

@@ -7,7 +7,10 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>orders-application</artifactId>
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
+    <modules>
+        <module>../infrastructure</module>
+    </modules>
 
     <!-- specify dependencies from peer modules in this project -->
     <dependencies>
