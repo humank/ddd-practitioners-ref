@@ -81,4 +81,5 @@ There are many useful applications of Event Storming. The most obvious time to u
 Event Storming can also help to identify key views for your user interface, which can jump start Site Mapping or Wireframing.
 
 Let's get started with a quick example to demonstrate how to run a simple Event Storming.
+
 [Next: 01 Hands-on Events Exploring >](docs/01-hands-on-events-exploring/README.md)
