@@ -24,36 +24,15 @@
       <artifactId>aws-lambda-java-events</artifactId>
       <version>2.2.2</version>
     </dependency>
-
     <dependency>
       <groupId>com.amazonaws</groupId>
       <artifactId>aws-java-sdk-events</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.googlecode.json-simple</groupId>
-      <artifactId>json-simple</artifactId>
-      <version>1.1.1</version>
-    </dependency>
-<!--    <dependency>-->
-<!--      <groupId>com.fasterxml.jackson.core</groupId>-->
-<!--      <artifactId>jackson-databind</artifactId>-->
-<!--      <version>[2.9.8,)</version>-->
-<!--    </dependency>-->
-    <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-smallrye-openapi</artifactId>
       <version>${quarkus.version}</version>
     </dependency>
-    <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-resteasy-jsonb</artifactId>
-      <version>${quarkus.version}</version>
-    </dependency>
-<!--    <dependency>-->
-<!--      <groupId>io.quarkus</groupId>-->
-<!--      <artifactId>quarkus-resteasy-jackson</artifactId>-->
-<!--      <version>${quarkus.version}</version>-->
-<!--    </dependency>-->
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-amazon-dynamodb</artifactId>
@@ -62,6 +41,11 @@
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-amazon-lambda</artifactId>
+      <version>${quarkus.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-resteasy-jackson</artifactId>
       <version>${quarkus.version}</version>
     </dependency>
   </dependencies>

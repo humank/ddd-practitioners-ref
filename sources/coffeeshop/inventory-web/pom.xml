@@ -9,13 +9,4 @@
     <artifactId>inventory-web</artifactId>
     <packaging>jar</packaging>
 
-    <!-- specify dependencies from peer modules in this project -->
-    <dependencies>
-        <dependency>
-            <groupId>solid.humank</groupId>
-            <artifactId>orders-application</artifactId>
-            <version>1.0</version>
-        </dependency>
-    </dependencies>
-
 </project>

@@ -1,14 +1,13 @@
 package solid.humank.coffeeshop.order.datacontracts.results;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import solid.humank.coffeeshop.order.models.OrderItem;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-
+@AllArgsConstructor
+@Data
 public class OrderItemRst{
 
     @Getter @Setter(AccessLevel.PRIVATE)
@@ -34,6 +33,6 @@ public class OrderItemRst{
         this.productId = orderItem.getProductId();
         this.qty = orderItem.getQty();
         this.price = orderItem.getPrice();
-        this.fee = orderItem.getFee();
+        this.fee = orderItem.fee();
     }
 }

@@ -1,6 +1,8 @@
 package solid.humank.ddd.commons.interfaces;
 
-public interface ITranslator<I,O> {
+import java.util.List;
 
-    O translate(I transRequest);
+public interface ITranslator<O,I> {
+
+    List<O> translate(List<I> transRequest);
 }

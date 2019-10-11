@@ -6,6 +6,7 @@ import solid.humank.coffeeshop.order.models.Order;
 import solid.humank.coffeeshop.order.models.OrderStatus;
 
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -31,6 +32,7 @@ public class OrderRst{
 
     public OrderRst(Order order) {
 
+        items = new ArrayList<>();
         this.id = order.getId().toString();
         this.status = order.getStatus().getValue();
         order.getOrderItems().stream().forEach(orderItem -> {

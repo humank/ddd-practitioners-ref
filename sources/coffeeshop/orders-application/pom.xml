@@ -7,12 +7,9 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>orders-application</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>../infrastructure</module>
-    </modules>
+    <packaging>jar</packaging>
 
-    <!-- specify dependencies from peer modules in this project -->
+
     <dependencies>
         <dependency>
             <groupId>solid.humank</groupId>
@@ -24,37 +21,36 @@
             <artifactId>aws-lambda-java-core</artifactId>
             <version>1.2.0</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.amazonaws/aws-lambda-java-events -->
         <dependency>
             <groupId>com.amazonaws</groupId>
             <artifactId>aws-lambda-java-events</artifactId>
             <version>2.2.2</version>
         </dependency>
-
-        <dependency>
-            <groupId>com.amazonaws</groupId>
-            <artifactId>aws-java-sdk-dynamodb</artifactId>
-            <!-- <version>1.11.255</version> -->
-        </dependency>
         <dependency>
             <groupId>com.amazonaws</groupId>
             <artifactId>aws-java-sdk-events</artifactId>
-            <!-- <version>1.11.313</version> -->
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple -->
         <dependency>
-            <groupId>com.googlecode.json-simple</groupId>
-            <artifactId>json-simple</artifactId>
-            <version>1.1.1</version>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-smallrye-openapi</artifactId>
+            <version>${quarkus.version}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
         <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>[2.9.8,)</version>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-amazon-dynamodb</artifactId>
+            <version>${quarkus.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-amazon-lambda</artifactId>
+            <version>${quarkus.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-resteasy-jackson</artifactId>
+            <version>${quarkus.version}</version>
         </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
@@ -98,7 +94,6 @@
             </plugin>
         </plugins>
     </build>
-
     <profiles>
         <profile>
             <id>native</id>
@@ -145,5 +140,4 @@
             </build>
         </profile>
     </profiles>
-
 </project>

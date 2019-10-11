@@ -32,12 +32,6 @@
         </dependency>
         <dependency>
             <groupId>solid.humank</groupId>
-            <artifactId>orders-domain</artifactId>
-            <version>1.0</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>solid.humank</groupId>
             <artifactId>orders-application</artifactId>
             <version>1.0</version>
             <scope>test</scope>

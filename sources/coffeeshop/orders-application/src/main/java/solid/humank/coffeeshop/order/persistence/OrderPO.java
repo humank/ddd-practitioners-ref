@@ -24,7 +24,7 @@ public class OrderPO {
         order.getTableNo();
         this.status = order.getStatus();
         this.orderItems = order.getOrderItems();
-        this.totalFee = order.getTotalFee();
+        this.totalFee = order.totalFee();
         this.createdDate = order.getCreatedDate();
         this.modifiedDate = order.getModifiedDate();
     }

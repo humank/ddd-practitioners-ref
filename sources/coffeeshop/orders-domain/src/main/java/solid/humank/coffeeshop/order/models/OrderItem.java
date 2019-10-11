@@ -1,6 +1,7 @@
 package solid.humank.coffeeshop.order.models;
 
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import solid.humank.ddd.commons.baseclasses.ValueObject;
@@ -8,7 +9,6 @@ import solid.humank.ddd.commons.baseclasses.ValueObject;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-
 
 public class OrderItem extends ValueObject<OrderItem> {
 
@@ -24,8 +24,9 @@ public class OrderItem extends ValueObject<OrderItem> {
     @Setter(AccessLevel.PRIVATE)
     BigDecimal price;
 
-    @Getter
-    public BigDecimal fee = this.price.multiply(BigDecimal.valueOf(qty));
+    public BigDecimal fee(){
+        return this.price.multiply(BigDecimal.valueOf(qty));
+    }
 
     public OrderItem() {
     }
