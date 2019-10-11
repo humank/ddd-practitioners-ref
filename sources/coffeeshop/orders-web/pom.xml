@@ -16,16 +16,6 @@
     </dependency>
     <dependency>
       <groupId>com.amazonaws</groupId>
-      <artifactId>aws-lambda-java-core</artifactId>
-      <version>1.2.0</version>
-    </dependency>
-    <dependency>
-      <groupId>com.amazonaws</groupId>
-      <artifactId>aws-lambda-java-events</artifactId>
-      <version>2.2.2</version>
-    </dependency>
-    <dependency>
-      <groupId>com.amazonaws</groupId>
       <artifactId>aws-java-sdk-events</artifactId>
     </dependency>
     <dependency>
@@ -139,3 +129,15 @@
     </profile>
   </profiles>
 </project>
+
+
+        <!--    <dependency>-->
+        <!--      <groupId>com.amazonaws</groupId>-->
+        <!--      <artifactId>aws-lambda-java-core</artifactId>-->
+        <!--      <version>1.2.0</version>-->
+        <!--    </dependency>-->
+        <!--    <dependency>-->
+        <!--      <groupId>com.amazonaws</groupId>-->
+        <!--      <artifactId>aws-lambda-java-events</artifactId>-->
+        <!--      <version>2.2.2</version>-->
+        <!--    </dependency>-->

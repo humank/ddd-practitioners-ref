@@ -1,30 +1,31 @@
-package solid.humank.coffeeshop.order.domainservices;
+package solid.humank.coffeeshop.infra.adapters;
 
 import com.amazonaws.services.cloudwatchevents.AmazonCloudWatchEvents;
+import com.amazonaws.services.cloudwatchevents.AmazonCloudWatchEventsClientBuilder;
 import com.amazonaws.services.cloudwatchevents.model.PutEventsRequest;
 import com.amazonaws.services.cloudwatchevents.model.PutEventsRequestEntry;
 import com.amazonaws.services.cloudwatchevents.model.PutEventsResult;
 import solid.humank.ddd.commons.baseclasses.DomainEvent;
 
-
+import javax.enterprise.context.Dependent;
+import javax.enterprise.context.RequestScoped;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Properties;
-
+@RequestScoped
 public class CloudWatchEventAdapter {
 
-    final String propFileName = "cloudwatchevents.properties";
-    private AmazonCloudWatchEvents cwe;
+    String propFileName = "cloudwatchevents.properties";
+    AmazonCloudWatchEvents cwe =
+            AmazonCloudWatchEventsClientBuilder.defaultClient();
 
-    public CloudWatchEventAdapter(AmazonCloudWatchEvents cwe) {
-        this.cwe = cwe;
+    public CloudWatchEventAdapter() {
     }
 
-    public PublishResult publishEvent(DomainEvent occuredEvent) {
-        //return putEvent(occuredEvent.getEventContent());
-        return putEvent(occuredEvent.toString());
+    public PublishResult publishEvent(DomainEvent occurredEvent) {
+        return putEvent(occurredEvent.toString());
     }
 
     private PublishResult putEvent(String eventContent) {

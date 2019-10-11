@@ -4,5 +4,5 @@ import java.util.List;
 
 public interface ITranslator<O,I> {
 
-    List<O> translate(List<I> transRequest);
+    O translate(I transRequest);
 }

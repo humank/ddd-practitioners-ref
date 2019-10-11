@@ -1,4 +1,4 @@
-package solid.humank.coffeeshop.order.domainservices;
+package solid.humank.coffeeshop.infra.adapters;
 
 public class PublishResult {
     private String result;

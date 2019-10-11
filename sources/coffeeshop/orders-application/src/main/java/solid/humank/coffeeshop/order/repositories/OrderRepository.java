@@ -5,6 +5,7 @@ import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import com.amazonaws.services.dynamodbv2.document.DynamoDB;
 import com.amazonaws.services.dynamodbv2.document.Item;
 import com.amazonaws.services.dynamodbv2.document.Table;
+import com.amazonaws.services.dynamodbv2.model.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import solid.humank.coffeeshop.order.models.Order;
@@ -75,7 +76,13 @@ public class OrderRepository implements Serializable {
     }
 
     public OrderId generateOrderId() {
-        long currentCount = ddb.getTable(tableName).describe().getItemCount();
+        AmazonDynamoDB cc = AmazonDynamoDBClientBuilder.standard().build();
+        DynamoDB dd = new DynamoDB(cc);
+
+        // Not sure if the scan will cost much. Take an alternative way as query select count
+        ScanRequest scanRequest = new ScanRequest().withTableName(tableName);
+        ScanResult scanResult = client.scan(scanRequest);
+        long currentCount = scanResult.getScannedCount();
         return new OrderId(currentCount + 1, OffsetDateTime.now());
     }
 }

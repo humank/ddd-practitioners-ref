@@ -34,6 +34,7 @@
         <module>coffee-application</module>
         <module>coffee-domain</module>
         <module>coffee-web</module>
+        <module>coffee-sls</module>
         <module>inventory-application</module>
         <module>inventory-domain</module>
         <module>inventory-web</module>

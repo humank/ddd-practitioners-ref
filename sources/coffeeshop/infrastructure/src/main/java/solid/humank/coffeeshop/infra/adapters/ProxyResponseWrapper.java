@@ -1,7 +1,4 @@
-package solid.humank.coffeeshop.order.domainservices;
-
-import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
-import solid.humank.coffeeshop.order.datacontracts.results.OrderRst;
+package solid.humank.coffeeshop.infra.adapters;
 
 public class ProxyResponseWrapper {
 //    public static APIGatewayProxyResponseEvent wrap(OrderRst orderTicket) {

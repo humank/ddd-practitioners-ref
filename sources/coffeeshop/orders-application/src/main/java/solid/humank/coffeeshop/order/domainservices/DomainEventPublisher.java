@@ -1,18 +1,19 @@
 package solid.humank.coffeeshop.order.domainservices;
 
-import com.amazonaws.services.cloudwatchevents.AmazonCloudWatchEvents;
-import com.amazonaws.services.cloudwatchevents.AmazonCloudWatchEventsClientBuilder;
+import solid.humank.coffeeshop.infra.adapters.CloudWatchEventAdapter;
+import solid.humank.coffeeshop.infra.adapters.PublishResult;
 import solid.humank.coffeeshop.order.domainevents.OrderCreated;
 
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
+
+@RequestScoped
 public class DomainEventPublisher {
-    final static AmazonCloudWatchEvents cwe =
-            AmazonCloudWatchEventsClientBuilder.defaultClient();
 
-    public static PublishResult publish(OrderCreated orderCreated) {
+    @Inject
+    CloudWatchEventAdapter cweAdapter;
 
-        CloudWatchEventAdapter cweAdapter = new CloudWatchEventAdapter(cwe);
+    public PublishResult publish(OrderCreated orderCreated) {
         return cweAdapter.publishEvent(orderCreated);
-
-
     }
 }

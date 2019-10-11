@@ -6,8 +6,6 @@ import solid.humank.coffeeshop.order.datacontracts.results.OrderItemRst;
 import solid.humank.coffeeshop.order.datacontracts.results.OrderRst;
 import solid.humank.coffeeshop.order.models.requests.AddOrderReq;
 import solid.humank.coffeeshop.order.models.requestsmodels.OrderItemRM;
-import solid.humank.coffeeshop.order.repositories.OrderRepository;
-
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -19,8 +17,8 @@ import java.util.List;
 @Path("/order")
 public class OrderResource {
 
-    //@Inject
-    CreateOrderSvc service = new CreateOrderSvc(new OrderRepository());
+    @Inject
+    CreateOrderSvc service;
 
     @GET
     @Produces(MediaType.TEXT_PLAIN)

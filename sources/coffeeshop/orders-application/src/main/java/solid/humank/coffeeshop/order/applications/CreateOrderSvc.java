@@ -6,7 +6,6 @@ import solid.humank.coffeeshop.order.datacontracts.results.OrderItemRst;
 import solid.humank.coffeeshop.order.datacontracts.results.OrderRst;
 import solid.humank.coffeeshop.order.domainevents.OrderCreated;
 import solid.humank.coffeeshop.order.domainservices.DomainEventPublisher;
-import solid.humank.coffeeshop.order.domainservices.OrderItemsTranslator;
 import solid.humank.coffeeshop.order.models.Order;
 import solid.humank.coffeeshop.order.models.OrderId;
 import solid.humank.coffeeshop.order.models.OrderItem;
@@ -29,7 +28,14 @@ public class CreateOrderSvc implements Serializable {
 
     }
 
+    @Inject
     public OrderRepository repository;
+
+    @Inject
+    public ITranslator<List<OrderItem>, List<OrderItemRst>> translator;
+
+    @Inject
+    DomainEventPublisher domainEventPublisher;
 
     @Inject
     public CreateOrderSvc(OrderRepository repository) {
@@ -44,12 +50,12 @@ public class CreateOrderSvc implements Serializable {
     public OrderRst establishOrder(CreateOrderMsg request) {
 
         OrderId id = this.repository.generateOrderId();
-        List<OrderItem> items = new OrderItemsTranslator().translate(request.getItems());
+        List<OrderItem> items = translator.translate(request.getItems());
         CreateOrder cmd = new CreateOrder(id, request.getTableNo(), OrderStatus.INITIAL, items);
         Order createdOrder = Order.create(cmd);
         this.repository.save(createdOrder);
 
-        DomainEventPublisher.publish(new OrderCreated<>(id, request.getTableNo(), items, createdOrder.getCreatedDate()));
+        domainEventPublisher.publish(new OrderCreated<>(id, request.getTableNo(), items, createdOrder.getCreatedDate()));
 
         return new OrderRst(createdOrder);
 

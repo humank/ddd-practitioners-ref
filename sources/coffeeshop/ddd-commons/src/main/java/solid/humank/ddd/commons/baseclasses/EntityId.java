@@ -13,6 +13,7 @@ import java.util.List;
 public abstract class EntityId extends ValueObject<EntityId> {
 
     @Getter(AccessLevel.PUBLIC)
+    @Setter(AccessLevel.PROTECTED)
     String abbr;
 
     @Getter(AccessLevel.PUBLIC)
