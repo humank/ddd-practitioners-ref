@@ -51,6 +51,9 @@
                 <groupId>io.quarkus</groupId>
                 <artifactId>quarkus-maven-plugin</artifactId>
                 <version>${quarkus.version}</version>
+                <configuration>
+                    <uberJar>true</uberJar>
+                </configuration>
                 <executions>
                     <execution>
                         <goals>
@@ -116,8 +119,8 @@
                                         <additionalBuildArg>-H:+JNI</additionalBuildArg>
                                         <additionalBuildArg>-H:-AllowVMInspection</additionalBuildArg>
                                         <additionalBuildArg>-H:+PrintClassInitialization</additionalBuildArg>
-                                        <additionalBuildArg>--initialize-at-run-time=io.quarkus.runner.ApplicationImpl1</additionalBuildArg>
-<!--                                        <additionalBuildArg>&#45;&#45;initialize-at-run-time=solid.humank.coffeeshop.infra.adapters.CloudWatchEventAdapter</additionalBuildArg>-->
+                                        <additionalBuildArgs>-H:+ReportExceptionStackTraces</additionalBuildArgs>
+                                        <!--                                        <additionalBuildArg>&#45;&#45;initialize-at-run-time=java.rmi.server.ObjID,sun.rmi.transport.ObjectTable,sun.rmi.transport.Transport,sun.rmi.transport.tcp.TCPEndpoint,sun.rmi.registry.RegistryImpl,sun.rmi.transport.DGCImpl,sun.rmi.transport.DGCClient</additionalBuildArg>-->
                                     </additionalBuildArgs>
                                 </configuration>
                             </execution>

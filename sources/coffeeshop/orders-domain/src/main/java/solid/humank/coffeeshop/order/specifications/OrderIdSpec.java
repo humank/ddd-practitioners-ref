@@ -10,11 +10,6 @@ public class OrderIdSpec extends Specification<OrderId> {
     public OrderIdSpec(OrderId orderId) {
         String pattern = "ord-\\d{8}-\\d{1,}";
         this.entity = orderId;
-        this.predicate = oid -> {
-            if (oid != null) {
-                Pattern.matches(pattern, oid.toString());
-            }
-            return false;
-        };
+        this.predicate = oid -> Pattern.matches(pattern, oid.toString());
     }
 }

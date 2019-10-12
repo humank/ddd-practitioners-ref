@@ -21,6 +21,8 @@ public class OrderResource {
     @Inject
     CreateOrderSvc service;
 
+    public OrderResource(){}
+
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     public String sayHello() {
@@ -34,12 +36,19 @@ public class OrderResource {
 
         CreateOrderMsg cmd = new CreateOrderMsg("0", this.transformToOrderItemVM(request.getItems()));
         OrderRst orderRst = null;
+        String err=null;
         try {
             orderRst = service.establishOrder(cmd);
         } catch (AggregateException e) {
-
+            e.printStackTrace();
+            err = e.getMessage();
         }
-        return Response.ok(orderRst).build();
+        if(err !=null){
+            return Response.ok(err).build();
+        }else{
+            return Response.ok(orderRst).build();
+        }
+
     }
 
     private List<OrderItemRst> transformToOrderItemVM(List<OrderItemRM> items) {

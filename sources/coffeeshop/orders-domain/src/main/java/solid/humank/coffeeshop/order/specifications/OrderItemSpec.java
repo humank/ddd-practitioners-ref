@@ -8,6 +8,7 @@ import java.util.Objects;
 
 public class OrderItemSpec extends Specification<List<OrderItem>> {
     public OrderItemSpec(List<OrderItem> orderItems) {
-        super.predicate = o -> orderItems.stream().anyMatch(Objects::isNull);
+        this.entity = orderItems;
+        this.predicate = o -> orderItems.stream().anyMatch(Objects::nonNull);
     }
 }
