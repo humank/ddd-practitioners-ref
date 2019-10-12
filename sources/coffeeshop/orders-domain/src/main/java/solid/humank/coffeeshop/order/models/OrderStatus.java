@@ -7,7 +7,7 @@ public enum OrderStatus {
 
     INITIAL(0), PROCESSING(1), DELIVER(2), CLOSED(3), CANCEL(4);
 
-    OrderStatus(int i) {
+    OrderStatus(int value) {
         this.value = value;
     }
 

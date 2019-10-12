@@ -1,27 +1,26 @@
 package solid.humank.coffeeshop.infra.adapters;
 
-import com.amazonaws.services.cloudwatchevents.AmazonCloudWatchEvents;
-import com.amazonaws.services.cloudwatchevents.AmazonCloudWatchEventsClientBuilder;
-import com.amazonaws.services.cloudwatchevents.model.PutEventsRequest;
-import com.amazonaws.services.cloudwatchevents.model.PutEventsRequestEntry;
-import com.amazonaws.services.cloudwatchevents.model.PutEventsResult;
+import software.amazon.awssdk.services.cloudwatchevents.CloudWatchEventsClient;
+import software.amazon.awssdk.services.cloudwatchevents.model.PutEventsRequest;
+import software.amazon.awssdk.services.cloudwatchevents.model.PutEventsRequestEntry;
+import software.amazon.awssdk.services.cloudwatchevents.model.PutEventsResponse;
 import solid.humank.ddd.commons.baseclasses.DomainEvent;
 
-import javax.enterprise.context.Dependent;
 import javax.enterprise.context.RequestScoped;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Properties;
+
 @RequestScoped
 public class CloudWatchEventAdapter {
 
     String propFileName = "cloudwatchevents.properties";
-    AmazonCloudWatchEvents cwe =
-            AmazonCloudWatchEventsClientBuilder.defaultClient();
+    CloudWatchEventsClient cwe = CloudWatchEventsClient.builder().build();
 
     public CloudWatchEventAdapter() {
+
     }
 
     public PublishResult publishEvent(DomainEvent occurredEvent) {
@@ -32,18 +31,17 @@ public class CloudWatchEventAdapter {
 
         try {
             Properties cweProp = getCWEParameters();
-            PutEventsRequestEntry request_entry = new PutEventsRequestEntry()
-                    .withDetail(eventContent)
-                    .withDetailType(cweProp.getProperty("EVENT_TYPE"))
-                    .withResources(cweProp.getProperty("RESOURCE_ARN"))
-                    .withSource(cweProp.getProperty("EVENT_SOURCE"));
 
-            PutEventsRequest request = new PutEventsRequest()
-                    .withEntries(request_entry);
+            PutEventsRequestEntry request_entry = PutEventsRequestEntry.builder()
+                    .detail(eventContent)
+                    .detailType(cweProp.getProperty("EVENT_TYPE"))
+                    .resources(cweProp.getProperty("RESOURCE_ARN"))
+                    .source(cweProp.getProperty("EVENT_SOURCE")).build();
 
-            PutEventsResult response = cwe.putEvents(request);
-
-            return new PublishResult(response.getSdkResponseMetadata().toString());
+            PutEventsRequest request = PutEventsRequest.builder()
+                    .entries(request_entry).build();
+            PutEventsResponse response = cwe.putEvents(request);
+            return new PublishResult(response.responseMetadata().toString());
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();

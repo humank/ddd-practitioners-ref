@@ -39,6 +39,12 @@
             <groupId>com.amazonaws</groupId>
             <artifactId>aws-java-sdk-events</artifactId>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/software.amazon.awssdk/cloudwatchevents -->
+        <dependency>
+            <groupId>software.amazon.awssdk</groupId>
+            <artifactId>cloudwatchevents</artifactId>
+            <version>${software.amazon.awssdk}</version>
+        </dependency>
     </dependencies>
 
     <build>

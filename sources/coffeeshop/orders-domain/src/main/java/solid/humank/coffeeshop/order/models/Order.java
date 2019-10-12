@@ -21,6 +21,7 @@ import solid.humank.coffeeshop.order.commands.CreateOrder;
 import solid.humank.coffeeshop.order.domainevents.OrderCreated;
 import solid.humank.coffeeshop.order.domainevents.OrderItemsChanged;
 import solid.humank.coffeeshop.order.domainevents.OrderStatusChanged;
+import solid.humank.coffeeshop.order.exceptions.AggregateException;
 import solid.humank.coffeeshop.order.exceptions.StatusTransitionException;
 import solid.humank.coffeeshop.order.policies.OrderPolicy;
 import solid.humank.coffeeshop.order.specifications.StatusTransitionSpec;
@@ -113,7 +114,7 @@ public class Order extends AggregateRoot<OrderId> {
         return null;
     }
 
-    public static Order create(CreateOrder cmd) {
+    public static Order create(CreateOrder cmd) throws AggregateException {
 
         Order order = new Order(cmd.getId(), cmd.getTableNo(), cmd.getStatus(), cmd.getItems(), OffsetDateTime.now());
         OrderPolicy.Verify(order);

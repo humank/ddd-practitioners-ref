@@ -4,6 +4,7 @@ import solid.humank.coffeeshop.order.applications.CreateOrderSvc;
 import solid.humank.coffeeshop.order.datacontracts.messages.CreateOrderMsg;
 import solid.humank.coffeeshop.order.datacontracts.results.OrderItemRst;
 import solid.humank.coffeeshop.order.datacontracts.results.OrderRst;
+import solid.humank.coffeeshop.order.exceptions.AggregateException;
 import solid.humank.coffeeshop.order.models.requests.AddOrderReq;
 import solid.humank.coffeeshop.order.models.requestsmodels.OrderItemRM;
 
@@ -32,9 +33,13 @@ public class OrderResource {
     public Response createOrder(AddOrderReq request) {
 
         CreateOrderMsg cmd = new CreateOrderMsg("0", this.transformToOrderItemVM(request.getItems()));
-        OrderRst orderRst = service.establishOrder(cmd);
-        return Response.ok(orderRst).build();
+        OrderRst orderRst = null;
+        try {
+            orderRst = service.establishOrder(cmd);
+        } catch (AggregateException e) {
 
+        }
+        return Response.ok(orderRst).build();
     }
 
     private List<OrderItemRst> transformToOrderItemVM(List<OrderItemRM> items) {
