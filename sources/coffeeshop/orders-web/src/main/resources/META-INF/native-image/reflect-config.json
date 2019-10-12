@@ -1,0 +1,656 @@
+[
+{
+  "name":"com.amazonaws.auth.AWS4Signer",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.amazonaws.internal.config.Builder",
+  "allDeclaredMethods":true
+},
+{
+  "name":"com.amazonaws.internal.config.HostRegexToRegionMappingJsonHelper",
+  "allDeclaredFields":true,
+  "allDeclaredMethods":true,
+  "allDeclaredConstructors":true
+},
+{
+  "name":"com.amazonaws.internal.config.HttpClientConfigJsonHelper",
+  "allDeclaredFields":true,
+  "allDeclaredMethods":true,
+  "allDeclaredConstructors":true
+},
+{
+  "name":"com.amazonaws.internal.config.InternalConfigJsonHelper",
+  "allDeclaredFields":true,
+  "allDeclaredMethods":true,
+  "allDeclaredConstructors":true
+},
+{
+  "name":"com.amazonaws.internal.config.JsonIndex",
+  "allDeclaredFields":true,
+  "allDeclaredMethods":true,
+  "allDeclaredConstructors":true
+},
+{
+  "name":"com.amazonaws.internal.config.SignerConfigJsonHelper",
+  "allDeclaredFields":true,
+  "allDeclaredMethods":true,
+  "allDeclaredConstructors":true
+},
+{
+  "name":"com.amazonaws.jmx.SdkMBeanRegistrySupport",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.amazonaws.partitions.model.CredentialScope",
+  "allDeclaredFields":true,
+  "allDeclaredMethods":true,
+  "allDeclaredConstructors":true
+},
+{
+  "name":"com.amazonaws.partitions.model.Endpoint",
+  "allDeclaredFields":true,
+  "allDeclaredMethods":true,
+  "allDeclaredConstructors":true
+},
+{
+  "name":"com.amazonaws.partitions.model.Partition",
+  "allDeclaredFields":true,
+  "allDeclaredMethods":true,
+  "allDeclaredConstructors":true
+},
+{
+  "name":"com.amazonaws.partitions.model.Partitions",
+  "allDeclaredFields":true,
+  "allDeclaredMethods":true,
+  "allDeclaredConstructors":true
+},
+{
+  "name":"com.amazonaws.partitions.model.Region",
+  "allDeclaredFields":true,
+  "allDeclaredMethods":true,
+  "allDeclaredConstructors":true
+},
+{
+  "name":"com.amazonaws.partitions.model.Service",
+  "allDeclaredFields":true,
+  "allDeclaredMethods":true,
+  "allDeclaredConstructors":true
+},
+{
+  "name":"com.amazonaws.services.s3.internal.AWSS3V4Signer"
+},
+{
+  "name":"com.fasterxml.jackson.databind.ObjectMapper"
+},
+{
+  "name":"com.fasterxml.jackson.jaxrs.base.ProviderBase",
+  "allDeclaredFields":true,
+  "allDeclaredMethods":true
+},
+{
+  "name":"com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider",
+  "allDeclaredFields":true,
+  "allDeclaredMethods":true
+},
+{
+  "name":"com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider",
+  "allDeclaredFields":true,
+  "allDeclaredMethods":true
+},
+{
+  "name":"io.quarkus.resteasy.jackson.runtime.QuarkusObjectMapperContextResolver",
+  "allDeclaredFields":true,
+  "allDeclaredMethods":true,
+  "allPublicConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.quarkus.resteasy.runtime.ResteasyFilter",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.quarkus.resteasy.runtime.RolesFilterRegistrar",
+  "allDeclaredFields":true,
+  "allDeclaredMethods":true,
+  "allPublicConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.quarkus.resteasy.server.common.runtime.QuarkusInjectorFactory",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.quarkus.smallrye.openapi.runtime.OpenApiServlet"
+},
+{
+  "name":"io.quarkus.undertow.runtime.HttpSessionContext",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.quarkus.undertow.runtime.QuarkusErrorServlet",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.smallrye.config.ImplicitConverters",
+  "methods":[{"name":"getConverter","parameterTypes":["java.lang.Class"] }]
+},
+{
+  "name":"io.smallrye.config.SmallRyeConfigBuilder",
+  "methods":[{"name":"getConverterType","parameterTypes":["java.lang.Class"] }]
+},
+{
+  "name":"io.undertow.UndertowLogger_$logger",
+  "methods":[{"name":"<init>","parameterTypes":["org.jboss.logging.Logger"] }]
+},
+{
+  "name":"io.undertow.server.protocol.http.HttpRequestParser$$generated",
+  "methods":[{"name":"<init>","parameterTypes":["org.xnio.OptionMap"] }]
+},
+{
+  "name":"io.undertow.servlet.handlers.DefaultServlet",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.undertow.servlet.sse.ServerSentEventSCI",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.undertow.util.FastConcurrentDirectDeque",
+  "fields":[
+    {"name":"head", "allowUnsafeAccess":true}, 
+    {"name":"tail", "allowUnsafeAccess":true}
+  ],
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.undertow.util.FastConcurrentDirectDeque$Node",
+  "fields":[
+    {"name":"item", "allowUnsafeAccess":true}, 
+    {"name":"next", "allowUnsafeAccess":true}, 
+    {"name":"prev", "allowUnsafeAccess":true}
+  ]
+},
+{
+  "name":"io.undertow.util.Headers",
+  "allDeclaredFields":true
+},
+{
+  "name":"io.undertow.util.HttpString",
+  "fields":[{"name":"hashCode"}]
+},
+{
+  "name":"io.undertow.util.Methods",
+  "allDeclaredFields":true
+},
+{
+  "name":"io.undertow.util.Protocols",
+  "allDeclaredFields":true
+},
+{
+  "name":"java.io.File",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.String"] }]
+},
+{
+  "name":"java.io.Serializable",
+  "allDeclaredMethods":true
+},
+{
+  "name":"java.lang.Class",
+  "allDeclaredFields":true,
+  "allDeclaredMethods":true
+},
+{
+  "name":"java.lang.Comparable",
+  "allDeclaredMethods":true
+},
+{
+  "name":"java.lang.Enum",
+  "allDeclaredMethods":true
+},
+{
+  "name":"java.lang.Number",
+  "allDeclaredFields":true,
+  "allDeclaredMethods":true
+},
+{
+  "name":"java.lang.Object",
+  "allDeclaredMethods":true
+},
+{
+  "name":"java.lang.Thread",
+  "fields":[
+    {"name":"contextClassLoader", "allowUnsafeAccess":true}, 
+    {"name":"inheritableThreadLocals", "allowUnsafeAccess":true}, 
+    {"name":"threadLocals", "allowUnsafeAccess":true}
+  ]
+},
+{
+  "name":"java.math.BigDecimal",
+  "allDeclaredFields":true,
+  "allDeclaredMethods":true,
+  "allDeclaredConstructors":true
+},
+{
+  "name":"java.nio.DirectByteBuffer",
+  "methods":[{"name":"cleaner","parameterTypes":[] }]
+},
+{
+  "name":"java.time.DayOfWeek",
+  "allDeclaredFields":true,
+  "allDeclaredMethods":true
+},
+{
+  "name":"java.time.Duration",
+  "allDeclaredFields":true,
+  "allDeclaredMethods":true,
+  "allDeclaredConstructors":true
+},
+{
+  "name":"java.time.Instant",
+  "allDeclaredFields":true,
+  "allDeclaredMethods":true,
+  "allDeclaredConstructors":true
+},
+{
+  "name":"java.time.LocalDateTime",
+  "allDeclaredFields":true,
+  "allDeclaredMethods":true,
+  "allDeclaredConstructors":true
+},
+{
+  "name":"java.time.LocalTime",
+  "allDeclaredFields":true,
+  "allDeclaredMethods":true,
+  "allDeclaredConstructors":true
+},
+{
+  "name":"java.time.Month",
+  "allDeclaredFields":true,
+  "allDeclaredMethods":true
+},
+{
+  "name":"java.time.OffsetDateTime",
+  "allDeclaredFields":true,
+  "allDeclaredMethods":true,
+  "allDeclaredConstructors":true
+},
+{
+  "name":"java.time.ZoneId",
+  "allDeclaredFields":true,
+  "allDeclaredMethods":true
+},
+{
+  "name":"java.time.ZoneOffset",
+  "allDeclaredFields":true,
+  "allDeclaredMethods":true,
+  "allDeclaredConstructors":true
+},
+{
+  "name":"java.time.chrono.ChronoLocalDateTime",
+  "allDeclaredMethods":true
+},
+{
+  "name":"java.time.temporal.Temporal",
+  "allDeclaredMethods":true
+},
+{
+  "name":"java.time.temporal.TemporalAccessor",
+  "allDeclaredMethods":true
+},
+{
+  "name":"java.time.temporal.TemporalAdjuster",
+  "allDeclaredMethods":true
+},
+{
+  "name":"java.time.temporal.TemporalAmount",
+  "allDeclaredMethods":true
+},
+{
+  "name":"java.time.zone.ZoneOffsetTransition",
+  "allDeclaredFields":true,
+  "allDeclaredMethods":true,
+  "allDeclaredConstructors":true
+},
+{
+  "name":"java.time.zone.ZoneOffsetTransitionRule",
+  "allDeclaredFields":true,
+  "allDeclaredMethods":true,
+  "allDeclaredConstructors":true
+},
+{
+  "name":"java.time.zone.ZoneOffsetTransitionRule$TimeDefinition",
+  "allDeclaredFields":true,
+  "allDeclaredMethods":true
+},
+{
+  "name":"java.time.zone.ZoneRules",
+  "allDeclaredFields":true,
+  "allDeclaredMethods":true,
+  "allDeclaredConstructors":true
+},
+{
+  "name":"java.util.ArrayList",
+  "allDeclaredMethods":true,
+  "allDeclaredConstructors":true
+},
+{
+  "name":"java.util.HashSet",
+  "allDeclaredMethods":true,
+  "allDeclaredConstructors":true
+},
+{
+  "name":"java.util.LinkedHashMap",
+  "allDeclaredMethods":true,
+  "allDeclaredConstructors":true
+},
+{
+  "name":"javax.enterprise.inject.Default",
+  "allDeclaredMethods":true
+},
+{
+  "name":"javax.ws.rs.core.NoContentException",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.String"] }]
+},
+{
+  "name":"org.apache.commons.logging.LogFactory"
+},
+{
+  "name":"org.apache.commons.logging.impl.JBossLogFactory",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.commons.logging.impl.WeakHashtable",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.apache.http.client.config.RequestConfig$Builder",
+  "methods":[{"name":"setNormalizeUri","parameterTypes":["boolean"] }]
+},
+{
+  "name":"org.jboss.logmanager.LogManager"
+},
+{
+  "name":"org.jboss.logmanager.Logger$AttachmentKey"
+},
+{
+  "name":"org.jboss.resteasy.context.ContextFeature",
+  "allDeclaredFields":true,
+  "allDeclaredMethods":true,
+  "allPublicConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.jboss.resteasy.core.AcceptHeaderByFileSuffixFilter",
+  "allDeclaredFields":true,
+  "allDeclaredMethods":true
+},
+{
+  "name":"org.jboss.resteasy.core.providerfactory.ResteasyProviderFactoryImpl",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.jboss.resteasy.plugins.interceptors.CacheControlFeature",
+  "allDeclaredFields":true,
+  "allDeclaredMethods":true,
+  "allPublicConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.jboss.resteasy.plugins.interceptors.ClientContentEncodingAnnotationFeature",
+  "allDeclaredFields":true,
+  "allDeclaredMethods":true,
+  "allPublicConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.jboss.resteasy.plugins.interceptors.MessageSanitizerContainerResponseFilter",
+  "allDeclaredFields":true,
+  "allDeclaredMethods":true,
+  "allPublicConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.jboss.resteasy.plugins.interceptors.ServerContentEncodingAnnotationFeature",
+  "allDeclaredFields":true,
+  "allDeclaredMethods":true,
+  "allPublicConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.jboss.resteasy.plugins.providers.AbstractEntityProvider",
+  "allDeclaredFields":true,
+  "allDeclaredMethods":true
+},
+{
+  "name":"org.jboss.resteasy.plugins.providers.ByteArrayProvider",
+  "allDeclaredFields":true,
+  "allDeclaredMethods":true,
+  "allPublicConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.jboss.resteasy.plugins.providers.CompletionStageProvider",
+  "allDeclaredFields":true,
+  "allDeclaredMethods":true,
+  "allPublicConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.jboss.resteasy.plugins.providers.DataSourceProvider",
+  "allDeclaredFields":true,
+  "allDeclaredMethods":true,
+  "allPublicConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.jboss.resteasy.plugins.providers.DefaultBooleanWriter",
+  "allDeclaredFields":true,
+  "allDeclaredMethods":true,
+  "allPublicConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.jboss.resteasy.plugins.providers.DefaultNumberWriter",
+  "allDeclaredFields":true,
+  "allDeclaredMethods":true,
+  "allPublicConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.jboss.resteasy.plugins.providers.DefaultTextPlain",
+  "allDeclaredFields":true,
+  "allDeclaredMethods":true,
+  "allPublicConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.jboss.resteasy.plugins.providers.FileProvider",
+  "allDeclaredFields":true,
+  "allDeclaredMethods":true,
+  "allPublicConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.jboss.resteasy.plugins.providers.FileRangeWriter",
+  "allDeclaredFields":true,
+  "allDeclaredMethods":true,
+  "allPublicConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.jboss.resteasy.plugins.providers.InputStreamProvider",
+  "allDeclaredFields":true,
+  "allDeclaredMethods":true,
+  "allPublicConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.jboss.resteasy.plugins.providers.MultiValuedParamConverterProvider",
+  "allDeclaredFields":true,
+  "allDeclaredMethods":true,
+  "allPublicConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.jboss.resteasy.plugins.providers.ReactiveStreamProvider",
+  "allDeclaredFields":true,
+  "allDeclaredMethods":true,
+  "allPublicConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.jboss.resteasy.plugins.providers.ReaderProvider",
+  "allDeclaredFields":true,
+  "allDeclaredMethods":true,
+  "allPublicConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.jboss.resteasy.plugins.providers.StreamingOutputProvider",
+  "allDeclaredFields":true,
+  "allDeclaredMethods":true,
+  "allPublicConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.jboss.resteasy.plugins.providers.StringTextStar",
+  "allDeclaredFields":true,
+  "allDeclaredMethods":true,
+  "allPublicConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.jboss.resteasy.plugins.providers.jackson.PatchMethodFilter",
+  "allDeclaredFields":true,
+  "allDeclaredMethods":true,
+  "allPublicConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.jboss.resteasy.plugins.providers.jackson.ResteasyJackson2Provider",
+  "allDeclaredFields":true,
+  "allDeclaredMethods":true,
+  "allPublicConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.jboss.resteasy.plugins.providers.jackson.UnrecognizedPropertyExceptionHandler",
+  "allDeclaredFields":true,
+  "allDeclaredMethods":true,
+  "allPublicConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.jboss.resteasy.plugins.providers.sse.SseEventOutputProvider",
+  "allDeclaredFields":true,
+  "allDeclaredMethods":true,
+  "allPublicConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.jboss.resteasy.plugins.providers.sse.SseEventSinkInterceptor",
+  "allDeclaredFields":true,
+  "allDeclaredMethods":true,
+  "allPublicConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.jboss.resteasy.resteasy_jaxrs.i18n.LogMessages_$logger",
+  "methods":[{"name":"<init>","parameterTypes":["org.jboss.logging.Logger"] }]
+},
+{
+  "name":"org.jboss.threads.EnhancedQueueExecutor",
+  "fields":[
+    {"name":"activeCount", "allowUnsafeAccess":true}, 
+    {"name":"peakQueueSize", "allowUnsafeAccess":true}, 
+    {"name":"peakThreadCount", "allowUnsafeAccess":true}, 
+    {"name":"queueSize", "allowUnsafeAccess":true}, 
+    {"name":"sequence"}, 
+    {"name":"terminationWaiters", "allowUnsafeAccess":true}
+  ]
+},
+{
+  "name":"org.jboss.threads.EnhancedQueueExecutor$PoolThreadNode",
+  "fields":[{"name":"task", "allowUnsafeAccess":true}]
+},
+{
+  "name":"org.jboss.threads.EnhancedQueueExecutor$QNode",
+  "fields":[{"name":"next", "allowUnsafeAccess":true}]
+},
+{
+  "name":"org.jboss.threads.EnhancedQueueExecutorBase1",
+  "fields":[{"name":"tail", "allowUnsafeAccess":true}]
+},
+{
+  "name":"org.jboss.threads.EnhancedQueueExecutorBase3",
+  "fields":[{"name":"head", "allowUnsafeAccess":true}]
+},
+{
+  "name":"org.jboss.threads.EnhancedQueueExecutorBase5",
+  "fields":[{"name":"threadStatus", "allowUnsafeAccess":true}]
+},
+{
+  "name":"org.jboss.threads.Messages_$logger",
+  "methods":[{"name":"<init>","parameterTypes":["org.jboss.logging.Logger"] }]
+},
+{
+  "name":"org.wildfly.common.lock.SpinLock",
+  "fields":[{"name":"owner", "allowUnsafeAccess":true}]
+},
+{
+  "name":"org.xnio._private.Messages_$logger",
+  "methods":[{"name":"<init>","parameterTypes":["org.jboss.logging.Logger"] }]
+},
+{
+  "name":"solid.humank.coffeeshop.order.controllers.OrderResource",
+  "allDeclaredFields":true,
+  "allDeclaredMethods":true,
+  "allPublicMethods":true,
+  "allDeclaredConstructors":true,
+  "allPublicConstructors":true
+},
+{
+  "name":"solid.humank.coffeeshop.order.datacontracts.results.OrderItemRst",
+  "allDeclaredFields":true,
+  "allDeclaredMethods":true,
+  "allDeclaredConstructors":true
+},
+{
+  "name":"solid.humank.coffeeshop.order.datacontracts.results.OrderRst",
+  "allDeclaredFields":true,
+  "allDeclaredMethods":true,
+  "allDeclaredConstructors":true
+},
+{
+  "name":"solid.humank.coffeeshop.order.models.OrderItem",
+  "allDeclaredFields":true,
+  "allDeclaredMethods":true,
+  "allDeclaredConstructors":true
+},
+{
+  "name":"solid.humank.coffeeshop.order.models.requests.AddOrderReq",
+  "allDeclaredFields":true,
+  "allDeclaredMethods":true,
+  "allDeclaredConstructors":true
+},
+{
+  "name":"solid.humank.coffeeshop.order.models.requestsmodels.OrderItemRM",
+  "allDeclaredFields":true,
+  "allDeclaredMethods":true,
+  "allDeclaredConstructors":true
+},
+{
+  "name":"solid.humank.ddd.commons.baseclasses.ValueObject",
+  "allDeclaredFields":true,
+  "allDeclaredMethods":true
+},
+{
+  "name":"sun.misc.Cleaner",
+  "methods":[{"name":"clean","parameterTypes":[] }]
+},
+{
+  "name":"sun.misc.Unsafe",
+  "fields":[{"name":"theUnsafe"}]
+}
+]
