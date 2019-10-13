@@ -1,7 +1,7 @@
 AWSTemplateFormatVersion: '2010-09-09'
-Transform: 'AWS::Serverless-2016-10-31'
+Transform: AWS::Serverless-2016-10-31
 Resources:
-  OrderFunction:
+  AcceptOrderFunction:
     Type: 'AWS::Serverless::Function'
     Properties:
       Runtime: java8
@@ -21,7 +21,9 @@ Resources:
             Method: post
 
 Outputs:
-  TestOrderUrl:
-    Description: "Test Order URL"
-    Value:
-      'Fn::Sub': "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/order"
+  AcceptOrderUrl:
+    Description: "Accept Order created event URL"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/order"
+  AcceptOrderFunction:
+    Description: "Hello World Lambda Function ARN"
+    Value: !GetAtt AcceptOrderFunction.Arn
