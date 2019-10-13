@@ -15,6 +15,7 @@ public abstract class Entity<T extends EntityId> {
     T id;
 
     private boolean suppressEvent = false;
+    @Getter(AccessLevel.PUBLIC)
     protected List<DomainEvent<? extends EntityId>> domainEvents = new ArrayList<>();
 
     protected void applyEvent(DomainEvent<T> event) {

@@ -9,7 +9,10 @@ import solid.humank.coffeeshop.order.models.requests.AddOrderReq;
 import solid.humank.coffeeshop.order.models.requestsmodels.OrderItemRM;
 
 import javax.inject.Inject;
-import javax.ws.rs.*;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
@@ -21,12 +24,7 @@ public class OrderResource {
     @Inject
     CreateOrderSvc service;
 
-    public OrderResource(){}
-
-    @GET
-    @Produces(MediaType.TEXT_PLAIN)
-    public String sayHello() {
-        return "hello 12000";
+    public OrderResource() {
     }
 
     @POST
@@ -36,19 +34,18 @@ public class OrderResource {
 
         CreateOrderMsg cmd = new CreateOrderMsg("0", this.transformToOrderItemVM(request.getItems()));
         OrderRst orderRst = null;
-        String err=null;
+        String err = null;
         try {
             orderRst = service.establishOrder(cmd);
         } catch (AggregateException e) {
             e.printStackTrace();
             err = e.getMessage();
         }
-        if(err !=null){
-            return Response.ok(err).build();
-        }else{
-            return Response.ok(orderRst).build();
-        }
 
+        if (err == null) {
+            return Response.ok(orderRst).status(Response.Status.CREATED).build();
+        }
+        return Response.ok(err).build();
     }
 
     private List<OrderItemRst> transformToOrderItemVM(List<OrderItemRM> items) {

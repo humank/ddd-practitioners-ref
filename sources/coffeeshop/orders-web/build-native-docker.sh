@@ -4,7 +4,7 @@ USER_ID=$(aws sts get-caller-identity | jq -r '.Account')
 REGION=$(aws configure get region)
 
 # Build regular Java Jar file and Native binary
-mvn clean package -DskipTests=true -Dnative=true -Dnative-image.docker-build=true
+# mvn clean package -DskipTests=true -Dnative=true -Dnative-image.docker-build=true
 
 # Docker Build
 docker build -f Dockerfile.native -t solid-humank-coffeeshop/orders-web .

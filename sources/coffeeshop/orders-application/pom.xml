@@ -9,7 +9,6 @@
     <artifactId>orders-application</artifactId>
     <packaging>jar</packaging>
 
-
     <dependencies>
         <dependency>
             <groupId>solid.humank</groupId>
@@ -21,11 +20,6 @@
             <artifactId>orders-domain</artifactId>
             <version>1.0</version>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>com.amazonaws</groupId>-->
-<!--            <artifactId>aws-lambda-java-core</artifactId>-->
-<!--            <version>1.2.0</version>-->
-<!--        </dependency>-->
         <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-smallrye-openapi</artifactId>
@@ -36,16 +30,6 @@
             <artifactId>quarkus-amazon-dynamodb</artifactId>
             <version>${quarkus.version}</version>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>io.quarkus</groupId>-->
-<!--            <artifactId>quarkus-amazon-lambda</artifactId>-->
-<!--            <version>${quarkus.version}</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>io.quarkus</groupId>-->
-<!--            <artifactId>quarkus-resteasy-jackson</artifactId>-->
-<!--            <version>${quarkus.version}</version>-->
-<!--        </dependency>-->
     </dependencies>
     <build>
         <plugins>

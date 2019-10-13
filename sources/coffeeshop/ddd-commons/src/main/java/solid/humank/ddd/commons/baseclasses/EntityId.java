@@ -1,14 +1,11 @@
 package solid.humank.ddd.commons.baseclasses;
 
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
 
 public abstract class EntityId extends ValueObject<EntityId> {
 

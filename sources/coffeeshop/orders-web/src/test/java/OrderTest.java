@@ -31,6 +31,6 @@ public class OrderTest {
                 .when().post("/order")
                 .then()
                 .assertThat()
-                .statusCode(200);
+                .statusCode(201);
     }
 }

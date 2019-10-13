@@ -1,10 +1,11 @@
 package solid.humank.coffeeshop.order.applications;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import solid.humank.coffeeshop.order.commands.CreateOrder;
 import solid.humank.coffeeshop.order.datacontracts.messages.CreateOrderMsg;
 import solid.humank.coffeeshop.order.datacontracts.results.OrderItemRst;
 import solid.humank.coffeeshop.order.datacontracts.results.OrderRst;
-import solid.humank.coffeeshop.order.domainevents.OrderCreated;
 import solid.humank.coffeeshop.order.domainservices.DomainEventPublisher;
 import solid.humank.coffeeshop.order.exceptions.AggregateException;
 import solid.humank.coffeeshop.order.models.Order;
@@ -22,6 +23,24 @@ import java.util.List;
 
 @ApplicationScoped
 public class CreateOrderSvc implements Serializable {
+
+    //TODO
+
+    /**
+     * 咖啡師 會接受訂單，並且開始依照訂單上的產品去冰箱取得原物料
+     * 咖啡師會定期更新訂單狀態
+     *
+     * 所以咖啡師和訂單的BC是Partner關係
+     * 訂單不會直接影響到庫存
+     * 這邊你寫在哪?
+     * 但是咖啡師取冰箱的時候，如果已經不足，會去同步取/扣庫存
+     *
+     * Producer --> Event <-- Consumer
+     * OrderDomain |OrderCreated | Coffee to accept the order
+     * Coffee      |OrderAccepted|
+     */
+
+    Logger logger = LoggerFactory.getLogger(CreateOrderSvc.class);
 
     public CreateOrderSvc() {
     }
@@ -43,13 +62,14 @@ public class CreateOrderSvc implements Serializable {
 
         OrderId id = this.repository.generateOrderId();
         List<OrderItem> items = translator.translate(request.getItems());
+
         CreateOrder cmd = new CreateOrder(id, request.getTableNo(), OrderStatus.INITIAL, items);
         Order createdOrder = Order.create(cmd);
+
         this.repository.save(createdOrder);
 
-        domainEventPublisher.publish(new OrderCreated<>(id, request.getTableNo(), items, createdOrder.getCreatedDate()));
+        domainEventPublisher.publish(createdOrder.getDomainEvents());
 
         return new OrderRst(createdOrder);
-
     }
 }

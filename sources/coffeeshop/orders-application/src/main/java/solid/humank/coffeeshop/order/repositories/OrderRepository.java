@@ -19,13 +19,14 @@ import java.time.OffsetDateTime;
 //public class OrderRepository implements IOrderRepository {
 public class OrderRepository implements Serializable {
     final private String tableName = "Order";
-    final AmazonDynamoDB client = AmazonDynamoDBClientBuilder.standard().build();
-    final DynamoDB ddb = new DynamoDB(client);
+    AmazonDynamoDB client;
+    DynamoDB ddb;
 
     //private IRepository<Order, OrderId> repository;
 
     public OrderRepository() {
-
+        client = AmazonDynamoDBClientBuilder.standard().build();
+        ddb = new DynamoDB(client);
     }
 
 //    public OrderRepository(IRepository<Order, OrderId> repository) {
