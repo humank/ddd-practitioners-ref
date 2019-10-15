@@ -1,5 +1,7 @@
 package solid.humank.coffeeshop.order.controllers;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import solid.humank.coffeeshop.order.applications.CreateOrderSvc;
 import solid.humank.coffeeshop.order.datacontracts.messages.CreateOrderMsg;
 import solid.humank.coffeeshop.order.datacontracts.results.OrderItemRst;
@@ -32,7 +34,12 @@ public class OrderResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response createOrder(AddOrderReq request) {
 
+        Logger logger = LoggerFactory.getLogger(OrderResource.class);
+
         CreateOrderMsg cmd = new CreateOrderMsg("0", this.transformToOrderItemVM(request.getItems()));
+
+        logger.info(cmd.toString());
+
         OrderRst orderRst = null;
         String err = null;
         try {
