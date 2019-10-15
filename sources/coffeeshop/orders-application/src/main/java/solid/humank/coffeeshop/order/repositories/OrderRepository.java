@@ -2,6 +2,8 @@ package solid.humank.coffeeshop.order.repositories;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
@@ -53,13 +55,15 @@ public class OrderRepository implements Serializable {
     public Order save(Order order) {
 
         ObjectMapper mapper = new ObjectMapper();
-        String orderItemsJson = "default-json";
-        try {
-            orderItemsJson = mapper.writeValueAsString(order.getOrderItems());
-            logger.info("orderItemsJson is : " + orderItemsJson);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
+        Gson gson = new GsonBuilder().create();
+
+        String orderItemsJson = gson.toJson(order.getOrderItems());
+//        try {
+//            orderItemsJson = mapper.writeValueAsString(order.getOrderItems());
+//            logger.info("orderItemsJson is : " + orderItemsJson);
+//        } catch (JsonProcessingException e) {
+//            e.printStackTrace();
+//        }
 
         HashMap<String, AttributeValue> item_values = new HashMap<String, AttributeValue>();
 
@@ -68,7 +72,7 @@ public class OrderRepository implements Serializable {
         item_values.put("orderStatus", AttributeValue.builder().n(String.valueOf(order.getStatus().getValue())).build());
         item_values.put("items", AttributeValue.builder().s(orderItemsJson).build());
 
-        logger.info("item_values.get(\"items\") is : "+ item_values.get("items"));
+        logger.info("item_values.get(\"items\") is : " + item_values.get("items"));
 
         item_values.put("totalFee", AttributeValue.builder().n(String.valueOf(order.totalFee())).build());
         item_values.put("createDate", AttributeValue.builder().s(order.createdDateString()).build());
