@@ -16,5 +16,11 @@
             <artifactId>ddd-commons</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>2.10.0.pr2</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 </project>

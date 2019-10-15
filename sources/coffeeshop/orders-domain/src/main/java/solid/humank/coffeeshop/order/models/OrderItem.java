@@ -1,5 +1,6 @@
 package solid.humank.coffeeshop.order.models;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
