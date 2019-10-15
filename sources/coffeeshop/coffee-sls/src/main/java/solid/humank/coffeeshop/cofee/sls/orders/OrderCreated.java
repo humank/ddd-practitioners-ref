@@ -1,5 +1,6 @@
 package solid.humank.coffeeshop.cofee.sls.orders;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import solid.humank.ddd.commons.baseclasses.DomainEvent;
@@ -10,6 +11,7 @@ import java.util.List;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class OrderCreated<OrderId extends EntityId> extends DomainEvent<OrderId> {
 
     OrderId orderId;
