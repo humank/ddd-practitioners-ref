@@ -30,11 +30,11 @@
         <!--            <groupId>com.amazonaws</groupId>-->
         <!--            <artifactId>aws-java-sdk-events</artifactId>-->
         <!--        </dependency>-->
-        <dependency>
-            <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-smallrye-openapi</artifactId>
-            <version>${quarkus.version}</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>io.quarkus</groupId>-->
+<!--            <artifactId>quarkus-smallrye-openapi</artifactId>-->
+<!--            <version>${quarkus.version}</version>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-amazon-dynamodb</artifactId>

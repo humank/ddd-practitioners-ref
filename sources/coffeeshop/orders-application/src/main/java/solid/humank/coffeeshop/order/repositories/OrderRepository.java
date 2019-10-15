@@ -1,7 +1,5 @@
 package solid.humank.coffeeshop.order.repositories;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.slf4j.Logger;
@@ -56,20 +54,13 @@ public class OrderRepository implements Serializable {
         Gson gson = new GsonBuilder().create();
 
         String orderItemsJson = gson.toJson(order.getOrderItems());
-//        try {
-//            orderItemsJson = mapper.writeValueAsString(order.getOrderItems());
-//            logger.info("orderItemsJson is : " + orderItemsJson);
-//        } catch (JsonProcessingException e) {
-//            e.printStackTrace();
-//        }
-
         HashMap<String, AttributeValue> item_values = new HashMap<String, AttributeValue>();
 
         item_values.put("seqNo", AttributeValue.builder().n(String.valueOf(order.getId().getSeqNo())).build());
         item_values.put("tableNo", AttributeValue.builder().n(order.getTableNo()).build());
         item_values.put("orderStatus", AttributeValue.builder().n(String.valueOf(order.getStatus().getValue())).build());
-        //item_values.put("items", AttributeValue.builder().s(orderItemsJson).build());
-        item_values.put("items", AttributeValue.builder().s("[{\"productId\":\"123\",\"qty\":2,\"price\":200}]").build());
+        item_values.put("items", AttributeValue.builder().s(orderItemsJson).build());
+        //item_values.put("items", AttributeValue.builder().s("[{\"productId\":\"123\",\"qty\":2,\"price\":200}]").build());
         logger.info("item_values.get(\"items\") is : " + item_values.get("items"));
 
         item_values.put("totalFee", AttributeValue.builder().n(String.valueOf(order.totalFee())).build());
