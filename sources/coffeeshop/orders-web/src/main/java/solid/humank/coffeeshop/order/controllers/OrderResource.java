@@ -38,7 +38,8 @@ public class OrderResource {
 
         CreateOrderMsg cmd = new CreateOrderMsg("0", this.transformToOrderItemVM(request.getItems()));
 
-        logger.info(cmd.toString());
+        logger.info("check for something...");
+        logger.info("cmd is :" + cmd.toString());
 
         OrderRst orderRst = null;
         String err = null;

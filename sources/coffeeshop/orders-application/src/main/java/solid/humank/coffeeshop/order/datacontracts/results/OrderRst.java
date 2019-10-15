@@ -1,7 +1,6 @@
 package solid.humank.coffeeshop.order.datacontracts.results;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import solid.humank.coffeeshop.order.models.Order;
 import solid.humank.coffeeshop.order.models.OrderStatus;
 
@@ -10,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-public class OrderRst{
+public class OrderRst {
 
     private List<OrderItemRst> items;
     private int status;

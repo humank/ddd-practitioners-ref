@@ -11,5 +11,6 @@
         </Root>
         <Logger name="software.amazon.awssdk" level="WARN" />
         <Logger name="software.amazon.awssdk.request" level="DEBUG" />
+        <logger name="solid.humank.coffeeshop" level="DEBUG" />
     </Loggers>
 </Configuration>
