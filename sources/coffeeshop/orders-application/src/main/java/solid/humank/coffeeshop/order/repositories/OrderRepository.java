@@ -64,7 +64,7 @@ public class OrderRepository implements Serializable {
         item_values.put("seqNo", AttributeValue.builder().n(String.valueOf(order.getId().getSeqNo())).build());
         item_values.put("tableNo", AttributeValue.builder().n(String.valueOf(order.getId().getSeqNo())).build());
         item_values.put("orderStatus", AttributeValue.builder().n(String.valueOf(order.getStatus().getValue())).build());
-        item_values.put("items", AttributeValue.builder().n(orderItemsJson).build());
+        item_values.put("items", AttributeValue.builder().s(orderItemsJson).build());
         item_values.put("totalFee", AttributeValue.builder().n(String.valueOf(order.totalFee())).build());
         item_values.put("createDate", AttributeValue.builder().s(order.createdDateString()).build());
         item_values.put("modifyDate", AttributeValue.builder().s(order.modifiedDateString()).build());
@@ -74,6 +74,7 @@ public class OrderRepository implements Serializable {
                 .tableName(tableName)
                 .item(item_values)
                 .build();
+        ddb.putItem(request);
 
         return order;
     }
