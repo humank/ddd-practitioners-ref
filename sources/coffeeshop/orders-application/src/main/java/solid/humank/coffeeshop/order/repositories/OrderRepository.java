@@ -54,12 +54,15 @@ public class OrderRepository implements Serializable {
         Gson gson = new GsonBuilder().create();
 
         String orderItemsJson = gson.toJson(order.getOrderItems());
+
+        logger.info("orderItemsJson is:" + orderItemsJson);
         HashMap<String, AttributeValue> item_values = new HashMap<String, AttributeValue>();
 
         item_values.put("seqNo", AttributeValue.builder().n(String.valueOf(order.getId().getSeqNo())).build());
         item_values.put("tableNo", AttributeValue.builder().n(order.getTableNo()).build());
         item_values.put("orderStatus", AttributeValue.builder().n(String.valueOf(order.getStatus().getValue())).build());
         item_values.put("items", AttributeValue.builder().s(orderItemsJson).build());
+
         //item_values.put("items", AttributeValue.builder().s("[{\"productId\":\"123\",\"qty\":2,\"price\":200}]").build());
         logger.info("item_values.get(\"items\") is : " + item_values.get("items"));
 
