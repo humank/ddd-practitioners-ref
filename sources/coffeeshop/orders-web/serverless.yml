@@ -7,7 +7,7 @@ provider:
   endpointType: REGIONAL
   stage: dev
   region: us-west-2
-  timeout: 300
+  timeout: 10
   tracing:
     apiGateway: true
     lambda: true
@@ -28,14 +28,8 @@ package:
   artifact: target/bundle/function.zip
 
 functions:
-  hello:
+  orderprocessor:
     handler: function.sh
     events:
       - http: ANY /
       - http: 'ANY {proxy+}'
-    layers:
-      - {Ref: GraalvmSecurityLambdaLayer}
-
-layers:
-  GraalvmSecurity:
-    path: lambda-layer 

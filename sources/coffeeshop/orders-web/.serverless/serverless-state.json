@@ -11,7 +11,7 @@
       "runtime": "provided",
       "endpointType": "REGIONAL",
       "region": "us-west-2",
-      "timeout": 300,
+      "timeout": 30,
       "tracing": {
         "apiGateway": true,
         "lambda": true
@@ -53,10 +53,10 @@
               }
             }
           },
-          "HelloLogGroup": {
+          "OrderprocessorLogGroup": {
             "Type": "AWS::Logs::LogGroup",
             "Properties": {
-              "LogGroupName": "/aws/lambda/order-created-event-handler-dev-hello"
+              "LogGroupName": "/aws/lambda/order-created-event-handler-dev-orderprocessor"
             }
           },
           "IamRoleLambdaExecution": {
@@ -148,28 +148,16 @@
               }
             }
           },
-          "GraalvmSecurityLambdaLayer": {
-            "Type": "AWS::Lambda::LayerVersion",
-            "Properties": {
-              "Content": {
-                "S3Bucket": {
-                  "Ref": "ServerlessDeploymentBucket"
-                },
-                "S3Key": "serverless/order-created-event-handler/dev/1571103817827-2019-10-15T01:43:37.827Z/GraalvmSecurity.zip"
-              },
-              "LayerName": "GraalvmSecurity"
-            }
-          },
-          "HelloLambdaFunction": {
+          "OrderprocessorLambdaFunction": {
             "Type": "AWS::Lambda::Function",
             "Properties": {
               "Code": {
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/order-created-event-handler/dev/1571103817827-2019-10-15T01:43:37.827Z/function.zip"
+                "S3Key": "serverless/order-created-event-handler/dev/1571148564809-2019-10-15T14:09:24.809Z/function.zip"
               },
-              "FunctionName": "order-created-event-handler-dev-hello",
+              "FunctionName": "order-created-event-handler-dev-orderprocessor",
               "Handler": "function.sh",
               "MemorySize": 1024,
               "Role": {
@@ -179,29 +167,24 @@
                 ]
               },
               "Runtime": "provided",
-              "Timeout": 300,
+              "Timeout": 30,
               "TracingConfig": {
                 "Mode": "Active"
-              },
-              "Layers": [
-                {
-                  "Ref": "GraalvmSecurityLambdaLayer"
-                }
-              ]
+              }
             },
             "DependsOn": [
-              "HelloLogGroup",
+              "OrderprocessorLogGroup",
               "IamRoleLambdaExecution"
             ]
           },
-          "HelloLambdaVersionc9evaf8qN5WZLfB93ujN6qd1B9N7usQgWongmaSGs": {
+          "OrderprocessorLambdaVersionwp8KRcu6sMv8sPqj1cpBGzP6WnzGX1iLOOTv2oHLKHY": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
-                "Ref": "HelloLambdaFunction"
+                "Ref": "OrderprocessorLambdaFunction"
               },
-              "CodeSha256": "WhL+h4eDQyPk76hjiAeQ7h+Xndx/fRX0kJ0ma5s7Mig="
+              "CodeSha256": "7t+SSXDJzXjOOQB7RMNOlodgS2dplMBOWfvKpxTMNLU="
             }
           },
           "ApiGatewayRestApi": {
@@ -264,7 +247,7 @@
                       ":lambda:path/2015-03-31/functions/",
                       {
                         "Fn::GetAtt": [
-                          "HelloLambdaFunction",
+                          "OrderprocessorLambdaFunction",
                           "Arn"
                         ]
                       },
@@ -307,7 +290,7 @@
                       ":lambda:path/2015-03-31/functions/",
                       {
                         "Fn::GetAtt": [
-                          "HelloLambdaFunction",
+                          "OrderprocessorLambdaFunction",
                           "Arn"
                         ]
                       },
@@ -319,7 +302,7 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayDeployment1571103817255": {
+          "ApiGatewayDeployment1571148564333": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -332,12 +315,12 @@
               "ApiGatewayMethodProxyVarAny"
             ]
           },
-          "HelloLambdaPermissionApiGateway": {
+          "OrderprocessorLambdaPermissionApiGateway": {
             "Type": "AWS::Lambda::Permission",
             "Properties": {
               "FunctionName": {
                 "Fn::GetAtt": [
-                  "HelloLambdaFunction",
+                  "OrderprocessorLambdaFunction",
                   "Arn"
                 ]
               },
@@ -376,16 +359,10 @@
               "Ref": "ServerlessDeploymentBucket"
             }
           },
-          "GraalvmSecurityLambdaLayerQualifiedArn": {
-            "Description": "Current Lambda layer version",
-            "Value": {
-              "Ref": "GraalvmSecurityLambdaLayer"
-            }
-          },
-          "HelloLambdaFunctionQualifiedArn": {
+          "OrderprocessorLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "HelloLambdaVersionc9evaf8qN5WZLfB93ujN6qd1B9N7usQgWongmaSGs"
+              "Ref": "OrderprocessorLambdaVersionwp8KRcu6sMv8sPqj1cpBGzP6WnzGX1iLOOTv2oHLKHY"
             }
           },
           "ServiceEndpoint": {
@@ -444,7 +421,7 @@
     },
     "pluginsData": {},
     "functions": {
-      "hello": {
+      "orderprocessor": {
         "handler": "function.sh",
         "events": [
           {
@@ -454,15 +431,10 @@
             "http": "ANY {proxy+}"
           }
         ],
-        "layers": [
-          {
-            "Ref": "GraalvmSecurityLambdaLayer"
-          }
-        ],
-        "name": "order-created-event-handler-dev-hello",
+        "name": "order-created-event-handler-dev-orderprocessor",
         "package": {},
         "memory": 1024,
-        "timeout": 300,
+        "timeout": 30,
         "runtime": "provided",
         "vpc": {}
       }
@@ -470,17 +442,10 @@
     "serviceFilename": "serverless.yml",
     "tenant": "yikaikao",
     "org": "yikaikao",
-    "layers": {
-      "GraalvmSecurity": {
-        "path": "lambda-layer",
-        "package": {
-          "artifact": "/home/ec2-user/environment/EventStormingWorkShop/sources/coffeeshop/orders-web/.serverless/GraalvmSecurity.zip"
-        }
-      }
-    }
+    "layers": {}
   },
   "package": {
-    "artifactDirectoryName": "serverless/order-created-event-handler/dev/1571103817827-2019-10-15T01:43:37.827Z",
+    "artifactDirectoryName": "serverless/order-created-event-handler/dev/1571148564809-2019-10-15T14:09:24.809Z",
     "artifact": "function.zip"
   }
 }
