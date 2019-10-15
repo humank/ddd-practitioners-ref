@@ -1,5 +1,6 @@
 package solid.humank.coffeeshop.order.datacontracts.results;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import lombok.Data;
 import solid.humank.coffeeshop.order.models.Order;
 import solid.humank.coffeeshop.order.models.OrderStatus;
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class OrderRst {
 
     private List<OrderItemRst> items;

@@ -1,5 +1,10 @@
 package solid.humank.coffeeshop.order.datacontracts.messages;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import lombok.Data;
+
+@Data
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class OrderReadModel {
 
     public OrderReadModel(String orderString) {
