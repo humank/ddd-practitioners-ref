@@ -1,15 +1,13 @@
 package solid.humank.coffeeshop.order.models;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import solid.humank.ddd.commons.baseclasses.ValueObject;
 
 import java.math.BigDecimal;
 
 @Data
+@EqualsAndHashCode(callSuper = false)
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class OrderItem extends ValueObject<OrderItem> {
 
