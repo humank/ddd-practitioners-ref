@@ -1,27 +1,5 @@
 package solid.humank.coffeeshop.infra.repositories;
 
-import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
-import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
-import com.amazonaws.services.dynamodbv2.document.*;
-import com.amazonaws.services.dynamodbv2.document.spec.DeleteItemSpec;
-import com.amazonaws.services.dynamodbv2.document.spec.GetItemSpec;
-import com.amazonaws.services.dynamodbv2.document.spec.PutItemSpec;
-import com.amazonaws.services.dynamodbv2.document.spec.UpdateItemSpec;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import solid.humank.ddd.commons.baseclasses.AggregateRoot;
-import solid.humank.ddd.commons.baseclasses.EntityId;
-import solid.humank.ddd.commons.baseclasses.Specification;
-import solid.humank.ddd.commons.interfaces.IRepository;
-import solid.humank.ddd.commons.interfaces.ISelector;
-
-import java.beans.BeanInfo;
-import java.beans.IntrospectionException;
-import java.beans.Introspector;
-import java.beans.PropertyDescriptor;
-import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.util.function.Supplier;
-
 // due to ddb need to specify each data structure before crud actions,
 // soe need to leave the 4 interfaces as parameter from outside.
 //        PutItemSpec
@@ -30,7 +8,7 @@ import java.util.function.Supplier;
 //        UpdateItemSpec
 
 //public class DDBRepositoryBase<T extends AggregateRoot, U extends EntityId> implements IRepository<T, U> {
-    public class DDBRepositoryBase {
+public class DDBRepositoryBase {
 //    final AmazonDynamoDB client = AmazonDynamoDBClientBuilder.standard().build();
 //    final DynamoDB dynamoDB = new DynamoDB(client);
 //    final ItemConfig config;

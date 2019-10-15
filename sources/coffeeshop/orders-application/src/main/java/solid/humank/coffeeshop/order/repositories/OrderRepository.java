@@ -1,32 +1,29 @@
 package solid.humank.coffeeshop.order.repositories;
 
-import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
-import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
-import com.amazonaws.services.dynamodbv2.document.DynamoDB;
-import com.amazonaws.services.dynamodbv2.document.Item;
-import com.amazonaws.services.dynamodbv2.document.Table;
-import com.amazonaws.services.dynamodbv2.model.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
+import software.amazon.awssdk.services.dynamodb.model.*;
 import solid.humank.coffeeshop.order.models.Order;
 import solid.humank.coffeeshop.order.models.OrderId;
 
 import javax.enterprise.context.Dependent;
 import java.io.Serializable;
 import java.time.OffsetDateTime;
+import java.util.HashMap;
 
 @Dependent
 //public class OrderRepository implements IOrderRepository {
 public class OrderRepository implements Serializable {
     final private String tableName = "Order";
-    AmazonDynamoDB client;
-    DynamoDB ddb;
+    DynamoDbClient ddb;
+
 
     //private IRepository<Order, OrderId> repository;
 
     public OrderRepository() {
-        client = AmazonDynamoDBClientBuilder.standard().build();
-        ddb = new DynamoDB(client);
+        ddb = DynamoDbClient.create();
+
     }
 
 //    public OrderRepository(IRepository<Order, OrderId> repository) {
@@ -53,7 +50,6 @@ public class OrderRepository implements Serializable {
         //return this.repository.create(order);
 
         //DDB的實作如下
-        Table table = ddb.getTable(tableName);
 
         ObjectMapper mapper = new ObjectMapper();
         String orderItemsJson = "default-json";
@@ -62,28 +58,38 @@ public class OrderRepository implements Serializable {
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
-        Item item = new Item()
-                .withPrimaryKey("seqNo", order.getId().getSeqNo())
-                .withString("tableNo", order.getTableNo())
-                .withNumber("orderStatus", order.getStatus().getValue())
-                .withString("items",  orderItemsJson)
-                .withNumber("totalFee", order.totalFee())
-                .withString("createDate", order.createdDateString())
-                .withString("modifyDate", order.modifiedDateString());
 
-        table.putItem(item);
+        HashMap<String, AttributeValue> item_values = new HashMap<String, AttributeValue>();
+
+        item_values.put("seqNo", AttributeValue.builder().n(String.valueOf(order.getId().getSeqNo())).build());
+        item_values.put("tableNo", AttributeValue.builder().n(String.valueOf(order.getId().getSeqNo())).build());
+        item_values.put("orderStatus", AttributeValue.builder().n(String.valueOf(order.getStatus().getValue())).build());
+        item_values.put("items", AttributeValue.builder().n(orderItemsJson).build());
+        item_values.put("totalFee", AttributeValue.builder().n(String.valueOf(order.totalFee())).build());
+        item_values.put("createDate", AttributeValue.builder().s(order.createdDateString()).build());
+        item_values.put("modifyDate", AttributeValue.builder().s(order.modifiedDateString()).build());
+
+        DynamoDbClient ddb = DynamoDbClient.create();
+        PutItemRequest request = PutItemRequest.builder()
+                .tableName(tableName)
+                .item(item_values)
+                .build();
 
         return order;
     }
 
     public OrderId generateOrderId() {
-        AmazonDynamoDB cc = AmazonDynamoDBClientBuilder.standard().build();
-        DynamoDB dd = new DynamoDB(cc);
 
         // Not sure if the scan will cost much. Take an alternative way as query select count
-        ScanRequest scanRequest = new ScanRequest().withTableName(tableName);
-        ScanResult scanResult = client.scan(scanRequest);
-        long currentCount = scanResult.getScannedCount();
+
+        ScanRequest scanRequest = ScanRequest.builder()
+                .tableName(tableName)
+                .select(Select.COUNT)
+                .build();
+
+        ScanResponse scanResponse = ddb.scan(scanRequest);
+        long currentCount = scanResponse.count();
+
         return new OrderId(currentCount + 1, OffsetDateTime.now());
     }
 }
