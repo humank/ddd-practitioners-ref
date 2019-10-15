@@ -7,6 +7,7 @@ import solid.humank.coffeeshop.order.datacontracts.messages.CreateOrderMsg;
 import solid.humank.coffeeshop.order.datacontracts.results.OrderItemRst;
 import solid.humank.coffeeshop.order.datacontracts.results.OrderRst;
 import solid.humank.coffeeshop.order.domainservices.DomainEventPublisher;
+import solid.humank.coffeeshop.order.domainservices.OrderItemsTranslator;
 import solid.humank.coffeeshop.order.exceptions.AggregateException;
 import solid.humank.coffeeshop.order.models.Order;
 import solid.humank.coffeeshop.order.models.OrderId;
@@ -49,7 +50,8 @@ public class CreateOrderSvc implements Serializable {
     public OrderRepository repository;
 
     @Inject
-    public ITranslator<List<OrderItem>, List<OrderItemRst>> translator;
+    //public ITranslator<List<OrderItem>, List<OrderItemRst>> translator;
+    public OrderItemsTranslator translator;
 
     @Inject
     DomainEventPublisher domainEventPublisher;
