@@ -2,6 +2,8 @@ package solid.humank.coffeeshop.order.repositories;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
 import software.amazon.awssdk.services.dynamodb.model.*;
 import solid.humank.coffeeshop.order.models.Order;
@@ -17,6 +19,8 @@ import java.util.HashMap;
 public class OrderRepository implements Serializable {
     final private String tableName = "Order";
     DynamoDbClient ddb;
+
+    Logger logger = LoggerFactory.getLogger(OrderRepository.class);
 
 
     //private IRepository<Order, OrderId> repository;
@@ -47,14 +51,12 @@ public class OrderRepository implements Serializable {
 
 
     public Order save(Order order) {
-        //return this.repository.create(order);
-
-        //DDB的實作如下
 
         ObjectMapper mapper = new ObjectMapper();
         String orderItemsJson = "default-json";
         try {
             orderItemsJson = mapper.writeValueAsString(order.getOrderItems());
+            logger.info("orderItemsJson is : " + orderItemsJson);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
@@ -62,9 +64,12 @@ public class OrderRepository implements Serializable {
         HashMap<String, AttributeValue> item_values = new HashMap<String, AttributeValue>();
 
         item_values.put("seqNo", AttributeValue.builder().n(String.valueOf(order.getId().getSeqNo())).build());
-        item_values.put("tableNo", AttributeValue.builder().n(String.valueOf(order.getId().getSeqNo())).build());
+        item_values.put("tableNo", AttributeValue.builder().n(order.getTableNo()).build());
         item_values.put("orderStatus", AttributeValue.builder().n(String.valueOf(order.getStatus().getValue())).build());
         item_values.put("items", AttributeValue.builder().s(orderItemsJson).build());
+
+        logger.info("item_values.get(\"items\") is : "+ item_values.get("items"));
+
         item_values.put("totalFee", AttributeValue.builder().n(String.valueOf(order.totalFee())).build());
         item_values.put("createDate", AttributeValue.builder().s(order.createdDateString()).build());
         item_values.put("modifyDate", AttributeValue.builder().s(order.modifiedDateString()).build());
