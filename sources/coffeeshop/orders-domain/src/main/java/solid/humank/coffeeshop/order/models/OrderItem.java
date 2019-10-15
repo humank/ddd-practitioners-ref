@@ -2,15 +2,14 @@ package solid.humank.coffeeshop.order.models;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import solid.humank.ddd.commons.baseclasses.ValueObject;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 
+@Data
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class OrderItem extends ValueObject<OrderItem> {
 
@@ -26,7 +25,7 @@ public class OrderItem extends ValueObject<OrderItem> {
     @Setter(AccessLevel.PRIVATE)
     BigDecimal price;
 
-    public BigDecimal fee(){
+    public BigDecimal fee() {
         return this.price.multiply(BigDecimal.valueOf(qty));
     }
 
