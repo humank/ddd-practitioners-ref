@@ -114,12 +114,7 @@
                                     <enableHttpUrlHandler>true</enableHttpUrlHandler>
                                     <additionalBuildArgs>
                                         <additionalBuildArg>-R:-InstallSegfaultHandler</additionalBuildArg>
-                                        <additionalBuildArg>-H:EnableURLProtocols=http,https</additionalBuildArg>
-                                        <additionalBuildArg>--enable-all-security-services</additionalBuildArg>
-                                        <additionalBuildArg>-H:+JNI</additionalBuildArg>
                                         <additionalBuildArg>-H:-AllowVMInspection</additionalBuildArg>
-                                        <additionalBuildArg>-H:+PrintClassInitialization</additionalBuildArg>
-                                        <additionalBuildArgs>-H:+ReportExceptionStackTraces</additionalBuildArgs>
                                     </additionalBuildArgs>
                                 </configuration>
                             </execution>

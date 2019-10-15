@@ -1,0 +1,41 @@
+org: yikaikao
+service: order-created-event-handler
+
+provider:
+  name: aws
+  runtime: provided
+  endpointType: REGIONAL
+  stage: dev
+  region: us-west-2
+  timeout: 300
+  tracing:
+    apiGateway: true
+    lambda: true
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:*
+        - logs:*
+        - xray:PutTraceSegments
+        - xray:PutTelemetryRecords
+        - xray:GetSamplingRules
+        - xray:GetSamplingTargets
+        - xray:GetSamplingStatisticSummaries
+      Resource:
+        - arn:aws:dynamodb:::*
+
+package:
+  artifact: target/bundle/function.zip
+
+functions:
+  hello:
+    handler: function.sh
+    events:
+      - http: ANY /
+      - http: 'ANY {proxy+}'
+    layers:
+      - {Ref: GraalvmSecurityLambdaLayer}
+
+layers:
+  GraalvmSecurity:
+    path: lambda-layer 
