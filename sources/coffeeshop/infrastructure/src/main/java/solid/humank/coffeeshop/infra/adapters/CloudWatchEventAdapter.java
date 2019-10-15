@@ -23,7 +23,7 @@ public class CloudWatchEventAdapter {
 
     Logger logger = LoggerFactory.getLogger(CloudWatchEventAdapter.class);
 
-    String propFileName = "cloudwatchevents.properties";
+    String propFileName = "META-INF/resources/cloudwatchevents.properties";
 
     public PublishResult publishEvent(DomainEvent occurredEvent) {
         String eventJson = null;
