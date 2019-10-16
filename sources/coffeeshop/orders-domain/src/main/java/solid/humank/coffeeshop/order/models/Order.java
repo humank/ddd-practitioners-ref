@@ -13,6 +13,7 @@
 
 package solid.humank.coffeeshop.order.models;
 
+import io.quarkus.runtime.annotations.RegisterForReflection;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -37,7 +38,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-
+@RegisterForReflection
 public class Order extends AggregateRoot<OrderId> {
 
     final static String ORDER_DATE_FORMAT = "yyyyMMddHHmmss";
