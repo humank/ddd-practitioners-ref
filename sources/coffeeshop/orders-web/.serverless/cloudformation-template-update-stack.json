@@ -123,6 +123,18 @@
         }
       }
     },
+    "GraalvmSecurityLambdaLayer": {
+      "Type": "AWS::Lambda::LayerVersion",
+      "Properties": {
+        "Content": {
+          "S3Bucket": {
+            "Ref": "ServerlessDeploymentBucket"
+          },
+          "S3Key": "serverless/order-created-event-handler/dev/1571237429096-2019-10-16T14:50:29.096Z/GraalvmSecurity.zip"
+        },
+        "LayerName": "GraalvmSecurity"
+      }
+    },
     "OrderprocessorLambdaFunction": {
       "Type": "AWS::Lambda::Function",
       "Properties": {
@@ -130,7 +142,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/order-created-event-handler/dev/1571148564809-2019-10-15T14:09:24.809Z/function.zip"
+          "S3Key": "serverless/order-created-event-handler/dev/1571237429096-2019-10-16T14:50:29.096Z/function.zip"
         },
         "FunctionName": "order-created-event-handler-dev-orderprocessor",
         "Handler": "function.sh",
@@ -142,24 +154,29 @@
           ]
         },
         "Runtime": "provided",
-        "Timeout": 30,
+        "Timeout": 10,
         "TracingConfig": {
           "Mode": "Active"
-        }
+        },
+        "Layers": [
+          {
+            "Ref": "GraalvmSecurityLambdaLayer"
+          }
+        ]
       },
       "DependsOn": [
         "OrderprocessorLogGroup",
         "IamRoleLambdaExecution"
       ]
     },
-    "OrderprocessorLambdaVersionwp8KRcu6sMv8sPqj1cpBGzP6WnzGX1iLOOTv2oHLKHY": {
+    "OrderprocessorLambdaVersiongIn8kGh2F1EuNh1DFX3kxst2FZspmxCIVZsG0YNT34": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "OrderprocessorLambdaFunction"
         },
-        "CodeSha256": "7t+SSXDJzXjOOQB7RMNOlodgS2dplMBOWfvKpxTMNLU="
+        "CodeSha256": "CWStBQSFTrDcUiOE8OvoN8r44zdczCi4Tjo/Y6SLzhA="
       }
     },
     "ApiGatewayRestApi": {
@@ -277,7 +294,7 @@
         "MethodResponses": []
       }
     },
-    "ApiGatewayDeployment1571148564333": {
+    "ApiGatewayDeployment1571237427758": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -334,10 +351,16 @@
         "Ref": "ServerlessDeploymentBucket"
       }
     },
+    "GraalvmSecurityLambdaLayerQualifiedArn": {
+      "Description": "Current Lambda layer version",
+      "Value": {
+        "Ref": "GraalvmSecurityLambdaLayer"
+      }
+    },
     "OrderprocessorLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "OrderprocessorLambdaVersionwp8KRcu6sMv8sPqj1cpBGzP6WnzGX1iLOOTv2oHLKHY"
+        "Ref": "OrderprocessorLambdaVersiongIn8kGh2F1EuNh1DFX3kxst2FZspmxCIVZsG0YNT34"
       }
     },
     "ServiceEndpoint": {

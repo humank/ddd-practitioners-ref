@@ -33,3 +33,9 @@ functions:
     events:
       - http: ANY /
       - http: 'ANY {proxy+}'
+    layers:
+      - {Ref: GraalvmSecurityLambdaLayer}
+
+layers:
+  GraalvmSecurity:
+    path: lambda-layer 
