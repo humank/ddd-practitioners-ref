@@ -6,28 +6,35 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
 import software.amazon.awssdk.services.dynamodb.model.*;
+import solid.humank.coffeeshop.order.interfaces.IOrderRepository;
 import solid.humank.coffeeshop.order.models.Order;
 import solid.humank.coffeeshop.order.models.OrderId;
+import solid.humank.ddd.commons.baseclasses.Specification;
+import solid.humank.ddd.commons.interfaces.IRepository;
 
 import javax.enterprise.context.Dependent;
-import java.io.Serializable;
+import javax.inject.Inject;
 import java.time.OffsetDateTime;
 import java.util.HashMap;
+import java.util.List;
 
 @Dependent
-//public class OrderRepository implements IOrderRepository {
-public class OrderRepository implements Serializable {
+public class OrderRepository implements IOrderRepository {
+
+    @Inject
+    IRepository<Order, OrderId> repository;
+
     final private String tableName = "Order";
     DynamoDbClient ddb;
 
     Logger logger = LoggerFactory.getLogger(OrderRepository.class);
 
-
-    //private IRepository<Order, OrderId> repository;
-
     public OrderRepository() {
         ddb = DynamoDbClient.create();
+    }
 
+    public OrderRepository(IRepository<Order, OrderId> repository) {
+        this.repository = repository;
     }
 
 //    public OrderRepository(IRepository<Order, OrderId> repository) {
@@ -80,7 +87,14 @@ public class OrderRepository implements Serializable {
         return order;
     }
 
+    @Override
+    public List<Order> get(Specification<Order> specification, int pageNo, int pageSize) {
+        return null;
+    }
+
     public OrderId generateOrderId() {
+
+        return new OrderId(this.repository.count(),OffsetDateTime.now());
 
         // Not sure if the scan will cost much. Take an alternative way as query select count
 
@@ -93,5 +107,10 @@ public class OrderRepository implements Serializable {
         long currentCount = scanResponse.count();
 
         return new OrderId(currentCount + 1, OffsetDateTime.now());
+    }
+
+    @Override
+    public Order getBy(OrderId id) {
+        return null;
     }
 }

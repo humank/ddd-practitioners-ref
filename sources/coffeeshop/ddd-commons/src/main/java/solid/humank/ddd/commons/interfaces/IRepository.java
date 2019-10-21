@@ -4,6 +4,7 @@ import solid.humank.ddd.commons.baseclasses.AggregateRoot;
 import solid.humank.ddd.commons.baseclasses.EntityId;
 import solid.humank.ddd.commons.baseclasses.Specification;
 
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 public interface IRepository<T extends AggregateRoot, U extends EntityId> {
@@ -11,17 +12,9 @@ public interface IRepository<T extends AggregateRoot, U extends EntityId> {
     //TODO: find a object for C# Iqueryable<T> collection
     //IQueryable<T> all;
 
+    List<T> all();
+
     T get(U entityId);
-
-    void remove(T aggregateRoot);
-
-    T first(ISelector selector, Specification<U> by);
-
-    T create(T aggregateRoot);
-
-    long count();
-
-    boolean any(Specification<T> by);
 
     /**
      * Just pass a functional interface, leave the most wide dev freedom for builder.
@@ -32,4 +25,26 @@ public interface IRepository<T extends AggregateRoot, U extends EntityId> {
 
     //provide a predefined functional interface method, leave the mandatory method and type constraints to be implemented.
     T get(ISelector selector, Specification<U> by);
+
+    T first(ISelector selector, Specification<U> by);
+
+    boolean any(Specification<T> by);
+
+    long count(Specification<T> by);
+
+    void create(T aggregateRoot);
+
+    int update(T aggregateRoot);
+
+    void remove(T aggregateRoot);
+
+
+
+
+
+
+
+
+
+
 }

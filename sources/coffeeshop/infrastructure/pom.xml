@@ -33,7 +33,11 @@
             <groupId>software.amazon.awssdk</groupId>
             <artifactId>cloudwatchevents</artifactId>
         </dependency>
-<!--        <dependency>-->
+        <dependency>
+            <groupId>software.amazon.awssdk</groupId>
+            <artifactId>dynamodb</artifactId>
+        </dependency>
+        <!--        <dependency>-->
 <!--            <groupId>com.amazonaws</groupId>-->
 <!--            <artifactId>aws-java-sdk-dynamodb</artifactId>-->
 <!--            <version>${aws-java-sdk-bom}</version>-->
