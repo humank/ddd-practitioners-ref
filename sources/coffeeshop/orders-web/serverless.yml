@@ -29,7 +29,7 @@ package:
 
 functions:
   orderprocessor:
-    handler: function.sh
+    handler: orders-web-1.0-SNAPSHOT-runner
     events:
       - http: ANY /
       - http: 'ANY {proxy+}'

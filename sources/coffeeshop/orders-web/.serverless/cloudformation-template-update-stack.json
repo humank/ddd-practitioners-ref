@@ -130,7 +130,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/order-created-event-handler/dev/1571237429096-2019-10-16T14:50:29.096Z/GraalvmSecurity.zip"
+          "S3Key": "serverless/order-created-event-handler/dev/1571244646604-2019-10-16T16:50:46.604Z/GraalvmSecurity.zip"
         },
         "LayerName": "GraalvmSecurity"
       }
@@ -142,10 +142,10 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/order-created-event-handler/dev/1571237429096-2019-10-16T14:50:29.096Z/function.zip"
+          "S3Key": "serverless/order-created-event-handler/dev/1571244646604-2019-10-16T16:50:46.604Z/function.zip"
         },
         "FunctionName": "order-created-event-handler-dev-orderprocessor",
-        "Handler": "function.sh",
+        "Handler": "orders-web-1.0-SNAPSHOT-runner",
         "MemorySize": 1024,
         "Role": {
           "Fn::GetAtt": [
@@ -169,14 +169,14 @@
         "IamRoleLambdaExecution"
       ]
     },
-    "OrderprocessorLambdaVersiongIn8kGh2F1EuNh1DFX3kxst2FZspmxCIVZsG0YNT34": {
+    "OrderprocessorLambdaVersionxwNeFnvS96Q574d9J1WoAeDKiUkoKN2SnBZfO3Ewk": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "OrderprocessorLambdaFunction"
         },
-        "CodeSha256": "CWStBQSFTrDcUiOE8OvoN8r44zdczCi4Tjo/Y6SLzhA="
+        "CodeSha256": "hRzUrdC8cENe0hL9vSBarZ0ez2TIErPJ/IZDNKx9rwY="
       }
     },
     "ApiGatewayRestApi": {
@@ -294,7 +294,7 @@
         "MethodResponses": []
       }
     },
-    "ApiGatewayDeployment1571237427758": {
+    "ApiGatewayDeployment1571244646016": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -360,7 +360,7 @@
     "OrderprocessorLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "OrderprocessorLambdaVersiongIn8kGh2F1EuNh1DFX3kxst2FZspmxCIVZsG0YNT34"
+        "Ref": "OrderprocessorLambdaVersionxwNeFnvS96Q574d9J1WoAeDKiUkoKN2SnBZfO3Ewk"
       }
     },
     "ServiceEndpoint": {
