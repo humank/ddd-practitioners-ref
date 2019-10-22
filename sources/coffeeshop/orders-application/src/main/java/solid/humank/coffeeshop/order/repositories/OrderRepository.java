@@ -1,5 +1,6 @@
 package solid.humank.coffeeshop.order.repositories;
 
+import solid.humank.coffeeshop.infra.repositories.DDBRepositoryBase;
 import solid.humank.coffeeshop.infra.repositories.orders.OrderRepoSpec;
 import solid.humank.coffeeshop.order.interfaces.IOrderRepository;
 import solid.humank.coffeeshop.order.models.Order;

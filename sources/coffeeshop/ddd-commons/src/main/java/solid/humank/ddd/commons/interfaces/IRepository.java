@@ -10,8 +10,6 @@ import java.util.concurrent.CompletableFuture;
 
 public interface IRepository<T extends AggregateRoot, U extends EntityId> {
 
-    //TODO: find a object for C# Iqueryable<T> collection
-    //IQueryable<T> all;
 
     List<T> all();
 
@@ -24,7 +22,6 @@ public interface IRepository<T extends AggregateRoot, U extends EntityId> {
      */
     T get(FunctionalInterface func, Specification<U> by);
 
-    //provide a predefined functional interface method, leave the mandatory method and type constraints to be implemented.
     T get(ISelector selector, Specification<U> by);
 
     T first(ISelector selector, Specification<U> by);

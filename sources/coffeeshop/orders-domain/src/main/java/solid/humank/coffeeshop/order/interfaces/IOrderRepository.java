@@ -3,7 +3,6 @@ package solid.humank.coffeeshop.order.interfaces;
 import solid.humank.coffeeshop.order.models.Order;
 import solid.humank.coffeeshop.order.models.OrderId;
 import solid.humank.ddd.commons.baseclasses.Specification;
-import solid.humank.ddd.commons.interfaces.IRepository;
 
 import java.util.List;
 

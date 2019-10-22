@@ -5,8 +5,6 @@ import lombok.*;
 import solid.humank.coffeeshop.order.models.OrderItem;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 @AllArgsConstructor
 @Data
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
