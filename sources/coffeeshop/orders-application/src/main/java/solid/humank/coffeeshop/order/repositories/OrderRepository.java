@@ -8,22 +8,21 @@ import solid.humank.coffeeshop.order.models.OrderId;
 import solid.humank.ddd.commons.baseclasses.Specification;
 import solid.humank.ddd.commons.interfaces.IRepository;
 
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import java.time.OffsetDateTime;
 import java.util.List;
 
-@RequestScoped
+@Dependent
 public class OrderRepository implements IOrderRepository {
 
     public OrderRepository() {
-
     }
 
-    //DDBRepositoryBase<Order, OrderId> repository = new DDBRepositoryBase<>();
+    DDBRepositoryBase<Order, OrderId> repository = new DDBRepositoryBase<>();
 
-    @Inject
-    IRepository<Order, OrderId> repository;
+//    @Inject
+//    public IRepository<Order, OrderId> repository;
 
     public Order save(Order order) {
 

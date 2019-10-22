@@ -18,6 +18,7 @@ public class DDBRepositoryBase<T extends AggregateRoot, U extends EntityId> impl
 
     DynamoDbClient ddb = DynamoDbClient.create();
 
+    public DDBRepositoryBase(){}
     @Override
     public List<T> all() {
         return null;
