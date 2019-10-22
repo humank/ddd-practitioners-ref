@@ -41,13 +41,14 @@
     <!-- sub modules -->
     <modules>
         <module>ddd-commons</module>
-<!--        <module>coffee-application</module>-->
-<!--        <module>coffee-domain</module>-->
-<!--        <module>coffee-web</module>-->
-<!--        <module>coffee-sls</module>-->
-<!--        <module>inventory-application</module>-->
-<!--        <module>inventory-domain</module>-->
-<!--        <module>inventory-web</module>-->
+        <module>coffee-application</module>
+        <module>coffee-domain</module>
+        <module>coffee-web</module>
+        <module>coffee-sls</module>
+        <module>inventory-application</module>
+        <module>inventory-domain</module>
+        <module>inventory-web</module>
+        <module>inventory-sls</module>
         <module>orders-application</module>
         <module>orders-domain</module>
         <module>orders-web</module>
@@ -85,14 +86,6 @@
             <artifactId>log4j-api</artifactId>
             <version>${log4j.api}</version>
         </dependency>
-        <!--
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-slf4j-impl</artifactId>
-            <version>${log4j.slf4j.impl}</version>
-        </dependency>
-        -->
-
         <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-resteasy</artifactId>
