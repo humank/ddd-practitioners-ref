@@ -1,24 +1,26 @@
 package solid.humank.coffeeshop.infra.repositories;
 
-// due to ddb need to specify each data structure before crud actions,
-// soe need to leave the 4 interfaces as parameter from outside.
-//        PutItemSpec
-//        GetItemSpec
-//        DeleteItemSpec
-//        UpdateItemSpec
-
 import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
+import software.amazon.awssdk.services.dynamodb.model.PutItemRequest;
+import software.amazon.awssdk.services.dynamodb.model.ScanRequest;
+import software.amazon.awssdk.services.dynamodb.model.ScanResponse;
 import solid.humank.ddd.commons.baseclasses.AggregateRoot;
 import solid.humank.ddd.commons.baseclasses.EntityId;
 import solid.humank.ddd.commons.baseclasses.Specification;
 import solid.humank.ddd.commons.interfaces.IRepository;
 import solid.humank.ddd.commons.interfaces.ISelector;
 
+import javax.enterprise.context.RequestScoped;
 import java.util.List;
 
+@RequestScoped
 public class DDBRepositoryBase<T extends AggregateRoot, U extends EntityId> implements IRepository<T, U> {
 
-    DynamoDbClient ddb;
+    public DDBRepositoryBase(){
+
+    }
+
+    DynamoDbClient ddb = DynamoDbClient.create();
 
     @Override
     public List<T> all() {
@@ -52,12 +54,20 @@ public class DDBRepositoryBase<T extends AggregateRoot, U extends EntityId> impl
 
     @Override
     public long count(Specification<T> by) {
-        return 0;
+        AggregateRootMapper mapper = DDBMapper.getMapper(by.getTargetTable());
+        ScanRequest scanRequest = mapper.buildCountScanRequest();
+        ScanResponse scanResponse = ddb.scan(scanRequest);
+        long currentCount = scanResponse.count();
+
+        return currentCount;
     }
 
     @Override
     public void create(T aggregateRoot) {
 
+        AggregateRootMapper mapper = DDBMapper.getMapper(aggregateRoot.getClass().getSimpleName());
+        PutItemRequest request = mapper.buildPutItemRequest(aggregateRoot);
+        ddb.putItem(request);
     }
 
     @Override

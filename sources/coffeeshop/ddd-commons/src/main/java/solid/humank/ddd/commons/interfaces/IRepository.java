@@ -4,6 +4,7 @@ import solid.humank.ddd.commons.baseclasses.AggregateRoot;
 import solid.humank.ddd.commons.baseclasses.EntityId;
 import solid.humank.ddd.commons.baseclasses.Specification;
 
+import javax.enterprise.context.Dependent;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 

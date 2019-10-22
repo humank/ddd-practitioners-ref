@@ -10,12 +10,6 @@
     </parent>
     <artifactId>orders-web</artifactId>
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/com.amazonaws/aws-lambda-java-log4j2 -->
-        <!--        <dependency>-->
-        <!--            <groupId>com.amazonaws</groupId>-->
-        <!--            <artifactId>aws-lambda-java-log4j2</artifactId>-->
-        <!--            <version>1.1.0</version>-->
-        <!--        </dependency>-->
         <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-amazon-lambda</artifactId>
@@ -26,15 +20,6 @@
             <artifactId>orders-application</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
-        <!--        <dependency>-->
-        <!--            <groupId>com.amazonaws</groupId>-->
-        <!--            <artifactId>aws-java-sdk-events</artifactId>-->
-        <!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>io.quarkus</groupId>-->
-<!--            <artifactId>quarkus-smallrye-openapi</artifactId>-->
-<!--            <version>${quarkus.version}</version>-->
-<!--        </dependency>-->
         <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-amazon-dynamodb</artifactId>
