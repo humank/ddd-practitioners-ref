@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+cd orders-web && mvn clean package && cd ..
 
 USER_ID=$(aws sts get-caller-identity | jq -r '.Account')
 REGION=$(aws configure get region)
@@ -7,7 +8,7 @@ REGION=$(aws configure get region)
 # mvn clean package -DskipTests=true -Dnative=true -Dnative-image.docker-build=true
 
 # Docker Build
-docker build -f Dockerfile.native -t solid-humank-coffeeshop/orders-web .
+docker build -f src/main/docker/Dockerfile.jvm -t solid-humank-coffeeshop/orders-web .
 
 # Tag image for ecr
 docker tag solid-humank-coffeeshop/orders-web:latest "$USER_ID".dkr.ecr."$REGION".amazonaws.com/solid-humank-coffeeshop/orders-web:latest
