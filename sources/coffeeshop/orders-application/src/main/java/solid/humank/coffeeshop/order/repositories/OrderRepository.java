@@ -6,10 +6,8 @@ import solid.humank.coffeeshop.order.interfaces.IOrderRepository;
 import solid.humank.coffeeshop.order.models.Order;
 import solid.humank.coffeeshop.order.models.OrderId;
 import solid.humank.ddd.commons.baseclasses.Specification;
-import solid.humank.ddd.commons.interfaces.IRepository;
 
 import javax.enterprise.context.Dependent;
-import javax.inject.Inject;
 import java.time.OffsetDateTime;
 import java.util.List;
 

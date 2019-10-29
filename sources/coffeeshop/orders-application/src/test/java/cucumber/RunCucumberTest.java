@@ -1,4 +1,4 @@
-package gradle.cucumber;
+package cucumber;
 
 
 import io.cucumber.junit.Cucumber;
@@ -8,7 +8,7 @@ import org.junit.runner.RunWith;
 @RunWith(Cucumber.class)
 @CucumberOptions(
         plugin = "json:target/cucumber-report.json",
-        glue = "gradle.cucumber",
+        glue = "cucumber",
         features = "src/test/resources/")
 public class RunCucumberTest {
 }
