@@ -29,6 +29,7 @@
         <log4j.core>2.12.1</log4j.core>
         <log4j.api>2.12.1</log4j.api>
         <log4j.slf4j.impl>2.12.1</log4j.slf4j.impl>
+        <jackson.datatpye.jsr310>2.10.0</jackson.datatpye.jsr310>
 
         <surefire-plugin.version>2.22.0</surefire-plugin.version>
         <maven.compiler.parameters>true</maven.compiler.parameters>
@@ -54,6 +55,7 @@
         <module>orders-domain</module>
         <module>orders-web</module>
         <module>infrastructure</module>
+        <module>service-discovery</module>
     </modules>
 
     <dependencyManagement>
@@ -146,6 +148,12 @@
             <version>${lombok.version}</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>${jackson.datatpye.jsr310}</version>
+        </dependency>
+
     </dependencies>
 
 </project>

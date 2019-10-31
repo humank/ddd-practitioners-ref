@@ -5,10 +5,10 @@ Resources:
     Type: 'AWS::Serverless::Function'
     Properties:
       Runtime: java8
-      Handler: solid.humank.port.adapter.OrderAPIGProxyWrapper::handleRequest
-      Timeout: 60
-      MemorySize: 256
-      CodeUri: ./target/lambda.jar
+      Handler: solid.humank.coffeeshop.cofee.sls.orders.OrderCreatedHandler::handleRequest
+      Timeout: 30
+      MemorySize: 128
+      CodeUri: .
       Policies:
         - AmazonDynamoDBFullAccess
         - AWSLambdaFullAccess

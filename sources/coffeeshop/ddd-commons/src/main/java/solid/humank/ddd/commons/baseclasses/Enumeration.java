@@ -26,9 +26,6 @@ public class Enumeration implements Comparable {
         this.name = name;
     }
 
-    //TODO: provide a method to get all public enumeration types.
-    //public static IEnumerable<T> GetAll<T>() where T : Enumeration
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

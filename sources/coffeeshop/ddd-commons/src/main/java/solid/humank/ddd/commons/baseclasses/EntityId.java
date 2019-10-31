@@ -21,7 +21,8 @@ public abstract class EntityId extends ValueObject<EntityId> {
     @Setter(AccessLevel.PRIVATE)
     OffsetDateTime occurredDate;
 
-    protected EntityId() {
+
+    public EntityId() {
         this.seqNo = 0;
         this.occurredDate = OffsetDateTime.now();
     }

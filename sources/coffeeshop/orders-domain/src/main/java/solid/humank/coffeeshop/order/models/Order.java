@@ -13,10 +13,13 @@
 
 package solid.humank.coffeeshop.order.models;
 
+import com.google.gson.Gson;
 import io.quarkus.runtime.annotations.RegisterForReflection;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import solid.humank.coffeeshop.order.commands.ChangeItem;
 import solid.humank.coffeeshop.order.commands.CreateOrder;
 import solid.humank.coffeeshop.order.domainevents.OrderCreated;
@@ -41,6 +44,7 @@ import java.util.stream.Stream;
 @RegisterForReflection
 public class Order extends AggregateRoot<OrderId> {
 
+    final static Logger logger = LoggerFactory.getLogger(Order.class);
     final static String ORDER_DATE_FORMAT = "yyyyMMddHHmmss";
 
 
@@ -120,7 +124,10 @@ public class Order extends AggregateRoot<OrderId> {
         Order order = new Order(cmd.getId(), cmd.getTableNo(), cmd.getStatus(), cmd.getItems(), OffsetDateTime.now());
         OrderPolicy.Verify(order);
 
-        order.applyEvent(new OrderCreated(order.getId(), order.tableNo, order.orderItems, order.createdDate));
+        OrderCreated orderCreated = new OrderCreated(order.getId(), order.tableNo, order.orderItems, order.createdDate);
+
+        logger.info(new Gson().toJson(orderCreated));
+        order.applyEvent(orderCreated);
         return order;
     }
 
@@ -217,4 +224,6 @@ public class Order extends AggregateRoot<OrderId> {
         return
                 modifiedDate == null ? "N/A" : modifiedDate.format(DateTimeFormatter.ofPattern(ORDER_DATE_FORMAT));
     }
+
+
 }

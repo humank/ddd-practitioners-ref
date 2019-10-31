@@ -22,7 +22,7 @@ import java.util.List;
 @ApplicationScoped
 public class CreateOrderSvc implements Serializable {
 
-    //TODO
+    //TODO 確認實作結果
 
     /**
      * 咖啡師 會接受訂單，並且開始依照訂單上的產品去冰箱取得原物料

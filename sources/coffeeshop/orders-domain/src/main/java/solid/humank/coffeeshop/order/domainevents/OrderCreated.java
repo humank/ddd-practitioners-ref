@@ -8,12 +8,10 @@ import solid.humank.ddd.commons.baseclasses.DomainEvent;
 import solid.humank.ddd.commons.baseclasses.EntityId;
 
 import java.time.OffsetDateTime;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 @Data
-@EqualsAndHashCode(callSuper=true)
+@EqualsAndHashCode(callSuper = true)
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class OrderCreated<OrderId extends EntityId> extends DomainEvent<OrderId> {
 
@@ -29,6 +27,5 @@ public class OrderCreated<OrderId extends EntityId> extends DomainEvent<OrderId>
         this.createdDate = createdDate;
 
     }
-
 
 }

@@ -6,6 +6,7 @@ import solid.humank.coffeeshop.order.models.Order;
 import solid.humank.coffeeshop.order.models.OrderId;
 import solid.humank.coffeeshop.order.models.OrderItem;
 import solid.humank.coffeeshop.order.models.OrderStatus;
+import solid.humank.ddd.commons.utilities.DateTimeUtil;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
@@ -14,8 +15,6 @@ import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
-//TODO Finish mock tests.
 
 public class OrderAmericanoSteps implements En {
 
@@ -38,10 +37,7 @@ public class OrderAmericanoSteps implements En {
 
         });
 
-        When("the order is confirmed", () -> {
-            createdOrder = Order.create(cmd);
-
-        });
+        When("the order is confirmed", () -> createdOrder = Order.create(cmd));
 
         Then("the total fee should be {int}l", (Integer int1) -> {
             assertEquals(createdOrder.totalFee().longValue(), int1.longValue());

@@ -3,6 +3,8 @@ package solid.humank.coffeeshop.infra.adapters;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import software.amazon.awssdk.services.cloudwatchevents.CloudWatchEventsClient;
@@ -28,7 +30,10 @@ public class CloudWatchEventAdapter {
     public PublishResult publishEvent(DomainEvent occurredEvent) {
         String eventJson = null;
         try {
-            eventJson = new ObjectMapper().writeValueAsString(occurredEvent);
+            ObjectMapper objectMapper = new ObjectMapper()
+                    .registerModule(new JavaTimeModule())
+                    .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+            eventJson = objectMapper.writeValueAsString(occurredEvent);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }

@@ -1,5 +1,7 @@
 package solid.humank.coffeeshop.order.domainservices;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import solid.humank.coffeeshop.infra.adapters.CloudWatchEventAdapter;
 import solid.humank.ddd.commons.baseclasses.DomainEvent;
 import solid.humank.ddd.commons.baseclasses.EntityId;
@@ -11,6 +13,8 @@ import java.util.List;
 @RequestScoped
 public class DomainEventPublisher {
 
+    Logger logger = LoggerFactory.getLogger(DomainEventPublisher.class);
+
     public DomainEventPublisher() {
     }
 
@@ -19,6 +23,7 @@ public class DomainEventPublisher {
 
     public void publish(List<DomainEvent<? extends EntityId>> domainEvents) {
         for (DomainEvent de : domainEvents) {
+            logger.info(de.toString());
             cweAdapter.publishEvent(de);
         }
     }
