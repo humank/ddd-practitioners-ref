@@ -1,10 +1,6 @@
 package solid.humank.coffeeshop.infra.adapters;
 
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import software.amazon.awssdk.services.cloudwatchevents.CloudWatchEventsClient;
@@ -12,6 +8,7 @@ import software.amazon.awssdk.services.cloudwatchevents.model.PutEventsRequest;
 import software.amazon.awssdk.services.cloudwatchevents.model.PutEventsRequestEntry;
 import software.amazon.awssdk.services.cloudwatchevents.model.PutEventsResponse;
 import solid.humank.ddd.commons.baseclasses.DomainEvent;
+import solid.humank.ddd.commons.utilities.DomainModelMapper;
 
 import javax.enterprise.context.RequestScoped;
 import java.io.FileNotFoundException;
@@ -29,14 +26,16 @@ public class CloudWatchEventAdapter {
 
     public PublishResult publishEvent(DomainEvent occurredEvent) {
         String eventJson = null;
-        try {
-            ObjectMapper objectMapper = new ObjectMapper()
-                    .registerModule(new JavaTimeModule())
-                    .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
-            eventJson = objectMapper.writeValueAsString(occurredEvent);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
+        //            ObjectMapper objectMapper = new ObjectMapper();
+
+        DomainModelMapper mapper = new DomainModelMapper();
+
+//                    .registerModule(new JavaTimeModule())
+//                    .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+
+        //eventJson = objectMapper.writeValueAsString(occurredEvent);
+        eventJson = mapper.writeToJsonString(occurredEvent);
+        logger.info(eventJson);
         if (eventJson == null) {
             return new PublishResult("Malformed format of Event");
         }

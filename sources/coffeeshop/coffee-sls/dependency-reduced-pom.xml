@@ -72,10 +72,6 @@
           <groupId>org.codehaus.groovy</groupId>
         </exclusion>
         <exclusion>
-          <artifactId>httpclient</artifactId>
-          <groupId>org.apache.httpcomponents</groupId>
-        </exclusion>
-        <exclusion>
           <artifactId>httpmime</artifactId>
           <groupId>org.apache.httpcomponents</groupId>
         </exclusion>

@@ -1,23 +1,12 @@
 package solid.humank.coffeeshop.cofee.sls.orders.datacontracts;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import solid.humank.ddd.commons.baseclasses.EntityId;
 
-import java.time.OffsetDateTime;
-
+@AllArgsConstructor
 @Data
-public class OrderId {
+public class OrderId extends EntityId {
 
-    String abbr;
-    long seqNo;
-    OffsetDateTime createdDate;
 
-    public OrderId() {
-        this.setAbbr("ord");
-    }
-
-    public OrderId(long seqNo, OffsetDateTime createdDate) {
-        this.setSeqNo(seqNo);
-        this.setCreatedDate(createdDate);
-        this.setAbbr("ord");
-    }
 }

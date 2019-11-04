@@ -125,8 +125,6 @@ public class Order extends AggregateRoot<OrderId> {
         OrderPolicy.Verify(order);
 
         OrderCreated orderCreated = new OrderCreated(order.getId(), order.tableNo, order.orderItems, order.createdDate);
-
-        logger.info(new Gson().toJson(orderCreated));
         order.applyEvent(orderCreated);
         return order;
     }
@@ -187,7 +185,7 @@ public class Order extends AggregateRoot<OrderId> {
 
     public void when(OrderCreated event) {
 
-        this.setId(event.getOrderId());
+        this.setId(event.getEntityId());
         this.tableNo = event.getTableNo();
         this.status = OrderStatus.INITIAL;
         this.orderItems = event.getOrderItems();

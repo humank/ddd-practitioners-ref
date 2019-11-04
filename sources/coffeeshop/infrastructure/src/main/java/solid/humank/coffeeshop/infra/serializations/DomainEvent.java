@@ -1,17 +1,14 @@
-package solid.humank.ddd.commons.baseclasses;
+package solid.humank.coffeeshop.infra.serializations;
 
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
-import org.jboss.resteasy.util.DateUtil;
-import solid.humank.ddd.commons.utilities.DateTimeUtil;
+import solid.humank.ddd.commons.baseclasses.EntityId;
 
 import java.time.OffsetDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
-public abstract class DomainEvent<T extends EntityId>{
+public class DomainEvent<T extends EntityId> {
 
     @Getter(AccessLevel.PUBLIC)
     @Setter(AccessLevel.PRIVATE)
@@ -28,7 +25,6 @@ public abstract class DomainEvent<T extends EntityId>{
 
     protected DomainEvent() {
         this.eventId = UUID.randomUUID();
-        this.occurredDate = OffsetDateTime.now() ;
+        this.occurredDate = OffsetDateTime.now();
     }
-
 }

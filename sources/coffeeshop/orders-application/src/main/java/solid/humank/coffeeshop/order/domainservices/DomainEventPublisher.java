@@ -23,8 +23,8 @@ public class DomainEventPublisher {
 
     public void publish(List<DomainEvent<? extends EntityId>> domainEvents) {
         for (DomainEvent de : domainEvents) {
-            logger.info(de.toString());
             cweAdapter.publishEvent(de);
         }
     }
+
 }
