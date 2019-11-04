@@ -4,6 +4,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.time.LocalDateTime;
 
 public class DomainModelMapper {
@@ -36,6 +38,16 @@ public class DomainModelMapper {
         try {
             result = mapper.readValue(json, valueType);
         } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public <T> T readValue(InputStream inputStream, Class<T> valueType) {
+        T result = null;
+        try {
+            result = mapper.readValue(inputStream, valueType);
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return result;

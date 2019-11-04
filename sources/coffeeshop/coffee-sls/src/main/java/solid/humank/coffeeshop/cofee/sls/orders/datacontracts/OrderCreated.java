@@ -4,7 +4,8 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import solid.humank.ddd.commons.baseclasses.EntityId;
+import solid.humank.coffeeshop.infra.serializations.EntityId;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 
 import java.time.OffsetDateTime;
 import java.util.List;
