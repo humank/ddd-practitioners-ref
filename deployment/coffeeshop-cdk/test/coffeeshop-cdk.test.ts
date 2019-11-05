@@ -1,13 +1,21 @@
-import { expect as expectCDK, matchTemplate, MatchStyle } from '@aws-cdk/assert';
+import { expect as expectCDK, haveResource } from '@aws-cdk/assert';
 import cdk = require('@aws-cdk/core');
-import CoffeeshopCdk = require('../lib/coffeeshop-cdk-stack');
+import CoffeeShopCdk = require('../lib/coffee-shop-cdk-stack');
 
-test('Empty Stack', () => {
+test('SQS Queue Created', () => {
     const app = new cdk.App();
     // WHEN
-    const stack = new CoffeeshopCdk.CoffeeshopCdkStack(app, 'MyTestStack');
+    const stack = new CoffeeShopCdk.CoffeeShopCdkStack(app, 'MyTestStack');
     // THEN
-    expectCDK(stack).to(matchTemplate({
-      "Resources": {}
-    }, MatchStyle.EXACT))
+    expectCDK(stack).to(haveResource("AWS::SQS::Queue",{
+      VisibilityTimeout: 300
+    }));
+});
+
+test('SNS Topic Created', () => {
+  const app = new cdk.App();
+  // WHEN
+  const stack = new CoffeeShopCdk.CoffeeShopCdkStack(app, 'MyTestStack');
+  // THEN
+  expectCDK(stack).to(haveResource("AWS::SNS::Topic"));
 });

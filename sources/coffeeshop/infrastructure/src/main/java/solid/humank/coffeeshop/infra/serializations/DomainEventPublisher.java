@@ -1,4 +1,4 @@
-package solid.humank.coffeeshop.order.domainservices;
+package solid.humank.coffeeshop.infra.serializations;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

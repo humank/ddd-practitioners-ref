@@ -2,8 +2,6 @@ import org.junit.jupiter.api.Test;
 import solid.humank.coffeeshop.cofee.sls.orders.datacontracts.OrderCreated;
 import solid.humank.ddd.commons.utilities.DomainModelMapper;
 
-import java.time.OffsetDateTime;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class JsonTest {
