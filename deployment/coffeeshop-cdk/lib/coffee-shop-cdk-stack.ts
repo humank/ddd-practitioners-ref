@@ -1,5 +1,4 @@
 import ecs = require('@aws-cdk/aws-ecs');
-import ecs_patterns = require('@aws-cdk/aws-ecs-patterns');
 import ec2 = require('@aws-cdk/aws-ec2');
 import cdk = require('@aws-cdk/core');
 
@@ -7,24 +6,14 @@ export class CoffeeShopCdkStack extends cdk.Stack {
   constructor(scope: cdk.App, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    // Create a cluster
-    const vpc = new ec2.Vpc(this, 'Vpc', { maxAzs: 3 });
+    // Create a VPC
+    const vpc = new ec2.Vpc(this, 'CoffeeShopVPC', {
+      cidr: '10.0.0.0/16',
+      natGateways: 1
+    });
+
+
+    // Create a ECS Fargate cluster
     const cluster = new ecs.Cluster(this, 'CoffeeShop-Fargate', { vpc });
-
-    // Create Fargate Service
-    const fargateService = new ecs_patterns.NetworkLoadBalancedFargateService(this, 'sample-app', {
-      cluster,
-      taskImageOptions: {
-        image: ecs.ContainerImage.fromRegistry("amazon/amazon-ecs-sample")
-      },
-    });
-
-    // Setup AutoScaling policy
-    const scaling = fargateService.service.autoScaleTaskCount({ maxCapacity: 2 });
-    scaling.scaleOnCpuUtilization('CpuScaling', {
-      targetUtilizationPercent: 50,
-      scaleInCooldown: cdk.Duration.seconds(60),
-      scaleOutCooldown: cdk.Duration.seconds(60)
-    });
   }
 }
