@@ -26,8 +26,11 @@ export class CoffeeShopCodePipeline extends cdk.Stack {
 
     constructor(scope: cdk.Construct, id: string, props: FargateCICDProps) {
         super(scope, id, props);
+
         this.ecrRepository = new ecr.Repository(this, 'Repository', {
-            repositoryName: props.repositoryName || `${DOCKER_IMAGE_PREFIX}-${this.stackName.toLowerCase()}`,
+            //repositoryName: props.repositoryName || `${DOCKER_IMAGE_PREFIX}-${this.stackName.toLowerCase()}`,
+            repositoryName: 'solid-humank-coffeeshop',
+            //
         });
 
         const buildRole = new iam.Role(this, 'CodeBuildIamRole', {
