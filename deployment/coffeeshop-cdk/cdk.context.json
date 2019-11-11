@@ -4,5 +4,39 @@
     "us-west-2b",
     "us-west-2c",
     "us-west-2d"
-  ]
+  ],
+  "vpc-provider:account=584518143473:filter.isDefault=false:filter.tag:Name=CoffeeShopCdkStack/CoffeeShopVPC:region=us-west-2": {
+    "vpcId": "vpc-01edd8dfac7dc7e27",
+    "availabilityZones": [
+      "us-west-2a",
+      "us-west-2b",
+      "us-west-2c"
+    ],
+    "privateSubnetIds": [
+      "subnet-0ae13b56ad5af18c6",
+      "subnet-0a2cb9eceec509d9b",
+      "subnet-0ab4c461aaf45a383"
+    ],
+    "privateSubnetNames": [
+      "Private"
+    ],
+    "privateSubnetRouteTableIds": [
+      "rtb-0d94980210323a780",
+      "rtb-01ce73a2535b5c7ed",
+      "rtb-0a6c199c455b3a914"
+    ],
+    "publicSubnetIds": [
+      "subnet-0a530988b5f57e0bc",
+      "subnet-05bc63e5b5f37d2a9",
+      "subnet-0b5765cd3c7f3ba70"
+    ],
+    "publicSubnetNames": [
+      "Public"
+    ],
+    "publicSubnetRouteTableIds": [
+      "rtb-0e796cc07b51fd367",
+      "rtb-0adca927553a06c9e",
+      "rtb-0ccf83144d952171f"
+    ]
+  }
 }

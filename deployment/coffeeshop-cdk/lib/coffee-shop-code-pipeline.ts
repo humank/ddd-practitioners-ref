@@ -7,18 +7,27 @@ import codepipeline = require('@aws-cdk/aws-codepipeline');
 import codepipeline_actions = require('@aws-cdk/aws-codepipeline-actions');
 import ecs = require('@aws-cdk/aws-ecs');
 import ecsPatterns = require('@aws-cdk/aws-ecs-patterns');
-import { CodeBuildProject } from '@aws-cdk/aws-events-targets';
-import { Duration } from '@aws-cdk/core';
+import codecommit = require('@aws-cdk/aws-codecommit');
+import {CodeBuildProject} from '@aws-cdk/aws-events-targets';
+import {Duration} from '@aws-cdk/core';
+import {Vpc} from '@aws-cdk/aws-ec2';
 
 const DOCKER_IMAGE_PREFIX = 'solid-humank-coffeeshop'
 const CODECOMMIT_REPO_NAME = 'EventStormingWorkshop'
 
+export interface FargateCICDProps extends cdk.StackProps {
+    source?: codebuild.ISource,
+    repositoryName?: string,
+    defaultVpc?: boolean
+}
+
 export class CoffeeShopCodePipeline extends cdk.Stack {
     readonly ecrRepository: ecr.Repository
-    constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
+
+    constructor(scope: cdk.Construct, id: string, props: FargateCICDProps) {
         super(scope, id, props);
         this.ecrRepository = new ecr.Repository(this, 'Repository', {
-            repositoryName: `${DOCKER_IMAGE_PREFIX}-${this.stackName.toLowerCase()}`,
+            repositoryName: props.repositoryName || `${DOCKER_IMAGE_PREFIX}-${this.stackName.toLowerCase()}`,
         });
 
         const buildRole = new iam.Role(this, 'CodeBuildIamRole', {
@@ -36,9 +45,9 @@ export class CoffeeShopCodePipeline extends cdk.Stack {
 
         // ECR Lifecycles
         // repository.addLifecycleRule({ tagPrefixList: ['prod'], maxImageCount: 9999 });
-        this.ecrRepository.addLifecycleRule({ maxImageAge: cdk.Duration.days(30) });
+        this.ecrRepository.addLifecycleRule({maxImageAge: cdk.Duration.days(30)});
 
-        const gitHubSource = codebuild.Source.gitHub({
+        const defaultSource = codebuild.Source.gitHub({
             owner: 'humank',
             repo: 'EventStormingWorkshop',
             webhook: true, // optional, default: true if `webhookFilteres` were provided, false otherwise
@@ -49,11 +58,11 @@ export class CoffeeShopCodePipeline extends cdk.Stack {
 
         new codebuild.Project(this, 'CodeBuildProject', {
             role: buildRole,
-            source: gitHubSource,
+            source: props.source || defaultSource,
             // Enable Docker AND custom caching
             cache: codebuild.Cache.local(codebuild.LocalCacheMode.DOCKER_LAYER, codebuild.LocalCacheMode.CUSTOM),
             environment: {
-                buildImage: codebuild.LinuxBuildImage.UBUNTU_14_04_OPEN_JDK_11,
+                buildImage: codebuild.LinuxBuildImage.STANDARD_2_0,
                 privileged: true,
             },
             buildSpec: codebuild.BuildSpec.fromObject({
@@ -72,8 +81,8 @@ export class CoffeeShopCodePipeline extends cdk.Stack {
                             'mvn clean install'
                         ]
                     },
-                    post_build:{
-                        commands:[
+                    post_build: {
+                        commands: [
                             'echo "Pack web modules into docker and push to ECR"',
                             'echo "ECR login now"',
                             'USER_ID=$(aws sts get-caller-identity | jq -r \'.Account\')',
@@ -95,11 +104,15 @@ export class CoffeeShopCodePipeline extends cdk.Stack {
             })
         });
 
-        const vpc = ec2.Vpc.fromLookup(this, 'CoffeeShopVPC', {
-            // vpcName: 'CoffeeShopVPC',
-            isDefault: true
-        })
+        // const vpc = ec2.Vpc.fromLookup(this, 'VPC', {
+        //     isDefault: true
+        // })
 
+        const vpc = props.defaultVpc === undefined ?
+            Vpc.fromLookup(this, 'CoffeeShopCdkStack/CoffeeShopVPC',{
+                vpcName: 'CoffeeShopCdkStack/CoffeeShopVPC',
+                isDefault: false,
+            }) : new ec2.Vpc(this, 'VPC');
 
         const cluster = new ecs.Cluster(this, 'Cluster', {
             clusterName: 'coffeeshop',
@@ -109,37 +122,22 @@ export class CoffeeShopCodePipeline extends cdk.Stack {
         const taskDefinition = new ecs.TaskDefinition(this, 'Task', {
             compatibility: ecs.Compatibility.FARGATE,
             memoryMiB: '512',
-            cpu: '256'
+            cpu: '256',
+            executionRole: new iam.Role(this, 'ExecutionRole', {
+                assumedBy: new iam.ServicePrincipal('ecs-tasks.amazonaws.com'),
+            }),
         });
 
-        const expressContainer = taskDefinition.addContainer('express', {
-            image: ecs.ContainerImage.fromAsset(__dirname + '/../../express/')
-        });
-
-        expressContainer.addPortMappings({
+        taskDefinition.addContainer('defaultContainer', {
+            image: ecs.ContainerImage.fromRegistry('amazon/amazon-ecs-sample')
+        }).addPortMappings({
             containerPort: 8080
         });
 
-        const fargatesvc = new ecsPatterns.ApplicationLoadBalancedFargateService(this, 'express', {
+        const fargatesvc = new ecsPatterns.ApplicationLoadBalancedFargateService(this, 'AlbSvc', {
             cluster,
             taskDefinition,
         })
-
-        // Create Fargate Service
-        const fargateService = new ecsPatterns.NetworkLoadBalancedFargateService(this, 'sample-app', {
-            cluster,
-            taskImageOptions: {
-                image: ecs.ContainerImage.fromRegistry("amazon/amazon-ecs-sample")
-            },
-        });
-
-        // Setup AutoScaling policy
-        const scaling = fargateService.service.autoScaleTaskCount({ maxCapacity: 3 });
-        scaling.scaleOnCpuUtilization('CpuScaling', {
-            targetUtilizationPercent: 50,
-            scaleInCooldown: cdk.Duration.seconds(60),
-            scaleOutCooldown: cdk.Duration.seconds(60)
-        });
 
         // if the default image is not from ECR, the ECS task execution role will not have ECR pull privileges
         // we need grant the pull for it explicitly
@@ -159,8 +157,8 @@ export class CoffeeShopCodePipeline extends cdk.Stack {
         })
 
         // CodePipeline
-        const codePipeline = new codepipeline.Pipeline(this, 'Ecr2EcsPipeline', {
-            pipelineName: 'Ecr2Ecs',
+        const codePipeline = new codepipeline.Pipeline(this, 'CoffeeShopPipeline', {
+            pipelineName: 'CoffeeShopPipeline',
         });
 
         const sourceOutputEcr = new codepipeline.Artifact();
@@ -172,9 +170,9 @@ export class CoffeeShopCodePipeline extends cdk.Stack {
             output: sourceOutputEcr,
         });
 
-        // const codecommitRepo = new codecommit.Repository(this, 'GitRepo', {
-        //     repositoryName: CODECOMMIT_REPO_NAME
-        // });
+        const codecommitRepo = new codecommit.Repository(this, 'GitRepo', {
+            repositoryName: CODECOMMIT_REPO_NAME
+        });
 
         const sourceActionCodeCommit = new codepipeline_actions.CodeCommitSourceAction({
             actionName: 'CodeCommit',
@@ -215,6 +213,28 @@ export class CoffeeShopCodePipeline extends cdk.Stack {
 
         new cdk.CfnOutput(this, 'StackName', {
             value: this.stackName
+        })
+
+        new cdk.CfnOutput(this, 'CodeCommitRepoName', {
+            value: codecommitRepo.repositoryName
+        })
+
+        let codeCommitHint = `
+Create a "imagedefinitions.json" file and git add/push into CodeCommit repository "${CODECOMMIT_REPO_NAME}" with the following value:
+
+[
+  {
+    "name": "defaultContainer",
+    "imageUri": "${this.ecrRepository.repositoryUri}:latest"
+  }
+]
+`
+        new cdk.CfnOutput(this, 'Hint', {
+            value: codeCommitHint
+        })
+
+        new cdk.CfnOutput(this, 'CodeBuildProjectName', {
+            value: CodeBuildProject.name
         })
     }
 }
