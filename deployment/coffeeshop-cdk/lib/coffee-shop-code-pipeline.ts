@@ -65,7 +65,7 @@ export class CoffeeShopCodePipeline extends cdk.Stack {
             // Enable Docker AND custom caching
             cache: codebuild.Cache.local(codebuild.LocalCacheMode.DOCKER_LAYER, codebuild.LocalCacheMode.CUSTOM),
             environment: {
-                buildImage: codebuild.LinuxBuildImage.STANDARD_2_0,
+                buildImage: codebuild.LinuxBuildImage.UBUNTU_14_04_OPEN_JDK_8,
                 privileged: true,
             },
             buildSpec: codebuild.BuildSpec.fromObject({
@@ -73,14 +73,17 @@ export class CoffeeShopCodePipeline extends cdk.Stack {
                 phases: {
                     install: {
                         'runtime-versions': {
-                            java: 'corretto11'
+                            java: 'openjdk8'
                         }
                     },
                     build: {
                         commands: [
-                            'cd sources/coffeeshop',
-                            'echo "Build all of the modules"',
+                            'echo "Build all modules"',
                             'echo "Run Maven clean install to have all the required jars in local .m2 repository"',
+                            'pwd',
+                            'ls',
+                            'cd sources/coffeeshop',
+                            'pwd',
                             'mvn clean install'
                         ]
                     },
@@ -88,18 +91,20 @@ export class CoffeeShopCodePipeline extends cdk.Stack {
                         commands: [
                             'echo "Pack web modules into docker and push to ECR"',
                             'echo "ECR login now"',
-                            'USER_ID=$(aws sts get-caller-identity | jq -r \'.Account\')',
-                            'REGION=$(aws configure get region)',
                             '$(aws ecr get-login --no-include-email)',
 
                             'echo "build orders-web docker image"',
-                            'cd orders-web && mvn clean package && cd ..',
+                            'cd sources/coffeeshop/orders-web && mvn clean package && cd ..',
                             'docker build -f src/main/docker/Dockerfile.jvm -t solid-humank-coffeeshop/orders-web .',
-                            'docker tag solid-humank-coffeeshop/orders-web:latest "$USER_ID".dkr.ecr."$REGION".amazonaws.com/solid-humank-coffeeshop/orders-web:latest',
-
+                            `docker tag ${this.ecrRepository.repositoryUri}/orders-web:$LATEST ${this.ecrRepository.repositoryUri}/orders-web:$TAG`,
                             'echo "Pushing Orders-web"',
-                            'docker push "$USER_ID".dkr.ecr."$REGION".amazonaws.com/solid-humank-coffeeshop/orders-web:latest',
-                            'echo "finished ECR push"'
+                            `docker push ${this.ecrRepository.repositoryUri}/orders-web:$TAG`,
+                            `docker push ${this.ecrRepository.repositoryUri}/orders-web:$LATEST`,
+                            'echo "finished ECR push"',
+
+
+
+
                         ]
 
                     }
