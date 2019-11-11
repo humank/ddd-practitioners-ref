@@ -59,6 +59,7 @@ export class CoffeeShopCodePipeline extends cdk.Stack {
             ], // optional, by default all pushes and Pull Requests will trigger a build
         });
 
+        
         new codebuild.Project(this, 'CodeBuildProject', {
             role: buildRole,
             source: props.source || defaultSource,
@@ -87,7 +88,7 @@ export class CoffeeShopCodePipeline extends cdk.Stack {
                             'echo "Pack web modules into docker and push to ECR"',
                             'echo "ECR login now"',
                             '$(aws ecr get-login --no-include-email)',
-  
+
                             'echo "build orders-web docker image"',
                             'cd sources/coffeeshop/orders-web && mvn clean package && cd ..',
                             'docker build -f src/main/docker/Dockerfile.jvm -t solid-humank-coffeeshop/orders-web .',
