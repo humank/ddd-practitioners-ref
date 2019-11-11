@@ -85,23 +85,31 @@ export class CoffeeShopCodePipeline extends cdk.Stack {
                     },
                     post_build: {
                         commands: [
+                            'TAG=${CODEBUILD_RESOLVED_SOURCE_VERSION}',
+                            'LATEST="latest"',
                             'echo "Pack web modules into docker and push to ECR"',
                             'echo "ECR login now"',
                             '$(aws ecr get-login --no-include-email)',
                             'pwd',
                             'echo "build orders-web docker image"',
-                            'cd sources/coffeeshop/orders-web',
-                            'mvn clean package -Dmaven.test.skip=true',
-                            'cd ..',
-                            'docker build -f src/main/docker/Dockerfile.jvm -t solid-humank-coffeeshop/orders-web .',
+                            'cd orders-web',
+                            'mvn package -Dmaven.test.skip=true',
+                            `docker build -f src/main/docker/Dockerfile.jvm -t ${this.ecrRepository.repositoryUri}/orders-web:$LATEST .`,
+                            `docker images`,
                             `docker tag ${this.ecrRepository.repositoryUri}/orders-web:$LATEST ${this.ecrRepository.repositoryUri}/orders-web:$TAG`,
                             'echo "Pushing Orders-web"',
-                            `docker push ${this.ecrRepository.repositoryUri}/orders-web:$TAG`,
-                            `docker push ${this.ecrRepository.repositoryUri}/orders-web:$LATEST`,
+                            `docker images`,
+                            `docker push ${this.ecrRepository.repositoryUri}:$TAG`,
+                            `docker push ${this.ecrRepository.repositoryUri}:$LATEST`,
                             'echo "finished ECR push"',
                         ]
 
                     }
+                },
+                cache:{
+                    paths:[
+                        '/root/.m2/**/*',
+                    ]
                 }
             })
         });
