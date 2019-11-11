@@ -71,11 +71,6 @@ export class CoffeeShopCodePipeline extends cdk.Stack {
             buildSpec: codebuild.BuildSpec.fromObject({
                 version: '0.2',
                 phases: {
-                    install: {
-                        'runtime-versions': {
-                            java: 'openjdk8'
-                        }
-                    },
                     build: {
                         commands: [
                             'echo "Build all modules"',
@@ -101,10 +96,6 @@ export class CoffeeShopCodePipeline extends cdk.Stack {
                             `docker push ${this.ecrRepository.repositoryUri}/orders-web:$TAG`,
                             `docker push ${this.ecrRepository.repositoryUri}/orders-web:$LATEST`,
                             'echo "finished ECR push"',
-
-
-
-
                         ]
 
                     }
