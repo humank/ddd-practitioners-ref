@@ -29,7 +29,7 @@ export class CoffeeShopCodePipeline extends cdk.Stack {
 
         this.ecrRepository = new ecr.Repository(this, 'Repository', {
             //repositoryName: props.repositoryName || `${DOCKER_IMAGE_PREFIX}-${this.stackName.toLowerCase()}`,
-            repositoryName: 'solid-humank-coffeeshop',
+            repositoryName: DOCKER_IMAGE_PREFIX,
             //
         });
 
@@ -55,7 +55,7 @@ export class CoffeeShopCodePipeline extends cdk.Stack {
             repo: 'EventStormingWorkshop',
             webhook: true, // optional, default: true if `webhookFilteres` were provided, false otherwise
             webhookFilters: [
-                codebuild.FilterGroup.inEventOf(codebuild.EventAction.PUSH).andBranchIs('master'),
+                codebuild.FilterGroup.inEventOf(codebuild.EventAction.PUSH).andBranchIs('dev'),
             ], // optional, by default all pushes and Pull Requests will trigger a build
         });
 
@@ -122,7 +122,7 @@ export class CoffeeShopCodePipeline extends cdk.Stack {
             vpc
         });
 
-        const taskDefinition = new ecs.TaskDefinition(this, 'Task', {
+        const taskDefinition = new ecs.TaskDefinition(this, 'orders-web-Task', {
             compatibility: ecs.Compatibility.FARGATE,
             memoryMiB: '512',
             cpu: '256',
