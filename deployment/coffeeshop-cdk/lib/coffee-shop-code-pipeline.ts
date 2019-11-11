@@ -7,12 +7,11 @@ import codepipeline = require('@aws-cdk/aws-codepipeline');
 import codepipeline_actions = require('@aws-cdk/aws-codepipeline-actions');
 import ecs = require('@aws-cdk/aws-ecs');
 import ecsPatterns = require('@aws-cdk/aws-ecs-patterns');
-import codecommit = require('@aws-cdk/aws-codecommit');
 import { CodeBuildProject } from '@aws-cdk/aws-events-targets';
 import { Duration } from '@aws-cdk/core';
 
-const DOCKER_IMAGE_PREFIX = 'fargate-cicd-sample'
-const CODECOMMIT_REPO_NAME = 'fargate-cicd-sample'
+const DOCKER_IMAGE_PREFIX = 'solid-humank-coffeeshop'
+const CODECOMMIT_REPO_NAME = 'EventStormingWorkshop'
 
 export class CoffeeShopCodePipeline extends cdk.Stack {
     readonly ecrRepository: ecr.Repository
@@ -118,7 +117,7 @@ export class CoffeeShopCodePipeline extends cdk.Stack {
         });
 
         expressContainer.addPortMappings({
-            containerPort: 3000
+            containerPort: 8080
         });
 
         const fargatesvc = new ecsPatterns.ApplicationLoadBalancedFargateService(this, 'express', {
@@ -173,9 +172,9 @@ export class CoffeeShopCodePipeline extends cdk.Stack {
             output: sourceOutputEcr,
         });
 
-        const codecommitRepo = new codecommit.Repository(this, 'GitRepo', {
-            repositoryName: CODECOMMIT_REPO_NAME
-        });
+        // const codecommitRepo = new codecommit.Repository(this, 'GitRepo', {
+        //     repositoryName: CODECOMMIT_REPO_NAME
+        // });
 
         const sourceActionCodeCommit = new codepipeline_actions.CodeCommitSourceAction({
             actionName: 'CodeCommit',

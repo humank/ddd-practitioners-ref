@@ -121,10 +121,13 @@ public class Order extends AggregateRoot<OrderId> {
 
     public static Order create(CreateOrder cmd) throws AggregateException {
 
-        Order order = new Order(cmd.getId(), cmd.getTableNo(), cmd.getStatus(), cmd.getItems(), OffsetDateTime.now());
+        Order order =
+                new Order(cmd.getId(), cmd.getTableNo(), cmd.getStatus(), cmd.getItems(), OffsetDateTime.now());
         OrderPolicy.Verify(order);
 
-        OrderCreated orderCreated = new OrderCreated(order.getId(), order.tableNo, order.orderItems, order.createdDate);
+        OrderCreated orderCreated =
+                new OrderCreated(order.getId(), order.tableNo, order.orderItems, order.createdDate);
+
         order.applyEvent(orderCreated);
         return order;
     }
