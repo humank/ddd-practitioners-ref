@@ -51,7 +51,7 @@ export class CoffeeShopCodePipeline extends cdk.Stack {
         this.ecrRepository.addLifecycleRule({maxImageAge: cdk.Duration.days(30)});
 
         const defaultSource = codebuild.Source.gitHub({
-            owner: 'humank',
+            owner: 'humank',   
             repo: 'EventStormingWorkshop',
             webhook: true, // optional, default: true if `webhookFilteres` were provided, false otherwise
             webhookFilters: [
