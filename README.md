@@ -1,5 +1,5 @@
 # Implementing Domain Driven Design (DDD) on AWS
-
+         
 ![image](docs/img/coffee.jpg)
 _Picture license-free from [Pexels](https://www.pexels.com/photo/background-beverage-breakfast-brown-414645/)_
 
