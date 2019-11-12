@@ -12,7 +12,7 @@ import {CodeBuildProject} from '@aws-cdk/aws-events-targets';
 import {Duration} from '@aws-cdk/core';
 import {Vpc} from '@aws-cdk/aws-ec2';
 
-const DOCKER_IMAGE_PREFIX = 'solid-humank-coffeeshop'
+const DOCKER_IMAGE_PREFIX = 'solid-humank-coffeeshop/orders-web'
 const CODECOMMIT_REPO_NAME = 'EventStormingWorkshop'
 
 export interface FargateCICDProps extends cdk.StackProps {
@@ -94,9 +94,9 @@ export class CoffeeShopCodePipeline extends cdk.Stack {
                             'echo "build orders-web docker image"',
                             'cd orders-web',
                             'mvn package -Dmaven.test.skip=true',
-                            `docker build -f src/main/docker/Dockerfile.jvm -t ${this.ecrRepository.repositoryUri}/orders-web:$LATEST .`,
+                            `docker build -f src/main/docker/Dockerfile.jvm -t ${this.ecrRepository.repositoryUri}:$LATEST .`,
                             `docker images`,
-                            `docker tag ${this.ecrRepository.repositoryUri}/orders-web:$LATEST ${this.ecrRepository.repositoryUri}/orders-web:$TAG`,
+                            `docker tag ${this.ecrRepository.repositoryUri}:$LATEST ${this.ecrRepository.repositoryUri}:$TAG`,
                             'echo "Pushing Orders-web"',
                             `docker images`,
                             `docker push ${this.ecrRepository.repositoryUri}:$TAG`,
@@ -129,17 +129,24 @@ export class CoffeeShopCodePipeline extends cdk.Stack {
             vpc
         });
 
+
+
         const taskDefinition = new ecs.TaskDefinition(this, 'orders-web-Task', {
             compatibility: ecs.Compatibility.FARGATE,
             memoryMiB: '512',
             cpu: '256',
+
             executionRole: new iam.Role(this, 'ExecutionRole', {
                 assumedBy: new iam.ServicePrincipal('ecs-tasks.amazonaws.com'),
             }),
         });
 
         taskDefinition.addContainer('defaultContainer', {
-            image: ecs.ContainerImage.fromRegistry('amazon/amazon-ecs-sample')
+            image: ecs.ContainerImage.fromRegistry('amazon/amazon-ecs-sample'),
+            logging: new ecs.AwsLogDriver({
+                streamPrefix: 'coffeeshop-orders-web',
+
+            })
         }).addPortMappings({
             containerPort: 8080
         });
