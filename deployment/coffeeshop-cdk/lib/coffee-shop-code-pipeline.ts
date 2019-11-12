@@ -55,7 +55,7 @@ export class CoffeeShopCodePipeline extends cdk.Stack {
             repo: 'EventStormingWorkshop',
             webhook: true, // optional, default: true if `webhookFilteres` were provided, false otherwise
             webhookFilters: [
-                codebuild.FilterGroup.inEventOf(codebuild.EventAction.PUSH).andBranchIs('dev'),
+                codebuild.FilterGroup.inEventOf(codebuild.EventAction.PUSH).andBranchIs('master'),
             ], // optional, by default all pushes and Pull Requests will trigger a build
         });
 
