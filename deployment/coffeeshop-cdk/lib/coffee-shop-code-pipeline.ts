@@ -131,6 +131,22 @@ export class CoffeeShopCodePipeline extends cdk.Stack {
         });
 
 
+        const orders_web_role = new iam.Role(this, 'ExecutionRole',{
+            assumedBy: new iam.ServicePrincipal('ecs-tasks.amazonaws.com'),
+        });
+
+        orders_web_role.addToPolicy(new iam.PolicyStatement({
+            resources: [
+                '*'
+            ],
+            actions: [
+                'logs:*',
+                'dynamodb:*',
+                'events:*',
+                'cloudwatch:*',
+                'xray:*',
+            ]
+        }));
 
         const taskDefinition = new ecs.TaskDefinition(this, 'orders-web-Task', {
             compatibility: ecs.Compatibility.FARGATE,
@@ -138,7 +154,8 @@ export class CoffeeShopCodePipeline extends cdk.Stack {
             cpu: '256',
 
             executionRole: new iam.Role(this, 'ExecutionRole', {
-                assumedBy: new iam.ServicePrincipal('ecs-tasks.amazonaws.com'),
+                //assumedBy: new iam.ServicePrincipal('ecs-tasks.amazonaws.com'),
+                assumedBy: orders_web_role,
             }),
         });
 
