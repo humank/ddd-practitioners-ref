@@ -62,6 +62,7 @@ export class CoffeeShopCodePipeline extends cdk.Stack {
 
         new codebuild.Project(this, 'CodeBuildProject', {
             role: buildRole,
+
             source: props.source || defaultSource,
             // Enable Docker AND custom caching
             cache: codebuild.Cache.local(codebuild.LocalCacheMode.DOCKER_LAYER, codebuild.LocalCacheMode.CUSTOM),
