@@ -131,20 +131,21 @@ export class CoffeeShopCodePipeline extends cdk.Stack {
         });
 
 
-        const orders_web_role = new iam.Role(this, 'ExecutionRole',{
+        const orders_web_role = new iam.Role(this, 'OrdersWebRole',{
             assumedBy: new iam.ServicePrincipal('ecs-tasks.amazonaws.com'),
+
         });
 
         orders_web_role.addToPolicy(new iam.PolicyStatement({
             resources: [
-                '*'
+                'arn:aws:dynamodb:::*'
             ],
             actions: [
                 'logs:*',
                 'dynamodb:*',
                 'events:*',
                 'cloudwatch:*',
-                'xray:*',
+                'xray:*', "cloudwatch:*"
             ]
         }));
 
