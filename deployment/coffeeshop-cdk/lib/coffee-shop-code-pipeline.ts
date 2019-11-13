@@ -1,5 +1,4 @@
 import cdk = require('@aws-cdk/core');
-import ec2 = require('@aws-cdk/aws-ec2');
 import ecr = require('@aws-cdk/aws-ecr');
 import iam = require('@aws-cdk/aws-iam');
 import codebuild = require('@aws-cdk/aws-codebuild');
@@ -11,31 +10,26 @@ import codecommit = require('@aws-cdk/aws-codecommit');
 import {CodeBuildProject} from '@aws-cdk/aws-events-targets';
 import {Duration} from '@aws-cdk/core';
 import {Vpc} from '@aws-cdk/aws-ec2';
+import dynamodb = require('@aws-cdk/aws-dynamodb');
+import events = require('@aws-cdk/aws-events');
+import {Rule} from "@aws-cdk/aws-events";
 
 const DOCKER_IMAGE_PREFIX = 'solid-humank-coffeeshop/orders-web'
 const CODECOMMIT_REPO_NAME = 'EventStormingWorkshop'
 
-export interface FargateCICDProps extends cdk.StackProps {
-    source?: codebuild.ISource,
-    repositoryName?: string,
-    defaultVpc?: boolean
-}
-
 export class CoffeeShopCodePipeline extends cdk.Stack {
+
     readonly ecrRepository: ecr.Repository
-
-    constructor(scope: cdk.Construct, id: string, props: FargateCICDProps) {
+    constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
         super(scope, id, props);
-
         this.ecrRepository = new ecr.Repository(this, 'Repository', {
-            //repositoryName: props.repositoryName || `${DOCKER_IMAGE_PREFIX}-${this.stackName.toLowerCase()}`,
             repositoryName: DOCKER_IMAGE_PREFIX,
-            //
         });
 
         const buildRole = new iam.Role(this, 'CodeBuildIamRole', {
             assumedBy: new iam.ServicePrincipal('codebuild.amazonaws.com')
-        })
+        });
+
         buildRole.addToPolicy(new iam.PolicyStatement({
             resources: ['*'],
             actions: ['ecr:GetAuthorizationToken']
@@ -46,7 +40,7 @@ export class CoffeeShopCodePipeline extends cdk.Stack {
             actions: ['ecr:*']
         }));
 
-        // ECR Lifecycles
+        // ECR LifeCycles
         // repository.addLifecycleRule({ tagPrefixList: ['prod'], maxImageCount: 9999 });
         this.ecrRepository.addLifecycleRule({maxImageAge: cdk.Duration.days(30)});
 
@@ -62,8 +56,7 @@ export class CoffeeShopCodePipeline extends cdk.Stack {
 
         new codebuild.Project(this, 'CodeBuildProject', {
             role: buildRole,
-
-            source: props.source || defaultSource,
+            source: defaultSource,
             // Enable Docker AND custom caching
             cache: codebuild.Cache.local(codebuild.LocalCacheMode.DOCKER_LAYER, codebuild.LocalCacheMode.CUSTOM),
             environment: {
@@ -115,15 +108,10 @@ export class CoffeeShopCodePipeline extends cdk.Stack {
             })
         });
 
-        // const vpc = ec2.Vpc.fromLookup(this, 'VPC', {
-        //     isDefault: true
-        // })
-
-        const vpc = props.defaultVpc === undefined ?
-            Vpc.fromLookup(this, 'CoffeeShopCdkStack/CoffeeShopVPC',{
+        const vpc = Vpc.fromLookup(this, 'CoffeeShopCdkStack/CoffeeShopVPC',{
                 vpcName: 'CoffeeShopCdkStack/CoffeeShopVPC',
                 isDefault: false,
-            }) : new ec2.Vpc(this, 'VPC');
+            });
 
         const cluster = new ecs.Cluster(this, 'Cluster', {
             clusterName: 'coffeeshop',
@@ -131,34 +119,36 @@ export class CoffeeShopCodePipeline extends cdk.Stack {
         });
 
 
-        const orders_web_role = new iam.Role(this, 'OrdersWebRole',{
+        const orders_web_role = new iam.Role(this, 'ExecutionRole',{
             assumedBy: new iam.ServicePrincipal('ecs-tasks.amazonaws.com'),
-
+            
         });
 
-        orders_web_role.addToPolicy(new iam.PolicyStatement({
-            resources: [
-                'arn:aws:dynamodb:::*'
-            ],
-            actions: [
-                'logs:*',
-                'dynamodb:*',
-                'events:*',
-                'cloudwatch:*',
-                'xray:*', "cloudwatch:*"
-            ]
-        }));
+        const table = new dynamodb.Table(this, 'Order', {
+            partitionKey: { name: 'seqNo', type: dynamodb.AttributeType.NUMBER }
+        });
+
+        table.grantFullAccess(orders_web_role);
+
+        const coffeeshop_eventbus = new events.EventBus(this, 'EventBus',{
+            eventBusName:'coffeeshop-event-bus',
+        });
+
+        const rule = new Rule(this, '',{
+            eventPattern:{
+                source:['{"detail-type": [ "customevent" ],"source": ["solid.humank.coffeeshop.order"]}'
+                ]
+            },
+            eventBus: coffeeshop_eventbus,
+            ruleName: 'OrderCreatedRule'
+        });
 
         const taskDefinition = new ecs.TaskDefinition(this, 'orders-web-Task', {
             compatibility: ecs.Compatibility.FARGATE,
             memoryMiB: '512',
             cpu: '256',
-
-            executionRole: new iam.Role(this, 'ExecutionRole', {
-                //assumedBy: new iam.ServicePrincipal('ecs-tasks.amazonaws.com'),
-                assumedBy: orders_web_role,
-            }),
-        });
+            executionRole: orders_web_role,
+            });
 
         taskDefinition.addContainer('defaultContainer', {
             image: ecs.ContainerImage.fromRegistry('amazon/amazon-ecs-sample'),

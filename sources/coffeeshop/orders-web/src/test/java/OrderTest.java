@@ -33,4 +33,10 @@ public class OrderTest {
                 .assertThat()
                 .statusCode(201);
     }
+
+    @Test
+    public void tesPrint(){
+        String s = "{\\\"detail-type\\\": [ \\\"customevent\\\" ],\\\"source\\\": [\\\"solid.humank.coffeeshop.order\\\"]}";
+        System.out.println(s);
+    }
 }

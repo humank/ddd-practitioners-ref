@@ -11,8 +11,8 @@
     "cdk": "cdk"
   },
   "devDependencies": {
-    "aws-cdk": "^1.15.0",
-    "@aws-cdk/assert": "^1.6.1",
+    "aws-cdk": "^1.16.2",
+    "@aws-cdk/assert": "^1.16.2",
     "@types/jest": "^24.0.18",
     "jest": "^24.9.0",
     "ts-jest": "^24.0.2",
@@ -20,14 +20,19 @@
     "typescript": "~3.6.2"
   },
   "dependencies": {
-    "@aws-cdk/aws-ec2": "^1.15.0",
-    "@aws-cdk/aws-ecs": "^1.15.0",
-    "@aws-cdk/aws-ecs-patterns": "^1.15.0",
-    "@aws-cdk/aws-elasticloadbalancingv2": "^1.15.0",
-    "@aws-cdk/aws-codedeploy": "^1.15.0",
-    "@aws-cdk/aws-codepipeline": "^1.15.0",
-    "@aws-cdk/aws-codepipeline-actions": "^1.15.0",
-    "@aws-cdk/aws-codebuild": "^1.15.0",
-    "@aws-cdk/core": "^1.15.0"
+    "@aws-cdk/aws-codebuild": "^1.16.2",
+    "@aws-cdk/aws-codedeploy": "^1.16.2",
+    "@aws-cdk/aws-codepipeline": "^1.16.2",
+    "@aws-cdk/aws-codepipeline-actions": "^1.16.2",
+    "@aws-cdk/aws-dynamodb": "^1.16.2",
+    "@aws-cdk/aws-ec2": "^1.16.2",
+    "@aws-cdk/aws-ecs": "^1.16.2",
+    "@aws-cdk/aws-ecs-patterns": "^1.16.2",
+    "@aws-cdk/aws-elasticloadbalancingv2": "^1.16.2",
+    "@aws-cdk/aws-events": "^1.16.2",
+    "@aws-cdk/core": "^1.16.2",
+    "@aws-cdk/cx-api": "^1.16.2",
+    "@aws-cdk/region-info": "^1.16.2",
+    "@types/node": "^12.12.7"
   }
 }
