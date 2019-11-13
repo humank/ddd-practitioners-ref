@@ -1,7 +1,5 @@
 # Implementing Domain Driven Design (DDD) on AWS
 
-<<Auto build>>
-
 ![image](docs/img/coffee.jpg) .         
 _Picture license-free from [Pexels](https://www.pexels.com/photo/background-beverage-breakfast-brown-414645/)_
 
@@ -34,6 +32,7 @@ As a developer, knowing how to narrow this gap can help you go a long way to bui
   - [Running on AWS](docs/04-modeling-and-development/README.md#running-on-aws)
   - [Design each Microservices in Port-adapter concept](docs/04-modeling-and-development/README.md#design-each-microservices-in-port-adapter-concept)
   - [Running on AWS](docs/04-modeling-and-development/README.md#running-on-aws)
+- [05 - Deploy Applications by AWS CDK]  
 <!---
 - [05 - Domain Driven Design Tactical design pattern guidance](05-ddd-tactical-design-pattern)
 - [06 - Actual Implementation](06-actual-implementation)

@@ -47,7 +47,7 @@ export class CoffeeShopCodePipeline extends cdk.Stack {
 
         const defaultSource = codebuild.Source.gitHub({
             owner: 'humank',
-            repo: 'EventStormingWorkshop',
+            repo: 'EventStormingWorkShop',
             webhook: true, // optional, default: true if `webhookFilteres` were provided, false otherwise
             webhookFilters: [
                 codebuild.FilterGroup.inEventOf(codebuild.EventAction.PUSH).andBranchIs('master'),
