@@ -11,5 +11,5 @@ const env = {
 };
 
 new CoffeeShopCdkStack(app, 'CoffeeShopCdkStack', {env});
-new CoffeeShopCodePipeline(app, 'CoffeeShopCodePipeline',{env});
+new CoffeeShopCodePipeline(app,'CoffeeShopCodePipeline',{env});
 

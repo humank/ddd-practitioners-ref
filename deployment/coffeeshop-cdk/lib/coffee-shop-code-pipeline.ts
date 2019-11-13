@@ -13,6 +13,7 @@ import {Vpc} from '@aws-cdk/aws-ec2';
 import * as dynamodb from '@aws-cdk/aws-dynamodb';
 import * as events from '@aws-cdk/aws-events';
 import {Rule} from "@aws-cdk/aws-events";
+import * as ssm from '@aws-cdk/aws-ssm';
 
 const DOCKER_IMAGE_PREFIX = 'solid-humank-coffeeshop/orders-web'
 const CODECOMMIT_REPO_NAME = 'EventStormingWorkshop'
@@ -142,7 +143,10 @@ export class CoffeeShopCodePipeline extends cdk.Stack {
         })
 
         const fargateTaskRole = fargatesvc.service.taskDefinition.taskRole;
-
+        fargateTaskRole.addToPolicy(new iam.PolicyStatement({
+            resources: ['*'],
+            actions: ['events:*']
+        }));
         const table = new dynamodb.Table(this, 'Order', {
             partitionKey: { name: 'seqNo', type: dynamodb.AttributeType.NUMBER },
             billingMode: dynamodb.BillingMode.PAY_PER_REQUEST,
@@ -152,8 +156,9 @@ export class CoffeeShopCodePipeline extends cdk.Stack {
         table.grantFullAccess(fargateTaskRole);
 
 
-        const coffeeshop_eventbus = new events.EventBus(this, 'EventBus',{
-            eventBusName:'coffeeshop-event-bus',
+
+        const coffeeshop_eventbus = new events.EventBus(this, 'EventBus', {
+            eventBusName: 'coffeeshop-event-bus',
         });
 
         const rule = new Rule(this, 'OrderCreatedRule',{
@@ -164,6 +169,26 @@ export class CoffeeShopCodePipeline extends cdk.Stack {
             eventBus: coffeeshop_eventbus,
             ruleName: 'OrderCreatedRule'
         });
+
+
+
+        //add ssm parameter store for cloudwatchevent put usage
+        const eventSourceParam = new ssm.StringParameter(this, 'eventSourceParam', {
+            parameterName: '/coffeeshop/events/ordercreated/event_source',
+            stringValue: 'solid.humank.coffeeshop.order',
+        });
+
+        // Grant read access to some Role
+        eventSourceParam.grantRead(fargateTaskRole);
+
+        //add ssm parameter store for cloudwatchevent put usage
+        const eventArnParam = new ssm.StringParameter(this, 'eventArnParam', {
+            parameterName: '/coffeeshop/events/ordercreated/event_arn',
+            stringValue: rule.ruleArn,
+        });
+
+        // Grant read access to some Role
+        eventArnParam.grantRead(fargateTaskRole);
 
         // if the default image is not from ECR, the ECS task execution role will not have ECR pull privileges
         // we need grant the pull for it explicitly

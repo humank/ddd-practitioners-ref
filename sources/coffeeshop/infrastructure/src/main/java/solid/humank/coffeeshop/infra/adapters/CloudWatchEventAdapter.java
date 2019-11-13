@@ -7,6 +7,7 @@ import software.amazon.awssdk.services.cloudwatchevents.CloudWatchEventsClient;
 import software.amazon.awssdk.services.cloudwatchevents.model.PutEventsRequest;
 import software.amazon.awssdk.services.cloudwatchevents.model.PutEventsRequestEntry;
 import software.amazon.awssdk.services.cloudwatchevents.model.PutEventsResponse;
+import software.amazon.awssdk.services.ssm.SsmClient;
 import solid.humank.ddd.commons.baseclasses.DomainEvent;
 import solid.humank.ddd.commons.utilities.DomainModelMapper;
 
@@ -24,18 +25,14 @@ public class CloudWatchEventAdapter {
 
     String propFileName = "META-INF/resources/cloudwatchevents.properties";
 
+    SsmClient client = SsmClient.create();
+
     public PublishResult publishEvent(DomainEvent occurredEvent) {
         String eventJson = null;
-        //            ObjectMapper objectMapper = new ObjectMapper();
 
         DomainModelMapper mapper = new DomainModelMapper();
-
-//                    .registerModule(new JavaTimeModule())
-//                    .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
-
-        //eventJson = objectMapper.writeValueAsString(occurredEvent);
         eventJson = mapper.writeToJsonString(occurredEvent);
-        logger.info(eventJson);
+
         if (eventJson == null) {
             return new PublishResult("Malformed format of Event");
         }
@@ -44,17 +41,17 @@ public class CloudWatchEventAdapter {
 
     private PublishResult putEvent(String eventContent) {
 
-        CloudWatchEventsClient cwe =
-                CloudWatchEventsClient.builder().build();
+        CloudWatchEventsClient cwe = CloudWatchEventsClient.builder().build();
+
         try {
             Properties cweProp = getCWEParameters();
-
             PutEventsRequestEntry request_entry = PutEventsRequestEntry.builder()
 
                     .detail(eventContent)
-                    .detailType(cweProp.getProperty("EVENT_TYPE"))
-                    .resources(cweProp.getProperty("RESOURCE_ARN"))
-                    .source(cweProp.getProperty("EVENT_SOURCE")).build();
+                    .detailType("customevent")
+                    .resources(SSMUtil.getParameter(cweProp.getProperty("ORDER_CREATED_RESOURCE_ARN")))
+                    .source(SSMUtil.getParameter(cweProp.getProperty("ORDER_CREATED_EVENT_SOURCE")))
+                    .build();
 
             PutEventsRequest request = PutEventsRequest.builder()
                     .entries(request_entry).build();
