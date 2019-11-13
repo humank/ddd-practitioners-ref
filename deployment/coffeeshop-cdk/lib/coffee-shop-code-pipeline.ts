@@ -1,17 +1,17 @@
-import cdk = require('@aws-cdk/core');
-import ecr = require('@aws-cdk/aws-ecr');
-import iam = require('@aws-cdk/aws-iam');
-import codebuild = require('@aws-cdk/aws-codebuild');
-import codepipeline = require('@aws-cdk/aws-codepipeline');
-import codepipeline_actions = require('@aws-cdk/aws-codepipeline-actions');
-import ecs = require('@aws-cdk/aws-ecs');
-import ecsPatterns = require('@aws-cdk/aws-ecs-patterns');
-import codecommit = require('@aws-cdk/aws-codecommit');
+import * as cdk from '@aws-cdk/core';
+import * as ecr from '@aws-cdk/aws-ecr';
+import * as iam from '@aws-cdk/aws-iam';
+import * as codebuild  from '@aws-cdk/aws-codebuild';
+import * as codepipeline from '@aws-cdk/aws-codepipeline';
+import * as codepipeline_actions from '@aws-cdk/aws-codepipeline-actions';
+import * as ecs from '@aws-cdk/aws-ecs';
+import * as ecsPatterns from '@aws-cdk/aws-ecs-patterns';
+import * as codecommit from '@aws-cdk/aws-codecommit';
 import {CodeBuildProject} from '@aws-cdk/aws-events-targets';
 import {Duration} from '@aws-cdk/core';
 import {Vpc} from '@aws-cdk/aws-ec2';
-import dynamodb = require('@aws-cdk/aws-dynamodb');
-import events = require('@aws-cdk/aws-events');
+import * as dynamodb from '@aws-cdk/aws-dynamodb';
+import * as events from '@aws-cdk/aws-events';
 import {Rule} from "@aws-cdk/aws-events";
 
 const DOCKER_IMAGE_PREFIX = 'solid-humank-coffeeshop/orders-web'
@@ -20,7 +20,7 @@ const CODECOMMIT_REPO_NAME = 'EventStormingWorkshop'
 export class CoffeeShopCodePipeline extends cdk.Stack {
 
     readonly ecrRepository: ecr.Repository
-    constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
+    constructor(scope: cdk.App, id: string, props?: cdk.StackProps) {
         super(scope, id, props);
         this.ecrRepository = new ecr.Repository(this, 'Repository', {
             repositoryName: DOCKER_IMAGE_PREFIX,
