@@ -19,7 +19,7 @@
         <junit5.version>5.5.2</junit5.version>
         <junit.platform.version>1.5.2</junit.platform.version>
         <lombok.version>1.18.10</lombok.version>
-        <quarkus.version>0.25.0</quarkus.version>
+        <quarkus.version>1.0.0.CR1</quarkus.version>
         <maven-surefire-plugin>2.22.2</maven-surefire-plugin>
         <cucumber.java.version>4.8.0</cucumber.java.version>
         <mockito.core.version>3.1.0</mockito.core.version>

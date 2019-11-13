@@ -28,7 +28,7 @@
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-junit5</artifactId>
-      <version>0.25.0</version>
+      <version>1.0.0.CR1</version>
       <scope>test</scope>
       <exclusions>
         <exclusion>
@@ -53,6 +53,10 @@
       <exclusions>
         <exclusion>
           <artifactId>activation</artifactId>
+          <groupId>javax.activation</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>javax.activation-api</artifactId>
           <groupId>javax.activation</groupId>
         </exclusion>
         <exclusion>

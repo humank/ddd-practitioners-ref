@@ -23,7 +23,7 @@ public class CloudWatchEventAdapter {
 
     Logger logger = LoggerFactory.getLogger(CloudWatchEventAdapter.class);
 
-    String propFileName = "META-INF/resources/cloudwatchevents.properties";
+    String propFileName = "cloudwatchevents.properties";
 
     SsmClient client = SsmClient.create();
 
