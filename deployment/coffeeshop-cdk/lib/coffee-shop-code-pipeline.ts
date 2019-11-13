@@ -109,9 +109,9 @@ export class CoffeeShopCodePipeline extends cdk.Stack {
         });
 
         const vpc = Vpc.fromLookup(this, 'CoffeeShopCdkStack/CoffeeShopVPC',{
-                vpcName: 'CoffeeShopCdkStack/CoffeeShopVPC',
-                isDefault: false,
-            });
+            vpcName: 'CoffeeShopCdkStack/CoffeeShopVPC',
+            isDefault: false,
+        });
 
         const cluster = new ecs.Cluster(this, 'Cluster', {
             clusterName: 'coffeeshop',
@@ -121,7 +121,7 @@ export class CoffeeShopCodePipeline extends cdk.Stack {
 
         const orders_web_role = new iam.Role(this, 'ExecutionRole',{
             assumedBy: new iam.ServicePrincipal('ecs-tasks.amazonaws.com'),
-            
+
         });
 
         const table = new dynamodb.Table(this, 'Order', {
@@ -134,7 +134,7 @@ export class CoffeeShopCodePipeline extends cdk.Stack {
             eventBusName:'coffeeshop-event-bus',
         });
 
-        const rule = new Rule(this, '',{
+        const rule = new Rule(this, 'OrderCreatedRule',{
             eventPattern:{
                 source:['{"detail-type": [ "customevent" ],"source": ["solid.humank.coffeeshop.order"]}'
                 ]
@@ -148,7 +148,7 @@ export class CoffeeShopCodePipeline extends cdk.Stack {
             memoryMiB: '512',
             cpu: '256',
             executionRole: orders_web_role,
-            });
+        });
 
         taskDefinition.addContainer('defaultContainer', {
             image: ecs.ContainerImage.fromRegistry('amazon/amazon-ecs-sample'),

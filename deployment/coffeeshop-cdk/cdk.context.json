@@ -38,5 +38,53 @@
       "rtb-0adca927553a06c9e",
       "rtb-0ccf83144d952171f"
     ]
+  },
+  "vpc-provider:account=584518143473:filter.isDefault=false:filter.tag:Name=CoffeeShopCdkStack/CoffeeShopVPC:region=us-west-2:returnAsymmetricSubnets=true": {
+    "vpcId": "vpc-01edd8dfac7dc7e27",
+    "availabilityZones": [],
+    "subnetGroups": [
+      {
+        "name": "Public",
+        "type": "Public",
+        "subnets": [
+          {
+            "subnetId": "subnet-0a530988b5f57e0bc",
+            "availabilityZone": "us-west-2a",
+            "routeTableId": "rtb-0e796cc07b51fd367"
+          },
+          {
+            "subnetId": "subnet-05bc63e5b5f37d2a9",
+            "availabilityZone": "us-west-2b",
+            "routeTableId": "rtb-0adca927553a06c9e"
+          },
+          {
+            "subnetId": "subnet-0b5765cd3c7f3ba70",
+            "availabilityZone": "us-west-2c",
+            "routeTableId": "rtb-0ccf83144d952171f"
+          }
+        ]
+      },
+      {
+        "name": "Private",
+        "type": "Private",
+        "subnets": [
+          {
+            "subnetId": "subnet-0ae13b56ad5af18c6",
+            "availabilityZone": "us-west-2a",
+            "routeTableId": "rtb-0d94980210323a780"
+          },
+          {
+            "subnetId": "subnet-0a2cb9eceec509d9b",
+            "availabilityZone": "us-west-2b",
+            "routeTableId": "rtb-01ce73a2535b5c7ed"
+          },
+          {
+            "subnetId": "subnet-0ab4c461aaf45a383",
+            "availabilityZone": "us-west-2c",
+            "routeTableId": "rtb-0a6c199c455b3a914"
+          }
+        ]
+      }
+    ]
   }
 }
