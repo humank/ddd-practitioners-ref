@@ -119,35 +119,11 @@ export class CoffeeShopCodePipeline extends cdk.Stack {
         });
 
 
-        const orders_web_role = new iam.Role(this, 'ExecutionRole',{
-            assumedBy: new iam.ServicePrincipal('ecs-tasks.amazonaws.com'),
-
-        });
-
-        const table = new dynamodb.Table(this, 'Order', {
-            partitionKey: { name: 'seqNo', type: dynamodb.AttributeType.NUMBER }
-        });
-
-        table.grantFullAccess(orders_web_role);
-
-        const coffeeshop_eventbus = new events.EventBus(this, 'EventBus',{
-            eventBusName:'coffeeshop-event-bus',
-        });
-
-        const rule = new Rule(this, 'OrderCreatedRule',{
-            eventPattern:{
-                source:['{"detail-type": [ "customevent" ],"source": ["solid.humank.coffeeshop.order"]}'
-                ]
-            },
-            eventBus: coffeeshop_eventbus,
-            ruleName: 'OrderCreatedRule'
-        });
 
         const taskDefinition = new ecs.TaskDefinition(this, 'orders-web-Task', {
             compatibility: ecs.Compatibility.FARGATE,
             memoryMiB: '512',
             cpu: '256',
-            executionRole: orders_web_role,
         });
 
         taskDefinition.addContainer('defaultContainer', {
@@ -164,6 +140,30 @@ export class CoffeeShopCodePipeline extends cdk.Stack {
             cluster,
             taskDefinition,
         })
+
+        const fargateTaskRole = fargatesvc.service.taskDefinition.taskRole;
+
+        const table = new dynamodb.Table(this, 'Order', {
+            partitionKey: { name: 'seqNo', type: dynamodb.AttributeType.NUMBER },
+            billingMode: dynamodb.BillingMode.PAY_PER_REQUEST,
+            tableName: 'Order',
+        });
+
+        table.grantFullAccess(fargateTaskRole);
+
+
+        const coffeeshop_eventbus = new events.EventBus(this, 'EventBus',{
+            eventBusName:'coffeeshop-event-bus',
+        });
+
+        const rule = new Rule(this, 'OrderCreatedRule',{
+            eventPattern:{
+                source:['{"detail-type": [ "customevent" ],"source": ["solid.humank.coffeeshop.order"]}'
+                ]
+            },
+            eventBus: coffeeshop_eventbus,
+            ruleName: 'OrderCreatedRule'
+        });
 
         // if the default image is not from ECR, the ECS task execution role will not have ECR pull privileges
         // we need grant the pull for it explicitly
