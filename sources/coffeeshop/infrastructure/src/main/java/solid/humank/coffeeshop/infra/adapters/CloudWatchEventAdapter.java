@@ -69,8 +69,6 @@ public class CloudWatchEventAdapter {
         return new PublishResult("AWS Cloud Watch Events configuration is not correct. The event is not published:" + eventContent);
     }
 
-    //TODO : Move the parameters to AWS ParameterStore
-
     private Properties getCWEParameters() throws FileNotFoundException {
 
         InputStream inputStream;
