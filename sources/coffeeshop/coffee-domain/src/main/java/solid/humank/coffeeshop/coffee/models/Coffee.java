@@ -1,11 +1,18 @@
 package solid.humank.coffeeshop.coffee.models;
 
 
-import solid.humank.coffeeshop.orders.Order;
+import solid.humank.coffeeshop.coffee.commands.MakeCoffee;
+
+import java.util.List;
 
 public class Coffee {
 
     String tableNo;
-    Order belongstoOrder;
+    String orderId;
 
+    public Coffee(String productId) {
+    }
+
+    public static void make(MakeCoffee cmd) {
+    }
 }
