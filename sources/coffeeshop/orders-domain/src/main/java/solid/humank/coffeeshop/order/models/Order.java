@@ -13,7 +13,6 @@
 
 package solid.humank.coffeeshop.order.models;
 
-import com.google.gson.Gson;
 import io.quarkus.runtime.annotations.RegisterForReflection;
 import lombok.AccessLevel;
 import lombok.Getter;

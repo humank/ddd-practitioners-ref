@@ -2,7 +2,6 @@ package solid.humank.coffeeshop.order.models;
 
 import solid.humank.ddd.commons.baseclasses.EntityId;
 
-import javax.enterprise.context.Dependent;
 import java.time.OffsetDateTime;
 
 public class OrderId extends EntityId {

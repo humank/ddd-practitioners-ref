@@ -6,7 +6,6 @@ import solid.humank.coffeeshop.order.models.Order;
 import solid.humank.coffeeshop.order.models.OrderId;
 import solid.humank.coffeeshop.order.models.OrderItem;
 import solid.humank.coffeeshop.order.models.OrderStatus;
-import solid.humank.ddd.commons.utilities.DateTimeUtil;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;

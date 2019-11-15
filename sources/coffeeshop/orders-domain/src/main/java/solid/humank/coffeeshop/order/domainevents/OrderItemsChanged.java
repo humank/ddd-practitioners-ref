@@ -7,7 +7,6 @@ import solid.humank.ddd.commons.baseclasses.DomainEvent;
 import solid.humank.ddd.commons.baseclasses.EntityId;
 
 import java.time.OffsetDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 public class OrderItemsChanged extends DomainEvent {

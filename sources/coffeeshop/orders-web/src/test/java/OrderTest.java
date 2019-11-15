@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 import solid.humank.coffeeshop.order.models.requests.AddOrderReq;
 import solid.humank.coffeeshop.order.models.requestsmodels.OrderItemRM;
 
-import javax.ws.rs.core.MediaType;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;

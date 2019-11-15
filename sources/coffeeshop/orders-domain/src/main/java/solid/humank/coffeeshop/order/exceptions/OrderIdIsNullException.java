@@ -1,6 +1,5 @@
 package solid.humank.coffeeshop.order.exceptions;
 
-import solid.humank.coffeeshop.order.OrderErrorCode;
 import solid.humank.ddd.commons.baseclasses.DomainException;
 
 public class OrderIdIsNullException extends DomainException {
