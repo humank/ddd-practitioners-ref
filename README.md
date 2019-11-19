@@ -32,7 +32,7 @@ As a developer, knowing how to narrow this gap can help you go a long way to bui
   - [Running on AWS](docs/04-modeling-and-development/README.md#running-on-aws)
   - [Design each Microservices in Port-adapter concept](docs/04-modeling-and-development/README.md#design-each-microservices-in-port-adapter-concept)
   - [Running on AWS](docs/04-modeling-and-development/README.md#running-on-aws)
-- [05 - Deploy Applications by AWS CDK]  
+- [05 - Deploy Applications by AWS CDK](docs/05-deploy-applications-by-cdk/README.md) 
 <!---
 - [05 - Domain Driven Design Tactical design pattern guidance](05-ddd-tactical-design-pattern)
 - [06 - Actual Implementation](06-actual-implementation)
