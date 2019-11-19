@@ -6,6 +6,8 @@ import solid.humank.ddd.commons.baseclasses.AggregateRoot;
 
 public abstract class AggregateRootMapper {
 
+    ;
+
     public abstract <T extends AggregateRoot> PutItemRequest buildPutItemRequest(T aggregateRoot);
 
     public abstract ScanRequest buildCountScanRequest();

@@ -1,7 +1,5 @@
 package solid.humank.coffeeshop.infra.repositories.orders;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import software.amazon.awssdk.services.dynamodb.model.AttributeValue;
@@ -11,6 +9,7 @@ import software.amazon.awssdk.services.dynamodb.model.Select;
 import solid.humank.coffeeshop.infra.repositories.AggregateRootMapper;
 import solid.humank.coffeeshop.order.models.Order;
 import solid.humank.ddd.commons.baseclasses.AggregateRoot;
+import solid.humank.ddd.commons.utilities.DomainModelMapper;
 
 import java.util.HashMap;
 
@@ -22,9 +21,9 @@ public class OrderDDBMapper extends AggregateRootMapper {
     @Override
     public <T extends AggregateRoot> PutItemRequest buildPutItemRequest(T aggregateRoot) {
         Order order = (Order) aggregateRoot;
-        Gson gson = new GsonBuilder().create();
+        DomainModelMapper mapper = new DomainModelMapper();
 
-        String orderItemsJson = gson.toJson(order.getOrderItems());
+        String orderItemsJson = mapper.writeToJsonString(order.getOrderItems());
 
         logger.info("orderItemsJson is:" + orderItemsJson);
         HashMap<String, AttributeValue> item_values = new HashMap();
@@ -45,7 +44,7 @@ public class OrderDDBMapper extends AggregateRootMapper {
     }
 
 
-   public ScanRequest buildCountScanRequest() {
+    public ScanRequest buildCountScanRequest() {
         ScanRequest scanRequest = ScanRequest.builder()
                 .tableName(TABLE_NAME)
                 .select(Select.COUNT)

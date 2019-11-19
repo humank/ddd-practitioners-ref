@@ -10,12 +10,11 @@ import java.util.List;
 public abstract class Entity<T extends EntityId> {
 
     @Getter(AccessLevel.PUBLIC)
+    protected List<DomainEvent<? extends EntityId>> domainEvents = new ArrayList<>();
+    @Getter(AccessLevel.PUBLIC)
     @Setter(AccessLevel.PROTECTED)
     T id;
-
     private boolean suppressEvent = false;
-    @Getter(AccessLevel.PUBLIC)
-    protected List<DomainEvent<? extends EntityId>> domainEvents = new ArrayList<>();
 
     protected void applyEvent(DomainEvent<T> event) {
         if (suppressEvent) return;

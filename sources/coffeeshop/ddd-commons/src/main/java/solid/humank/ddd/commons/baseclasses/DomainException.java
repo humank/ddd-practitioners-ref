@@ -6,12 +6,12 @@ public class DomainException extends Exception {
     private Enum errorCode;
     private String errorMessage;
 
-    public DomainException(String errorMessage){
+    public DomainException(String errorMessage) {
         super(errorMessage);
     }
 
-    public DomainException(String source, Enum errorCode ,String errorMessage, Throwable err){
-        super(errorMessage,err);
+    public DomainException(String source, Enum errorCode, String errorMessage, Throwable err) {
+        super(errorMessage, err);
         this.source = source;
         this.errorMessage = errorMessage;
         this.errorCode = errorCode;
@@ -25,8 +25,8 @@ public class DomainException extends Exception {
     }
 
     @Override
-    public String toString(){
-        return String.format("Code:%s - %s, Message: %s .",this.source,this.errorCode,this.errorMessage);
+    public String toString() {
+        return String.format("Code:%s - %s, Message: %s .", this.source, this.errorCode, this.errorMessage);
     }
 
 }

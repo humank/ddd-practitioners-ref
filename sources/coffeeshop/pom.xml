@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
 		 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
@@ -29,9 +29,9 @@
         <log4j.core>2.12.1</log4j.core>
         <log4j.api>2.12.1</log4j.api>
         <log4j.slf4j.impl>2.12.1</log4j.slf4j.impl>
-        <jackson.datatpye.jsr310>2.10.0</jackson.datatpye.jsr310>
+        <jackson.version>2.10.0</jackson.version>
 
-        <surefire-plugin.version>2.22.0</surefire-plugin.version>
+        <!--        <surefire-plugin.version>2.22.0</surefire-plugin.version>-->
         <maven.compiler.parameters>true</maven.compiler.parameters>
         <compiler-plugin.version>3.8.1</compiler-plugin.version>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -73,6 +73,13 @@
                 <version>${software.amazon.awssdk}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson</groupId>
+                <artifactId>jackson-bom</artifactId>
+                <version>${jackson.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -148,12 +155,35 @@
             <version>${lombok.version}</version>
             <scope>compile</scope>
         </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.module</groupId>
+            <artifactId>jackson-module-parameter-names</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jdk8</artifactId>
+        </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.datatype</groupId>
             <artifactId>jackson-datatype-jsr310</artifactId>
-            <version>${jackson.datatpye.jsr310}</version>
         </dependency>
-
     </dependencies>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven-surefire-plugin}</version>
+                <configuration>
+                    <systemPropertyVariables>
+                        <software.amazon.awssdk.http.service.impl>
+                            software.amazon.awssdk.http.urlconnection.UrlConnectionSdkHttpService
+                        </software.amazon.awssdk.http.service.impl>
+                    </systemPropertyVariables>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

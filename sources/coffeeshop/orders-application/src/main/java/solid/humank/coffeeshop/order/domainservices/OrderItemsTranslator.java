@@ -14,14 +14,15 @@ import java.util.List;
 public class OrderItemsTranslator implements ITranslator<List<OrderItem>, List<OrderItemRst>> {
 
     Logger logger = LoggerFactory.getLogger(OrderItemsTranslator.class);
+
     @Override
     public List<OrderItem> translate(List<OrderItemRst> transRequest) {
         List<OrderItem> orderItemList = new ArrayList<>();
         for (OrderItemRst orderItemRst : transRequest) {
 
-            logger.info("orderItemRst.getProductId(): "+ orderItemRst.getProductId());
-            logger.info("orderItemRst.getQty(): "+ orderItemRst.getQty());
-            logger.info("orderItemRst.getPrice() "+ orderItemRst.getPrice());
+            logger.info("orderItemRst.getProductId(): " + orderItemRst.getProductId());
+            logger.info("orderItemRst.getQty(): " + orderItemRst.getQty());
+            logger.info("orderItemRst.getPrice() " + orderItemRst.getPrice());
             orderItemList.add(
                     new OrderItem(orderItemRst.getProductId(),
                             orderItemRst.getQty(),

@@ -2,46 +2,51 @@ package solid.humank.coffeeshop.cofee.sls.orders;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestStreamHandler;
-import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import solid.humank.coffeeshop.cofee.sls.orders.datacontracts.OrderCreated;
-import solid.humank.coffeeshop.cofee.sls.orders.datacontracts.OrderItem;
-import solid.humank.coffeeshop.coffee.models.Barista;
-import solid.humank.coffeeshop.coffee.models.Coffee;
+import solid.humank.coffeeshop.coffee.applications.MakeCoffeeSvc;
+import solid.humank.coffeeshop.coffee.datacontracts.messages.MakeCoffeeMsg;
+import solid.humank.coffeeshop.coffee.datacontracts.results.CoffeeItemRst;
+import solid.humank.coffeeshop.coffee.domainservices.CoffeeItemsTranslator;
+import solid.humank.coffeeshop.coffee.repositories.CoffeeRepository;
+import solid.humank.coffeeshop.inventories.applicationservices.ConfirmInventorySvc;
 import solid.humank.ddd.commons.utilities.DomainModelMapper;
 
+import javax.inject.Named;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+@Named("test")
 public class OrderCreatedHandler implements RequestStreamHandler {
 
+//    @Inject
+//    MakeCoffeeSvc service;
 
     @Override
-    public void handleRequest(InputStream inputStream, OutputStream outputStream, @NotNull Context context) {
+    public void handleRequest(InputStream inputStream, OutputStream outputStream, Context context) throws IOException {
+
+        MakeCoffeeSvc service =
+                new MakeCoffeeSvc(new CoffeeRepository(), new ConfirmInventorySvc(), new CoffeeItemsTranslator());
 
         DomainModelMapper mapper = new DomainModelMapper();
         OrderCreated orderCreated = mapper.readValue(inputStream, OrderCreated.class);
 
         //TODO : 調用咖啡師的服務, 參照需求文檔找製作美式咖啡的需求
-        List<Coffee> coffees = transformToCoffeeItems(orderCreated);
-        Barista.make(coffees);
-        //TODO : 在咖啡師製作的過程中，發現手邊原料不足時，去扣庫存, 提供web api調度以及 application service
+        MakeCoffeeMsg cmd = new MakeCoffeeMsg(orderCreated.getTableNo(), transformToCoffeeItemVM(orderCreated));
+        service.make(cmd);
+
+        context.getLogger().log("Coffee made...");
+        outputStream.write("{\"status\":\"Coffee made!\"}".getBytes());
     }
 
-    @Nullable
-    @Contract(pure = true)
-    private List<Coffee> transformToCoffeeItems(OrderCreated receivedOrder) {
-        List<Coffee> coffees = new ArrayList<>();
-        List<OrderItem> items = receivedOrder.getOrderItems();
-        for (OrderItem item : items) {
-            for (int i = 0; i < item.getQty(); i++) {
-                coffees.add(new Coffee(item.getProductId()));
-            }
-        }
+    private List<CoffeeItemRst> transformToCoffeeItemVM(OrderCreated receivedOrder) {
+        List<CoffeeItemRst> result = new ArrayList<>();
+        receivedOrder.getOrderItems().forEach(orderItem -> {
+            result.add(new CoffeeItemRst(orderItem.getProductId()));
+        });
 
-        return coffees;
+        return result;
     }
 }

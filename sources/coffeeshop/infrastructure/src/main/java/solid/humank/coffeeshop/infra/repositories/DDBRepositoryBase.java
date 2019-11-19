@@ -1,5 +1,6 @@
 package solid.humank.coffeeshop.infra.repositories;
 
+import software.amazon.awssdk.http.urlconnection.UrlConnectionHttpClient;
 import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
 import software.amazon.awssdk.services.dynamodb.model.PutItemRequest;
 import software.amazon.awssdk.services.dynamodb.model.ScanRequest;
@@ -16,9 +17,15 @@ import java.util.List;
 @Dependent
 public class DDBRepositoryBase<T extends AggregateRoot, U extends EntityId> implements IRepository<T, U> {
 
-    DynamoDbClient ddb = DynamoDbClient.create();
 
-    public DDBRepositoryBase(){}
+    DynamoDbClient ddb;
+
+    public DDBRepositoryBase() {
+        ddb = DynamoDbClient.builder()
+                .httpClientBuilder(UrlConnectionHttpClient.builder())
+                .build();
+    }
+
     @Override
     public List<T> all() {
         return null;

@@ -14,10 +14,10 @@ import java.util.List;
 @Dependent
 public class OrderRepository implements IOrderRepository {
 
+    DDBRepositoryBase<Order, OrderId> repository = new DDBRepositoryBase<>();
+
     public OrderRepository() {
     }
-
-    DDBRepositoryBase<Order, OrderId> repository = new DDBRepositoryBase<>();
 
 //    @Inject
 //    public IRepository<Order, OrderId> repository;

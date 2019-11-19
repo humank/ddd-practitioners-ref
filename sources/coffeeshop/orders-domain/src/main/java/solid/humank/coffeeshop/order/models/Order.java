@@ -44,7 +44,7 @@ import java.util.stream.Stream;
 public class Order extends AggregateRoot<OrderId> {
 
     final static Logger logger = LoggerFactory.getLogger(Order.class);
-    final static String ORDER_DATE_FORMAT = "yyyyMMddHHmmss";
+    final static String DATE_FORMAT = "yyyyMMddHHmmss";
 
 
     @Getter
@@ -60,24 +60,13 @@ public class Order extends AggregateRoot<OrderId> {
     @Getter
     @Setter(AccessLevel.PRIVATE)
     private List<OrderItem> orderItems;
-
-
-    public BigDecimal totalFee() {
-        return this.getOrderItems()
-                .stream()
-                .map(orderItem -> orderItem.fee())
-                .reduce(BigDecimal.ZERO, (b1, b2) -> b1.add(b2));
-    }
-
-
     @Getter
     @Setter(AccessLevel.PRIVATE)
     private OffsetDateTime createdDate;
-
-
     @Getter
     @Setter(AccessLevel.PRIVATE)
     private OffsetDateTime modifiedDate;
+
 
     public Order() {
         this.setId(new OrderId());
@@ -129,6 +118,13 @@ public class Order extends AggregateRoot<OrderId> {
 
         order.applyEvent(orderCreated);
         return order;
+    }
+
+    public BigDecimal totalFee() {
+        return this.getOrderItems()
+                .stream()
+                .map(orderItem -> orderItem.fee())
+                .reduce(BigDecimal.ZERO, (b1, b2) -> b1.add(b2));
     }
 
     public void changeItem(ChangeItem cmd) {
@@ -217,12 +213,12 @@ public class Order extends AggregateRoot<OrderId> {
     }
 
     public String createdDateString() {
-        return createdDate.format(DateTimeFormatter.ofPattern(ORDER_DATE_FORMAT));
+        return createdDate.format(DateTimeFormatter.ofPattern(DATE_FORMAT));
     }
 
     public String modifiedDateString() {
         return
-                modifiedDate == null ? "N/A" : modifiedDate.format(DateTimeFormatter.ofPattern(ORDER_DATE_FORMAT));
+                modifiedDate == null ? "N/A" : modifiedDate.format(DateTimeFormatter.ofPattern(DATE_FORMAT));
     }
 
 

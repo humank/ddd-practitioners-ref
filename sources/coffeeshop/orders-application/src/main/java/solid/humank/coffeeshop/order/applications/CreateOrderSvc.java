@@ -1,5 +1,7 @@
 package solid.humank.coffeeshop.order.applications;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import solid.humank.coffeeshop.infra.serializations.DomainEventPublisher;
 import solid.humank.coffeeshop.order.commands.CreateOrder;
 import solid.humank.coffeeshop.order.datacontracts.messages.CreateOrderMsg;
@@ -12,6 +14,7 @@ import solid.humank.coffeeshop.order.models.OrderId;
 import solid.humank.coffeeshop.order.models.OrderItem;
 import solid.humank.coffeeshop.order.models.OrderStatus;
 import solid.humank.ddd.commons.interfaces.ITranslator;
+import solid.humank.ddd.commons.utilities.DomainModelMapper;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -23,6 +26,14 @@ import java.util.List;
 public class CreateOrderSvc implements Serializable {
 
     //TODO 確認實作結果
+
+    @Inject
+    public IOrderRepository repository;
+    @Inject
+    public ITranslator<List<OrderItem>, List<OrderItemRst>> translator;
+    @Inject
+    DomainEventPublisher domainEventPublisher;
+    Logger logger = LoggerFactory.getLogger(CreateOrderSvc.class);
 
     /**
      * 咖啡師 會接受訂單，並且開始依照訂單上的產品去冰箱取得原物料
@@ -41,15 +52,6 @@ public class CreateOrderSvc implements Serializable {
     public CreateOrderSvc() {
     }
 
-    @Inject
-    public IOrderRepository repository;
-
-    @Inject
-    public ITranslator<List<OrderItem>, List<OrderItemRst>> translator;
-
-    @Inject
-    DomainEventPublisher domainEventPublisher;
-
     public OrderRst establishOrder(CreateOrderMsg request) throws AggregateException {
 
         OrderId id = this.repository.generateOrderId();
@@ -57,6 +59,8 @@ public class CreateOrderSvc implements Serializable {
 
         CreateOrder cmd = new CreateOrder(id, request.getTableNo(), OrderStatus.INITIAL, items);
         Order createdOrder = Order.create(cmd);
+
+        logger.info(new DomainModelMapper().writeToJsonString(createdOrder));
 
         this.repository.save(createdOrder);
 

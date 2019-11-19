@@ -9,10 +9,11 @@ import java.util.List;
 
 public class ChangeItem {
 
-    @Getter @Setter(AccessLevel.PRIVATE)
+    @Getter
+    @Setter(AccessLevel.PRIVATE)
     List<OrderItem> items;
 
-    public ChangeItem(List<OrderItem> items){
+    public ChangeItem(List<OrderItem> items) {
         this.items = items;
     }
 }

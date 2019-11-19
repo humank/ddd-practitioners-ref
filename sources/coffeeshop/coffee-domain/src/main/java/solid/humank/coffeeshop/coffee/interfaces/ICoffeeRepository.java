@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface ICoffeeRepository {
 
-    List<Coffee> get(Specification<Coffee> specification,  int pageNo, int pageSize);
+    List<Coffee> get(Specification<Coffee> specification, int pageNo, int pageSize);
 
     CoffeeId generateCoffeeId();
 

@@ -6,7 +6,7 @@ import solid.humank.ddd.commons.baseclasses.Specification;
 
 import java.util.List;
 
-public interface IOrderRepository{
+public interface IOrderRepository {
 
     List<Order> get(Specification<Order> specification, int pageNo, int pageSize);
 

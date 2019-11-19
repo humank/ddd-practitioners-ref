@@ -11,11 +11,14 @@ import java.time.OffsetDateTime;
 
 public class OrderStatusChanged extends DomainEvent<EntityId> {
 
-    @Getter @Setter(AccessLevel.PRIVATE)
+    @Getter
+    @Setter(AccessLevel.PRIVATE)
     private OffsetDateTime modifiedDate;
-    @Getter @Setter(AccessLevel.PRIVATE)
+    @Getter
+    @Setter(AccessLevel.PRIVATE)
     private OrderStatus lastStatus;
-    @Getter @Setter(AccessLevel.PRIVATE)
+    @Getter
+    @Setter(AccessLevel.PRIVATE)
     private OrderStatus curStatus;
 
 

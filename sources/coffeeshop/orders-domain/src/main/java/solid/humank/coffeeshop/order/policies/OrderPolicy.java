@@ -22,7 +22,7 @@ public class OrderPolicy {
             exceptions.add(new OrderIdIsNullException(Order.class.getName(), OrderErrorCode.ORDER_ID_IS_NULL, "Order Id can not be null"));
 
         if (new OrderTableNoSpec(order.getTableNo()).isSatisfy() == false)
-            exceptions.add(new TableNoEmptyException(Order.class.getName(), OrderErrorCode.TABLE_NO_IS_EMPTY,"Table no can not be empty"));
+            exceptions.add(new TableNoEmptyException(Order.class.getName(), OrderErrorCode.TABLE_NO_IS_EMPTY, "Table no can not be empty"));
 
         if (new OrderItemSpec(order.getOrderItems()).isSatisfy() == false)
             exceptions.add(new OrderItemEmptyException(Order.class.getName(), OrderErrorCode.ORDER_ITEMS_ARE_EMPTY_OR_NULL, "OrderItem can not be empty or null"));

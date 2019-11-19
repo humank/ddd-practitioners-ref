@@ -33,6 +33,8 @@ public class CloudWatchEventAdapter {
         DomainModelMapper mapper = new DomainModelMapper();
         eventJson = mapper.writeToJsonString(occurredEvent);
 
+        logger.info("eventJson : " + eventJson);
+
         if (eventJson == null) {
             return new PublishResult("Malformed format of Event");
         }

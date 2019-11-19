@@ -6,6 +6,7 @@ Resources:
     Properties:
       Runtime: java8
       Handler: solid.humank.coffeeshop.cofee.sls.orders.OrderCreatedHandler::handleRequest
+      # Handler: io.quarkus.amazon.lambda.runtime.QuarkusStreamHandler::handleRequest
       Timeout: 30
       MemorySize: 128
       CodeUri: .

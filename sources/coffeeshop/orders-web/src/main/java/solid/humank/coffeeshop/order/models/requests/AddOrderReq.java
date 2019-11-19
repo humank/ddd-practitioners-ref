@@ -15,7 +15,7 @@ public class AddOrderReq {
 
     List<OrderItemRM> items;
 
-    public AddOrderReq(){
+    public AddOrderReq() {
         items = new ArrayList<>();
     }
 }

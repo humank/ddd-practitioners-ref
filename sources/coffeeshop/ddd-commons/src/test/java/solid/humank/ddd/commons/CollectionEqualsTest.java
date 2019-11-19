@@ -14,10 +14,6 @@ import static org.junit.jupiter.api.Assertions.*;
 public class CollectionEqualsTest {
 
 
-    enum status {
-        OPEN, CLOSE;
-    }
-
     @Test
     public void timeTest() {
         OffsetDateTime time = OffsetDateTime.now();
@@ -45,6 +41,10 @@ public class CollectionEqualsTest {
         boolean result = a1.equals(a2);
         assertNotEquals(sut1, sut2);
         assertFalse(result);
+    }
+
+    enum status {
+        OPEN, CLOSE;
     }
 }
 

@@ -5,12 +5,12 @@ import solid.humank.ddd.commons.baseclasses.EntityId;
 import java.time.OffsetDateTime;
 
 public class CoffeeId extends EntityId {
-    public CoffeeId(){
+    public CoffeeId() {
         this.setAbbr("cof");
     }
 
-    public CoffeeId(long seqNo, OffsetDateTime createdDate){
-        super(seqNo,createdDate);
+    public CoffeeId(long seqNo, OffsetDateTime createdDate) {
+        super(seqNo, createdDate);
         this.setAbbr("cof");
     }
 }

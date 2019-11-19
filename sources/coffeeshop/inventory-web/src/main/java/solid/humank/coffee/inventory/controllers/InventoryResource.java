@@ -8,12 +8,12 @@ import javax.ws.rs.Path;
 public class InventoryResource {
 
     @GET
-    public String sayHello(){
+    public String sayHello() {
         return "hello";
     }
 
     @PUT
-    public String takeOut(CoffeeBean coffeeBean){
+    public String takeOut(CoffeeBean coffeeBean) {
 
         return "success-200";
     }

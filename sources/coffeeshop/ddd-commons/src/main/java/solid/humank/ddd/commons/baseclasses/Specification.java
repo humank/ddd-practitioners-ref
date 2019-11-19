@@ -29,6 +29,7 @@ public class Specification<T> {
     public void setTargetTable(String targetTable) {
         this.targetTable = targetTable;
     }
+
     public boolean isSatisfy() {
         return this.predicate.test(entity);
     }

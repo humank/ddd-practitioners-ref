@@ -16,14 +16,14 @@ public class Enumeration implements Comparable {
     @Getter(AccessLevel.PUBLIC)
     private int id;
 
-    @Override
-    public String toString() {
-        return this.name;
-    }
-
     protected Enumeration(int id, String name) {
         this.id = id;
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return this.name;
     }
 
     @Override

@@ -35,12 +35,4 @@ public interface IRepository<T extends AggregateRoot, U extends EntityId> {
     void remove(T aggregateRoot);
 
 
-
-
-
-
-
-
-
-
 }

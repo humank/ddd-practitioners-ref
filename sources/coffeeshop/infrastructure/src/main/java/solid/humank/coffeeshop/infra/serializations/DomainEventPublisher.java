@@ -14,12 +14,11 @@ import java.util.List;
 public class DomainEventPublisher {
 
     Logger logger = LoggerFactory.getLogger(DomainEventPublisher.class);
+    @Inject
+    CloudWatchEventAdapter cweAdapter;
 
     public DomainEventPublisher() {
     }
-
-    @Inject
-    CloudWatchEventAdapter cweAdapter;
 
     public void publish(List<DomainEvent<? extends EntityId>> domainEvents) {
         for (DomainEvent de : domainEvents) {

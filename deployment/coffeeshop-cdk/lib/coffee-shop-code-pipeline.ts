@@ -147,15 +147,21 @@ export class CoffeeShopCodePipeline extends cdk.Stack {
             resources: ['*'],
             actions: ['events:*']
         }));
-        const table = new dynamodb.Table(this, 'Order', {
+        const orderTable = new dynamodb.Table(this, 'Order', {
             partitionKey: { name: 'seqNo', type: dynamodb.AttributeType.NUMBER },
             billingMode: dynamodb.BillingMode.PAY_PER_REQUEST,
             tableName: 'Order',
         });
 
-        table.grantFullAccess(fargateTaskRole);
+        orderTable.grantFullAccess(fargateTaskRole);
 
+        const coffeeTable = new dynamodb.Table(this, 'Coffee', {
+            partitionKey: { name: 'seqNo', type: dynamodb.AttributeType.NUMBER },
+            billingMode: dynamodb.BillingMode.PAY_PER_REQUEST,
+            tableName: 'Coffee',
+        });
 
+        coffeeTable.grantFullAccess(fargateTaskRole);
 
         const coffeeshop_eventbus = new events.EventBus(this, 'EventBus', {
             eventBusName: 'coffeeshop-event-bus',

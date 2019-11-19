@@ -15,6 +15,15 @@ public class OrderItem extends ValueObject<OrderItem> {
     int qty;
     BigDecimal price;
 
+    public OrderItem() {
+    }
+
+    public OrderItem(String productId, int qty, BigDecimal prices) {
+        this.productId = productId;
+        this.qty = qty;
+        this.price = prices;
+    }
+
     public String getProductId() {
         return productId;
     }
@@ -41,15 +50,6 @@ public class OrderItem extends ValueObject<OrderItem> {
 
     public BigDecimal fee() {
         return this.price.multiply(BigDecimal.valueOf(qty));
-    }
-
-    public OrderItem() {
-    }
-
-    public OrderItem(String productId, int qty, BigDecimal prices) {
-        this.productId = productId;
-        this.qty = qty;
-        this.price = prices;
     }
 
 }

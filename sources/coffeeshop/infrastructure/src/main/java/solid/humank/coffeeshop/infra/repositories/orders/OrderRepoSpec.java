@@ -4,7 +4,7 @@ import solid.humank.ddd.commons.baseclasses.Specification;
 
 public class OrderRepoSpec extends Specification {
 
-    public OrderRepoSpec(){
+    public OrderRepoSpec() {
         super();
         this.targetTable = "Order";
     }

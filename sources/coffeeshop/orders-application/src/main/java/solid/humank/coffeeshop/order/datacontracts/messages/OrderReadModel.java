@@ -7,6 +7,8 @@ import lombok.Data;
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class OrderReadModel {
 
+    private String orderString;
+
     public OrderReadModel(String orderString) {
         this.orderString = orderString;
     }
@@ -18,6 +20,4 @@ public class OrderReadModel {
     public void setOrderString(String orderString) {
         this.orderString = orderString;
     }
-
-    private String orderString;
 }

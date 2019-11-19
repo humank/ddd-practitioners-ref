@@ -13,6 +13,6 @@ public class OrderIdIsNullException extends DomainException {
     }
 
     public OrderIdIsNullException(String source, Enum errorCode, String errorMessage) {
-        super(source,errorCode,errorMessage);
+        super(source, errorCode, errorMessage);
     }
 }

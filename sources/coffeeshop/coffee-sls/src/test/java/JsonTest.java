@@ -8,11 +8,12 @@ public class JsonTest {
 
     @Test
     public void test() {
-        String data="{\"eventId\":\"e0c00a3d-9834-42fd-a3b0-b4214be31254\",\"occurredDate\":1572865608.044000000,\"entityId\":{\"abbr\":\"ord\",\"seqNo\":90,\"occurredDate\":1572865608.031000000},\"tableNo\":\"0\",\"orderItems\":[{\"productId\":\"123\",\"qty\":2,\"price\":200}],\"createdDate\":1572865608.039000000}";
+        String data = "{\"eventId\":\"b17534fe-3b93-4d3b-b1c2-cf9ca040755b\",\"occurredDate\":1574142357.804512000,\"entityId\":{\"abbr\":\"ord\",\"seqNo\":15,\"occurredDate\":1574142357.799072000},\"tableNo\":\"0\",\"orderItems\":[{\"productId\":\"123\",\"qty\":2,\"price\":200}],\"createdDate\":1574142357.802369000}";
 
+        System.out.println(data);
         DomainModelMapper mapper = new DomainModelMapper();
         OrderCreated created = mapper.readValue(data, OrderCreated.class);
-        assertEquals(data, mapper.writeToJsonString(created) );
+        assertEquals(data, mapper.writeToJsonString(created));
     }
 
 

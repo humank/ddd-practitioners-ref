@@ -18,14 +18,12 @@ public class CoffeeRst {
     private OffsetDateTime createdDate;
     private OffsetDateTime modifiedDate;
 
-    public CoffeeRst(){
-
+    public CoffeeRst(String id) {
+        this.id = id;
     }
 
     public CoffeeRst(List<Coffee> madeCoffees) {
         items = new ArrayList<>();
-        madeCoffees.stream().forEach(coffee -> {
-            this.id = coffee.getId().toString();
-        });
+        madeCoffees.stream().forEach(coffee -> this.id = coffee.getId().toString());
     }
 }

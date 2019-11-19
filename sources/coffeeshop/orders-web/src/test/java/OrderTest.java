@@ -16,7 +16,7 @@ public class OrderTest {
 
     @Test
     public void addOrderTest() throws JsonProcessingException {
-
+        System.out.println(System.getProperty("software.amazon.awssdk.http.service.impl"));
         AddOrderReq req = new AddOrderReq();
         List<OrderItemRM> list = new ArrayList<>();
         list.add(new OrderItemRM("123", 2, new BigDecimal(200)));
@@ -34,7 +34,7 @@ public class OrderTest {
     }
 
     @Test
-    public void tesPrint(){
+    public void tesPrint() {
         String s = "{\\\"detail-type\\\": [ \\\"customevent\\\" ],\\\"source\\\": [\\\"solid.humank.coffeeshop.order\\\"]}";
         System.out.println(s);
     }

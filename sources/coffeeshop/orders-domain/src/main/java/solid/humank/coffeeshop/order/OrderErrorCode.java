@@ -13,12 +13,6 @@ public enum OrderErrorCode {
     PRODUCT_DISCOUNT_IS_INAPPROPRIATE(6),
     PRICE_IS_INAPPROPRIATE(7);
 
-    private int value;
-
-    OrderErrorCode(int value) {
-        this.value = value;
-    }
-
     private static Map map = new HashMap<>();
 
     static {
@@ -26,6 +20,12 @@ public enum OrderErrorCode {
         for (OrderErrorCode errorCode : OrderErrorCode.values()) {
             map.put(errorCode.value, errorCode);
         }
+    }
+
+    private int value;
+
+    OrderErrorCode(int value) {
+        this.value = value;
     }
 
     public static OrderErrorCode valueOf(int errorCode) {
