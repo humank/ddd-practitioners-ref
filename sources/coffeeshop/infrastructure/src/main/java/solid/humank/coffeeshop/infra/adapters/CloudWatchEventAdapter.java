@@ -25,8 +25,6 @@ public class CloudWatchEventAdapter {
 
     String propFileName = "cloudwatchevents.properties";
 
-    SsmClient client = SsmClient.create();
-
     public PublishResult publishEvent(DomainEvent occurredEvent) {
         String eventJson = null;
 
