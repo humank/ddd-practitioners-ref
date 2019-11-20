@@ -3,6 +3,7 @@ package solid.humank.coffeeshop.infra.adapters;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import software.amazon.awssdk.http.urlconnection.UrlConnectionHttpClient;
 import software.amazon.awssdk.services.cloudwatchevents.CloudWatchEventsClient;
 import software.amazon.awssdk.services.cloudwatchevents.model.PutEventsRequest;
 import software.amazon.awssdk.services.cloudwatchevents.model.PutEventsRequestEntry;
@@ -26,7 +27,7 @@ public class CloudWatchEventAdapter {
     String propFileName = "cloudwatchevents.properties";
 
     public PublishResult publishEvent(DomainEvent occurredEvent) {
-        String eventJson = null;
+        String eventJson;
 
         DomainModelMapper mapper = new DomainModelMapper();
         eventJson = mapper.writeToJsonString(occurredEvent);
@@ -41,7 +42,8 @@ public class CloudWatchEventAdapter {
 
     private PublishResult putEvent(String eventContent) {
 
-        CloudWatchEventsClient cwe = CloudWatchEventsClient.builder().build();
+        CloudWatchEventsClient cwe = CloudWatchEventsClient.builder().httpClientBuilder(UrlConnectionHttpClient.builder())
+                .build();
 
         try {
             Properties cweProp = getCWEParameters();
