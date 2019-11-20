@@ -130,8 +130,7 @@ export class CoffeeShopCodePipeline extends cdk.Stack {
         taskDefinition.addContainer('defaultContainer', {
             image: ecs.ContainerImage.fromRegistry('amazon/amazon-ecs-sample'),
             logging: new ecs.AwsLogDriver({
-                streamPrefix: 'coffeeshop-orders-web',
-
+                streamPrefix: 'coffeeshop',
             })
         }).addPortMappings({
             containerPort: 8080
