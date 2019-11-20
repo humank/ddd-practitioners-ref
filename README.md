@@ -29,9 +29,7 @@ As a developer, knowing how to narrow this gap can help you go a long way to bui
   - [TDD within Unit Test environment](docs/04-modeling-and-development/README.md#tdd-within-unit-test-environment)
   - [Generate unit test code skeleton](docs/04-modeling-and-development/README.md#generate-unit-test-code-skeleton)
   - [Implement Domain Model from code Skeleton](docs/04-modeling-and-development/README.md#implement-domain-model-from-code-skeleton)
-  - [Running on AWS](docs/04-modeling-and-development/README.md#running-on-aws)
   - [Design each Microservices in Port-adapter concept](docs/04-modeling-and-development/README.md#design-each-microservices-in-port-adapter-concept)
-  - [Running on AWS](docs/04-modeling-and-development/README.md#running-on-aws)
 - [05 - Deploy Applications by AWS CDK](docs/05-deploy-applications-by-cdk/README.md) 
 <!---
 - [05 - Domain Driven Design Tactical design pattern guidance](05-ddd-tactical-design-pattern)
