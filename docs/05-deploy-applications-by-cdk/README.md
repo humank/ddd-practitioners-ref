@@ -1,4 +1,14 @@
-*Will update ASAP*
+# Deploy Coffeeshop application automatically through AWS Code* family with AWS CDK
+
+
+
+**Kudos for your insist learning from this repository. It's time to deploy the applications to real AWS environment.**
+
+
+
+
+
+![](../img/EventStormingWorkshop-CDK.png)
 
 To deploy applications to AWS, you need to have the following essential tools installed:
 
