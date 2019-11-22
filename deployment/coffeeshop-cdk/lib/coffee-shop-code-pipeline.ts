@@ -79,6 +79,14 @@ export class CoffeeShopCodePipeline extends cdk.Stack {
             buildSpec: codebuild.BuildSpec.fromObject({
                 version: '0.2',
                 phases: {
+
+                    install:{
+                        commands:[
+                            'brew tap aws/tap',
+                            'brew install aws-sam-cli',
+                        ]
+                    },
+
                     build: {
                         commands: [
                             'echo "Build all modules"',
