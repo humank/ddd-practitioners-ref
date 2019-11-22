@@ -1,6 +1,7 @@
 import * as cdk from '@aws-cdk/core';
 import * as ecr from '@aws-cdk/aws-ecr';
 import * as iam from '@aws-cdk/aws-iam';
+import * as s3 from '@aws-cdk/aws-s3';
 import * as codebuild  from '@aws-cdk/aws-codebuild';
 import * as codepipeline from '@aws-cdk/aws-codepipeline';
 import * as codepipeline_actions from '@aws-cdk/aws-codepipeline-actions';
@@ -23,10 +24,11 @@ export class CoffeeShopCodePipeline extends cdk.Stack {
     readonly ecrRepository: ecr.Repository
     constructor(scope: cdk.App, id: string, props?: cdk.StackProps) {
         super(scope, id, props);
+
         this.ecrRepository = new ecr.Repository(this, 'Repository', {
             repositoryName: DOCKER_IMAGE_PREFIX,
+            removalPolicy: cdk.RemovalPolicy.DESTROY
         });
-
         const buildRole = new iam.Role(this, 'CodeBuildIamRole', {
             assumedBy: new iam.ServicePrincipal('codebuild.amazonaws.com')
         });
@@ -54,6 +56,16 @@ export class CoffeeShopCodePipeline extends cdk.Stack {
             ], // optional, by default all pushes and Pull Requests will trigger a build
         });
 
+        let bucketName = 'coffeeshop-' + Math.random().toString(36).substring(7);
+        const coffeeShopBucket = new s3.Bucket(this, 'CoffeeShopBucket', {
+            bucketName: bucketName,
+            publicReadAccess: true,
+
+            // The default removal policy is RETAIN, which means that cdk destroy will not attempt to delete
+            // the new bucket, and it will remain in your account until manually deleted. By setting the policy to
+            // DESTROY, cdk destroy will attempt to delete the bucket, but will error if the bucket is not empty.
+            removalPolicy: cdk.RemovalPolicy.DESTROY, // NOT recommended for production code
+        });
 
         new codebuild.Project(this, 'CodeBuildProject', {
             role: buildRole,
@@ -97,6 +109,12 @@ export class CoffeeShopCodePipeline extends cdk.Stack {
                             `docker push ${this.ecrRepository.repositoryUri}:$TAG`,
                             `docker push ${this.ecrRepository.repositoryUri}:$LATEST`,
                             'echo "finished ECR push"',
+
+                            'echo package coffee serverless lambda function',
+                            'cd ../coffee-sls',
+                            'mvn package -Dmaven.test.skip=true',
+                            'sam package --template-file template.yaml --s3-bucket'+ bucketName + '--output-template-file packaged.yaml',
+                            'sam deploy --template-file ./packaged.yaml --stack-name coffee-sls --capabilities CAPABILITY_IAM',
                         ]
 
                     }
@@ -292,5 +310,8 @@ Create a "imagedefinitions.json" file and git add/push into CodeCommit repositor
         new cdk.CfnOutput(this, 'CodeBuildProjectName', {
             value: CodeBuildProject.name
         })
+
+        new cdk.CfnOutput(this, 'Bucket', { value: coffeeShopBucket.bucketName });
+
     }
 }

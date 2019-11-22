@@ -9,7 +9,7 @@ Resources:
       # Handler: io.quarkus.amazon.lambda.runtime.QuarkusStreamHandler::handleRequest
       Timeout: 30
       MemorySize: 128
-      CodeUri: .
+      CodeUri: target/coffee-sls-1.0-SNAPSHOT.jar
       Policies:
         - AmazonDynamoDBFullAccess
         - AWSLambdaFullAccess
