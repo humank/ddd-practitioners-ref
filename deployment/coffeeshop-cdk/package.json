@@ -33,6 +33,7 @@
     "@aws-cdk/core": "^1.16.2",
     "@aws-cdk/cx-api": "^1.16.2",
     "@aws-cdk/region-info": "^1.16.2",
+    "@aws-cdk/aws-sam": "^1.16.2",
     "@types/node": "^12.12.7"
   }
 }
