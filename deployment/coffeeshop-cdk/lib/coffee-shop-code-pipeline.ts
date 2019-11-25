@@ -59,7 +59,6 @@ export class CoffeeShopCodePipeline extends cdk.Stack {
         let bucketName = 'coffeeshop-' + Math.random().toString(36).substring(7);
         const coffeeShopBucket = new s3.Bucket(this, 'CoffeeShopBucket', {
             bucketName: bucketName,
-            publicReadAccess: true,
 
             // The default removal policy is RETAIN, which means that cdk destroy will not attempt to delete
             // the new bucket, and it will remain in your account until manually deleted. By setting the policy to
@@ -82,7 +81,7 @@ export class CoffeeShopCodePipeline extends cdk.Stack {
 
                     install:{
                         commands:[
-                            'sudo sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"',
+                            'sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"',
                             'test -d ~/.linuxbrew && eval $(~/.linuxbrew/bin/brew shellenv)',
                             'test -d /home/linuxbrew/.linuxbrew && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)',
                             'test -r ~/.bash_profile && echo "eval \\$($(brew --prefix)/bin/brew shellenv)" >>~/.bash_profile',
