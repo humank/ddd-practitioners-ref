@@ -43,6 +43,11 @@ export class CoffeeShopCodePipeline extends cdk.Stack {
 
         buildRole.addToPolicy(new iam.PolicyStatement({
             resources: ['*'],
+            actions: ['iam:*']
+        }));
+
+        buildRole.addToPolicy(new iam.PolicyStatement({
+            resources: ['*'],
             actions: ['ecr:GetAuthorizationToken']
         }));
 
