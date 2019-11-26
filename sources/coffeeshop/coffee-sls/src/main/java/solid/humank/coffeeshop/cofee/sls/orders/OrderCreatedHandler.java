@@ -36,14 +36,21 @@ public class OrderCreatedHandler implements RequestStreamHandler {
 
         DomainModelMapper mapper = new DomainModelMapper();
         OrderCreated orderCreated = mapper.readValue(inputStream, OrderCreated.class);
-        logger.info(orderCreated.getTableNo());
-        logger.info(orderCreated.getEventId());
         logger.info(orderCreated.getVersion());
-        logger.info(String.valueOf(orderCreated.getOrderItems().size()));
-        logger.info(orderCreated.getEntityId().toString());
+        logger.info(orderCreated.getId());
+        logger.info(orderCreated.getDetailType());
+        logger.info(orderCreated.getSource());
+        logger.info(orderCreated.getAccount());
+        logger.info(orderCreated.getTime());
+        logger.info(orderCreated.getRegion());
+        logger.info(orderCreated.getResources().toString());
+        logger.info(orderCreated.getDetail().getTableNo());
+        logger.info(orderCreated.getDetail().getEventId());
+        logger.info(String.valueOf(orderCreated.getDetail().getOrderItems().size()));
+        logger.info(orderCreated.getDetail().getEntityId().toString());
 
         //TODO : 調用咖啡師的服務, 參照需求文檔找製作美式咖啡的需求
-        MakeCoffeeMsg cmd = new MakeCoffeeMsg(orderCreated.getTableNo(), transformToCoffeeItemVM(orderCreated));
+        MakeCoffeeMsg cmd = new MakeCoffeeMsg(orderCreated.getDetail().getTableNo(), transformToCoffeeItemVM(orderCreated));
         service.make(cmd);
 
         context.getLogger().log("Coffee made...");
@@ -52,7 +59,7 @@ public class OrderCreatedHandler implements RequestStreamHandler {
 
     private List<CoffeeItemRst> transformToCoffeeItemVM(OrderCreated receivedOrder) {
         List<CoffeeItemRst> result = new ArrayList<>();
-        receivedOrder.getOrderItems().forEach(orderItem -> {
+        receivedOrder.getDetail().getOrderItems().forEach(orderItem -> {
             result.add(new CoffeeItemRst(orderItem.getProductId()));
         });
 

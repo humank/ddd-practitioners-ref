@@ -5,26 +5,21 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import solid.humank.coffeeshop.infra.serializations.EntityId;
 
+import java.time.OffsetDateTime;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 @EqualsAndHashCode(callSuper = false)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class OrderCreated {
-
-    String version;
-    String id;
-    String detailType;
-    String source;
-    String account;
-    String time;
-    String region;
-    String[] resources;
-    BodyDetail detail;
-
-
-
-
+public class BodyDetail {
+    String eventId;
+    OffsetDateTime occurredDate;
+    EntityId entityId;
+    String tableNo;
+    List<OrderItem> orderItems;
+    OffsetDateTime createdDate;
 }
