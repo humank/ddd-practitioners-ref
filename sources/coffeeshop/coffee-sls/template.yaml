@@ -7,6 +7,7 @@ Resources:
       Runtime: java8
       Handler: solid.humank.coffeeshop.cofee.sls.orders.OrderCreatedHandler::handleRequest
       # Handler: io.quarkus.amazon.lambda.runtime.QuarkusStreamHandler::handleRequest
+      FunctionName: coffee-sls-OrderCreatedHandler
       Timeout: 30
       MemorySize: 128
       CodeUri: target/coffee-sls-1.0-SNAPSHOT.jar
