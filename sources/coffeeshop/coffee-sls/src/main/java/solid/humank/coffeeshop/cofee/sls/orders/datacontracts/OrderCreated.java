@@ -16,6 +16,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = false)
 public class OrderCreated {
 
+    String version;
     String eventId;
     OffsetDateTime occurredDate;
     EntityId entityId;

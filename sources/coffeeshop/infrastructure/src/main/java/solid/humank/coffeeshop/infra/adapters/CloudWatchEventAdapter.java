@@ -8,7 +8,6 @@ import software.amazon.awssdk.services.cloudwatchevents.CloudWatchEventsClient;
 import software.amazon.awssdk.services.cloudwatchevents.model.PutEventsRequest;
 import software.amazon.awssdk.services.cloudwatchevents.model.PutEventsRequestEntry;
 import software.amazon.awssdk.services.cloudwatchevents.model.PutEventsResponse;
-import software.amazon.awssdk.services.ssm.SsmClient;
 import solid.humank.ddd.commons.baseclasses.DomainEvent;
 import solid.humank.ddd.commons.utilities.DomainModelMapper;
 

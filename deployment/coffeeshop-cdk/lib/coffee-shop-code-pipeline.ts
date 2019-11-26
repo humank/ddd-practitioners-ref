@@ -135,7 +135,7 @@ export class CoffeeShopCodePipeline extends cdk.Stack {
                             'sam deploy --template-file ./packaged.yaml --stack-name coffee-sls --capabilities CAPABILITY_IAM',
 
                             'targetArn=$(aws lambda get-function --function-name coffee-sls-OrderCreatedHandler | jq \'.Configuration.FunctionArn\')',
-                            'aws events  put-targets --rule OrderCreatedRule --targets "Id"="OrderCreated","Arn"=$targetArn'
+                            'aws events  put-targets --rule OrderCreatedRule --targets "Id"="OrderCreated","Arn"=$targetArn',
                         ]
 
                     }
@@ -331,6 +331,9 @@ Create a "imagedefinitions.json" file and git add/push into CodeCommit repositor
         })
 
         new cdk.CfnOutput(this, 'Bucket', { value: coffeeShopBucket.bucketName });
+        new cdk.CfnOutput(this, 'OrderCreatedRule',{
+            value: rule.ruleName
+        })
 
     }
 }
