@@ -62,17 +62,15 @@ Do remember to create a Create a "imagedefinitions.json" file and git add/push i
 [
   {
     "name": "defaultContainer",
-    "imageUri": "<<your ecr repository arn for this coffeeshop>>/solid-humank-coffeeshop/orders-web:latest"
+    "imageUri": "your ecr repository arn for this coffeeshop/solid-humank-coffeeshop/orders-web:latest"
   }
 ]
-
-CoffeeSh
 
 **Installed Resources**
 
 * VPC with standard 3 AZs, 1 NAT Gateway, Public and Private subnets defnied
 * EventBridge
-* CloudWatch Rule
+* EventRule
 * Dynamodb
 * ECR
 * Fargate Cluster, Fargate Service, ECS Task definition
