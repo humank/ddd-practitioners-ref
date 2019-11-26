@@ -31,6 +31,16 @@ cdk deploy CoffeeShopCodePipeline
 ```
 
 
+**Setup EventBridge custom event target for Lambda Function **
+
+This folllowing instructions has been merged into codebuild - post_build phase.
+
+```
+targetArn=$(aws lambda get-function --function-name coffee-sls-OrderCreatedHandler | jq '.Configuration.FunctionArn')
+
+aws events  put-targets --rule OrderCreatedRule --event-bus-name coffeeshop-event-bus --targets "Id"="OrderCreated","Arn"="$targetArn"
+
+```
 
 **Installed Resources**
 
