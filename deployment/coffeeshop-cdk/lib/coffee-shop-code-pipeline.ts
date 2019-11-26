@@ -72,7 +72,7 @@ export class CoffeeShopCodePipeline extends cdk.Stack {
             // Enable Docker AND custom caching
             cache: codebuild.Cache.local(codebuild.LocalCacheMode.DOCKER_LAYER, codebuild.LocalCacheMode.CUSTOM),
             environment: {
-                buildImage: codebuild.LinuxBuildImage.UBUNTU_14_04_OPEN_JDK_8,
+                buildImage: codebuild.LinuxBuildImage.STANDARD_2_0,
                 privileged: true,
             },
             buildSpec: codebuild.BuildSpec.fromObject({
@@ -81,12 +81,15 @@ export class CoffeeShopCodePipeline extends cdk.Stack {
 
                     install:{
                         commands:[
-                           'yes | sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"',
+                            'apt-get update -y',
+                            'useradd -m linuxbrew',
+                            'sudo -u linuxbrew -i /bin/bash',
+                            'PATH=~/.linuxbrew/bin:/usr/sbin:/usr/bin:/sbin:/bin',
+                            'yes | sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"',
                             'test -d ~/.linuxbrew && eval $(~/.linuxbrew/bin/brew shellenv)',
                             'test -d /home/linuxbrew/.linuxbrew && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)',
                             'test -r ~/.bash_profile && echo "eval \\$($(brew --prefix)/bin/brew shellenv)" >>~/.bash_profile',
                             'echo "eval \\$($(brew --prefix)/bin/brew shellenv)" >>~/.profile',
-
                             'brew install hello',
                            'brew tap aws/tap',
                            'brew install aws-sam-cli',
