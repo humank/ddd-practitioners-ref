@@ -29,7 +29,7 @@
         <log4j.core>2.12.1</log4j.core>
         <log4j.api>2.12.1</log4j.api>
         <log4j.slf4j.impl>2.12.1</log4j.slf4j.impl>
-        <jackson.version>2.10.0</jackson.version>
+        <jackson.version>2.9.10.20191020</jackson.version>
 
         <!--        <surefire-plugin.version>2.22.0</surefire-plugin.version>-->
         <maven.compiler.parameters>true</maven.compiler.parameters>
@@ -156,18 +156,18 @@
             <scope>compile</scope>
         </dependency>
 
-        <dependency>
-            <groupId>com.fasterxml.jackson.module</groupId>
-            <artifactId>jackson-module-parameter-names</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.datatype</groupId>
-            <artifactId>jackson-datatype-jdk8</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.datatype</groupId>
-            <artifactId>jackson-datatype-jsr310</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.fasterxml.jackson.module</groupId>-->
+<!--            <artifactId>jackson-module-parameter-names</artifactId>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>com.fasterxml.jackson.datatype</groupId>-->
+<!--            <artifactId>jackson-datatype-jdk8</artifactId>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>com.fasterxml.jackson.datatype</groupId>-->
+<!--            <artifactId>jackson-datatype-jsr310</artifactId>-->
+<!--        </dependency>-->
     </dependencies>
 
     <build>

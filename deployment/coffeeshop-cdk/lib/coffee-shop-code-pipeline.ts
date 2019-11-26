@@ -131,7 +131,6 @@ export class CoffeeShopCodePipeline extends cdk.Stack {
 
                             'echo package coffee serverless lambda function',
                             'cd ../coffee-sls',
-                            'mvn package -Dmaven.test.skip=true',
                             'sam package --template-file template.yaml --s3-bucket '+ bucketName + ' --output-template-file packaged.yaml',
                             'sam deploy --template-file ./packaged.yaml --stack-name coffee-sls --capabilities CAPABILITY_IAM',
 
@@ -141,11 +140,11 @@ export class CoffeeShopCodePipeline extends cdk.Stack {
 
                     }
                 },
-                cache:{
-                    paths:[
-                        '/root/.m2/**/*',
-                    ]
-                }
+                // cache:{
+                //     paths:[
+                //         '/root/.m2/**/*',
+                //     ]
+                // }
             })
         });
 
