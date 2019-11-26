@@ -17,10 +17,10 @@ public class SSMTest {
         String path1 = "/coffeeshop/events/ordercreated/event_source";
         String path2 = "/coffeeshop/events/ordercreated/event_arn";
         SsmParameterCachingClient client = new SsmParameterCachingClient(ssm, Duration.ofMinutes(1));
-        String stringParameter1 = client.getAsString(path2);
-        //String stringParameter2 = client.getAsString(path2);
-        System.out.println("Full Parameter metadata: " + stringParameter1);
-        //System.out.println("Full Parameter metadata: " + stringParameter2);
+        String stringParameter1 = client.getAsString(path1);
+        String stringParameter2 = client.getAsString(path2);
+        System.out.println("event source: " + stringParameter1);
+        System.out.println("event arn: " + stringParameter2);
 
     }
 }

@@ -207,14 +207,12 @@ export class CoffeeShopCodePipeline extends cdk.Stack {
 
         const rule = new Rule(this, 'OrderCreatedRule',{
             eventPattern:{
-                source:['{"detail-type": [ "customevent" ],"source": ["solid.humank.coffeeshop.order"]}'
-                ]
+                source:["solid.humank.coffeeshop.order"],
+                detailType:['customevent']
             },
             // eventBus: coffeeshop_eventbus,
             ruleName: 'OrderCreatedRule',
         });
-
-
 
         //add ssm parameter store for cloudwatchevent put usage
         const eventSourceParam = new ssm.StringParameter(this, 'eventSourceParam', {
