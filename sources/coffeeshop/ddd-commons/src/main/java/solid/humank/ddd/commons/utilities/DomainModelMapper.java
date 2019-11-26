@@ -22,7 +22,6 @@ public class DomainModelMapper {
 //        mapper.writerWithDefaultPrettyPrinter();
 
           mapper = new ObjectMapper()
-                  .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
                   .registerModule(new ParameterNamesModule())
                   .registerModule(new Jdk8Module())
                   .registerModule(new JavaTimeModule()); // new module, NOT JSR310Module
