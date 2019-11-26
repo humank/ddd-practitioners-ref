@@ -34,6 +34,7 @@ export class CoffeeShopCodePipeline extends cdk.Stack {
             assumedBy: new iam.ServicePrincipal('codebuild.amazonaws.com')
         });
         buildRole.addManagedPolicy(iam.ManagedPolicy.fromAwsManagedPolicyName("AWSLambdaFullAccess"));
+        buildRole.addManagedPolicy(iam.ManagedPolicy.fromAwsManagedPolicyName("AmazonAPIGatewayAdministrator"));
 
         buildRole.addToPolicy(new iam.PolicyStatement({
             resources: ['*'],
