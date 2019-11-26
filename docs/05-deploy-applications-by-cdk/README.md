@@ -17,7 +17,25 @@ To deploy applications to AWS, you need to have the following essential tools in
 
 
 
-**Deploy instruction**
+## Deploy instruction
+
+### Deploy infrastructure by CDK
+
+```shell
+cd deployment/coffeeshop-cdk
+
+npm run build 
+
+cdk synth
+
+cdk deploy CoffeeShopCdkStack 
+```
+
+**By running this CDK application, You will get a standard VPC with 3 Availablity Zones environment, and one NATGateway serving private subnets.**
+
+**Besides, in order to have an ease of use container orcheration service, an ECS Cluster with Fargate mode is also created.**
+
+### Deploy Application by Code* family
 
 ```shell script
 cd deployment/coffeeshop-cdk
@@ -26,13 +44,19 @@ npm run build
 
 cdk synth
 
-cdk deploy CoffeeShopCdkStack 
 cdk deploy CoffeeShopCodePipeline 
 ```
 
+**This workshop sample code is developed in Java8 with Quarkus Framework, Libs dependency managed by Maven. By running this CDK CoffeeShopCodePipeline stack, You will have:**
+
+* CodeCommit Repository - for auto deployment
+* CodeBuild - Get Github WebHooked project, build source code, build docker image, Push image to ECR,  deploy **Orders-web** Fargate Service, deploy **coffee-sls Lambda Function**, create **Dynamodb Table -{ Order, Coffee}**, create Event Rule in default **Amazon EventBridge** ..etc.
+
+
 
 **Deploy Result**
-```
+
+```shell
 Outputs:
 CoffeeShopCodePipeline.CodeBuildProjectName = CodeBuildProject
 CoffeeShopCodePipeline.AlbSvcServiceURL46A1D997 = http://Coffe-AlbSv-5MLHALGIGWUB-82783022.us-west-2.elb.amazonaws.com
@@ -66,12 +90,36 @@ Do remember to create a Create a "imagedefinitions.json" file and git add/push i
   }
 ]
 
-**Installed Resources**
 
-* VPC with standard 3 AZs, 1 NAT Gateway, Public and Private subnets defnied
-* EventBridge
-* EventRule
-* Dynamodb
-* ECR
-* Fargate Cluster, Fargate Service, ECS Task definition
-* Lambda function
+
+### Setup Lambda function trigger with EventBridge
+
+```shell
+targetArn=$(aws lambda get-function --function-name coffee-sls-OrderCreatedHandler | jq \'.Configuration.FunctionArn\')
+
+aws events  put-targets --rule OrderCreatedRule --targets "Id"="OrderCreated","Arn"=$targetArn'
+
+ruleArn=$(aws events list-rules --name-prefix OrderCreatedRule | jq -r '.Rules[0].Arn')
+
+aws lambda add-permission \
+	--function-name coffee-sls-OrderCreatedHandler \
+  --action lambda:InvokeFunction \
+	--statement-id stat-coffee-sls \
+  --principal events.amazonaws.com \
+	--source-arn $ruleArn
+```
+
+### Run Test
+
+**As all of the setting done, now you could hit the url which you created to make an coffee order:**
+
+The **Orders-web** service endpoint is the Stak output - **CoffeeShopCodePipeline.AlbSvcServiceURLxxxx**
+
+```shell
+curl --header "Content-Type: application/json" \                                                                                            
+        --request POST \
+        --data '{"items":[{"productId":"5678","qty":2,"price":200}]}' \
+        http://Coffe-AlbSv-5MLHALGIGWUB-82783022.us-west-2.elb.amazonaws.com/order
+{"items":[{"productId":"5678","qty":2,"price":200,"fee":400}],"status":0,"id":"ord-20191126-5906","createdDate":1574801783.400000000,"modifiedDate":null}
+```
+
