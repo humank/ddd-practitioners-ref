@@ -31,16 +31,42 @@ cdk deploy CoffeeShopCodePipeline
 ```
 
 
-**Setup EventBridge custom event target for Lambda Function **
-
-This folllowing instructions has been merged into codebuild - post_build phase.
-
+**Deploy Result**
 ```
-targetArn=$(aws lambda get-function --function-name coffee-sls-OrderCreatedHandler | jq '.Configuration.FunctionArn')
+Outputs:
+CoffeeShopCodePipeline.CodeBuildProjectName = CodeBuildProject
+CoffeeShopCodePipeline.AlbSvcServiceURL46A1D997 = http://Coffe-AlbSv-5MLHALGIGWUB-82783022.us-west-2.elb.amazonaws.com
+CoffeeShopCodePipeline.AlbSvcLoadBalancerDNS20AA0F0B = Coffe-AlbSv-5MLHALGIGWUB-82783022.us-west-2.elb.amazonaws.com
+CoffeeShopCodePipeline.Hint =
+Create a "imagedefinitions.json" file and git add/push into CodeCommit repository "EventStormingWorkshop" with the following value:
 
-aws events  put-targets --rule OrderCreatedRule --event-bus-name coffeeshop-event-bus --targets "Id"="OrderCreated","Arn"="$targetArn"
+[
+  {
+    "name": "defaultContainer",
+    "imageUri": "123456789012.dkr.ecr.us-west-2.amazonaws.com/solid-humank-coffeeshop/orders-web:latest"
+  }
+]
 
+CoffeeShopCodePipeline.Bucket = coffeeshop-nypea
+CoffeeShopCodePipeline.CodeCommitRepoName = EventStormingWorkshop
+CoffeeShopCodePipeline.ServiceURL = http://Coffe-AlbSv-5MLHALGIGWUB-82783022.us-west-2.elb.amazonaws.com
+CoffeeShopCodePipeline.StackName = CoffeeShopCodePipeline
+CoffeeShopCodePipeline.StackId = arn:aws:cloudformation:us-west-2:584518143473:stack/CoffeeShopCodePipeline/f10c0520-0618-11ea-8122-023709c486f0
+
+Stack ARN:
+arn:aws:cloudformation:us-west-2:584518143473:stack/CoffeeShopCodePipeline/f10c0520-0618-11ea-8122-023709c486f0
 ```
+
+Do remember to create a Create a "imagedefinitions.json" file and git add/push into CodeCommit repository "EventStormingWorkshop" with the following value:
+
+[
+  {
+    "name": "defaultContainer",
+    "imageUri": "<<your ecr repository arn for this coffeeshop>>/solid-humank-coffeeshop/orders-web:latest"
+  }
+]
+
+CoffeeSh
 
 **Installed Resources**
 
