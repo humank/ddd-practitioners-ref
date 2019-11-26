@@ -201,16 +201,16 @@ export class CoffeeShopCodePipeline extends cdk.Stack {
 
         coffeeTable.grantFullAccess(fargateTaskRole);
 
-        const coffeeshop_eventbus = new events.EventBus(this, 'EventBus', {
-            eventBusName: 'coffeeshop-event-bus',
-        });
+        // const coffeeshop_eventbus = new events.EventBus(this, 'EventBus', {
+        //     eventBusName: 'coffeeshop-event-bus',
+        // });
 
         const rule = new Rule(this, 'OrderCreatedRule',{
             eventPattern:{
                 source:['{"detail-type": [ "customevent" ],"source": ["solid.humank.coffeeshop.order"]}'
                 ]
             },
-            eventBus: coffeeshop_eventbus,
+            // eventBus: coffeeshop_eventbus,
             ruleName: 'OrderCreatedRule',
         });
 
