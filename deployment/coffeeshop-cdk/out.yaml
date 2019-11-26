@@ -5,8 +5,8 @@ Resources:
       LifecyclePolicy:
         LifecyclePolicyText: '{"rules":[{"rulePriority":1,"selection":{"tagStatus":"any","countType":"sinceImagePushed","countNumber":30,"countUnit":"days"},"action":{"type":"expire"}}]}'
       RepositoryName: solid-humank-coffeeshop/orders-web
-    UpdateReplacePolicy: Retain
-    DeletionPolicy: Retain
+    UpdateReplacePolicy: Delete
+    DeletionPolicy: Delete
     Metadata:
       aws:cdk:path: CoffeeShopCodePipeline/Repository/Resource
   RepositoryCoffeeShopCodePipelineCoffeeShopPipeline2276F00DSourceEventRule367A45AD:
@@ -61,6 +61,17 @@ Resources:
           - Action: ecr:GetAuthorizationToken
             Effect: Allow
             Resource: "*"
+          - Action:
+              - iam:GetRole
+              - iam:PassRole
+            Effect: Allow
+            Resource: "*"
+          - Action: cloudformation:*
+            Effect: Allow
+            Resource: "*"
+          - Action: lambda:*
+            Effect: Allow
+            Resource: "*"
           - Action: ecr:*
             Effect: Allow
             Resource:
@@ -70,6 +81,65 @@ Resources:
                       - Repository22E53BBD
                       - Arn
                   - "*"
+          - Action:
+              - s3:PutObject*
+              - s3:Abort*
+            Effect: Allow
+            Resource:
+              Fn::Join:
+                - ""
+                - - Fn::GetAtt:
+                      - CoffeeShopBucketEF3ADD55
+                      - Arn
+                  - /*
+          - Action:
+              - s3:GetObject*
+              - s3:GetBucket*
+              - s3:List*
+            Effect: Allow
+            Resource:
+              - Fn::GetAtt:
+                  - CoffeeShopBucketEF3ADD55
+                  - Arn
+              - Fn::Join:
+                  - ""
+                  - - Fn::GetAtt:
+                        - CoffeeShopBucketEF3ADD55
+                        - Arn
+                    - /*
+          - Action:
+              - s3:GetObject*
+              - s3:GetBucket*
+              - s3:List*
+              - s3:DeleteObject*
+              - s3:PutObject*
+              - s3:Abort*
+            Effect: Allow
+            Resource:
+              - Fn::GetAtt:
+                  - CoffeeShopBucketEF3ADD55
+                  - Arn
+              - Fn::Join:
+                  - ""
+                  - - Fn::GetAtt:
+                        - CoffeeShopBucketEF3ADD55
+                        - Arn
+                    - /*
+          - Action:
+              - s3:DeleteObject*
+              - s3:PutObject*
+              - s3:Abort*
+            Effect: Allow
+            Resource:
+              - Fn::GetAtt:
+                  - CoffeeShopBucketEF3ADD55
+                  - Arn
+              - Fn::Join:
+                  - ""
+                  - - Fn::GetAtt:
+                        - CoffeeShopBucketEF3ADD55
+                        - Arn
+                    - /*
           - Action:
               - logs:CreateLogGroup
               - logs:CreateLogStream
@@ -95,6 +165,14 @@ Resources:
         - Ref: CodeBuildIamRoleAC16D411
     Metadata:
       aws:cdk:path: CoffeeShopCodePipeline/CodeBuildIamRole/DefaultPolicy/Resource
+  CoffeeShopBucketEF3ADD55:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: coffeeshop-nxllha
+    UpdateReplacePolicy: Retain
+    DeletionPolicy: Retain
+    Metadata:
+      aws:cdk:path: CoffeeShopCodePipeline/CoffeeShopBucket/Resource
   CodeBuildProject4B91CF3F:
     Type: AWS::CodeBuild::Project
     Properties:
@@ -102,7 +180,7 @@ Resources:
         Type: NO_ARTIFACTS
       Environment:
         ComputeType: BUILD_GENERAL1_SMALL
-        Image: aws/codebuild/java:openjdk-8
+        Image: aws/codebuild/amazonlinux2-x86_64-standard:1.0
         PrivilegedMode: true
         Type: LINUX_CONTAINER
       ServiceRole:
@@ -117,14 +195,16 @@ Resources:
                 {
                   "version": "0.2",
                   "phases": {
+                    "install": {
+                      "runtime-versions": {
+                        "java": "corretto8"
+                      }
+                    },
                     "build": {
                       "commands": [
                         "echo \"Build all modules\"",
                         "echo \"Run Maven clean install to have all the required jars in local .m2 repository\"",
-                        "pwd",
-                        "ls",
                         "cd sources/coffeeshop",
-                        "pwd",
                         "mvn clean install -Dmaven.test.skip=true"
                       ]
                     },
@@ -250,7 +330,12 @@ Resources:
               - Ref: Repository22E53BBD
               - >-
                 :$LATEST",
-                        "echo \"finished ECR push\""
+                        "echo \"finished ECR push\"",
+                        "echo package coffee serverless lambda function",
+                        "cd ../coffee-sls",
+                        "mvn package -Dmaven.test.skip=true",
+                        "sam package --template-file template.yaml --s3-bucket coffeeshop-nxllha --output-template-file packaged.yaml",
+                        "sam deploy --template-file ./packaged.yaml --stack-name coffee-sls --capabilities CAPABILITY_IAM"
                       ]
                     }
                   },
@@ -260,7 +345,7 @@ Resources:
                     ]
                   }
                 }
-        Location: https://github.com/humank/EventStormingWorkshop.git
+        Location: https://github.com/humank/EventStormingWorkShop.git
         ReportBuildStatus: true
         Type: GITHUB
       Cache:
@@ -310,6 +395,13 @@ Resources:
                   - Order702A5B72
                   - Arn
               - Ref: AWS::NoValue
+          - Action: dynamodb:*
+            Effect: Allow
+            Resource:
+              - Fn::GetAtt:
+                  - CoffeeE126F75C
+                  - Arn
+              - Ref: AWS::NoValue
           - Action:
               - ssm:DescribeParameters
               - ssm:GetParameters
@@ -353,7 +445,7 @@ Resources:
             Options:
               awslogs-group:
                 Ref: orderswebTaskdefaultContainerLogGroupD3EA3B52
-              awslogs-stream-prefix: coffeeshop-orders-web
+              awslogs-stream-prefix: coffeeshop
               awslogs-region: us-west-2
           Name: defaultContainer
           PortMappings:
@@ -578,6 +670,21 @@ Resources:
     DeletionPolicy: Retain
     Metadata:
       aws:cdk:path: CoffeeShopCodePipeline/Order/Resource
+  CoffeeE126F75C:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      KeySchema:
+        - AttributeName: seqNo
+          KeyType: HASH
+      AttributeDefinitions:
+        - AttributeName: seqNo
+          AttributeType: "N"
+      BillingMode: PAY_PER_REQUEST
+      TableName: Coffee
+    UpdateReplacePolicy: Retain
+    DeletionPolicy: Retain
+    Metadata:
+      aws:cdk:path: CoffeeShopCodePipeline/Coffee/Resource
   EventBus7B8748AA:
     Type: AWS::Events::EventBus
     Properties:
@@ -1146,7 +1253,7 @@ Resources:
   CDKMetadata:
     Type: AWS::CDK::Metadata
     Properties:
-      Modules: aws-cdk=1.16.2,@aws-cdk/assets=1.16.2,@aws-cdk/aws-applicationautoscaling=1.16.2,@aws-cdk/aws-autoscaling=1.16.2,@aws-cdk/aws-autoscaling-common=1.16.2,@aws-cdk/aws-autoscaling-hooktargets=1.16.2,@aws-cdk/aws-certificatemanager=1.16.2,@aws-cdk/aws-cloudformation=1.16.2,@aws-cdk/aws-cloudwatch=1.16.2,@aws-cdk/aws-codebuild=1.16.2,@aws-cdk/aws-codecommit=1.16.2,@aws-cdk/aws-codepipeline=1.16.2,@aws-cdk/aws-codepipeline-actions=1.16.2,@aws-cdk/aws-dynamodb=1.16.2,@aws-cdk/aws-ec2=1.16.2,@aws-cdk/aws-ecr=1.16.2,@aws-cdk/aws-ecr-assets=1.16.2,@aws-cdk/aws-ecs=1.16.2,@aws-cdk/aws-ecs-patterns=1.16.2,@aws-cdk/aws-elasticloadbalancingv2=1.16.2,@aws-cdk/aws-events=1.16.2,@aws-cdk/aws-events-targets=1.16.2,@aws-cdk/aws-iam=1.16.2,@aws-cdk/aws-kms=1.16.2,@aws-cdk/aws-lambda=1.16.2,@aws-cdk/aws-logs=1.16.2,@aws-cdk/aws-route53=1.16.2,@aws-cdk/aws-route53-targets=1.16.2,@aws-cdk/aws-s3=1.16.2,@aws-cdk/aws-s3-assets=1.16.2,@aws-cdk/aws-servicediscovery=1.16.2,@aws-cdk/aws-sns=1.16.2,@aws-cdk/aws-sns-subscriptions=1.16.2,@aws-cdk/aws-sqs=1.16.2,@aws-cdk/aws-ssm=1.16.2,@aws-cdk/core=1.16.2,@aws-cdk/cx-api=1.16.2,@aws-cdk/region-info=1.16.2,jsii-runtime=node.js/v12.12.0
+      Modules: aws-cdk=1.16.2,@aws-cdk/assets=1.17.1,@aws-cdk/aws-applicationautoscaling=1.17.1,@aws-cdk/aws-autoscaling=1.17.1,@aws-cdk/aws-autoscaling-common=1.17.1,@aws-cdk/aws-autoscaling-hooktargets=1.17.1,@aws-cdk/aws-certificatemanager=1.17.1,@aws-cdk/aws-cloudformation=1.17.1,@aws-cdk/aws-cloudwatch=1.17.1,@aws-cdk/aws-codebuild=1.17.1,@aws-cdk/aws-codecommit=1.17.1,@aws-cdk/aws-codepipeline=1.17.1,@aws-cdk/aws-codepipeline-actions=1.17.1,@aws-cdk/aws-dynamodb=1.17.1,@aws-cdk/aws-ec2=1.17.1,@aws-cdk/aws-ecr=1.17.1,@aws-cdk/aws-ecr-assets=1.17.1,@aws-cdk/aws-ecs=1.17.1,@aws-cdk/aws-ecs-patterns=1.17.1,@aws-cdk/aws-elasticloadbalancingv2=1.17.1,@aws-cdk/aws-events=1.17.1,@aws-cdk/aws-events-targets=1.17.1,@aws-cdk/aws-iam=1.17.1,@aws-cdk/aws-kms=1.17.1,@aws-cdk/aws-lambda=1.17.1,@aws-cdk/aws-logs=1.17.1,@aws-cdk/aws-route53=1.17.1,@aws-cdk/aws-route53-targets=1.17.1,@aws-cdk/aws-s3=1.17.1,@aws-cdk/aws-s3-assets=1.17.1,@aws-cdk/aws-servicediscovery=1.17.1,@aws-cdk/aws-sns=1.17.1,@aws-cdk/aws-sns-subscriptions=1.17.1,@aws-cdk/aws-sqs=1.17.1,@aws-cdk/aws-ssm=1.17.1,@aws-cdk/core=1.17.1,@aws-cdk/cx-api=1.17.1,@aws-cdk/region-info=1.17.1,jsii-runtime=node.js/v12.12.0
 Outputs:
   AlbSvcLoadBalancerDNS20AA0F0B:
     Value:
@@ -1217,4 +1324,7 @@ Outputs:
             ]
   CodeBuildProjectName:
     Value: CodeBuildProject
+  Bucket:
+    Value:
+      Ref: CoffeeShopBucketEF3ADD55
 

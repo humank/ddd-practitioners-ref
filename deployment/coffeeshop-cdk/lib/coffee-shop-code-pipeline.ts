@@ -22,6 +22,7 @@ const CODECOMMIT_REPO_NAME = 'EventStormingWorkshop'
 export class CoffeeShopCodePipeline extends cdk.Stack {
 
     readonly ecrRepository: ecr.Repository
+    // @ts-ignore
     constructor(scope: cdk.App, id: string, props?: cdk.StackProps) {
         super(scope, id, props);
 
@@ -32,6 +33,12 @@ export class CoffeeShopCodePipeline extends cdk.Stack {
         const buildRole = new iam.Role(this, 'CodeBuildIamRole', {
             assumedBy: new iam.ServicePrincipal('codebuild.amazonaws.com')
         });
+        buildRole.addManagedPolicy(iam.ManagedPolicy.fromAwsManagedPolicyName("AWSLambdaFullAccess"));
+
+        buildRole.addToPolicy(new iam.PolicyStatement({
+            resources: ['*'],
+            actions: ['cloudformation:*']
+        }));
 
         buildRole.addToPolicy(new iam.PolicyStatement({
             resources: ['*'],
@@ -59,12 +66,17 @@ export class CoffeeShopCodePipeline extends cdk.Stack {
         let bucketName = 'coffeeshop-' + Math.random().toString(36).substring(7);
         const coffeeShopBucket = new s3.Bucket(this, 'CoffeeShopBucket', {
             bucketName: bucketName,
-
             // The default removal policy is RETAIN, which means that cdk destroy will not attempt to delete
             // the new bucket, and it will remain in your account until manually deleted. By setting the policy to
             // DESTROY, cdk destroy will attempt to delete the bucket, but will error if the bucket is not empty.
-            removalPolicy: cdk.RemovalPolicy.DESTROY, // NOT recommended for production code
+
+            //removalPolicy: cdk.RemovalPolicy.DESTROY, // NOT recommended for production code
         });
+
+        coffeeShopBucket.grantPut(buildRole);
+        coffeeShopBucket.grantRead(buildRole);
+        coffeeShopBucket.grantReadWrite(buildRole);
+        coffeeShopBucket.grantWrite(buildRole);
 
         new codebuild.Project(this, 'CodeBuildProject', {
             role: buildRole,
@@ -72,38 +84,22 @@ export class CoffeeShopCodePipeline extends cdk.Stack {
             // Enable Docker AND custom caching
             cache: codebuild.Cache.local(codebuild.LocalCacheMode.DOCKER_LAYER, codebuild.LocalCacheMode.CUSTOM),
             environment: {
-                buildImage: codebuild.LinuxBuildImage.STANDARD_2_0,
+                buildImage: codebuild.LinuxBuildImage.AMAZON_LINUX_2,
                 privileged: true,
             },
             buildSpec: codebuild.BuildSpec.fromObject({
                 version: '0.2',
                 phases: {
-
                     install:{
-                        commands:[
-                            'apt-get update -y',
-                            'useradd -m linuxbrew',
-                            'sudo -u linuxbrew -i /bin/bash',
-                            'PATH=~/.linuxbrew/bin:/usr/sbin:/usr/bin:/sbin:/bin',
-                            'yes | sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"',
-                            'test -d ~/.linuxbrew && eval $(~/.linuxbrew/bin/brew shellenv)',
-                            'test -d /home/linuxbrew/.linuxbrew && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)',
-                            'test -r ~/.bash_profile && echo "eval \\$($(brew --prefix)/bin/brew shellenv)" >>~/.bash_profile',
-                            'echo "eval \\$($(brew --prefix)/bin/brew shellenv)" >>~/.profile',
-                            'brew install hello',
-                           'brew tap aws/tap',
-                           'brew install aws-sam-cli',
-                        ]
+                        'runtime-versions': {
+                            java: 'corretto8'
+                        }
                     },
-
                     build: {
                         commands: [
                             'echo "Build all modules"',
                             'echo "Run Maven clean install to have all the required jars in local .m2 repository"',
-                            'pwd',
-                            'ls',
                             'cd sources/coffeeshop',
-                            'pwd',
                             'mvn clean install -Dmaven.test.skip=true'
                         ]
                     },
@@ -130,7 +126,7 @@ export class CoffeeShopCodePipeline extends cdk.Stack {
                             'echo package coffee serverless lambda function',
                             'cd ../coffee-sls',
                             'mvn package -Dmaven.test.skip=true',
-                            'sam package --template-file template.yaml --s3-bucket'+ bucketName + '--output-template-file packaged.yaml',
+                            'sam package --template-file template.yaml --s3-bucket '+ bucketName + ' --output-template-file packaged.yaml',
                             'sam deploy --template-file ./packaged.yaml --stack-name coffee-sls --capabilities CAPABILITY_IAM',
                         ]
 
@@ -207,7 +203,7 @@ export class CoffeeShopCodePipeline extends cdk.Stack {
                 ]
             },
             eventBus: coffeeshop_eventbus,
-            ruleName: 'OrderCreatedRule'
+            ruleName: 'OrderCreatedRule',
         });
 
 
