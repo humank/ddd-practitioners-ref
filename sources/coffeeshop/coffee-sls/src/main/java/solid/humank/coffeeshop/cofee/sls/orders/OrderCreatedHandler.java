@@ -2,6 +2,8 @@ package solid.humank.coffeeshop.cofee.sls.orders;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestStreamHandler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import solid.humank.coffeeshop.cofee.sls.orders.datacontracts.OrderCreated;
 import solid.humank.coffeeshop.coffee.applications.MakeCoffeeSvc;
 import solid.humank.coffeeshop.coffee.datacontracts.messages.MakeCoffeeMsg;
@@ -24,6 +26,8 @@ public class OrderCreatedHandler implements RequestStreamHandler {
 //    @Inject
 //    MakeCoffeeSvc service;
 
+    Logger logger = LoggerFactory.getLogger(OrderCreatedHandler.class);
+
     @Override
     public void handleRequest(InputStream inputStream, OutputStream outputStream, Context context) throws IOException {
 
@@ -32,6 +36,11 @@ public class OrderCreatedHandler implements RequestStreamHandler {
 
         DomainModelMapper mapper = new DomainModelMapper();
         OrderCreated orderCreated = mapper.readValue(inputStream, OrderCreated.class);
+        logger.info(orderCreated.getTableNo());
+        logger.info(orderCreated.getEventId());
+        logger.info(orderCreated.getVersion());
+        logger.info(String.valueOf(orderCreated.getOrderItems().size()));
+        logger.info(orderCreated.getEntityId().toString());
 
         //TODO : 調用咖啡師的服務, 參照需求文檔找製作美式咖啡的需求
         MakeCoffeeMsg cmd = new MakeCoffeeMsg(orderCreated.getTableNo(), transformToCoffeeItemVM(orderCreated));
