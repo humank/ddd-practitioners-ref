@@ -120,6 +120,8 @@ curl --header "Content-Type: application/json" \
         --request POST \
         --data '{"items":[{"productId":"5678","qty":2,"price":200}]}' \
         http://Coffe-AlbSv-5MLHALGIGWUB-82783022.us-west-2.elb.amazonaws.com/order
+
+Result : 
 {"items":[{"productId":"5678","qty":2,"price":200,"fee":400}],"status":0,"id":"ord-20191126-5906","createdDate":1574801783.400000000,"modifiedDate":null}
 ```
 
