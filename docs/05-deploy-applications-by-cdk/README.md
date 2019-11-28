@@ -19,6 +19,31 @@ To deploy applications to AWS, you need to have the following essential tools in
 
 ## Deploy instruction
 
+### Fork this repo to your own github account
+
+This workshop will leverage Github webhook mechanism to automatically build / deploy application onto aws, so the first step is fork it.
+
+Besides, please also update the repo owner information in theis source code:
+
+**EventStormingWorkShop/deployment/coffeeshop-cdk/lib/coffee-shop-code-pipeline.ts**
+
+
+
+>  Replace the owner to your github account.
+
+```typescript
+const defaultSource = codebuild.Source.gitHub({
+            owner: 'humank',
+            repo: 'EventStormingWorkShop',
+            webhook: true, // optional, default: true if `webhookFilteres` were provided, false otherwise
+            webhookFilters: [
+                codebuild.FilterGroup.inEventOf(codebuild.EventAction.PUSH).andBranchIs('master'),
+            ], // optional, by default all pushes and Pull Requests will trigger a build
+        });
+```
+
+
+
 ### Deploy infrastructure by CDK
 
 ```shell
