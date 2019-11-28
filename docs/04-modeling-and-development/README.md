@@ -150,12 +150,6 @@ public class OrderAmericanoSteps implements En {
 
 ```
 
-
-
-## Running on AWS
-
-> This workshop explained  is running on AWS. By using Lambda and cloudwatch event to present how can we keep model classes at the core, and leverage the outside adapter to interact with other domain
-
 ## Design each Microservices in Port-adapter concept
 
 ![image](../img/implementation.png)
@@ -166,25 +160,14 @@ public class OrderAmericanoSteps implements En {
 
 > For this workshop demo, design a order domain object, and leverage AWS services to do persistent, http request accept and handler, and event propagation.
 
-## Using Lambda function as the entry point (Event Handler)
-
-You can easily export a lambda function to accept the incomg command, and do some stuff.
-
 ## Using Amazon EventBridge Event as the integration Event
 
-If cross boundary event did occured in current domain, never call other domain service directly, just publish a cross-domain-event. On AWS, the most appropriate one is using CloudWatch Event, it's a near-real-time event, high performance and scalable.
+You can easily export a lambda function to accept the incomg command, and do some stuff.
+If cross boundary event did occured in current domain, never call other domain service directly, just publish a cross-domain-event. On AWS, the most appropriate one is using EventBridge Event, it's a near-real-time event, high performance and scalable.
 
 ## Using DynamoDB as the Write Model/ Read Model persistent Repository
 
 Once capture Model with Domain Experts, you can design Write Model first, and create Query usage Read Model.
-
-## Launch this workshop in Serverless Architecture
-
-![image](../img/eventhandling.png)
-
-This workshop example explained a Coffee shop use case, go through a customer order coffee and barista accept the order then make coffee.
-
-
 
 ## Further Information
 
