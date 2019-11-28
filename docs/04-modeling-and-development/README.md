@@ -2,6 +2,8 @@ _[< back to 03 Roles, Commands and Event Mapping](../03-roles-commands-events-ma
 
 ## Modeling and Development
 
+![](../img/coffeeshop-ddd-subdomains.jpg)
+
 Now, you have the whole story, bounded context and **just-enough** aggregates, commands, and events. It's time to develop domain model to proof crunched model is correct or not.
 
 > Design & Develop model iteratively and incrementally is recommended, never to run this workshop in a waterfall style, that's spent lots of time but encounter uncontrollable surprise at last-minute.
