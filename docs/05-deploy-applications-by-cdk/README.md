@@ -184,3 +184,9 @@ REPORT RequestId: acfc1cf1-ba73-402e-921d-2fa2d95af5dc	Duration: 8150.39 ms	Bill
 
 **Check the coffee table in DynamoDB**
 
+![](../img/coffee-table-items.png)
+
+
+
+Now,  you have go through all ofthe whole coffee ordering process journey, in case you would like to hands-on more, just implement more business scenario as you can, and taste all these **Cloud coffeeshop on AWS.**
+
