@@ -40,7 +40,7 @@ public class Coffee extends AggregateRoot<CoffeeId> {
 
     @Getter
     @Setter(AccessLevel.PRIVATE)
-    String productName;
+    String productName = "Americano";
 
     @Getter
     @Setter(AccessLevel.PRIVATE)
