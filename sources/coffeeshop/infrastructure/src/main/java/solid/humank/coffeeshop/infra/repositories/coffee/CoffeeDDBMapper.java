@@ -1,7 +1,5 @@
 package solid.humank.coffeeshop.infra.repositories.coffee;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import software.amazon.awssdk.services.dynamodb.model.AttributeValue;
 import software.amazon.awssdk.services.dynamodb.model.PutItemRequest;
 import software.amazon.awssdk.services.dynamodb.model.ScanRequest;
@@ -19,7 +17,6 @@ public class CoffeeDDBMapper extends AggregateRootMapper {
     @Override
     public <T extends AggregateRoot> PutItemRequest buildPutItemRequest(T aggregateRoot) {
         Coffee coffee = (Coffee) aggregateRoot;
-        Gson gson = new GsonBuilder().create();
 
         HashMap<String, AttributeValue> item_values = new HashMap();
 

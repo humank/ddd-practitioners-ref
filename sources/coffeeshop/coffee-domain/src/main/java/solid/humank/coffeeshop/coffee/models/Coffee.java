@@ -40,7 +40,7 @@ public class Coffee extends AggregateRoot<CoffeeId> {
 
     @Getter
     @Setter(AccessLevel.PRIVATE)
-    String productName = "Americano";
+    String productName;
 
     @Getter
     @Setter(AccessLevel.PRIVATE)
@@ -56,6 +56,7 @@ public class Coffee extends AggregateRoot<CoffeeId> {
         this.coffeeItems = items;
         this.status = CoffeeStatus.STAYIN;
         this.createdDate = OffsetDateTime.now();
+        this.productName = "Americano";
     }
 
     public static Coffee make(MakeCoffee cmd) {

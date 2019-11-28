@@ -25,6 +25,4 @@ public class OrderCreated {
     BodyDetail detail;
 
 
-
-
 }

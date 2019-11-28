@@ -1,7 +1,6 @@
 package solid.humank.ddd.commons.utilities;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -21,10 +20,10 @@ public class DomainModelMapper {
 //        mapper.findAndRegisterModules();
 //        mapper.writerWithDefaultPrettyPrinter();
 
-          mapper = new ObjectMapper()
-                  .registerModule(new ParameterNamesModule())
-                  .registerModule(new Jdk8Module())
-                  .registerModule(new JavaTimeModule()); // new module, NOT JSR310Module
+        mapper = new ObjectMapper()
+                .registerModule(new ParameterNamesModule())
+                .registerModule(new Jdk8Module())
+                .registerModule(new JavaTimeModule()); // new module, NOT JSR310Module
     }
 
     public String writeToJsonString(Object object) {

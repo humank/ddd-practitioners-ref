@@ -10,9 +10,9 @@ Resources:
       MemorySize: 128
       CodeUri: s3://solid-humank-coffeeshop/6d45cd8788f4cb9abd785ca4eb6faad3
       Policies:
-      - AmazonDynamoDBFullAccess
-      - AWSLambdaFullAccess
-      - CloudWatchEventsFullAccess
+        - AmazonDynamoDBFullAccess
+        - AWSLambdaFullAccess
+        - CloudWatchEventsFullAccess
       Events:
         PurchaseOrder:
           Type: Api
@@ -28,5 +28,5 @@ Outputs:
     Description: Hello World Lambda Function ARN
     Value:
       Fn::GetAtt:
-      - AcceptOrderFunction
-      - Arn
+        - AcceptOrderFunction
+        - Arn
