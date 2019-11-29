@@ -135,6 +135,14 @@ aws lambda add-permission \
 	--source-arn $ruleArn
 ```
 
+### Way to Deploy applications 
+
+You could deploy these applications via two approach: 
+
+1. commit and push any changes to your cloned repo in master branch, then the CodeBuild service will automatically buid it and trigger the codepipeline to deploy all these applications.
+
+2. Self manually deploy in Codebuild service, just to start a new build then the deployment process will be started.
+
 ### Run Test
 
 **As all of the setting done, now you could hit the url which you created to make an coffee order:**
