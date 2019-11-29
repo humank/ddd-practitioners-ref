@@ -133,15 +133,6 @@ export class CoffeeShopCodePipeline extends cdk.Stack {
                             'cd ../coffee-sls',
                             'sam package --template-file template.yaml --s3-bucket '+ bucketName + ' --output-template-file packaged.yaml',
                             'sam deploy --template-file ./packaged.yaml --stack-name coffee-sls --capabilities CAPABILITY_IAM',
-
-                            'targetArn=$(aws lambda get-function --function-name coffee-sls-OrderCreatedHandler | jq \'.Configuration.FunctionArn\')',
-                            'aws events  put-targets --rule OrderCreatedRule --targets "Id"="OrderCreated","Arn"=$targetArn',
-                            'aws lambda add-permission \\\n' +
-                            '    --function-name coffee-sls-OrderCreatedHandler \\\n' +
-                            '    --action lambda:InvokeFunction \\\n' +
-                            '    --statement-id stat-coffee-sls \\\n' +
-                            '    --principal events.amazonaws.com \\\n' +
-                            '    --source-arn arn:aws:events:us-west-2:584518143473:rule/OrderCreatedRule'
                         ]
 
                     }
