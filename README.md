@@ -7,6 +7,18 @@ Building software is hard. Understanding the business needs of the software is e
 
 As a developer, knowing how to narrow this gap can help you go a long way to building applications that are relevant for the users. Using a Domain Driven Design approach, delivered via Event Storming, it can help to reduce the time it takes for everyone in the project team to understand a business domain model.
 
+
+
+> Theory and Practice: Learning in the Real world cases
+
+**Go through all of the learning journey, develop-->build-->deploy artifacts on AWS**
+
+![](docs/img/Coffeeshop-architecture.png)
+
+
+
+
+
 ## Table of Contents
 - [00 - Event Storming](#eventstorming)
   - [What is Event Storming?](#what-is-event-storming)
