@@ -328,9 +328,6 @@ Create a "imagedefinitions.json" file and git add/push into CodeCommit repositor
         })
 
         new cdk.CfnOutput(this, 'Bucket', { value: coffeeShopBucket.bucketName });
-        new cdk.CfnOutput(this, 'OrderCreatedRule',{
-            value: rule.ruleName
-        })
 
     }
 }
