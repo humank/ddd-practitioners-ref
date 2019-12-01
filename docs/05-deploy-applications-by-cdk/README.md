@@ -44,15 +44,7 @@ const defaultSource = codebuild.Source.gitHub({
 
 
 
-### Deploy infrastructure by CDK
-
-```shell
-cd deployment/coffeeshop-cdk
-
-npm run build 
-
-cdk deploy CoffeeShopCdkStack 
-```
+### Deploy infrastructure and Application with Code* family CI/CD pipeline by CDK
 
 **By running this CDK application, You will get a standard VPC with 3 Availablity Zones environment, and one NATGateway serving private subnets.**
 
@@ -64,6 +56,10 @@ cdk deploy CoffeeShopCdkStack
 cd deployment/coffeeshop-cdk
 
 npm run build 
+
+cdk synth
+
+cdk bootstrap aws://${your-aws-id}/${your-region-todeploy}
 
 cdk deploy CoffeeShopCodePipeline 
 ```
@@ -103,7 +99,7 @@ Stack ARN:
 arn:aws:cloudformation:us-west-2:584518143473:stack/CoffeeShopCodePipeline/f10c0520-0618-11ea-8122-023709c486f0
 ```
 
-Do remember to create a Create a "imagedefinitions.json" file and git add/push into CodeCommit repository "EventStormingWorkshop" with the following value:
+Do remember to create a "imagedefinitions.json" file and git add/push into CodeCommit repository "EventStormingWorkshop" with the following value:
 
 [
   {
@@ -143,7 +139,7 @@ You could deploy these applications via two approach:
 
 **As all of the setting done, now you could hit the url which you created to make an coffee order:**
 
-The **Orders-web** service endpoint is the Stak output - **CoffeeShopCodePipeline.AlbSvcServiceURLxxxx**
+The **Orders-web** service endpoint is the Stack output - **CoffeeShopCodePipeline.AlbSvcServiceURLxxxx**
 
 ```shell
 curl --header "Content-Type: application/json" \                                                                                            

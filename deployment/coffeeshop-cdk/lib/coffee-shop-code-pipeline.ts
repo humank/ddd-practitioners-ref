@@ -2,6 +2,7 @@ import * as cdk from '@aws-cdk/core';
 import * as ecr from '@aws-cdk/aws-ecr';
 import * as iam from '@aws-cdk/aws-iam';
 import * as s3 from '@aws-cdk/aws-s3';
+import ec2 = require('@aws-cdk/aws-ec2');
 import * as codebuild  from '@aws-cdk/aws-codebuild';
 import * as codepipeline from '@aws-cdk/aws-codepipeline';
 import * as codepipeline_actions from '@aws-cdk/aws-codepipeline-actions';
@@ -10,9 +11,7 @@ import * as ecsPatterns from '@aws-cdk/aws-ecs-patterns';
 import * as codecommit from '@aws-cdk/aws-codecommit';
 import {CodeBuildProject} from '@aws-cdk/aws-events-targets';
 import {Duration} from '@aws-cdk/core';
-import {Vpc} from '@aws-cdk/aws-ec2';
 import * as dynamodb from '@aws-cdk/aws-dynamodb';
-import * as events from '@aws-cdk/aws-events';
 import {Rule} from "@aws-cdk/aws-events";
 import * as ssm from '@aws-cdk/aws-ssm';
 
@@ -25,6 +24,12 @@ export class CoffeeShopCodePipeline extends cdk.Stack {
     // @ts-ignore
     constructor(scope: cdk.App, id: string, props?: cdk.StackProps) {
         super(scope, id, props);
+
+        // Create a VPC
+        const vpc = new ec2.Vpc(this, 'CoffeeShopVPC', {
+            cidr: '10.0.0.0/16',
+            natGateways: 1
+        });
 
         this.ecrRepository = new ecr.Repository(this, 'Repository', {
             repositoryName: DOCKER_IMAGE_PREFIX,
@@ -145,10 +150,10 @@ export class CoffeeShopCodePipeline extends cdk.Stack {
             })
         });
 
-        const vpc = Vpc.fromLookup(this, 'CoffeeShopCdkStack/CoffeeShopVPC',{
-            vpcName: 'CoffeeShopCdkStack/CoffeeShopVPC',
-            isDefault: false,
-        });
+        // const vpc = Vpc.fromLookup(this, 'CoffeeShopCdkStack/CoffeeShopVPC',{
+        //     vpcName: 'CoffeeShopCdkStack/CoffeeShopVPC',
+        //     isDefault: false,
+        // });
 
         const cluster = new ecs.Cluster(this, 'Cluster', {
             clusterName: 'coffeeshop',
@@ -197,10 +202,6 @@ export class CoffeeShopCodePipeline extends cdk.Stack {
         });
 
         coffeeTable.grantFullAccess(fargateTaskRole);
-
-        // const coffeeshop_eventbus = new events.EventBus(this, 'EventBus', {
-        //     eventBusName: 'coffeeshop-event-bus',
-        // });
 
         const rule = new Rule(this, 'OrderCreatedRule',{
             eventPattern:{
