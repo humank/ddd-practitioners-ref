@@ -113,9 +113,9 @@ Do remember to create a "imagedefinitions.json" file and git add/push into CodeC
 ### Setup Lambda function trigger with EventBridge
 
 ```shell
-targetArn=$(aws lambda get-function --function-name coffee-sls-OrderCreatedHandler | jq \'.Configuration.FunctionArn\')
+targetArn=$(aws lambda get-function --function-name coffee-sls-OrderCreatedHandler | jq '.Configuration.FunctionArn')
 
-aws events  put-targets --rule OrderCreatedRule --targets "Id"="OrderCreated","Arn"=$targetArn'
+aws events  put-targets --rule OrderCreatedRule --targets "Id"="OrderCreated","Arn"=$targetArn
 
 ruleArn=$(aws events list-rules --name-prefix OrderCreatedRule | jq -r '.Rules[0].Arn')
 
