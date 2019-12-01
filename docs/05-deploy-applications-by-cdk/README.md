@@ -131,9 +131,8 @@ aws lambda add-permission \
 
 You could deploy these applications via two approach: 
 
-1. commit and push any changes to your cloned repo in master branch, then the CodeBuild service will automatically buid it and trigger the codepipeline to deploy all these applications.
-
-2. Self manually deploy in Codebuild service, just to start a new build then the deployment process will be started.
+1. At first time, self manually deploy application in Codebuild service, just to select the codebuild project and click the **start build** button,  then the deployment process will be started.
+2. Anytime, if you make any chang on the EventStormingWorkshop repository on github, while you commit and push  to  master branch, then the CodeBuild service will automatically buid it and trigger the codepipeline to deploy all these applications.
 
 ### Run Test
 
