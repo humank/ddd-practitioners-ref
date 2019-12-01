@@ -51,8 +51,6 @@ cd deployment/coffeeshop-cdk
 
 npm run build 
 
-cdk synth
-
 cdk deploy CoffeeShopCdkStack 
 ```
 
@@ -66,8 +64,6 @@ cdk deploy CoffeeShopCdkStack
 cd deployment/coffeeshop-cdk
 
 npm run build 
-
-cdk synth
 
 cdk deploy CoffeeShopCodePipeline 
 ```
