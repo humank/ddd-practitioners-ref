@@ -110,6 +110,13 @@ Do remember to create a "imagedefinitions.json" file and git add/push into CodeC
 
 
 
+### Way to Deploy applications 
+
+You could deploy these applications via two approach: 
+
+1. At first time, self manually deploy application in Codebuild service, just to select the codebuild project and click the **start build** button,  then the deployment process will be started.
+2. Anytime, if you make any chang on the EventStormingWorkshop repository on github, while you commit and push  to  master branch, then the CodeBuild service will automatically buid it and trigger the codepipeline to deploy all these applications.
+
 ### Setup Lambda function trigger with EventBridge
 
 ```shell
@@ -126,13 +133,6 @@ aws lambda add-permission \
   --principal events.amazonaws.com \
 	--source-arn $ruleArn
 ```
-
-### Way to Deploy applications 
-
-You could deploy these applications via two approach: 
-
-1. At first time, self manually deploy application in Codebuild service, just to select the codebuild project and click the **start build** button,  then the deployment process will be started.
-2. Anytime, if you make any chang on the EventStormingWorkshop repository on github, while you commit and push  to  master branch, then the CodeBuild service will automatically buid it and trigger the codepipeline to deploy all these applications.
 
 ### Run Test
 
