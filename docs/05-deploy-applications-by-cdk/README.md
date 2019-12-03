@@ -19,6 +19,11 @@ To deploy applications to AWS, you need to have the following essential tools in
 
 ## Deploy instruction
 
+### Get Github Webhook integration
+
+Open the AWS Codebuild console, and click the **Create build project**, we will leverage this step to setup webhook, but we don't need to really save this build project, please follow the screenshots.
+
+
 ### Fork this repo to your own github account
 
 This workshop will leverage Github webhook mechanism to automatically build / deploy application onto aws, so the first step is fork it.
