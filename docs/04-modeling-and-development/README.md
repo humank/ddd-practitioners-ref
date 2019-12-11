@@ -171,7 +171,6 @@ If cross boundary event did occured in current domain, never call other domain s
 
 Once capture Model with Domain Experts, you can design Write Model first, and create Query usage Read Model.
 
-[Next: 05 Deploy Applications by AWS CDK >](../docs/05-deploy-applications-by-cdk/README.md)
 
 ## Further Information
 
@@ -198,3 +197,5 @@ Once capture Model with Domain Experts, you can design Write Model first, and cr
 **Arthur Chang** , collaborate design & run the workshop, Co-founder from Domain Driven Design Taiwan Community
 
 **Kenny Baas-Schwegler** , discuss the aggregate definition and ES workshop running experience sharing
+
+[Next: 05 Deploy Applications by AWS CDK >](../05-deploy-applications-by-cdk/README.md)
