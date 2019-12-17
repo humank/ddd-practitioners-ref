@@ -1,5 +1,7 @@
 # Implementing Domain Driven Design (DDD) on AWS
 
+**Updated @ 2019-12-17. Appreciate to have your watch and stars, now this workshop has been officially merged into [aws-samples/designing-cloud-native-microservices-on-aws](aws-samples/designing-cloud-native-microservices-on-aws), all of the un-resolved reserach and imeplementation will also merge too, wellcome to keep going watch and star the new repo.**
+
 ![image](docs/img/coffee.jpg) .         
 _Picture license-free from [Pexels](https://www.pexels.com/photo/background-beverage-breakfast-brown-414645/)_
 
