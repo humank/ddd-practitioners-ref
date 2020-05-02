@@ -1,8 +1,6 @@
-# Implementing Domain Driven Design (DDD) on AWS
+# Designing Cloud Native Microservices on AWS  (via DDD/EventStormingWorkshop)
 
-**Updated @ 2019-12-17. Appreciate to have your watch and stars, now this workshop has been officially merged into [aws-samples/designing-cloud-native-microservices-on-aws](https://github.com/aws-samples/designing-cloud-native-microservices-on-aws/), all of the un-resolved reserach and imeplementation will also merge too, wellcome to keep going watch and star the new repo.**
-
-![image](docs/img/coffee.jpg) .         
+![](docs/img/coffee.jpg)
 _Picture license-free from [Pexels](https://www.pexels.com/photo/background-beverage-breakfast-brown-414645/)_
 
 Building software is hard. Understanding the business needs of the software is even harder. In almost every software development project, there will always be some form of gap between the requirements of the business users and the actual implementation.
@@ -58,7 +56,7 @@ As a developer, knowing how to narrow this gap can help you go a long way to bui
 ![image](docs/img/problemsolving.png)
 
 ## What is Event Storming?
-Event Storming is a **rapid**, **lightweight**, and often under-appreciated group modeling technique that is **intense**, **fun**, and **useful** to **accelerate** project teams. It is typically offered as an interactive **workshop** and it is a synthesis of facilitated group learning practices from Gamestorming, leveraging on the principles of Domain Driven Design (DDD).
+Event Storming is a **rapid**, **lightweight**, and often under-appreciated group modeling technique invented by Alberto Brandolini, that is **intense**, **fun**, and **useful** to **accelerate** project teams. It is typically offered as an interactive **workshop** and it is a synthesis of facilitated group learning practices from Gamestorming, leveraging on the principles of Domain Driven Design (DDD).
 
 You can apply it practically on any technical or business domain, especially those that are large, complex, or both.
 
@@ -110,3 +108,8 @@ Event Storming can also help to identify key views for your user interface, whic
 Let's get started with a quick example to demonstrate how to run a simple Event Storming.
 
 [Next: 01 Hands-on Events Exploring >](docs/01-hands-on-events-exploring/README.md)
+
+
+## License
+
+This library is licensed under the MIT-0 License. See the LICENSE file.
