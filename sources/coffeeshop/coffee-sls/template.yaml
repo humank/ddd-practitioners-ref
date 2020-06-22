@@ -9,7 +9,7 @@ Resources:
       # Handler: io.quarkus.amazon.lambda.runtime.QuarkusStreamHandler::handleRequest
       FunctionName: coffee-sls-OrderCreatedHandler
       Timeout: 30
-      MemorySize: 512
+      MemorySize: 1024
       CodeUri: target/coffee-sls-1.0-SNAPSHOT.jar
       Policies:
         - AmazonDynamoDBFullAccess
