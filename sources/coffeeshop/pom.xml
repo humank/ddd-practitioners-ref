@@ -55,6 +55,14 @@
         <module>service-discovery</module>
     </modules>
 
+    <distributionManagement>
+        <repository>
+            <id>artifacts--myArtifact</id>
+            <name>artifacts--myArtifact</name>
+            <url>https://artifacts-584518143473.d.codeartifact.us-west-2.amazonaws.com/maven/myArtifact/</url>
+        </repository>
+    </distributionManagement>
+
     <dependencyManagement>
         <dependencies>
             <dependency>
