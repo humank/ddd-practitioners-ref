@@ -2,7 +2,11 @@
 
 **Updated @ 2021-06-05. Appreciate to have your support on building this workshop, hope this workshop is useful & meaningful for you. In order to well organize all of the contents for DDD practitioners reference, the workshop will be refactored to cover wider topics with a more complex business scenario sample. Plan to release new content before the end of 2021, stay tuned.**
 
-The topics will cover  what I have learned from WW communities (ddd_eu, virtualddd) and awesome ddd-practitioners experience.
+In this ddd-practitioners-reference, you will learn more than classic Domain-Driven Design Strategic design and Tactical design patterns. DDD is good to approach decision makers to align business goals among diversity stakeholders in different BU.
+
+When learning a series of methodology would always bored ourself and lot passion on the unlimited learning journey, so i'll walk you through a bsuiness case to practice the following methodologies/approaches to get familiar in using DDD to design solutions.
+
+So, this guide will cover below topics whaich are what I learned from WW communities (ddd_eu, virtualddd) and awesome ddd-practitioners experience.
 
 Outline:
 
