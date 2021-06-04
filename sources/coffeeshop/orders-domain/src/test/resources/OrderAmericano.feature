@@ -8,3 +8,4 @@ Feature: Order Americano in seat
     Then the total fee should be 160l
 
 
+
