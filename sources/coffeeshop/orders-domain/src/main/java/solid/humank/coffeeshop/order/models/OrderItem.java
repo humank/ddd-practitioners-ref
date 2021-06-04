@@ -28,7 +28,7 @@ public class OrderItem extends ValueObject<OrderItem> {
         return productId;
     }
 
-    public void setProductId(String productId) {
+    private void setProductId(String productId) {
         this.productId = productId;
     }
 
@@ -36,7 +36,7 @@ public class OrderItem extends ValueObject<OrderItem> {
         return qty;
     }
 
-    public void setQty(int qty) {
+    private void setQty(int qty) {
         this.qty = qty;
     }
 
@@ -44,7 +44,7 @@ public class OrderItem extends ValueObject<OrderItem> {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    private void setPrice(BigDecimal price) {
         this.price = price;
     }
 
