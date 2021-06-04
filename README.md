@@ -1,6 +1,6 @@
 # Implementing Domain Driven Design (DDD) on AWS
 
-**Updated @ 2021-06-05. Appreciate to have your watch and stars, hope this workshop is useful & meanful for you. In order to well organize all of the contents for DDD practitioners reference, the workshop will be refactored to cover wider topics with a more complex business scenario sample. Plan to release new content before the end of 2021, stay tuned.**
+**Updated @ 2021-06-05. Appreciate to have your support on building this workshop, hope this workshop is useful & meaningful for you. In order to well organize all of the contents for DDD practitioners reference, the workshop will be refactored to cover wider topics with a more complex business scenario sample. Plan to release new content before the end of 2021, stay tuned.**
 
 The topics will cover  what I have learned from WW communities (ddd_eu, virtualddd) and awesome ddd-practitioners experience, in addition to introduce an **Aggregate Canvs** for design level modeling tool which is founded by DDD Taiwan Community co-founder Arthur Chang.
 
