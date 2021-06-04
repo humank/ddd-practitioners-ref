@@ -2,6 +2,21 @@
 
 **Updated @ 2021-06-05. Appreciate to have your watch and stars, hope this workshop is useful & meanful for you. In order to well organize all of the contents for DDD practitioners reference, the workshop will be refactored to cover wider topics with a more complex business scenario sample. Plan to release new content before the end of 2021, stay tuned.**
 
+The topics will cover  what I have learned from WW communities (ddd_eu, virtualddd) and awesome ddd-practitioners experience, in addition to introduce an **Aggregate Canvs** for design level modeling tool which is founded by DDD Taiwan Community co-founder Arthur Chang.
+
+Outline:
+
+- A sample business story - Trip Service
+- Awaren businesss context by Wardley Maps
+- Kowing your key stakeholders - Impcat Mapping
+- EventStorming
+- Bounded Context Canvas - founded by Nick Tune
+- Aggregate Design Canvas (*) - founded by Kacper Gunia
+- Aggregate Canvas (*) - founded by Arthur Chang
+- Example Mapping
+- Specification by Example
+- Implement DDD Tactical pattern in Clean Architecture with Spring boot framework - refer to awesome-trip
+- Integrate with AWS cloud native offerings
 -----
 
 **Updated @ 2019-12-17. So far this workshop has been officially merged into [aws-samples/designing-cloud-native-microservices-on-aws](https://github.com/aws-samples/designing-cloud-native-microservices-on-aws/), all of the un-resolved reserach and imeplementation will also merge too, wellcome to keep going watch and star the new repo.**
