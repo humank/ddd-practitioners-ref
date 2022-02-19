@@ -1,5 +1,7 @@
 # Domain-Driven Design Practitioners Reference
 
+## Under Construction - 
+
 **Appreciate having your support on building this workshop, hope this workshop is useful & meaningful for you. In order to well organize all of the contents for DDD practitioners reference, the workshop will be refactored to cover wider topics with a more complex business scenario sample. Plan to release new content before the end of 2021, stay tuned.**
 
 In this ddd-practitioners-reference, you will learn more than classic Domain-Driven Design Strategic design and Tactical design patterns. DDD is good to approach decision makers to align business goals among diversity stakeholders in different BU.
@@ -22,16 +24,6 @@ Outline:
 - Implement DDD Tactical pattern in Clean Architecture with Spring boot framework - refer to awesome-trip
 - Integrate with AWS cloud native offerings
 -----
-
-**Updated @ 2019-12-17. So far this workshop has been officially merged into [aws-samples/designing-cloud-native-microservices-on-aws](https://github.com/aws-samples/designing-cloud-native-microservices-on-aws/), if you tend to know more on how to deploy the artifacts to AWS, please refer to it.**
-
-![image](docs/img/coffee.jpg) .         
-_Picture license-free from [Pexels](https://www.pexels.com/photo/background-beverage-breakfast-brown-414645/)_
-
-Building software is hard. Understanding the business needs of the software is even harder. In almost every software development project, there will always be some form of gap between the requirements of the business users and the actual implementation.
-
-As a developer, knowing how to narrow this gap can help you go a long way to building applications that are relevant for the users. Using a Domain Driven Design approach, delivered via Event Storming, it can help to reduce the time it takes for everyone in the project team to understand a business domain model.
-
 
 ## Table of Contents
 - [00 - Event Storming](#eventstorming)
