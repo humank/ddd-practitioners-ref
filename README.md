@@ -1,6 +1,6 @@
 # Domain-Driven Design Practitioners Reference
 
-**Updated @ 2021-06-05. Appreciate to have your support on building this workshop, hope this workshop is useful & meaningful for you. In order to well organize all of the contents for DDD practitioners reference, the workshop will be refactored to cover wider topics with a more complex business scenario sample. Plan to release new content before the end of 2021, stay tuned.**
+**Appreciate having your support on building this workshop, hope this workshop is useful & meaningful for you. In order to well organize all of the contents for DDD practitioners reference, the workshop will be refactored to cover wider topics with a more complex business scenario sample. Plan to release new content before the end of 2021, stay tuned.**
 
 In this ddd-practitioners-reference, you will learn more than classic Domain-Driven Design Strategic design and Tactical design patterns. DDD is good to approach decision makers to align business goals among diversity stakeholders in different BU.
 
@@ -23,7 +23,7 @@ Outline:
 - Integrate with AWS cloud native offerings
 -----
 
-**Updated @ 2019-12-17. So far this workshop has been officially merged into [aws-samples/designing-cloud-native-microservices-on-aws](https://github.com/aws-samples/designing-cloud-native-microservices-on-aws/), all of the un-resolved reserach and imeplementation will also merge too, wellcome to keep going watch and star the new repo.**
+**Updated @ 2019-12-17. So far this workshop has been officially merged into [aws-samples/designing-cloud-native-microservices-on-aws](https://github.com/aws-samples/designing-cloud-native-microservices-on-aws/), if you tend to know more on how to deploy the artifacts to AWS, please refer to it.**
 
 ![image](docs/img/coffee.jpg) .         
 _Picture license-free from [Pexels](https://www.pexels.com/photo/background-beverage-breakfast-brown-414645/)_
@@ -31,17 +31,6 @@ _Picture license-free from [Pexels](https://www.pexels.com/photo/background-beve
 Building software is hard. Understanding the business needs of the software is even harder. In almost every software development project, there will always be some form of gap between the requirements of the business users and the actual implementation.
 
 As a developer, knowing how to narrow this gap can help you go a long way to building applications that are relevant for the users. Using a Domain Driven Design approach, delivered via Event Storming, it can help to reduce the time it takes for everyone in the project team to understand a business domain model.
-
-
-
-> Theory and Practice: Learning in the Real world cases
-
-**Go through all of the learning journey, develop-->build-->deploy artifacts on AWS**
-
-![](docs/img/Coffeeshop-architecture.png)
-
-
-
 
 
 ## Table of Contents
